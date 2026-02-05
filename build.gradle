@@ -100,3 +100,26 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+subprojects {
+    // 为Android库模块添加命名空间（必须）
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin('com.android.library')) {
+//            android {
+//                namespace = "com.oort.${project.name.toLowerCase()}"  // 按需修改
+//                compileSdk 34
+//
+//                // 移除过时配置
+//                defaultConfig {
+//                    minSdk 21
+//                    targetSdk 34
+//                    versionCode 1
+//                    versionName "1.0.0"
+//                }
+//
+//                // 移除 buildToolsVersion
+//                // 移除 dexOptions
+//            }
+        }
+    }
+}

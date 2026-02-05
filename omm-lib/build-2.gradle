@@ -218,9 +218,9 @@ android {
             url = uri("${System.getProperty('user.home')}/.m2/repository")
         }
 
-        flatDir {
-            dirs '../OortWebframeLib/libs'   // aar目录
-        }
+//        flatDir {
+//            dirs '../OortWebframeLib/libs'   // aar目录
+//        }
 
 
     }

@@ -1436,9 +1436,9 @@
     <string name="tip_get_friends_failed">加载好友列表失败</string>
     <string name="delete_public_number_error">取消关注失败</string>
     <string name="hint_invisible">隐身人不能发言</string>
-    <string name="tip_set_invisible_place_holder">%s设置%s为隐身人</string>
+    <string name="tip_set_invisible_place_holder" formatted="false">%s设置%s为隐身人</string>
     <string name="tip_cancel_invisible_place_holder">%1$s取消%2$s的隐身人</string>
-    <string name="tip_set_guardian_place_holder">%s设置%s为监控人</string>
+    <string name="tip_set_guardian_place_holder" formatted="false" >%s设置%s为监控人</string>
     <string name="tip_cancel_guardian_place_holder">%1$s取消%2$s的监控人</string>
     <string name="set_invisible">指定隐身人</string>
     <string name="cancel_invisible">取消隐身人</string>
@@ -2383,7 +2383,7 @@
     <string name="scan_recharge">扫码充值</string>
     <string name="band_transfer">银行转账</string>
     <string name="get_money_code">收款二维码</string>
-    <string name="scan_recharge_wx_alipay_tip1">1.点击保存收款码到手机相册，跟着打开%s的扫一扫，点击右上角的‘相册’，选择刚保存的收款码转账%s元，请在转账备注中填写您的通讯号：%s，充值将更快到账。</string>
+    <string name="scan_recharge_wx_alipay_tip1" formatted="false">1.点击保存收款码到手机相册，跟着打开%s的扫一扫，点击右上角的‘相册’，选择刚保存的收款码转账%s元，请在转账备注中填写您的通讯号：%s，充值将更快到账。</string>
     <string name="scan_recharge_wx_alipay_tip2">2.完成转账后请点击下面的“确定”按钮</string>
     <string name="alipay">支付宝</string>
     <string name="scan_recharge_band_tip1">1.付款时请在付款备注中填写您的通讯号：%s，充值将更快到账。</string>

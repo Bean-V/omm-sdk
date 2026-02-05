@@ -13,7 +13,7 @@ android {
         versionName "v1.0.1"
         versionCode 1
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
+        multiDexEnabled false
     }
 
     buildFeatures {
@@ -32,8 +32,8 @@ android {
 
     buildTypes {
         debug {
-            debuggable true
-            jniDebuggable true
+            debuggable false
+            jniDebuggable false
             signingConfig signingConfigs.keyStore
         }
 

@@ -219,10 +219,10 @@ android {
         maven {
             url = uri("${System.getProperty('user.home')}/.m2/repository")
         }
-
-        flatDir {
-            dirs '../OortWebframeLib/libs'   // aar目录
-        }
+//
+//        flatDir {
+//            dirs '../OortWebframeLib/libs'   // aar目录
+//        }
 
 
     }
@@ -441,22 +441,44 @@ configurations {
 }
 
 // 设置版本和组
-version = '1.0.0'
-group = 'com.oort'
+//version = '1.0.0'
+//group = 'com.oort'
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                from components.release  // ✅ 自动包含依赖信息
+//
+//                // 设置 Maven 坐标
+//                groupId = group
+//                artifactId = 'omm-lib'
+//                version = version
+//
+//                // 可选：添加描述等信息
+//                pom {
+//                    description = 'OMM-SDK'
+//                }
+//            }
+//        }
+//    }
+//}
+
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release  // ✅ 自动包含依赖信息
+                from components.release
 
-                // 设置 Maven 坐标
-                groupId = group
-                artifactId = 'omm-lib'
-                version = version
+                // 设置坐标信息
+                groupId = 'com.github.Bean-V'  // ⚠️ 修改这里！
+                artifactId = 'ommSDK'                    // JitPack上的名称
+                version = '1.0.0'                       // ⚠️ 与标签一致
 
-                // 可选：添加描述等信息
+                // 可选：添加POM信息
                 pom {
-                    description = 'OMM-SDK'
+                    name = 'OMM SDK'
+                    description = '聚合所有功能的Android SDK'
+                    url = 'https://github.com/Bean-V/ommSDK'
                 }
             }
         }

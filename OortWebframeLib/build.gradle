@@ -47,9 +47,9 @@ allprojects {
         maven {
             url "https://maven.google.com"
         }
-        flatDir{
-            dirs 'libs'
-        }
+//        flatDir{
+//            dirs 'libs'
+//        }
     }
 }
 
@@ -100,9 +100,9 @@ android {
         }
     }
     repositories {
-        flatDir {
-            dirs 'libs'   // aar目录
-        }
+//        flatDir {
+//            dirs 'libs'   // aar目录
+//        }
     }
 
 }

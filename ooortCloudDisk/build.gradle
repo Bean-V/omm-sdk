@@ -73,11 +73,7 @@ android {
 //        }
 //}
 
-repositories {
-    flatDir {
-        dirs '../libs'   // aar目录
-    }
-}
+
 
 
 dependencies {
