@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="290dp"
+        android:layout_height="350dp"
+        android:orientation="vertical"
+
+        android:background="@mipmap/icon_dialog_permission_position">
+
+        <TextView android:id="@+id/tv_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="104dp"
+            android:textSize="20sp"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:text="开启位置访问"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:maxLines="2"
+            android:gravity="center"
+            android:text="我们需要您的位置信息才能继续提供服务"
+            />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"></LinearLayout>
+
+        <Button
+            android:id="@+id/btn_on"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:text="一键开启"
+            android:textColor="#ffffff"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:background="@drawable/bg_main_color_r_26"/>
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textSize="16sp"
+            android:text="下次再说"
+            android:textColor="#666666"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:layout_gravity="center"
+            android:background="#00000000"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,66 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/main_color</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+
+    </style>
+
+    <style name="DialogStyles" parent="@style/Base.V7.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+    </style>
+
+<!--     ···············title_bar样式·························    -->
+    <style name="title_bar_style">
+        <item name="android:background">@color/main_color</item>
+        <item name="android:paddingLeft">0.0dip</item>
+        <item name="android:paddingRight">0.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">56.0dip</item>
+        <item name="android:gravity">center_vertical</item>
+
+    </style>
+
+    <style name="title_bar_button">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/nav_text_color</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">0.0dip</item>
+        <item name="android:layout_marginRight">8.0dip</item>
+    </style>
+
+    <style name="back_view" parent="@style/title_bar_button">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_back</item>
+        <item name="android:paddingLeft">0.0dip</item>
+        <item name="android:paddingRight">0.0dip</item>
+        <item name="android:layout_marginLeft">16.0dip</item>
+        <item name="android:layout_marginRight">16.0dip</item>
+        <item name="android:text">@null</item>
+        <item name="android:drawableLeft">@null</item>
+
+    </style>
+    <!--    ······················end·······································              -->
+
+    <style name="checkbox_style" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/color_999</item>
+        <item name="colorControlActivated">@color/color_115</item>
+    </style>
+
+    <style name="LoadProgressDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">false</item><!-- 模糊 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.0</item><!-- 灰度 -->
+        <!--Dialog图标着色-->
+        <!--<item name="colorAccent">#ffffff</item>-->
+    </style>
+
+</resources>

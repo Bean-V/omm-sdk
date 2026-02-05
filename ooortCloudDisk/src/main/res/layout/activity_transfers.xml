@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/color_3f7"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicator="@drawable/tab_layout_indicator"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/color_333"
+        app:tabTextColor="@color/color_a1a" />
+<!--     app:tabIndicator="@drawable/tab_layout_indicator" 弊端 只有text长度一致 否则会有不适配问题-->
+<!--    app:tabTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/dp_4"
+        android:background="@color/color_ebe"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"/>
+</LinearLayout>

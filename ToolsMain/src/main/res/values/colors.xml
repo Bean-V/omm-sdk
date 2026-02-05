@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black_usb">#FF000000</color>
+    <color name="white_tm">#FFFFFFFF</color>
+    <color name="mainColor">#1156A6</color>
+    <color name="tapMainColor">#30333333</color>
+
+    <color name="clearColor">#01000000</color>
+    <color name="colorAccent">#ffffff</color>
+    <color name="colorBg">#f1f1f1</color>
+    <color name="colorSeg">#2D6CFF</color>
+
+    <color name="colorZT33">#333333</color>
+
+    <color name="colorZTMain">#1156A6</color>
+    <color name="colorZT66">#666666</color>
+    <color name="colorZT99">#999999</color>
+    <color name="colorZTNav">#ffffff</color>
+
+    <color name="colorWhite">#FFFFFFFF</color>
+    <color name="colorBlack">#FF000000</color>
+    <color name="colorGray">#878787</color>
+    <color name="colorOrange">#FFE26C25</color>
+    <color name="colorGreen">#0DE423</color>
+    <color name="colorRed">#ff0000</color>
+
+    <color name="colorf2">#f2f2f2</color>
+    <color name="colore3">#e3e3e3</color>
+
+    <color name="check_color">#1156a6</color>
+    <color name="nav_color">#ffffff</color>
+    <color name="nav_icon_color">#000000</color>
+    <color name="nav_text_color">#000000</color>
+    <color name="nav_search_text_color">#1156a6</color>
+    <color name="white">#ffffff</color>
+</resources>

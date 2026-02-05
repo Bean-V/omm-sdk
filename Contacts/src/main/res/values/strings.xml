@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="skin_Shang_Wu_lan">商务蓝</string>
+    <string name="skin_pu_tao_zi">葡萄紫</string>
+    <string name="name">contacts</string>
+    <string name="txt_search">搜索好友</string>
+    <string name="str_contacts_number">通讯号：</string>
+    <string name="contacts_setting">通讯录设置</string>
+    <string name="user_not_exist">用户不存在</string>
+    <string name="report">举报</string>
+    <string name="set_remark_and_label">设置备注和标签</string>
+    <string name="set_remark_name">设置备注名称</string>
+    <string name="add_black">加入黑名单</string>
+    <string name="remove_black">移出黑名单</string>
+    <string name="thoroughly_delete">彻底删除</string>
+    <string name="delete_friend">删除好友</string>
+    <string name="default_setting">默认设置</string>
+    <string name="dept_setting">部门设置</string>
+    <string name="personal_setting">个人设置</string>
+    <string name="storage">保存</string>
+    <string name="setting">设置</string>
+    <string name="is_terminal_displayed">是否终端显示</string>
+    <string name="portrait">头像</string>
+    <string name="user_name">姓名</string>
+    <string name="i_d_card">身份证</string>
+    <string name="sex">性别</string>
+    <string name="login_account_number">登录账号</string>
+    <string name="phone_number">手机号码</string>
+    <string name="user_code">用户编码</string>
+    <string name="user_status">用户状态</string>
+    <string name="dept_code">部门编码</string>
+    <string name="account_number_type">账号类型</string>
+    <string name="user_type">用户类型</string>
+    <string name="user_email">用户邮箱</string>
+    <string name="house_number">办公室门号</string>
+    <string name="oph">办公电话</string>
+    <string name="private_phone">私有电话</string>
+    <string name="quarters">岗位</string>
+    <string name="job">职务</string>
+    <string name="postscript">备注</string>
+    <string name="loading_text">正在努力加载...</string>
+    <string name="birth_date">出生日期</string>
+
+
+    <string name="base_info">基本信息</string>
+    <string name="account_number_info">账号信息</string>
+    <string name="work_info">工作信息</string>
+
+    <string name="i_d_card_code">身份证号</string>
+    <string name="phone_code">电话号码</string>
+    <string name="user_name_1">用户名</string>
+    <string name="nick_name">昵称</string>
+    <string name="qr_code">二维码</string>
+    <string name="category_dept">所属部门</string>
+
+    <string name="related_dept_name">关联部门名称</string>
+    <string name="send_message">发消息</string>
+
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="unknown">未知</string>
+    <string name="other">其它</string>
+    <string name="forbidden">禁用</string>
+    <string name="normal">正常</string>
+    <string name="delete">删除</string>
+
+    <string name="formal_account_number">正式账号</string>
+    <string name="other_account_number">其它账号</string>
+    <string name="test_account_number">测试账号</string>
+    <string name="no_data">暂无数据</string>
+    <string name="drag_adjustment_order">拖拽调整顺序</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
+    <string name="select_set_dept_user">请选择需要设置的部门或人员</string>
+    <string name="many_dept">多部门</string>
+    <string name="many_user">多人员</string>
+    <string name="not">无</string>
+    <string name="save_successfully">保存成功</string>
+    <string name="select_person_c">选择人员</string>
+    <string name="search_org">搜索组织</string>
+    <string name="user_info_str">用户信息</string>
+    <string name="police_code">警号</string>
+    <string name="police_small_code">小号</string>
+    <string name="all_partment">所有部门</string>
+    <string name="message_str">消息</string>
+    <string name="contact_str">联系人</string>
+    <string name="input_group_des">请输入群组描述</string>
+    <string name="input_group_name">请输入群组名称</string>
+    <string name="create_group">创建群组</string>
+    <string name="unfind_org">未查找到相关组织</string>
+    <string name="voice_str">语音</string>
+    <string name="app_name">警务通</string>
+    <string name="button_ok">确定</string>
+
+</resources>

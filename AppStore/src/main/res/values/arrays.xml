@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="manage_titles">
+        <item>@string/app_update_str</item>
+        <item>@string/del_str</item>
+    </string-array>
+    <string-array name="detailed_titles">
+        <item>@string/comment_text_str</item>
+        <item>评论 (999+)</item>
+    </string-array>
+
+    <string-array name="type_classify_titles">
+        <item>移动执法</item>
+        <item>移动办公</item>
+        <item>队伍建设</item>
+        <item>基础工作</item>
+        <item>沟通协助</item>
+        <item>AI+视频</item>
+    </string-array>
+
+</resources>

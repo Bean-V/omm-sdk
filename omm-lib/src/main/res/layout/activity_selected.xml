@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/a_view_actionbar"/>
+    <RelativeLayout
+        android:id="@+id/setting_rl"
+        style="@style/IMTbleLine_No_bg">
+        <ImageView
+            android:id="@+id/selectedIv"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/state_mzz"
+            app:srcLight="@drawable/my_set_title_light" />
+        <TextView
+            android:id="@+id/selectedTv"
+            style="@style/IMTbleLine_TextName"
+            android:layout_centerVertical="true"
+            android:text="美滋滋" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="-2dp"
+        android:layout_marginBottom="-2dp"
+        android:background="@color/normal_bg" />
+    <EditText
+        android:id="@+id/selectedEt"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:background="#ffffff"
+        android:hint="请输入快捷回复（选填）"
+        android:textColor="#FF333333"
+        android:textSize="12sp"/>
+
+</LinearLayout>

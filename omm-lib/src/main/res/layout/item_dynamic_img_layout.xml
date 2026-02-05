@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:descendantFocusability="afterDescendants">
+
+
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_marginTop="@dimen/dp10_contact"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:scaleType="centerCrop" />
+    <ImageView
+        android:id="@+id/iv_add"
+        android:layout_marginTop="@dimen/dp10_contact"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:background="#f2f2f2"
+        android:padding="15dp"
+        android:src="@mipmap/icon_take" />
+    <!--    @mipmap/icon_dynamic_select_img-->
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@mipmap/icon_dynamic_cancel_img"
+        android:visibility="visible"
+        android:layout_marginLeft="75dp"
+        />
+
+    <ImageView
+        android:id="@+id/iv_play"
+        android:layout_marginTop="32dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="22dp"
+
+        android:src="@mipmap/icon_dynamic_play" />
+
+</FrameLayout>

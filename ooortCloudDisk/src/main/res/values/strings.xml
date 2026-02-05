@@ -1,0 +1,41 @@
+<resources>
+<!--    <string name="app_name">云盘</string>-->
+    <string name="slogan_text">智能跨网，无间隙同步</string>
+    <string name="contact_text_b">通讯录传送</string>
+    <string name="file_text_b">文件传送</string>
+    <string name="pic_text_b">图片传送</string>
+    <string name="txt_text_b">文本传送</string>
+    <string name="contact_text">通讯录同步</string>
+    <string name="file_text">文件同步</string>
+    <string name="pic_text">图片同步</string>
+    <string name="txt_text">文本同步</string>
+    <string name="accomplish_text">同步完成</string>
+    <string name="hint_text">手机同步只能连接办公区域Wi-Fi进行同步</string>
+    <string name="txt_hint">从粘贴板粘贴或输入文本</string>
+    <string name="file_name_hint">未命名文件夹</string>
+    <string name="pic_hint">图片上传每次只能选10张</string>
+    <string name="all_file">全部文件</string>
+    <string name="download">下载</string>
+    <string name="edit">重命名</string>
+    <string name="copy">复制/移动</string>
+    <string name="delete">删除</string>
+    <string name="create">新 建</string>
+    <string name="create_mkdir">新建文件夹</string>
+    <string name="file_upload">上传文件</string>
+    <string name="transfers_list">传输列表</string>
+    <string name="aim_folder">选择目标文件夹</string>
+    <string name="check_all">全选</string>
+    <string name="development_company">开发公司: 奥尔特云(深圳)科技智慧有限公司</string>
+    <string name="cloud_disk">云盘</string>
+    <string name="search_key_tip">请输入关键字搜索</string>
+    <string name="download_list">下载列表</string>
+    <string name="upload_list">上传列表</string>
+    <string name="no_download_record">暂无下载记录</string>
+    <string name="no_upload_record">暂无上传记录</string>
+    <string name="cancel">取消</string>
+    <string name="search_history">搜索历史</string>
+    <string name="search_str">搜索</string>
+    <string name="new_folder">新文件夹</string>
+    <string name="no_data">文件夹是空的</string>
+
+</resources>

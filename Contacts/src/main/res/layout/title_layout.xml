@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@color/nav_color"
+        android:layout_height="@dimen/dp_56">
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/ic_back"
+        android:tint="@color/nav_icon_color"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:textSize="@dimen/sp_18"
+            android:layout_toRightOf="@id/img_back"
+            android:text="@string/contact_str"
+            android:textColor="@color/nav_text_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <Button
+            android:id="@+id/confirm_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#ffffff"
+            android:visibility="visible"
+            android:textSize="@dimen/sp_14"
+            android:background="@drawable/bg_confirm_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:text="@string/button_ok" />
+    </RelativeLayout>
+
+

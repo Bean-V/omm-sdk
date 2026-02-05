@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="290dp"
+        android:layout_height="560dp"
+        android:orientation="vertical"
+
+        android:background="@mipmap/icon_dialog_permission_all_bg">
+
+        <TextView android:id="@+id/tv_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="104dp"
+            android:textSize="20sp"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:text="权限开启"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="15dp"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:maxLines="2"
+            android:gravity="center"
+            android:text="为了保证APP正常稳定运行并给您提供更好的服务，请您开启以下权限"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView 
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/icon_dialog_permission_all_msg"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:textStyle="bold"
+                    android:text="消息通知"
+
+                    />
+                <TextView 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:maxLines="2"
+                    android:text="为您提供及时的消息提醒服务"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView 
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/icon_dialog_permission_all_positon"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:textStyle="bold"
+                    android:text="地理位置"
+
+                    />
+                <TextView 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:maxLines="2"
+                    android:text="获取位置信息"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView 
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/icon_dialog_permission_all_record"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:textStyle="bold"
+                    android:text="麦克风"
+
+                    />
+                <TextView 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:maxLines="2"
+                    android:text="聊天和线上会议需使用麦克风权限"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView 
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/icon_dialog_permission_all_camera"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:textStyle="bold"
+                    android:text="相机"
+
+                    />
+                <TextView 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:maxLines="2"
+                    android:text="拍照和录制视频发送给好友"
+                    />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp">
+            <ImageView 
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/icon_dialog_permission_all_ablum"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:textStyle="bold"
+                    android:text="相册"
+
+                    />
+                <TextView 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:maxLines="2"
+                    android:text="发送照片或视频给好友"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_on"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:text="一键开启"
+            android:textColor="#ffffff"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:background="@drawable/bg_main_color_r_26"/>
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="16sp"
+            android:text="下次再说"
+            android:textColor="#666666"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:layout_gravity="center"
+            android:background="#00000000"/>
+    </LinearLayout>
+
+</LinearLayout>

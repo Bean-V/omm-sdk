@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_container"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_f6_18"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp">
+        <ImageView
+            android:id="@+id/iv_file_icon"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/icon_dynamic_topic_item"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:maxWidth="220dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="测绘银屏测"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/tv_cancel"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/icon_dynamic_cancel_img"
+            android:visibility="gone"
+            android:scaleType="fitCenter"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="8dp">
+
+    <!-- 标签容器：RelativeLayout 承载滑动背景和 Tab 列表 -->
+    <RelativeLayout
+        android:id="@+id/tabs_container"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/tab_container_bg"
+    android:paddingHorizontal="4dp">
+
+    <!-- 选中项白色背景（滑动层，初始位置与第一个 Tab 对齐） -->
+    <View
+        android:id="@+id/selected_background"
+        android:layout_width="70dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/selected_tab_bg"
+    android:visibility="visible" />
+
+    <!-- Tab 列表：LinearLayout 横向排列，每个 Tab 宽度统一 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- 全部 Tab -->
+        <LinearLayout
+            android:id="@+id/tab_all"
+            android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp">
+
+        <ImageView
+            android:id="@+id/iv_all"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_msg_group_all" />
+
+        <TextView
+            android:id="@+id/tv_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="全部"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- 未读 Tab -->
+    <LinearLayout
+        android:id="@+id/tab_unread"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp">
+
+        <ImageView
+            android:id="@+id/iv_unread"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_msg_group_unreae" />
+
+        <TextView
+            android:id="@+id/tv_unread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="未读"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- 单聊 Tab（默认显示，如需隐藏可通过代码控制） -->
+    <LinearLayout
+        android:id="@+id/tab_single"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp"
+        android:visibility="gone"> <!-- 改为默认显示，与其他 Tab 统一 -->
+
+        <ImageView
+            android:id="@+id/iv_single"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_msg_group_single" />
+
+        <TextView
+            android:id="@+id/tv_single"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="单聊"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- 群聊 Tab -->
+    <LinearLayout
+        android:id="@+id/tab_group"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp">
+
+        <ImageView
+            android:id="@+id/iv_group"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_msg_group_groups" />
+
+        <TextView
+            android:id="@+id/tv_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="群聊"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>
+    </RelativeLayout>
+
+    </LinearLayout>

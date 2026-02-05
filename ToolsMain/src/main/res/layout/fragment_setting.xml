@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".FragmentSetting">
+
+    <!-- TODO: Update blank fragment layout -->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:background="@color/mainColor">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/setting"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textColor="@color/colorZTNav"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            />-->
+
+<!--    </LinearLayout>-->
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_language"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/white">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_set_lang_en_green"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/changeLangage"
+            android:textSize="16sp"
+            android:textColor="@color/colorZT33"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorZT33"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_current_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中文简体"
+            android:textSize="14sp"
+            android:textColor="#999999"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_arrow"
+            android:layout_marginRight="10dp"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="45dp"
+        android:background="@color/colorBg"
+        />
+    <LinearLayout
+        android:id="@+id/ll_syn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_sys"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sys_task"
+            android:textSize="16sp"
+            android:textColor="@color/colorZT33"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/colorZT33"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_see_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/mainColor"
+            android:text="@string/sys_see_detail"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            />
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <Switch
+                android:id="@+id/sh_sys"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="0dp"
+                android:visibility="gone"
+                />
+
+
+            <ImageView
+                android:id="@+id/iv_sh_bg"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_off"
+                android:layout_marginRight="0dp"
+                android:layout_gravity="center_vertical"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_sh"
+                android:layout_width="40dp"
+                android:layout_height="60dp"
+                />
+        </FrameLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="45dp"
+        android:background="@color/colorBg"
+        />
+    <LinearLayout
+        android:id="@+id/ll_about"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_seting_about"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/abut_us"
+            android:textSize="14sp"
+            android:textColor="@color/colorZT33"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/colorZT33"
+            android:layout_marginLeft="5dp"
+            />
+        <TextView
+            android:id="@+id/tv_current_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.0.0"
+            android:textSize="14sp"
+            android:textColor="#999999"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_arrow"
+            android:layout_marginRight="10dp"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorBg"
+        android:layout_marginLeft="45dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_privacy"
+            android:textColor="@color/white"
+            android:layout_marginLeft="15dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_p"
+            android:textSize="14sp"
+            android:textColor="@color/colorZT33"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/colorZT33"
+            android:layout_marginLeft="5dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="14sp"
+            android:textColor="#999999"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_arrow"
+            android:layout_marginRight="10dp"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorBg"
+        android:layout_marginLeft="45dp"
+        />
+
+
+
+
+
+
+</LinearLayout>

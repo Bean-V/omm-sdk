@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/btn_fm_back"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="64dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:background="@color/mainColor">-->
+
+    <!--        <ImageButton-->
+
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="10dp"-->
+    <!--            android:layout_marginTop="32dp"-->
+    <!--            android:background="#00000000"-->
+    <!--            android:focusable="false"-->
+    <!--            android:src="@mipmap/ic_fm_back" />-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="30dp"-->
+    <!--            android:text="@string/file_wx"-->
+    <!--            android:textSize="18sp"-->
+    <!--            android:textColor="@color/colorZTNav"-->
+    <!--            android:layout_marginLeft="15dp"-->
+    <!--            />-->
+    <!--    </LinearLayout>-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainColor"
+        android:fitsSystemWindows="true"
+        app:title="@string/back"
+        app:titleTextColor="@color/colorZTNav">
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_oper"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="?actionBarSize"-->
+<!--            android:layout_gravity="right"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:src="@drawable/ic_more_grey" />-->
+
+        <LinearLayout
+            android:id="@+id/ll_oper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:gravity="right">
+            <TextView
+                android:id="@+id/tv_del"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:text=""
+                android:paddingTop="8dp"
+                android:drawableTop="@mipmap/ic_wx_oper_del_w"
+                android:layout_marginRight="10dp"
+                android:textSize="8sp"
+                android:textColor="@color/white"
+                />
+            <TextView
+                android:id="@+id/tv_allSelect"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:text=""
+                android:paddingTop="8dp"
+                android:layout_marginRight="10dp"
+                android:textSize="8sp"
+                android:drawableLeft="@mipmap/ic_wx_selectall_un"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                />
+            <FrameLayout
+                android:id="@+id/fl_copy"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone">
+                <TextView
+                    android:id="@+id/tv_copy"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right"
+                    android:text=""
+                    android:paddingTop="8dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="8sp"
+                    android:drawableTop="@mipmap/ic_wx_oper_copy_w"
+                    android:textColor="@color/white"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:gravity="center"
+                    android:background="@drawable/badge"
+                    android:minWidth="9dp"
+                    android:text="9"
+                    android:layout_marginRight="10dp"
+                    android:textSize="7sp"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    />
+            </FrameLayout>
+
+
+            <TextView
+            android:id="@+id/tv_canceledit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text=""
+            android:paddingTop="8dp"
+            android:layout_marginRight="10dp"
+            android:textSize="8sp"
+            android:drawableLeft="@mipmap/ic_wx_selectall_un"
+            android:textColor="@color/white"
+            />
+
+
+
+
+
+        </LinearLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        style="@style/MyTablayoutstyle"
+        app:tabTextAppearance="@style/MyTablayoutstyle"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        app:tabIndicatorFullWidth="false">
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorBg"
+        />
+
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vg"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        />
+
+
+<!--    <LinearLayout-->
+
+<!--        android:id="@+id/ll_oper"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:orientation="vertical"-->
+<!--        >-->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:textColor="@color/colorZTNav"-->
+<!--            android:background="#f2f2f2"-->
+<!--            />-->
+<!--        <LinearLayout-->
+
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="44dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_vertical"-->
+
+<!--            >-->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_oper_count"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="已选(0)"-->
+
+<!--                android:textSize="18sp"-->
+<!--                android:textColor="@color/mainColor"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_del"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="删除"-->
+<!--                android:layout_marginRight="15dp"-->
+
+<!--                android:textSize="18sp"-->
+<!--                android:textColor="@color/mainColor"-->
+<!--                />-->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_copy"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="right|center_vertical"-->
+<!--                android:text="复制到U盘"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textColor="@color/mainColor"-->
+<!--                />-->
+
+
+
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+
+
+
+</LinearLayout>

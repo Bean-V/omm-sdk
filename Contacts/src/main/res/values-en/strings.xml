@@ -1,0 +1,89 @@
+
+<resources>
+    <string name="name">contacts</string>
+    <string name="txt_search">Search Friends</string>
+    <string name="str_contacts_number">Contact Number:</string>
+    <string name="contacts_setting">Contacts Settings</string>
+    <string name="user_not_exist">User does not exist</string>
+    <string name="report">Report</string>
+    <string name="set_remark_and_label">Set Remark and Label</string>
+    <string name="set_remark_name">Set Remark Name</string>
+    <string name="add_black">Add to Blacklist</string>
+    <string name="remove_black">Remove from Blacklist</string>
+    <string name="thoroughly_delete">Permanently Delete</string>
+    <string name="delete_friend">Delete Friend</string>
+    <string name="default_setting">Default Settings</string>
+    <string name="dept_setting">Department Settings</string>
+    <string name="personal_setting">Personal Settings</string>
+    <string name="storage">Save</string>
+    <string name="setting">Settings</string>
+    <string name="is_terminal_displayed">Is Terminal Displayed</string>
+    <string name="portrait">Portrait</string>
+    <string name="user_name">Name</string>
+    <string name="i_d_card">ID Card</string>
+    <string name="sex">Gender</string>
+    <string name="login_account_number">Login Account Number</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="user_code">User Code</string>
+    <string name="user_status">User Status</string>
+    <string name="dept_code">Department Code</string>
+    <string name="account_number_type">Account Number Type</string>
+    <string name="user_type">User Type</string>
+    <string name="user_email">User Email</string>
+    <string name="house_number">Office Number</string>
+    <string name="oph">Office Phone</string>
+    <string name="private_phone">Private Phone</string>
+    <string name="quarters">Position</string>
+    <string name="job">Job Title</string>
+    <string name="postscript">Remarks</string>
+    <string name="loading_text">Loading...</string>
+    <string name="birth_date">Date of Birth</string>
+
+    <string name="base_info">Basic Information</string>
+    <string name="account_number_info">Account Information</string>
+    <string name="work_info">Work Information</string>
+
+    <string name="i_d_card_code">ID Card Number</string>
+    <string name="phone_code">Phone Number</string>
+    <string name="user_name_1">User Name</string>
+    <string name="nick_name">Nick Name</string>
+    <string name="qr_code">QR Code</string>
+    <string name="category_dept">Department</string>
+
+    <string name="related_dept_name">Related Department</string>
+    <string name="send_message">Send Message</string>
+
+    <string name="man">Male</string>
+    <string name="woman">Female</string>
+    <string name="unknown">Unknown</string>
+    <string name="other">Other</string>
+    <string name="forbidden">Disabled</string>
+    <string name="normal">Normal</string>
+    <string name="delete">Delete</string>
+
+    <string name="formal_account_number">Official Account</string>
+    <string name="other_account_number">Other Account</string>
+    <string name="test_account_number">Test Account</string>
+    <string name="no_data">No Data Available</string>
+    <string name="drag_adjustment_order">Drag to sort</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="select_set_dept_user">Please select the department or user to set</string>
+    <string name="many_dept">Multiple Departments</string>
+    <string name="many_user">Multiple Users</string>
+    <string name="not">Not</string>
+    <string name="save_successfully">Saved successfully</string>
+    <string name="select_person_c">Select Person</string>
+    <string name="search_org">Search Organization</string>
+    <string name="user_info_str">Info</string>
+    <string name="police_code">Police Code</string>
+    <string name="police_small_code">Small Code</string>
+    <string name="all_partment">All departments</string>
+    <string name="message_str">Messages</string>
+    <string name="contact_str">Contacts</string>
+    <string name="input_group_des">Input description</string>
+    <string name="input_group_name">Input name</string>
+    <string name="create_group">Create Group</string>
+    <string name="unfind_org">Not find org data</string>
+    <string name="voice_str">Voice Call</string>
+</resources>

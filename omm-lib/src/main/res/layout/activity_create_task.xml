@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5">
+
+    <!-- 标题栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#FFFFFF"
+        android:paddingHorizontal="16dp"
+        android:elevation="2dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:src="@drawable/ic_arrow_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="4dp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="创建警情任务"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/dp_16" />
+
+        <View
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+    </LinearLayout>
+
+    <!-- 主要内容区域 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 基本信息卡片 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                android:background="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- 分类标题 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="基本信息"
+                        android:textSize="16sp"
+                        android:textColor="#333333"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp"
+                        android:drawablePadding="8dp" />
+
+                    <!-- 接警单编号 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="接警单编号"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_incident_id"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：202401010001"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <!-- 警情级别 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="警情级别"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tv_severity_level"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/edit_text_background"
+                                android:hint="示例：一级"
+                                android:textSize="14sp"
+                                android:textColor="#333333"
+                                android:textColorHint="#999999"
+                                android:paddingHorizontal="12dp"
+                                android:gravity="center_vertical"
+                                android:clickable="true"
+                                android:focusable="false" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_arrow_right"
+                                android:layout_marginStart="8dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- 报警类别 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="报警类别"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_incident_category"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：交通警情"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <!-- 报警类型 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="报警类型"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_incident_type"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：交通事故"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <!-- 报警细类 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="报警细类"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_incident_subcategory"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：车辆碰撞"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <!-- 报警小类 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="报警小类"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_incident_minor_category"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：轻微刮擦"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <!-- 警情状态 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="警情状态"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tv_incident_status"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/edit_text_background"
+                                android:hint="示例：待处理"
+                                android:textSize="14sp"
+                                android:textColor="#333333"
+                                android:textColorHint="#999999"
+                                android:paddingHorizontal="12dp"
+                                android:gravity="center_vertical"
+                                android:clickable="true"
+                                android:focusable="false" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:visibility="gone"
+                                android:src="@drawable/ic_arrow_right"
+                                android:layout_marginStart="8dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- 时间和人员信息卡片 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                android:background="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- 分类标题 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="时间和人员信息"
+                        android:textSize="16sp"
+                        android:textColor="#333333"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- 接警时间 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="接警时间"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_reception_time"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：2024-01-01 10:30:00"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true"
+                            android:inputType="datetime"
+                            android:focusable="false"
+                            android:clickable="true" />
+
+                    </LinearLayout>
+
+                    <!-- 报警人姓名 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="报警人姓名"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_reporter_name"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：张三"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <!-- 报警人电话 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="报警人电话"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <EditText
+                                android:id="@+id/et_reporter_phone"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/edit_text_background"
+                                android:hint="示例：13800138000"
+                                android:textSize="14sp"
+                                android:textColor="#333333"
+                                android:textColorHint="#999999"
+                                android:paddingHorizontal="12dp"
+                                android:singleLine="true"
+                                android:inputType="phone" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/ic_phone"
+                                android:visibility="gone"
+                                android:layout_marginStart="8dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- 地点和内容卡片 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                android:background="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- 分类标题 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="地点和内容"
+                        android:textSize="16sp"
+                        android:textColor="#333333"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- 事发地点 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="事发地点"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <EditText
+                                android:id="@+id/et_incident_location"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/edit_text_background"
+                                android:hint="示例：北京市朝阳区建国路88号"
+                                android:textSize="14sp"
+                                android:textColor="#333333"
+                                android:textColorHint="#999999"
+                                android:paddingHorizontal="12dp"
+                                android:singleLine="true" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/ic_location"
+                                android:visibility="gone"
+                                android:layout_marginStart="8dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- 报警内容 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="top"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="报警内容"
+                            android:textSize="14sp"
+                            android:textColor="#666666"
+                            android:layout_marginTop="2dp" />
+
+                        <EditText
+                            android:id="@+id/et_incident_content"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：两车相撞，无人员伤亡，需要交警处理"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="10dp"
+                            android:minHeight="40dp"
+                            android:gravity="top"
+                            android:inputType="textMultiLine" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- 处警信息卡片 -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                android:background="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- 分类标题 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="处警信息"
+                        android:textSize="16sp"
+                        android:textColor="#333333"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- 处警员编号 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="处警员编号"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_officer_id"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：P001"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <!-- 三级处警单位 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="三级处警单位"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_level3_unit"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：交警支队"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <!-- 二级联动单位 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="二级联动单位"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_level2_unit"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：市公安局"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                    <!-- 三级联动单位 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="三级联动单位"
+                            android:textSize="14sp"
+                            android:textColor="#666666" />
+
+                        <EditText
+                            android:id="@+id/et_level3_linkage_unit"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:background="@drawable/edit_text_background"
+                            android:hint="示例：省公安厅"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:paddingHorizontal="12dp"
+                            android:singleLine="true" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- 底部创建按钮 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        android:elevation="4dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_reset_background"
+            android:text="取消"
+            android:textSize="16sp"
+            android:textColor="#666666" />
+
+        <Button
+            android:id="@+id/btn_create"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_filter_background"
+            android:text="创建任务"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</LinearLayout>

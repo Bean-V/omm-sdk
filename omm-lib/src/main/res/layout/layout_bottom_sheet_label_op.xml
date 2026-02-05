@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_rename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="重命名"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black"/>
+
+    <Button
+        android:id="@+id/btn_add_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加聊天"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black"/>
+
+    <Button
+        android:id="@+id/btn_delete_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="删除标签"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:textColor="@android:color/black"/>
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="取消"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        android:textColor="#ff0000"/>
+
+</LinearLayout>

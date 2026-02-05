@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/chat_item_padding_left"
+    android:paddingTop="@dimen/chat_item_padding_top"
+    android:paddingRight="@dimen/chat_item_padding_right"
+    android:paddingBottom="@dimen/chat_item_padding_bottom">
+
+    <TextView
+        android:id="@+id/time_tv"
+        style="@style/ChattingUISystem"
+        android:visibility="gone" />
+
+    <com.oort.weichat.view.HeadView
+        android:id="@+id/chat_head_iv"
+        android:layout_width="@dimen/chat_head_size"
+        android:layout_height="@dimen/chat_head_size"
+        android:layout_below="@id/time_tv"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="@dimen/chat_head_left"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_marginEnd="@dimen/chat_head_right"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/avatar_normal" />
+
+    <TextView
+        android:id="@+id/nick_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_tv"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_toLeftOf="@id/chat_head_iv"
+        android:text=""
+        android:textSize="@dimen/SmallerTextSize"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/chat_warp_view"
+        android:layout_width="@dimen/chat_form_info_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nick_name"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_toLeftOf="@id/chat_head_iv"
+        android:background="@drawable/chat_bubble_whrite_right_icon_text_image"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp15"
+        android:paddingTop="@dimen/dp15"
+        android:paddingRight="@dimen/dp15">
+        <TextView
+            android:id="@+id/tv_approval_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="外出申请"
+            android:textSize="18sp"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- 申请人信息 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申  请  人："
+                android:textSize="14sp"
+                android:textColor="@color/secondary_text"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="张丽春"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_text"
+                    android:maxLines="2"/>
+                <TextView
+                    android:id="@+id/tv_part"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="龙辉市回如区公安局交通管理支队"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:maxLines="2"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 审批事由 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="审批事由"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/secondary_text"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="事        由："
+                android:textSize="14sp"
+
+                android:textColor="@color/secondary_text"/>
+
+            <TextView
+                android:id="@+id/tv_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="外出巡查"
+                android:textSize="14sp"
+                android:textColor="@color/primary_text"/>
+        </LinearLayout>
+
+        <!-- 时间范围 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始时间："
+                android:textSize="14sp"
+                android:textColor="@color/secondary_text"/>
+
+            <TextView
+                android:id="@+id/tv_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2025-12-05 19:03:01"
+                android:textSize="12sp"
+                android:textColor="@color/primary_text"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="结束时间："
+                android:textSize="14sp"
+                android:textColor="@color/secondary_text"/>
+
+
+
+            <TextView
+                android:id="@+id/tv_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2025-12-06"
+                android:textSize="14sp"
+                android:textColor="@color/primary_text"/>
+        </LinearLayout>
+
+
+        <!-- 底部操作按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tv_view_detail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="查看详情"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:background="@drawable/btn_approve_detail_bg"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:textColor="@color/colorPrimary"/>
+
+
+
+            <Button
+                android:id="@+id/btn_approve"
+                android:layout_marginLeft="10dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="审批"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_approve_bg"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/view_holder_state_from" />
+
+    <CheckBox
+        android:id="@+id/chat_msc"
+        style="@style/CustomCheckBoxTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chat_warp_view"
+        android:layout_marginTop="@dimen/dp10_contact"
+        android:clickable="false"
+        android:visibility="visible" />
+
+</RelativeLayout>

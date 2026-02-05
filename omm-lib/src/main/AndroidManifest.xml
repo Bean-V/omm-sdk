@@ -1,0 +1,1560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.oort.weichat">
+
+    <queries>
+
+        <!-- 声明将要查询的包名 -->
+        <package android:name="com.tmri.mobilepolice" />
+        <package android:name="koal.ssl" />
+    </queries>
+
+    <permission
+        android:name="${APP_ID}.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="${APP_ID}.push.permission.MESSAGE"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="${APP_ID}.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.microphone" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.RECORD_VIDEO" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RAISED_THREAD_PRIORITY" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 这个权限必须是applicationId开头， -->
+    <!-- 允许开发nfc的权限 -->
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" /> <!-- 魅族推送， -->
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="${APP_ID}.permission.MIPUSH_RECEIVE" />
+    <uses-permission android:name="com.meizu.flyme.push.permission.RECEIVE" />
+    <uses-permission android:name="${APP_ID}.push.permission.MESSAGE" />
+    <uses-permission android:name="com.meizu.c2dm.permission.RECEIVE" /> <!-- OPPO 推送 -->
+    <uses-permission android:name="${APP_ID}.permission.C2D_MESSAGE" /> <!-- 可选：获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+    <uses-permission android:name="android.permission.SET_APPLICATION_BADGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/icon_appicon"
+        android:label="@string/app_name"
+        android:roundIcon="@null"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode"
+        android:debuggable="true"
+        tools:replace="android:name, android:icon, android:roundIcon,android:allowBackup,android:theme,android:supportsRtl">
+        <!--        <activity-->
+        <!--            android:name=".call.TestJsitisActivity"-->
+        <!--            android:exported="false" />-->
+        <!--         <activity-->
+        <!--         android:name=".call.TestJsitisActivity"-->
+        <!--         android:exported="true">-->
+        <!--         <intent-filter>-->
+        <!--         <action android:name="android.intent.action.MAIN" />-->
+        <!--         <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--         </intent-filter>-->
+        <!--         </activity>-->
+        <activity
+            android:name=".ui.message.Activity_chat_announce"
+            android:exported="false" /> <!-- android:configChanges -->
+        <activity
+            android:name=".fragment.dynamic.DynamicActivitySearchResList"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".fragment.home.HomeActivityReplyDetail"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".fragment.dynamic.DynamicActivityUserHome"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".fragment.home.HomeActivityNewsDetail"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".fragment.home.HomeActivityTaskLsit"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".fragment.dynamic.DynamicActivityTopicList"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".fragment.dynamic.DynamicActivityDynamicInfo"
+            android:exported="false"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".fragment.dynamic.DynamicActivityPlayVideo"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"
+            android:theme="@style/NoActionBar" /> <!-- <uses-library android:name="mpsimdm" android:required="true" /> -->
+        <activity
+            android:name=".Activity_pick_person_search"
+            android:exported="false" /> <!-- <uses-library -->
+        <!-- android:name="mpsimdm" -->
+        <!-- android:required="true" /> -->
+        <activity
+            android:name="com.oortcloud.custom.ActivityWeb"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.web.container_text" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.lcfavorite.ActivityFav"
+            android:exported="false" />
+        <activity android:name="com.oortcloud.activity.SendMsgActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.sendmsg" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.offline.OnffLineMainActivity"
+            android:theme="@style/NoActionBar" android:exported="false"/>
+        <activity
+            android:name=".ui.offline.OffLineManagerActivity"
+            android:theme="@style/NoActionBar" android:exported="false"/>
+        <activity
+            android:name=".ui.offline.OffLineAboutActivity"
+            android:theme="@style/NoActionBar" android:exported="false"/>
+        <activity
+            android:name=".pay.new_ui.PaymentOrReceiptActivity"
+            android:label="@string/title_activity_payment_new_ui"
+            android:theme="@style/AppTheme.NoActionBar" android:exported="false"/>
+        <activity android:name=".ui.contacts.label.LabelActivityNewUI" android:exported="false"/>
+        <activity android:name=".ui.me.DescriptionActivity" android:exported="false"/>
+        <activity android:name=".ui.backup.ReceiveChatHistoryActivity" android:exported="false"/>
+        <activity android:name=".ui.circle.range.SelectCoverActivity" android:exported="false"/>
+        <activity android:name=".ui.search.SearchSingleTypeActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.search.SearchAllActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" android:exported="false"/>
+        <activity android:name=".ui.other.LifeCircleSettingsActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.backup.SendChatHistoryActivity"
+            android:launchMode="singleInstance" android:exported="false"/>
+        <activity android:name=".ui.backup.SelectChatActivity" android:exported="false"/>
+        <activity android:name=".ui.backup.BackupHistoryActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.other.PrivacyAgreeActivity"
+            android:launchMode="singleTop" android:exported="false"/>
+        <activity android:name=".ui.login.AuthLoginActivity" android:exported="false"/>
+        <activity android:name=".ui.login.H5LoginActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.login.H5LoginProxyActivity"
+            android:theme="@style/SplashTheme" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${APP_ID}"
+                    android:path="/H5login"
+                    android:scheme="sk" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.notification.NotificationProxyActivity"
+            android:theme="@style/SplashTheme" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${APP_ID}"
+                    android:path="/notification"
+                    android:scheme="sk" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.account.ChangePasswordActivity" android:exported="false"/>
+        <activity android:name=".ui.me.PrivacyWhitelistActivity" android:exported="false"/>
+        <activity android:name=".ui.groupchat.FaceToFaceGroup" android:exported="false"/>
+        <activity android:name=".ui.groupchat.RoomSearchResultActivity" android:exported="false"/>
+        <activity android:name=".ui.groupchat.RoomSearchActivity" android:exported="false"/> <!-- 启动页面 -->
+        <activity
+            android:name=".ui.SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:theme="@style/SplashTheme"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".testjs.TestJsActivity"
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name="com.oort.im.audio.VoiceRecordActivity" android:exported="false"/>
+        <activity android:name="com.oort.im.audio.VoiceRecordActivity2" android:exported="false"/> <!-- Jitsi -->
+        <activity
+            android:name=".call.JitsiTalk"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:exported="false"/>
+        <activity
+            android:name=".call.Jitsi_connecting_second"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:taskAffinity="android.task.meet"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.Jitsi_connecting_second" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".call.Jitsi_pre"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.chatVideo" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- 声明前台服务 -->
+        <service
+            android:name=".call.CallForegroundService"
+            android:foregroundServiceType="phoneCall"
+            android:exported="false" />
+        <activity
+            android:name=".call.JitsiIncomingcall"
+            android:launchMode="singleTask"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:showOnLockScreen="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:turnScreenOn="true">
+
+            <!-- 声明为通话界面（可选，增强系统识别） -->
+            <intent-filter>
+                <action android:name="android.intent.action.CALL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".call.JitsiInviteActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" android:exported="false"/>
+        <!--        android:launchMode="singleInstance"-->
+        <activity
+            android:name=".call.JitsiActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:exported="true"
+
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity=""
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".course.CourseDateilsActivity" android:exported="false"/>
+        <activity android:name=".course.LocalCourseActivity" android:exported="false"/>
+        <activity android:name=".course.SelectFriendsActivity" android:exported="false"/>
+        <activity android:name=".course.SelectNewContactsActivity" android:exported="false"/>
+        <activity android:name=".course.SelectNewGroupActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.account.RegisterActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity
+            android:name=".fragment.dynamic.DynamicSendActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity
+            android:name=".ui.account.RegisterUserBasicInfoActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity
+            android:name=".ui.account.LoginActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity
+            android:name=".ui.account.LoginHistoryActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.LoginHistoryActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.account.DataDownloadActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.account.SelectPrefixActivity"
+            android:windowSoftInputMode="stateHidden" android:exported="false"/>
+        <activity android:name=".ui.account.AuthCodeActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.account.FindPwdActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity android:name=".ui.circle.range.AtSeeCircleActivity" android:exported="false"/>
+        <activity android:name=".ui.circle.range.NewZanActivity" android:exported="false"/>
+        <activity android:name=".ui.circle.range.SeeCircleActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.circle.range.SendShuoshuoActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" android:exported="false"/>
+        <activity
+            android:name=".ui.circle.range.SendAudioActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" android:exported="false"/>
+        <activity
+            android:name=".ui.circle.range.SendVideoActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" android:exported="false"/>
+        <activity
+            android:name=".ui.circle.range.SendFileActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" android:exported="false"/>
+        <activity android:name=".ui.circle.BusinessCircleActivity" android:exported="false"/>
+        <activity android:name=".ui.circle.LongTextShowActivity" android:exported="false"/>
+        <activity android:name=".ui.company.AddEmployee" android:exported="false"/>
+        <activity android:name=".ui.company.ChangeEmployeeDepartment" android:exported="false"/>
+        <activity android:name=".ui.company.CreateCompany" android:exported="false"/>
+        <activity android:name=".ui.company.CreateDepartment" android:exported="false"/>
+        <activity android:name=".ui.company.CreateGroup" android:exported="false"/>
+        <activity android:name=".ui.company.ManagerCompany" android:exported="false"/>
+        <activity android:name=".ui.company.ModifyCompanyName" android:exported="false"/>
+        <activity android:name=".ui.company.ModifyDepartmentName" android:exported="false"/>
+        <activity
+            android:name=".ui.contacts.label.CreateLabelActivity"
+            android:windowSoftInputMode="stateHidden" android:exported="false"/>
+        <activity
+            android:name=".ui.contacts.label.LabelActivity"
+            android:windowSoftInputMode="stateHidden" android:exported="false"/>
+        <activity android:name=".ui.contacts.label.SelectLabelFriendActivity" android:exported="false"/>
+        <activity android:name=".ui.contacts.label.LabUsersActivity" android:exported="false"/>
+        <activity android:name=".ui.contacts.BlackActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.contacts.ContactInviteActivity"
+            android:windowSoftInputMode="stateHidden" android:exported="false"/>
+        <activity android:name=".ui.contacts.ContactsActivity" android:exported="false"/>
+        <activity android:name=".ui.contacts.ContactsMsgInviteActivity" android:exported="false"/>
+        <activity android:name=".ui.contacts.DeviceActivity" android:exported="false"/>
+        <activity android:name=".ui.contacts.NewFriendActivity" android:exported="false"/>
+        <activity android:name=".ui.contacts.PublishNumberActivity" android:exported="false"/>
+        <activity android:name=".ui.contacts.RoomActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.contacts.SearchFriendActivity"
+            android:windowSoftInputMode="stateVisible" android:exported="false"/>
+        <activity android:name=".ui.contacts.TalkHistoryActivity" android:exported="false"/>
+        <activity android:name=".ui.groupchat.SelectContactsActivity" android:exported="false"/> <!-- 直播 -->
+        <activity android:name=".ui.live.CreateLiveActivity" android:exported="false"/>
+        <activity android:name=".ui.live.LiveActivity" android:exported="true"> <!-- 抖音 -->
+            <intent-filter>
+                <action android:name="${applicationId}.classroom.live" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.trill.TrillActivity"
+            android:theme="@style/AppTheme_Sliding" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.douyin" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.trill.TriListActivity"
+            android:theme="@style/AppTheme_Sliding" android:exported="false"/>
+        <activity
+            android:name=".ui.xrce.RecordxActivity"
+            android:theme="@style/RecxTheme" android:exported="false"/>
+        <activity
+            android:name=".ui.xrce.PreviewxActivity"
+            android:theme="@style/RecxTheme" android:exported="false"/> <!-- 发布短视频 -->
+        <activity
+            android:name=".ui.trill.ReleasexActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" android:exported="false"/> <!-- 短视频选择标签 -->
+        <activity
+            android:name=".ui.trill.TagPickerActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" android:exported="false"/>
+        <activity
+            android:name=".ui.live.LivePlayingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity
+            android:name=".ui.live.PushFlowActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan" android:exported="false"/>
+        <activity android:name=".ui.map.MapActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.map.MapPickerActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" android:exported="false"/> <!-- 红包 -->
+        <activity android:name=".ui.me.redpacket.MucSendRedPacketActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.MyConsumeRecordNew" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.QuXianActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.RedDetailsActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.RedListActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.SendRedPacketActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.WxPayAdd" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.WxPayBlance" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.scan.ScanRechargeActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.scan.ScanWithdrawActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.scan.ScanWithdrawListActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.scan.ScanWithdrawAddActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.scan.ScanWithdrawUpdateActivity" android:exported="false"/>
+        <activity android:name=".ui.me.sendgroupmessage.ChatActivityForSendGroup" android:exported="false"/> <!-- 收付款、转账 -->
+        <activity
+            android:name=".pay.sk.SKPayActivity"
+            android:launchMode="singleTask" android:exported="false"/>
+        <activity android:name=".pay.TransferMoneyActivity" android:exported="false"/>
+        <activity android:name=".pay.TransferMoneyDetailActivity" android:exported="false"/>
+        <activity android:name=".pay.TransferRecordActivity" android:exported="false"/>
+        <activity android:name=".pay.PaymentActivity" android:exported="false"/>
+        <activity android:name=".pay.PaymentReceiptMoneyActivity" android:exported="false"/>
+        <activity android:name=".pay.ReceiptActivity" android:exported="false"/>
+        <activity android:name=".pay.ReceiptPayMoneyActivity" android:exported="false"/>
+        <activity android:name=".pay.ReceiptSetMoneyActivity" android:exported="false"/> <!-- Me模块 -->
+        <activity android:name=".ui.me.AboutActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.me.AddStateActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:exported="false"/>
+        <activity
+            android:name=".ui.me.SelectedActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" android:exported="false"/>
+        <activity
+            android:name=".ui.me.BasicInfoEditActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.myinfo" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.me.FontSizeActivity" android:exported="false"/>
+        <activity android:name=".ui.me.LocalVideoActivity" android:exported="false"/>
+        <activity android:name=".ui.me.MyCollection" android:exported="false"/>
+        <activity android:name=".ui.me.NearPersonActivity" android:exported="false">
+            <intent-filter>
+                <action android:name="${applicationId}.nearby" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.me.PrivacySettingActivity" android:exported="false"/>
+        <activity android:name=".ui.me.BandAccountActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.me.SelectFriendsActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" android:exported="false"/>
+        <activity android:name=".ui.me.select.SelectLabelActivity" android:exported="false"/>
+        <activity android:name=".ui.me.SetAccountActivity" android:exported="false" />
+        <activity
+            android:name=".ui.me.SetConfigActivity"
+            android:windowSoftInputMode="adjustResize" android:exported="false"/>
+        <activity android:name=".ui.me.SettingActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.setting" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.me.SkinStore" android:exported="false"/>
+        <activity android:name=".ui.me.SwitchLanguage" android:exported="false"/> <!-- 消息模块 -->
+        <activity
+            android:name=".ui.message.assistant.GroupAssistantAddKeywordActivity"
+            android:windowSoftInputMode="stateHidden" android:exported="false"/>
+        <activity android:name=".ui.message.assistant.GroupAssistantDetailActivity" android:exported="false"/>
+        <activity android:name=".ui.message.assistant.SelectGroupAssistantActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.message.ChatActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.chat" />
+
+                <category android:name="android.intent.category.DEFAULT" android:exported="false"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.message.ChatHistoryActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.message.ChatOverviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Sliding" android:exported="false"/>
+        <activity android:name=".ui.message.single.PersonSettingActivity" android:exported="false"/>
+        <activity android:name=".ui.message.single.SelectSetTypeActivity" android:exported="false"/>
+        <activity android:name=".ui.message.single.SetChatBackActivity" android:exported="false"/>
+        <activity android:name=".ui.message.single.SetLabelActivity" android:exported="false"/>
+        <activity android:name=".ui.message.single.SetRemarkActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.message.MucChatActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" android:exported="false"/>
+        <activity android:name=".ui.message.multi.AddContactsActivity" android:exported="false"/>
+        <activity android:name=".ui.message.multi.GroupManager" android:exported="false"/>
+        <activity
+            android:name=".ui.message.multi.GroupMoreFeaturesActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" android:exported="false"/>
+        <activity android:name=".ui.message.multi.GroupTransferActivity" android:exported="false"/>
+        <activity android:name=".ui.message.multi.InviteVerifyActivity" android:exported="false"/>
+        <activity android:name=".ui.message.multi.NoticeListActivity" android:exported="false"/>
+        <activity android:name=".ui.message.multi.ProclamationActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.message.multi.RoomInfoActivity"
+            android:launchMode="singleTop" android:exported="false"/>
+        <activity android:name=".ui.message.multi.RoomReadListActivity" android:exported="false"/>
+        <activity android:name=".ui.message.multi.SetManagerActivity" android:exported="false"/>
+        <activity android:name=".ui.message.ManagerEmojiActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.message.MessageRemindActivity"
+            android:theme="@style/Anim_fade" android:exported="false"/>
+        <activity android:name=".ui.message.search.SearchChatHistoryActivity" android:exported="false"/>
+        <activity android:name=".ui.message.search.SearchDesignationContent" android:exported="false"/>
+        <activity android:name=".ui.message.search.SearchImageVideoContent" android:exported="false"/>
+        <activity
+            android:name=".ui.message.InstantMessageActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" android:exported="false"/>
+        <activity android:name=".ui.message.QuickSendPreviewActivity" />
+        <activity
+            android:name=".ui.message.SelectNewContactsActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" android:exported="false"/>
+        <activity
+            android:name=".ui.message.SelectNewGroupInstantActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" android:exported="false"/> <!-- 群文件 -->
+        <activity android:name="com.oortcloud.coo.instant.InstantActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.InstantActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.mucfile.AddMucFileActivity" android:exported="false" />
+        <activity android:name=".ui.mucfile.MucFileDetails" android:exported="false" />
+        <activity android:name=".ui.mucfile.MucFileListActivity" android:exported="false" />
+        <activity android:name=".ui.mucfile.MucFilePreviewActivity" android:exported="false" /> <!-- 附近模块 -->
+        <activity android:name=".ui.nearby.UserSearchActivity" android:exported="false" />
+        <activity android:name=".ui.nearby.UserListActivity" android:exported="false" />
+        <activity android:name=".ui.nearby.UserListGatherActivity" android:exported="false" />
+        <activity android:name=".ui.other.BasicInfoActivity" android:exported="false" />
+        <activity android:name=".ui.other.QRcodeActivity" android:exported="true" >
+            <intent-filter>
+                <action android:name="${applicationId}.qr_code" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity> <!-- 分享模块 -->
+        <activity
+            android:name=".ui.share.ShareLoginActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.share.AuthorizationActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.share.ShareNearChatFriend"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${APP_ID}"
+                    android:path="/share"
+                    android:scheme="sk" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.share.ShareLifeCircleActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.share.ShareNewFriend"
+            android:launchMode="singleTop" android:exported="false" />
+        <activity
+            android:name=".ui.share.ShareToChatActivity"
+            android:launchMode="singleTop" android:exported="false" />
+        <activity
+            android:name=".ui.share.ShareNewGroup"
+            android:launchMode="singleTop" android:exported="false" /> <!-- Tool Activity -->
+        <activity
+            android:name=".ui.tool.MultiImagePreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Sliding" android:exported="false" />
+        <activity
+            android:name=".ui.tool.SelectAreaActivity"
+            android:screenOrientation="portrait" android:exported="false" />
+        <activity
+            android:name=".ui.tool.SelectConstantActivity"
+            android:screenOrientation="portrait" android:exported="false" />
+        <activity
+            android:name=".ui.tool.SelectConstantSectionActivity"
+            android:screenOrientation="portrait" android:exported="false" />
+        <activity
+            android:name=".ui.tool.SingleImagePreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Sliding" android:exported="false"/>
+        <activity
+            android:name=".video.ChatVideoPreviewActivity"
+            android:screenOrientation="portrait" android:exported="false"/>
+        <activity
+            android:name=".ui.tool.WebViewActivity"
+            android:screenOrientation="portrait" android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:fitsSystemWindows="true"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:supportsRtl="true"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="${applicationId}.main" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity> <!-- Android 8.0 报错 Only fullscreen opaque activities can request orientation -->
+        <!--
+            <activity
+            android:name="com.oort.weichat.ui.UserCheckedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IMTheme.DialogStyle"/>
+        -->
+        <activity
+            android:name=".ui.UserCheckedActivity"
+            android:theme="@style/IMTheme.DialogStyle" />
+        <activity
+            android:name=".video.EasyCameraActivity"
+            android:screenOrientation="portrait" /> <!-- android:screenOrientation="portrait" 强制竖屏 -->
+        <!-- CameraWithFilterActivity -->
+        <activity
+            android:name=".luo.activity.CameraWithFilterActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".video.VideoRecorderActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/RecxTheme" android:exported="false"/>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="false"
+            android:launchMode="singleTop" /> <!-- QQ登录相关 -->
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" android:exported="false"
+            />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent${QQ_APP_ID}" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.me.redpacket.ChangePayPasswordActivity"
+            android:windowSoftInputMode="stateAlwaysVisible" android:exported="false"/> <!-- 图片多选框架 -->
+        <!--
+                <activity
+                    android:name="com.foamtrace.photopicker.PhotoPickerActivity"
+                    android:configChanges="orientation|screenSize"
+                    android:theme="@style/PhotoPickerTheme"/>
+                <activity
+                    android:name="com.foamtrace.photopicker.PhotoPreviewActivity"
+                    android:theme="@style/PhotoPickerTheme"/>
+        -->
+        <activity
+            android:name=".view.photopicker.PhotoPickerActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/PhotoPickerTheme" android:exported="false"/>
+        <activity
+            android:name=".view.photopicker.PhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme" android:exported="false"/>
+        <activity
+            android:name="com.vivo.push.sdk.LinkProxyClientActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.huawei.hms.activity.BridgeActivity"
+            android:configChanges="orientation|locale|screenSize|layoutDirection|fontScale"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent">
+            <meta-data
+                android:name="hwc-theme"
+                android:value="androidhwext:style/Theme.Emui.Translucent" />
+        </activity>
+        <activity
+            android:name=".ui.life.LifeCircleActivity"
+            android:screenOrientation="portrait" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.discover" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.nearby.PublicNumberSearchActivity" android:exported="false"/>
+        <activity android:name=".ui.nearby.PublicNumberListActivity" android:exported="false"/>
+        <activity android:name=".ui.circle.range.PraiseListActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.systemshare.ShareNearChatFriend"
+            android:label="@string/send_to_friend"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="${applicationId}.shareFriend" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <!-- <data android:mimeType="*/*" /> -->
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.systemshare.ShareNewFriend" android:exported="false"/>
+        <activity android:name=".ui.systemshare.ShareNewGroup" android:exported="false"/>
+        <activity
+            android:name=".ui.systemshare.ShareLifeCircleProxyActivity"
+            android:label="@string/send_to_life_circle"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.systemshare.ShareShuoshuoActivity" android:exported="false"/>
+        <activity android:name=".ui.systemshare.ShareVideoActivity" android:exported="false"/> <!-- 推送服务绑定进程 -->
+        <activity android:name=".ui.systemshare.ShareFileActivity" android:exported="false"/> <!-- 注：此service必须在3.0.1版本以后（包括3.0.1版本）加入 -->
+        <activity android:name=".ui.account.QuickLoginAuthority" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- shikuimapp://www.shikuAndroid.com:80?apiKey= & appSecret = -->
+
+                <data
+                    android:host="www.shikuandroid.com"
+                    android:port="80"
+                    android:scheme="shikuimapp" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.account.QuickPay" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- shikuimapp://www.shikuandroid.com:80/skPay?appId="+obj.appId+"&prepayId="+obj.prepayId+"&sign="+obj.signt = -->
+
+                <data
+                    android:host="www.shikuandroid.pay.com"
+                    android:port="80"
+                    android:scheme="shikuimapp" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".call.QuickMeetingActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- shikuimapp://meet.youjob.co/asdf -->
+
+                <data
+                    android:host="meet.youjob.co"
+                    android:scheme="shikuimapp" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.lock.DeviceLockActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateVisible|adjustResize" android:exported="false"/>
+        <activity android:name=".ui.me.SecureSettingActivity" android:exported="false"/> <!-- 注：此service必须在2.2.5版本以后（包括2.2.5版本）加入 -->
+        <activity
+            android:name=".ui.lock.ChangeDeviceLockPasswordActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" android:exported="false"/>
+        <activity android:name=".ui.contacts.SendContactsActivity" android:exported="false"/> <!-- VIVO 推送 -->
+        <activity android:name=".ui.login.WebLoginActivity" android:exported="false"/>
+        <activity android:name=".ui.message.multi.RoomCopyActivity" android:exported="false"/> <!-- push应用定义消息receiver声明 -->
+        <activity android:name=".ui.me.redpacket.PaymentCenterActivity" android:exported="false"/>
+        <activity android:name=".ui.me.select.SelectRoomActivity" android:exported="false"/>
+        <activity android:name=".ui.me.select.SelectColleagueActivity" android:exported="false"/> <!-- OPPO 推送 -->
+        <activity android:name=".ui.me.redpacket.ResetPayPasswordActivity" android:exported="false"/> <!-- 华为推送 -->
+        <activity
+            android:name="com.fanjun.keeplive.activity.OnePixelActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/onePixelActivity" android:exported="false"/> <!-- 2.BridgeActivity定义了HMS-SDK中一些跳转所需要的透明页面 -->
+        <activity android:name=".view.imageedit.IMGEditActivity" android:exported="false"/> <!-- 3.UpdateProvider用于HMS-SDK引导升级HMS，提供给系统安装器读取升级文件。 -->
+        <!-- 不同应用的authorities必须不同，所以用applicationId开头， -->
+        <activity android:name=".ui.yeepay.YeepayWallet" android:exported="false"/> <!-- 4.用来接收PUSH消息的receiver： -->
+        <activity android:name=".ui.yeepay.YeepayWebViewActivity" android:exported="false"/> <!-- 5. 接收通道发来的通知栏消息： -->
+        <activity android:name=".ui.yeepay.YeepayPaymentCenterActivity" android:exported="false"/>
+        <activity android:name=".ui.yeepay.YeepayRecharge" android:exported="false"/>
+        <activity android:name=".ui.yeepay.YeepayWithdraw" android:exported="false"/>
+        <activity android:name=".ui.yeepay.YeepayOpenActivity" android:exported="false"/>
+        <activity android:name=".ui.me.redpacket.MyWalletActivity" android:exported="false"/>
+        <activity android:name=".ui.yeepay.YeepayRecordActivity" android:exported="false"/> <!-- 魅族推送， -->
+        <!-- 绑定进程保活 -->
+        <activity
+            android:name="com.plugins.streamingmedia.SimpleAudioStream"
+            android:configChanges="orientation|screenSize"
+            android:label="Simple Audio Stream" android:exported="false"/>
+        <activity
+            android:name="com.plugins.streamingmedia.SimpleVideoStream"
+            android:configChanges="orientation|screenSize"
+            android:label="Simple Video Stream" android:exported="false"/>
+        <activity
+            android:name="com.oortcloud.custom.WebContainer"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.web.container" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oortcloud.debug.AppDebugActivity"
+            android:configChanges="orientation|screenSize" android:exported="false">
+            <intent-filter>
+                <action android:name="${applicationId}.app.debug" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <!--
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+                -->
+            </intent-filter>
+        </activity>
+        <activity android:name="com.oortcloud.debug.BaseActivity" android:exported="false"/>
+        <activity android:name="com.oortcloud.debug.ChoiceFileActivity" android:exported="false"/>
+        <activity
+            android:name="com.oortcloud.debug.DebugActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.oortcloud.permission.PermissionRequestActivity" android:exported="false"/>
+        <activity
+            android:name="com.turui.bank.ocr.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" android:exported="false"/>
+        <activity
+            android:name="com.ui.card.TRCardScan"
+            android:screenOrientation="landscape" android:exported="false">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oort.zxing.client.android.CaptureActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.oort.zxing.client.android.encode.EncodeActivity"
+            android:label="Share" android:exported="false"/>
+        <activity
+            android:name="com.oortcloud.appstore.AppStoreActivity"
+            android:theme="@style/XUITheme.Phone" android:exported="false">
+            <intent-filter>
+                <action android:name="${applicationId}.app.store" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <!--
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+                -->
+            </intent-filter>
+        </activity>
+        <activity android:name="com.oortcloud.custom.VoiceMeet" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.voicemeet" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.dispatch.DispatchActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.dispatch" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.oortcloud.custom.VedioMeet" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.vediomeet" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.oortcloud.custom.TokenOverdueActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.tokenoverdue" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oortcloud.player.PlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/AppTheme.NoActionBar" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.player" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oortcloud.privacyview.PrivacyPolicyActivity"
+            android:screenOrientation="portrait" android:exported="false"/>
+        <activity
+            android:name="com.oortcloud.privacyview.TermsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.oortcloud.activity.ReportActivity" android:exported="false"/>
+        <activity android:name="com.oortcloud.activity.RepeatActivity" android:exported="false"/>
+        <activity android:name="com.oortcloud.activity.MeetingActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.meeting" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.oortcloud.revision.activity.FriendActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.contact" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.oortcloud.activity.MessageCalendarActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.lccontact.PersonPickActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation|keyboard|locale|layoutDirection" android:exported="false"/>
+        <activity android:name=".ui.lccontact.LCLabUserActivity" android:exported="false"/>
+        <activity android:name=".ui.lccontact.LCAddressContactActivity" android:exported="false"/>
+
+
+
+        <activity
+            android:name=".ui.tabbar.activity.TabHomeActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.TabHomeActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.tabbar.activity.TabMessageActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.TabMeesgeActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.tabbar.activity.TabContactActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.TabContactActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.tabbar.activity.TabDynamicActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.TabDynamicActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.tabbar.activity.TabMeActivity"
+            android:windowSoftInputMode="adjustPan" android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.TabMeActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!--        <activity android:name=".call.TestJsitisActivity"-->
+        <!--            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"-->
+        <!--            android:exported="false"/>-->
+
+        <activity
+            android:name=".call.TestJsitisActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:taskAffinity=""
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="firebase_crashlytics_collection_enabled"
+                android:value="false" />
+
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.VIEW" />-->
+
+            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+            <!--                <category android:name="android.intent.category.DEFAULT" />-->
+
+            <!--                <data-->
+            <!--                    android:host="alpha.jitsi.net"-->
+            <!--                    android:scheme="https" />-->
+            <!--                <data-->
+            <!--                    android:host="beta.meet.jit.si"-->
+            <!--                    android:scheme="https" />-->
+            <!--                <data-->
+            <!--                    android:host="meet.jit.si"-->
+            <!--                    android:scheme="https" />-->
+            <!--            </intent-filter>-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.VIEW" />-->
+
+            <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+            <!--                <category android:name="android.intent.category.DEFAULT" />-->
+
+            <!--                <data android:scheme="org.jitsi.meet" />-->
+            <!--            </intent-filter>-->
+        </activity>
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="${BAIDU_API_KEY}" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${GOOGLE_API_KEY}" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.vivo.push.api_key"
+            android:value="${VIVO_APP_KEY}" />
+        <meta-data
+            android:name="com.vivo.push.app_id"
+            android:value="${VIVO_APP_ID}" />
+        <meta-data
+            android:name="com.huawei.hms.client.appid"
+            android:value="${HUAWEI_APP_ID}" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/icon_notification" />
+        <meta-data
+            android:name="TencentGeoLocationSDK"
+            android:value="WZCBZ-OLPCU-TJJVJ-4LZTE-SSG5O-6JFEM" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${APP_ID}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"
+                tools:replace="android:resource" />
+        </provider>
+        <provider
+            android:name="com.huawei.hms.update.provider.UpdateProvider"
+            android:authorities="${APP_ID}.hms.update.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+        <provider
+            android:name="com.plugins.camera.FileProvider"
+            android:authorities="${applicationId}.camera.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/camera_provider_paths" />
+        </provider>
+        <provider
+            android:name="com.plugins.notification.util.AssetProvider"
+            android:authorities="${applicationId}.localnotifications.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/localnotification_provider_paths" />
+        </provider>
+        <provider
+            android:name="com.plugins.oortcloud.xshare.FileProvider"
+            android:authorities="${applicationId}.sharing.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/sharing_paths" />
+        </provider>
+        <provider
+            android:name="com.oort.imagepicksdk.model.Provider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:ignore="MissingClass">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+        <provider
+            android:name="com.plugins.fileopener2.FileProvider"
+            android:authorities="${applicationId}.opener.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/opener_paths" />
+        </provider> <!-- 以下增加 -->
+        <receiver
+            android:name=".broadcast.MyBroadcastReceiver"
+            android:exported="true"
+            android:process=":restart">
+            <intent-filter>
+                <action android:name="${APP_ID}.action.broadcasttest.startActivity" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".broadcast.ShakeReceiver"    android:exported="false">
+            <intent-filter>
+                <action android:name="${APP_ID}.action.shake_msg_notify" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.PingReceiver"
+            android:exported="false"
+            android:process=":pushservice">
+            <intent-filter>
+                <action android:name="com.xiaomi.push.PING_TIMER" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".xmpp.helloDemon.MiMessageReceiver"
+            android:exported="true">
+
+            <!-- 这里com.xiaomi.mipushdemo.DemoMessageRreceiver改成app中定义的完整类名 -->
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.ERROR" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".xmpp.helloDemon.VivoPushMessageReceiver"
+            android:exported="true">
+            <intent-filter>
+
+                <!-- 接收push消息 -->
+                <action android:name="com.vivo.pushclient.action.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".xmpp.helloDemon.HuaweiPushRevicer" android:exported="true">
+            <intent-filter>
+
+                <!-- 必须,用于接收TOKEN -->
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <!-- 必须，用于接收消息 -->
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <!-- 可选，用于点击通知栏或通知栏上的按钮后触发onEvent回调 -->
+                <action android:name="com.huawei.android.push.intent.CLICK" />
+                <!-- 可选，查看PUSH通道是否连接，不查看则不需要 -->
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.huawei.hms.support.api.push.PushEventReceiver"  android:exported="true">
+            <intent-filter>
+
+                <!-- 接收通道发来的通知栏消息，兼容老版本PUSH -->
+                <action android:name="com.huawei.intent.action.PUSH" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".xmpp.helloDemon.MeizuPushMsgReceiver"
+            tools:ignore="ExportedReceiver"  android:exported="true">
+            <intent-filter>
+
+                <!-- 接收push消息 -->
+                <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
+                <!-- 接收register消息 -->
+                <action android:name="com.meizu.flyme.push.intent.REGISTER.FEEDBACK" />
+                <!-- 接收unregister消息 -->
+                <action android:name="com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK" />
+                <action android:name="com.meizu.c2dm.intent.REGISTRATION" />
+                <action android:name="com.meizu.c2dm.intent.RECEIVE" />
+
+                <category android:name="${APP_ID}" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.fanjun.keeplive.receiver.NotificationClickReceiver"  android:exported="true"/>
+        <receiver
+            android:name="com.plugins.localnotification.TriggerReceiver"
+            android:exported="false" />
+        <receiver
+            android:name="com.plugins.localnotification.ClearReceiver"
+            android:exported="false" /> <!-- <receiver -->
+        <!-- android:name="com.plugins.localnotification.RestoreReceiver" -->
+        <!-- android:directBootAware="true" -->
+        <!-- android:exported="false"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" /> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <receiver
+            android:name="com.plugins.oortcloud.xshare.ShareChooserPendingIntent"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".BootBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <!-- <intent-filter android:priority="1000"> -->
+            <!-- <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" /> -->
+            <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- </intent-filter> -->
+        </receiver>
+
+        <service
+            android:name=".xmpp.CoreService"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="remoteMessaging" /> <!-- 假设是数据同步相关，你可根据实际改 -->
+        <service android:name=".call.JitsiFloatService"
+            android:foregroundServiceType="mediaPlayback" /> <!-- 假设与媒体播放有关，你可根据实际改 -->
+        <service android:name=".call.RecordService"
+            android:foregroundServiceType="mediaProjection" /> <!-- 假设与媒体录制投影有关，你可根据实际改 -->
+        <service android:name=".view.window.WindowShowService"
+            android:foregroundServiceType="dataSync" /> <!-- 如果没有特定类型，可先设为 none ，你可根据实际改 -->
+        <service android:name=".RestartService"
+            android:foregroundServiceType="dataSync" /> <!-- ocr start -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"
+            android:foregroundServiceType="location" /> <!-- 假设与定位有关，你可根据实际改 -->
+        <service
+            android:name="com.xiaomi.push.service.XMPushService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:process=":pushservice"
+            android:foregroundServiceType="remoteMessaging" > <!-- 假设与远程消息推送有关，你可根据实际改 -->
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service> <!-- ocr end -->
+        <!-- barcodeScanner start -->
+        <service
+            android:name="com.xiaomi.push.service.XMJobService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":pushservice"
+            android:foregroundServiceType="remoteMessaging" /> <!-- 假设与远程消息推送有关，你可根据实际改 -->
+        <service
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="remoteMessaging" /> <!-- barcodeScanner end -->
+        <!-- app market start -->
+        <service
+            android:name="com.xiaomi.mipush.sdk.MessageHandleService"
+            android:enabled="true"
+            android:foregroundServiceType="remoteMessaging" /> <!-- app market end -->
+        <!-- app ocr plateid start -->
+        <service android:name=".xmpp.helloDemon.FirebaseMessageService"
+            android:exported="false"
+            android:foregroundServiceType="remoteMessaging" >
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.vivo.push.sdk.service.CommandClientService"
+            android:exported="true"
+            android:foregroundServiceType="remoteMessaging" />
+        <service
+            android:name=".xmpp.helloDemon.OppoPushMessageService"
+            android:permission="com.coloros.mcs.permission.SEND_MCS_MESSAGE"
+            android:exported="false"
+            android:foregroundServiceType="remoteMessaging" >
+            <intent-filter>
+                <action android:name="com.coloros.mcs.action.RECEIVE_MCS_MESSAGE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".xmpp.helloDemon.MeizuForegroundService"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" > <!-- 如果没有特定类型，可先设为 none ，你可根据实际改 -->
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+        <service android:name="com.fanjun.keeplive.service.LocalService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" /> <!-- 如果没有特定类型，可先设为 none ，你可根据实际改 -->
+        <service android:name="com.fanjun.keeplive.service.HideForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" /> <!-- 如果没有特定类型，可先设为 none ，你可根据实际改 -->
+        <service
+            android:name="com.fanjun.keeplive.service.JobHandlerService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" /> <!-- 假设是数据同步相关，你可根据实际改 -->
+        <service
+            android:name="com.fanjun.keeplive.service.RemoteService"
+            android:process=":remote"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" /> <!-- 如果没有特定类型，可先设为 none ，你可根据实际改 -->
+        <service
+            android:name="com.plugins.localnotification.ClickReceiver"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" /> <!-- 如果没有特定类型，可先设为 none ，你可根据实际改 -->
+        <service
+            android:name="com.plugins.foreground.ForegroundService"
+            android:stopWithTask="true"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" /> <!-- 如果没有特定类型，可先设为 none ，你可根据实际改 -->
+        <service android:name="com.oortcloud.logcat.LogService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" /> <!-- 开机自启动 -->
+        <service android:name="com.oortcloud.service.LocationService"
+            android:exported="false"
+            android:foregroundServiceType="location" /> <!-- 假设与定位有关，你可根据实际改 -->
+
+        <!--警情协同-->
+        <activity android:name="com.oortcloud.coo.police.CoordinationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.PoliceCoordinationActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.oortcloud.coo.police.SearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+
+        <activity android:name="com.oortcloud.coo.police.IncidentDetailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+
+        <activity android:name="com.oortcloud.coo.police.CreateTaskActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <!--狱情协同-->
+        <activity android:name="com.oortcloud.coo.prison.CoordinationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.PrisonCoordinationActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.oortcloud.coo.prison.SearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity android:name="com.oortcloud.coo.prison.IncidentDetailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity android:name="com.oortcloud.coo.prison.CreateTaskActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <!--案件协同-->
+        <activity android:name="com.oortcloud.coo.cases.CoordinationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}.CasesCoordinationActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.oortcloud.coo.cases.SearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity android:name="com.oortcloud.coo.cases.IncidentDetailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+        <activity android:name="com.oortcloud.coo.cases.CreateTaskActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
+
+        <activity android:name=".ui.message.ChainOfGroupsActivity"
+            android:exported="true"/>
+
+    </application>
+
+</manifest>

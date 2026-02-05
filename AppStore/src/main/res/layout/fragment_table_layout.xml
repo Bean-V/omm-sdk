@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_FAFFFFFF"
+    android:orientation="vertical"
+    tools:context=".fragment.TableFragment">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/page_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btm_navigation" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/btm_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/colorBackgroundWhite"
+        app:itemIconTint="@drawable/btm_navigation_selector"
+        app:itemTextColor="@drawable/btm_navigation_selector"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/menu_btm_navigation" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/btm_navigation"
+        android:layout_alignTop="@+id/btm_navigation"
+        android:layout_marginTop="0dp"
+        android:background="@color/color_FAFFFFFF" />
+
+
+</RelativeLayout>

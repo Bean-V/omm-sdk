@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/iv_title"
+        layout="@layout/title_layout" />
+
+    <com.oortcloud.contacts.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="5dp" />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/bg_confirm_btn"
+        android:gravity="center"
+        android:text="@string/search_str"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_depart"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginTop="0dp"
+        android:background="#ffffff"
+        android:overScrollMode="never"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_24"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_hail_fellow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+
+        <FrameLayout
+            android:id="@+id/fl_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/empty_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableBottom="@drawable/icon_not_found"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="@string/no_data"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

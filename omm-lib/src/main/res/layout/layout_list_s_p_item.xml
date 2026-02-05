@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+    <ImageButton
+        android:id="@+id/btn_sel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:textColor="#F65830"
+        android:background="#00ffffff"
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/icon_p_default"/>
+
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/lab_user_header"-->
+<!--        android:layout_width="35dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:src="@mipmap/labuser"-->
+<!--        app:shapeAppearance="@style/CircleStyle"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        />-->
+    <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+        android:id="@+id/lab_user_header"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@mipmap/labuser"
+        android:layout_marginLeft="10dp"
+        />
+    <TextView
+        android:id="@+id/lab_name"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_weight="1"
+        android:text="标签名称"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        />
+
+
+</LinearLayout>

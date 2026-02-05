@@ -1,0 +1,18 @@
+
+<resources>
+    <array name="departmentarray">
+        <item>深圳市人民检察院</item>
+        <item>前海蛇口自贸区检察院</item>
+        <item>福田区人民检察院</item>
+        <item>罗湖区人民检察院</item>
+        <item>盐田区人民检察院</item>
+        <item>南山区人民检察院</item>
+        <item>宝安区人民检察院</item>
+        <item>龙岗区人民检察院</item>
+        <item>龙华区人民检察院</item>
+        <item>坪山区人民检察院</item>
+        <item>光明区人民检察院</item>
+        <item>深汕特别合作区检察院</item>
+    </array>
+</resources>
+

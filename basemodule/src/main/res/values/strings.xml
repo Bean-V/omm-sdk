@@ -1,0 +1,141 @@
+<resources>
+    <!--    <string name="app_name">BaseModule</string>-->
+
+
+    <string name="skin_qian_dou_green_base">奥陌陌</string>
+    <string name="skin_Qing_Shui_blue_base">清水蓝</string>
+    <string name="skin_Shan_Hu_Hong_base">珊瑚红</string>
+    <string name="skin_Liu_Xia_Fen_base">流霞粉</string>
+    <string name="skin_Dan_Gu_green_base">淡钴绿</string>
+    <string name="skin_Shen_sui_blue_base">深邃蓝</string>
+    <string name="skin_Shang_Wu_lv_base">商务黑</string>
+    <string name="skin_Chen_wen_Hui_base">沉稳灰</string>
+    <string name="select_skin_base">来挑选符合你眼缘的颜色吧</string>
+    <string name="skin_pu_tao_zi_base">葡萄紫</string>
+    <string name="skin_Shang_Wu_lan_base">商务蓝</string>
+    <string name="jing_dian_hong_base">经典红</string>
+
+
+    <string name="skin_qian_dou_green">奥陌陌</string>
+    <string name="skin_Qing_Shui_blue">清水蓝</string>
+    <string name="skin_Shan_Hu_Hong">珊瑚红</string>
+    <string name="skin_Liu_Xia_Fen">流霞粉</string>
+    <string name="skin_Dan_Gu_green">淡钴绿</string>
+    <string name="skin_Shen_sui_blue">深邃蓝</string>
+    <string name="skin_Shang_Wu_lv">商务黑</string>
+    <string name="skin_Chen_wen_Hui">沉稳灰</string>
+    <string name="jing_dian_hong">经典红</string>
+    <string name="skin_Shang_Wu_lan">商务蓝</string>
+    <string name="skin_pu_tao_zi">葡萄紫</string>
+    <!--  更新界面使用到的内容，界面国际化需要配置这些内容  -->
+
+
+    <string name="srl_component_falsify" formatted="false">%s falsify area,\n Represents the height[%.1fdp] of drag at run time,\n It does not show anything.</string>
+    <string name="srl_content_empty">The content view in SmartRefreshLayout is empty. Do you forget to add it in xml layout file?</string>
+    <string name="srl_footer_failed">Load Failed</string>
+    <string name="srl_footer_finish">Load Success</string>
+    <string name="srl_footer_loading">Loading…</string>
+    <string name="srl_footer_nothing">No More Data</string>
+    <string name="srl_footer_pulling">Pull Up To Load More</string>
+    <string name="srl_footer_refreshing">Wait For Refreshing…</string>
+    <string name="srl_footer_release">Release To Load More</string>
+    <string name="srl_header_failed">Refresh Failed</string>
+    <string name="srl_header_finish">Refresh Success</string>
+    <string name="srl_header_loading">Wait For Loading…</string>
+    <string name="srl_header_pulling">Pull Down To Refresh</string>
+    <string name="srl_header_refreshing">Refreshing…</string>
+    <string name="srl_header_release">Release To Refresh</string>
+    <string name="srl_header_secondary">Release To Second Floor</string>
+    <string name="srl_header_update">\'Last Update\' M-d HH:mm</string>
+
+
+    <item name="type_header" type="integer" />
+    <item name="type_footer" type="integer" />
+    <item name="type_child" type="integer" />
+    <item name="type_empty" type="integer" />
+
+    <string name="basepopup_error_non_act_context">找不到宿主Activity，请确保您至少打开了一个Activity</string>
+    <string name="basepopup_error_thread">请在主线程操作</string>
+    <string name="basepopup_error_destroyed">该BasePopup已经被Destroy，无法继续执行show</string>
+    <string name="basepopup_error_decorview">PopupWindow需要%s的DecorView的WindowToken，请检查是否存在DecorView</string>
+    <string name="basepopup_window_not_prepare">%s窗口尚未准备好，等待准备就绪后弹出</string>
+    <string name="basepopup_window_prepared">%s窗口已经准备好，执行弹出</string>
+    <string name="basepopup_has_been_shown">BasePopup已经显示了</string>
+    <string name="basepopup_shown_successful">弹窗成功</string>
+    <string name="basepopup_host">宿主（%s）</string>
+    <string name="basepopup_host_destroyed">宿主已经被销毁</string>
+    <string name="find_new_version">发现新版本</string>
+    <string name="version_des">版本描述：</string>
+    <string name="use_old">仍使用旧版</string>
+    <string name="update_version">立即升级</string>
+    <string name="base_cancel">取消</string>
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">"松开刷新</string>
+    <string name="pull_to_refresh_refreshing_label">正在刷新</string>
+
+    <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
+    <string name="pull_to_refresh_from_bottom_pull_label">上拉加载</string>
+    <string name="pull_to_refresh_from_bottom_release_label">松开加载</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">正在加载</string>
+
+    <string name="support_recycler_data_empty">暂时没有数据</string>
+    <string name="support_recycler_more_not">没有更多数据啦</string>
+    <string name="support_recycler_click_load_more">点击加载更多</string>
+    <string name="support_recycler_load_error">加载出错啦，请稍后重试</string>
+    <string name="support_recycler_load_more_message">正在加载更多数据，请稍后</string>
+    <string name="xupdate_lab_update">升级</string>
+    <string name="xupdate_lab_background_update">后台更新</string>
+    <string name="xupdate_lab_install">安装</string>
+    <string name="xupdate_lab_ignore">忽略此版本</string>
+    <string name="xupdate_tip_permissions_reject">请授权访问存储空间权限，否则App无法更新！</string>
+    <string name="xupdate_connecting_service">正在连接服务器…</string>
+    <string name="xupdate_start_download">开始下载</string>
+    <string name="xupdate_download_complete">下载完成，请点击安装</string>
+    <string name="xupdate_lab_ready_update">是否升级到%s版本？</string>
+    <string name="xupdate_lab_new_version_size">新版本大小：</string>
+    <string name="xupdate_lab_downloading">正在下载：</string>
+    <string name="xupdate_tip_download_url_error">新版本下载路径错误</string>
+
+    <!--  更新错误信息  -->
+    <string name="xupdate_error_install_failed">安装APK失败！</string>
+    <string name="xupdate_error_download_permission_denied">无法下载：存储权限申请被拒绝！</string>
+    <string name="xupdate_error_download_failed">下载失败!</string>
+    <string name="xupdate_error_prompt_activity_destroy">提示失败：activity已被销毁！</string>
+    <string name="xupdate_error_prompt_unknown">提示失败：未知错误！</string>
+    <string name="xupdate_error_check_apk_cache_dir_empty">更新失败：apk的下载缓存目录为空！</string>
+    <string name="xupdate_error_check_ignored_version">更新失败：已经被忽略的版本！</string>
+    <string name="xupdate_error_check_parse">查询失败：解析Json错误！</string>
+    <string name="xupdate_error_check_json_empty">查询失败：Json为空！</string>
+    <string name="xupdate_error_check_no_new_version">已是最新版本！</string>
+    <string name="xupdate_error_check_updating">程序正在进行版本更新！</string>
+    <string name="xupdate_error_check_no_network">查询失败：没有网络！</string>
+    <string name="xupdate_error_check_no_wifi">查询失败：没有WIFI！</string>
+    <string name="xupdate_error_check_net_request">查询失败：网络请求错误！</string>
+
+    <string name="base_data_exception">数据异常，请稍后重试</string>
+    <string name="base_net_exception">网络异常，请稍后重试</string>
+    <string name="base_request_exception">网络异常，请稍后重试</string>
+    <string name="base_tip_unkown_error_place_holder">未知异常，%s</string>
+    <string name="base_install">正在安装...</string>
+
+    <string name="app_name">WImagePreview</string>
+
+    <string name="num_indicator_text">%1$d/%2$d</string>
+
+    <!-- 异常消息 -->
+    <!-- 图片为空 -->
+    <string name="exception_image_empty">Unable to get image file;</string>
+    <!-- 图片集合为空 -->
+    <string name="exception_image_list_empty">The minimum length of the image array is 1, actual 0;</string>
+    <!-- 图片类型无效 -->
+    <string name="exception_image_type_invalid">Invalid image file type;</string>
+    <!-- 图片集合越界 -->
+    <string name="exception_array_out_of_bounds">Array index out of bounds;</string>
+    <string name="exception_array_index">Index: %1$d;</string>
+    <string name="exception_array_index_size">Index: %1$d, size: %2$d;</string>
+    <!-- 未知参数 -->
+    <string name="exception_illegal_argument">Illegal argument: %s;</string>
+    <string name="base_save">保存</string>
+    <string name="str_input_psw">请输入密聊密码</string>
+    <string name="str_forget_psw">忘记密码？</string>
+</resources>

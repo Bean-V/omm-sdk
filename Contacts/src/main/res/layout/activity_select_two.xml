@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="#ffffff">
+
+    <include
+        android:id="@+id/iv_title"
+        layout="@layout/title_layout" />
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_view"
+        android:layout_below="@id/iv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:id="@+id/line1"
+            android:layout_width="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_height="70dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/select_rv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fadeScrollbars="false"
+                android:focusableInTouchMode="false"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@+id/bt_select" />
+
+            <EditText
+                android:id="@+id/search_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/select_rv"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_999"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_8"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="@string/search_str" />
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/scroll_view"
+        android:background="@color/color_f6f" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_depart"
+        android:background="#ffffff"
+        android:layout_below="@+id/view1"
+        android:layout_width="match_parent"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_24"
+        android:layout_height="47dp"
+        android:overScrollMode="never" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hail_fellow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:layout_below="@id/rv_depart" />
+
+    <com.oortcloud.contacts.widget.LetterIndexView
+        android:id="@+id/letter_index_view"
+        android:layout_width="12dp"
+        android:layout_height="491dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="9dp"
+        android:visibility="gone"
+        android:layout_marginRight="9dp" />
+
+    <FrameLayout
+        android:id="@+id/fl_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@drawable/icon_not_found"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="@string/no_data"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+    </FrameLayout>
+
+</RelativeLayout>

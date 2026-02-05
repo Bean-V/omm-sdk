@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="5dp"/>
+    <solid android:color="#FFF3F3"/>
+    <stroke android:width="0.5dp"
+        android:color="@color/main_color"/>
+</shape>
+
+
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    <item  android:state_hovered= "true" >-->
+<!--        <shape>-->
+<!--            <corners android:radius="5dp"/>-->
+<!--            <solid android:color="#FFF3F3"/>-->
+<!--            <stroke android:width="0.5dp"-->
+<!--                android:color="@color/main_color"/>-->
+<!--        </shape>-->
+<!--    </item>-->
+<!--    <item  android:state_pressed= "true" >-->
+<!--        <shape>-->
+<!--            <corners android:radius="5dp"/>-->
+<!--            <solid android:color="#FFF3F3"/>-->
+<!--            <stroke android:width="0.5dp"-->
+<!--                android:color="@color/main_color"/>-->
+<!--        </shape>-->
+<!--    </item>-->
+<!--     <item  android:state_focused= "true" android:state_enabled = "true" >-->
+<!--        <shape>-->
+<!--            <corners android:radius="5dp"/>-->
+<!--            <solid android:color="#FFF3F3"/>-->
+<!--            <stroke android:width="0.5dp"-->
+<!--                android:color="@color/main_color"/>-->
+<!--        </shape>-->
+<!--    </item>-->
+
+
+<!--    <item>-->
+<!--        <shape>-->
+<!--            <corners android:radius="5dp"/>-->
+<!--            <solid android:color="#F6F7F8"/>-->
+<!--            <stroke-->
+<!--               android:width="0.5dp"-->
+<!--                android:color="@color/color_D8D8D8"/>-->
+<!--        </shape>-->
+<!--    </item>-->
+<!--</selector>-->

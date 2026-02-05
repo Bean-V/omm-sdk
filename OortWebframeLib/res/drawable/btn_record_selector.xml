@@ -1,0 +1,7 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 录制中显示停止状态 -->
+    <item android:drawable="@drawable/btn_record_stop" android:state_enabled="false" />
+    <!-- 未录制时显示开始状态 -->
+    <item android:drawable="@drawable/btn_record_start" android:state_enabled="true" />
+</selector>
+    

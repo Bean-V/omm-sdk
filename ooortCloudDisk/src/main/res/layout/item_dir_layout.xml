@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+<TextView
+    android:id="@+id/dir_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_8"
+    android:paddingBottom="@dimen/dp_8"
+    android:paddingLeft="@dimen/dp_4"
+    android:paddingRight="@dimen/dp_4"
+    android:textColor="@color/color_333"
+    android:background="@drawable/setting_bg"
+    android:textSize="@dimen/sp_16"
+    android:text="SD卡"/>
+    <TextView
+    android:id="@+id/dir_cut"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_8"
+    android:paddingBottom="@dimen/dp_8"
+    android:textColor="@color/color_333"
+    android:textSize="@dimen/sp_14"
+        android:text="/"/>
+
+
+</LinearLayout>

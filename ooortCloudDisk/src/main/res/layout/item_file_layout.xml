@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/copy_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/setting_bg"
+    android:orientation="horizontal">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_82"
+        android:layout_gravity="center_horizontal"
+        android:indeterminateOnly="false"
+        android:max="100"
+        android:visibility="gone"
+        android:progress="0"
+        android:progressDrawable="@drawable/progress_horizontal" />
+
+    <ImageView
+        android:id="@+id/file_img"
+        android:layout_width="@dimen/dp_32"
+        android:layout_height="@dimen/dp_32"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_19"
+        tools:src="@mipmap/ppt" />
+
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_toLeftOf="@id/more_img"
+        android:layout_toRightOf="@id/file_img"
+        android:orientation="vertical">
+
+        <com.oortcloud.clouddisk.widget.ScrollTextView
+            android:id="@+id/file_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_18"
+            android:textColor="@color/color_333"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusableInTouchMode="true"
+            android:textSize="@dimen/sp_16"
+            tools:text="测试.ppt" />
+<!--        android:singleLine="true"-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_18"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/file_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_666"
+                android:textSize="@dimen/sp_12"
+                tools:text="2020年5月20日" />
+            <TextView
+                android:id="@+id/file_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_666"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginLeft="@dimen/dp_16"
+                tools:text="36.7 KB" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_32"
+        android:layout_marginRight="@dimen/dp_19"
+        android:theme="@style/checkbox_style"
+        android:visibility="gone"
+        android:checked="false" />
+
+    <ImageView
+        android:id="@+id/more_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/dp_16"
+        android:src="@mipmap/ic_cd_more"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_toRightOf="@id/file_img"
+        android:layout_below="@+id/ll_1"
+        android:background="@color/color_ebe"/>
+</RelativeLayout>

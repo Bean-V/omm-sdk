@@ -1,0 +1,426 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget
+    id="com.oortcloud.oortwebframe"
+    version="1.0.0"
+    xmlns="http://www.w3.org/ns/widgets"
+    xmlns:cdv="http://cordova.apache.org/ns/1.0">
+
+    <!-- 基础插件配置：Battery 等插件保持原有格式 -->
+    <feature name="Battery">
+        <param
+            name="android-package"
+            value="com.plugins.batterystatus.BatteryListener" />
+    </feature>
+    <feature name="DynamicSharePlugin">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.imshare.DynamicSharePlugin" />
+    </feature>
+    <feature name="ChatPlugin">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.imshare.ChatPlugin" />
+    </feature>
+    <feature name="SharePlugin">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.imshare.SharePlugin" />
+    </feature>
+    <feature name="Camera">
+        <param
+            name="android-package"
+            value="com.plugins.camera.CameraLauncher" />
+    </feature>
+    <feature name="Device">
+        <param
+            name="android-package"
+            value="com.plugins.device.Device" />
+    </feature>
+    <feature name="Notification">
+        <param
+            name="android-package"
+            value="com.plugins.dialogs.Notification" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param
+            name="android-package"
+            value="com.plugins.networkinformation.NetworkManager" />
+    </feature>
+
+    <!-- Whitelist 插件：拆分为两个 <param> 标签（android-package + onload） -->
+    <feature name="Whitelist">
+        <param
+            name="android-package"
+            value="com.plugins.whitelist.WhitelistPlugin" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+
+    <!-- 应用基础信息 -->
+    <name>oortcloud</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author
+        email="dev@cordova.apache.org"
+        href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+
+    <!-- 权限与导航配置 -->
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <allow-intent href="market:*" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
+    <allow-navigation href="data:*" />
+    <allow-navigation href="cdvfile:*" />
+
+    <!-- 日志与 File 插件（onload 拆分为独立 <param>） -->
+    <preference
+        name="loglevel"
+        value="DEBUG" />
+    <feature name="File">
+        <param
+            name="android-package"
+            value="com.plugins.file.FileUtils" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+
+    <!-- 位置与浏览器插件 -->
+    <feature name="Geolocation">
+        <param
+            name="android-package"
+            value="com.plugins.geolocation.Geolocation" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param
+            name="android-package"
+            value="com.plugins.inappbrowser.InAppBrowser" />
+    </feature>
+
+    <!-- 媒体与捕获插件 -->
+    <feature name="Media">
+        <param
+            name="android-package"
+            value="com.plugins.media.AudioHandler" />
+    </feature>
+    <feature name="Capture">
+        <param
+            name="android-package"
+            value="com.plugins.mediacapture.Capture" />
+    </feature>
+
+    <!-- 屏幕与状态栏插件（StatusBar 的 onload 拆分） -->
+    <feature name="CDVOrientation">
+        <param
+            name="android-package"
+            value="com.plugins.screenorientation.CDVOrientation" />
+    </feature>
+    <feature name="StatusBar">
+        <param
+            name="android-package"
+            value="com.plugins.statusbar.StatusBar" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+
+    <!-- 通知与徽章插件 -->
+    <feature name="Badge">
+        <param
+            name="android-package"
+            value="com.plugins.badge.Badge" />
+    </feature>
+    <feature name="LocalNotification">
+        <param
+            name="android-package"
+            value="com.plugins.localnotification.LocalNotification" />
+    </feature>
+
+    <!-- 诊断类插件（所有带 onload 的诊断插件均拆分） -->
+    <feature name="WifiInfo">
+        <param
+            name="android-package"
+            value="com.plugins.wifiinfo.WifiInfo" />
+    </feature>
+    <feature name="Diagnostic">
+        <param
+            name="android-package"
+            value="com.plugins.diagnostic.Diagnostic" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+    <feature name="Diagnostic_Location">
+        <param
+            name="android-package"
+            value="com.plugins.diagnostic.Diagnostic_Location" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+    <feature name="Diagnostic_Bluetooth">
+        <param
+            name="android-package"
+            value="com.plugins.diagnostic.Diagnostic_Bluetooth" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+    <feature name="Diagnostic_Wifi">
+        <param
+            name="android-package"
+            value="com.plugins.diagnostic.Diagnostic_Wifi" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+    <feature name="Diagnostic_Camera">
+        <param
+            name="android-package"
+            value="com.plugins.diagnostic.Diagnostic_Camera" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+    <feature name="Diagnostic_Notifications">
+        <param
+            name="android-package"
+            value="com.plugins.diagnostic.Diagnostic_Notifications" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+    <feature name="Diagnostic_NFC">
+        <param
+            name="android-package"
+            value="com.plugins.diagnostic.Diagnostic_NFC" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+    <feature name="Diagnostic_External_Storage">
+        <param
+            name="android-package"
+            value="com.plugins.diagnostic.Diagnostic_External_Storage" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+
+    <!-- 工具类插件 -->
+    <feature name="Launcher">
+        <param
+            name="android-package"
+            value="com.plugins.launcher.Launcher" />
+    </feature>
+    <feature name="Clipboard">
+        <param
+            name="android-package"
+            value="com.plugins.clipboard.Clipboard" />
+    </feature>
+    <feature name="BackbuttonPlugin">
+        <param
+            name="android-package"
+            value="com.plugins.backbutton.BackbuttonPlugin" />
+    </feature>
+    <feature name="ForegroundPlugin">
+        <param
+            name="android-package"
+            value="com.plugins.foreground.ForegroundPlugin" />
+    </feature>
+    <feature name="CDVIonicKeyboard">
+        <param
+            name="android-package"
+            value="com.plugins.keyboard.CDVIonicKeyboard" />
+        <param
+            name="onload"
+            value="true" />
+    </feature>
+
+    <!-- 数据存储插件 -->
+    <feature name="SQLitePlugin">
+        <param
+            name="android-package"
+            value="com.plugins.sqlitestorage.SQLitePlugin" />
+    </feature>
+    <feature name="NativeStorage">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.nativestorage.NativeStorage" />
+    </feature>
+
+    <!-- 网络与传输插件 -->
+    <feature name="CordovaHttpPlugin">
+        <param
+            name="android-package"
+            value="com.plugins.advancedhttp.cordovahttp.CordovaHttpPlugin" />
+    </feature>
+    <feature name="FileTransfer">
+        <param
+            name="android-package"
+            value="com.plugins.filetransfer.FileTransfer" />
+    </feature>
+
+    <!-- 媒体与解析插件 -->
+    <feature name="StreamingMedia">
+        <param
+            name="android-package"
+            value="com.plugins.streamingmedia.StreamingMedia" />
+    </feature>
+    <feature name="MediaPicker">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.mediaPickerPlugin.MediaPicker" />
+    </feature>
+    <feature name="Zip">
+        <param
+            name="android-package"
+            value="com.plugins.zip.Zip" />
+    </feature>
+    <feature name="md5chksum">
+        <param
+            name="android-package"
+            value="com.plugins.md5.md5chksum" />
+    </feature>
+    <feature name="SocialSharing">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.xshare.SocialSharing" />
+    </feature>
+    <feature name="BarcodeScanner">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.barcodescanner.BarcodeScanner" />
+    </feature>
+    <feature name="OcrPlugin">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.ocrPlugin.OcrPlugin" />
+    </feature>
+
+    <!-- 交互与对话框插件 -->
+    <feature name="DateTimePicker">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.datetimepicker.DateTimePicker" />
+    </feature>
+    <feature name="XYDialog">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.progressdialog.XYDialog" />
+    </feature>
+
+    <!-- 通讯类插件 -->
+    <feature name="CallNumber">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.callnumber.CFCallNumber" />
+    </feature>
+    <feature name="Sms">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.sms.Sms" />
+    </feature>
+    <feature name="Contacts">
+        <param
+            name="android-package"
+            value="com.plugins.contacts.ContactManager" />
+    </feature>
+    <feature name="GPSLocation">
+        <param
+            name="android-package"
+            value="com.plugins.gpslocation.GPSLocation" />
+    </feature>
+
+    <!-- 安全与硬件插件 -->
+    <feature name="Fingerprint">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.fingerprint.Fingerprint" />
+    </feature>
+    <feature name="MKBluetoothPrinter">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.bluetoothprint.MKBluetoothPrinter" />
+    </feature>
+    <feature name="BluetoothLePlugin">
+        <param
+            name="android-package"
+            value="com.plugins.bluetoothle.BluetoothLePlugin" />
+    </feature>
+    <feature name="nfcPlugin">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.nfcPlugin.nfcPlugin" />
+    </feature>
+
+    <!-- 应用配置与上下文插件 -->
+    <feature name="LocalContext">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.context.LocalContext" />
+    </feature>
+    <feature name="FileOpener2">
+        <param
+            name="android-package"
+            value="com.plugins.fileopener2.FileOpener2" />
+    </feature>
+    <feature name="AppConfig">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.appconfig.AppConfig" />
+    </feature>
+    <feature name="AppPlugin">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.appplugin.AppPlugin" />
+    </feature>
+    <feature name="AppStorePlugin">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.appplugin.AppStorePlugin" />
+    </feature>
+    <feature name="AppSendMsg">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.appplugin.AppSendMsg" />
+    </feature>
+
+    <!-- 视频与内容插件 -->
+    <feature name="ExoPlayer">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.exoplayer.Plugin" />
+    </feature>
+    <feature name="VideoPlugin">
+        <param
+            name="android-package"
+            value="com.oortcloud.cordova.VideoPlugin" />
+    </feature>
+    <feature name="DiscoverPlugin">
+        <param
+            name="android-package"
+            value="com.oortcloud.cordova.DiscoverPlugin" />
+    </feature>
+    <feature name="LivePlugin">
+        <param
+            name="android-package"
+            value="com.oortcloud.cordova.LivePlugin" />
+    </feature>
+    <feature name="SavePicture">
+        <param
+            name="android-package"
+            value="com.plugins.oortcloud.savepicture.SavePicture" />
+    </feature>
+</widget>

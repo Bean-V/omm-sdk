@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.oortcloud.appstore"
+    android:sharedUserId="android.uid.system"
+    android:usesCleartextTraffic="true">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- <uses-permission android:name="android.permission.INSTALL_PACKAGES" /> -->
+    <!-- <uses-permission android:name="android.permission.DELETE_PACKAGES" /> -->
+    <!-- <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+    <uses-permission android:name="android.permission.REQUEST_MOUNT_UNMOUNT_FILESYSTEMS" /> <!-- 再添加读写权限这个可以实现安装时读取路径 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:networkSecurityConfig="@xml/etwork_security_config"
+        tools:replace="android:networkSecurityConfig">
+        <activity
+            android:name=".activity.AppApplyActivity"
+            android:exported="false" />
+        <activity android:name=".activity.EditorActivity" android:exported="false"/>
+        <activity android:name=".activity.AppDetailedActivity" android:exported="false"/>
+        <activity android:name=".activity.SearchActivity" android:exported="false"/>
+        <activity android:name=".activity.TypeAppAllActivity"
+            android:exported="false"/>
+
+        <service android:name=".download.DownloadService"
+            android:exported="false"/>
+
+        <activity android:name=".activity.WebViewActivity"
+            android:exported="false"/>
+        <activity android:name=".activity.CommentActivity"
+            android:exported="false"/>
+        <activity android:name=".activity.AppManagerActivity" android:exported="false">
+            <intent-filter>
+                <action android:name="${applicationId}.app.appManager" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities=" ${applicationId}.fileprovider_store"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/appstore_filepaths" />
+        </provider>
+
+        <service android:name=".activity.AppManagerService" android:exported="false">
+            <intent-filter>
+                <action android:name="${applicationId}.app.appManager" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".activity.AnenstActivity" android:exported="false"/>
+    </application>
+
+</manifest>

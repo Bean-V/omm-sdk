@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 顶部标题栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:background="@color/white"
+        android:paddingEnd="16dp"
+       >
+<!--        android:elevation="4dp"-->
+        <!-- 返回按钮 -->
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_arrow_back"
+            android:padding="4dp" />
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="警情协同"
+            android:textSize="18sp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:textStyle="bold"
+            android:textColor="#333" />
+
+        <!-- 创建按钮 -->
+        <ImageView
+            android:id="@+id/btn_add"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:src="@drawable/ic_add"
+            app:tint="@color/c_333"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:padding="4dp" />
+
+        <!-- 搜索按钮 -->
+        <ImageView
+            android:id="@+id/btn_search"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:src="@drawable/ic_search"
+            android:padding="4dp" />
+
+    </LinearLayout>
+
+    <!-- 标签页导航 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tab_participated"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="我参与的警情"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#2196F3"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tab_my_incidents"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="我的警情"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tab_unit_incidents"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="我单位的警情"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <!-- ViewPager2 支持左右滑动 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager_incidents"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

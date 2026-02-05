@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/btn_fm_back"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:background="@color/mainColor">-->
+
+<!--        <ImageButton-->
+
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:background="#00000000"-->
+<!--            android:focusable="false"-->
+<!--            android:src="@mipmap/ic_fm_back" />-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:text="@string/file_manager"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textColor="@color/colorZTNav"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            />-->
+<!--    </LinearLayout>-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainColor"
+        android:fitsSystemWindows="true"
+        app:navigationIcon="@mipmap/ic_fm_back"
+        app:title="@string/file_manager"
+        app:titleTextColor="@color/colorZTNav" />
+
+    <include layout="@layout/layout_filelist_header"
+        android:id="@+id/layout_loacal_header"/>
+
+
+    <LinearLayout
+        android:id="@+id/fm_local"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        />
+
+    <include layout="@layout/layout_filelist_oper"
+        android:id="@+id/layout_local_oper"/>
+
+    <TextView
+        android:id="@+id/tv_ges"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/mainColor"
+        />
+
+    <include layout="@layout/layout_filelist_header"
+        android:id="@+id/layout_up_header"/>
+    <LinearLayout
+        android:id="@+id/fm_up"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:id="@+id/ll_nousb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_fm_nousb"
+                android:layout_marginTop="50dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:text="@string/no_usb"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+    <include layout="@layout/layout_filelist_oper"
+        android:id="@+id/layout_up_oper"/>
+
+</LinearLayout>

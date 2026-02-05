@@ -1,0 +1,1072 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
+
+// Fat AAR 插件不支持 AGP 8.x，使用自定义任务实现
+
+buildscript {
+    ext {
+        appId = 'com.oort.weichat' // 奥陌陌 - 修复：定义 appId 避免后续引用错误
+        channel = '@string/app_name' // bugly上显示的渠道名，
+
+        buglyAppId = '438ff58c22' // bugly配置的appId,
+        baiduApiKey = 'Q7wb91P5U7RnKkcwOTu8AQtBpsujKmzu' // baidu配置的apiKey,
+        googleApiKey = 'AIzaSyAbJjDWUPU6sRsQccNMp8E3soO7YGSkTIg' // google地图配置的apiKey,
+        huaweiAppId = '102058269' // 华为推送配置的appId,
+        xiaomiAppId = '2882303761517581074' // 小米推送配置的appId,
+        xiaomiAppKey = '5951758130074' // 小米推送配置的appKey,
+        meizuAppId = '118639' // 魅族推送配置的appId,
+        meizuAppKey = '198cfa2fa66544ba87ab05874ba22868' // 魅族推送配置的appKey,
+        vivoAppId = '18094' // VIVO推送配置的appId,
+        vivoAppKey = '41337891-3989-4db0-8894-6ecbf313cefd' // VIVO推送配置的appKey,
+        oppoAppKey = 'dIHycN8J0NsCokwSGss8sskw4' // OPPO推送配置的appKey,
+        oppoAppSecret = 'b9f6927d9eCD0159532dA5c2e1118eC8' // OPPO推送配置的secret,
+        wechatAppId = '' // 微信相关的appId,
+        qqAppId = '' // QQ相关的appId,
+
+        buglyAppChannel = channel
+        date = new Date().format("yyyyMMdd")
+        buglyVersionNameSuffix = '' + '-' + date
+    }
+}
+
+// 判断存在谷歌服务配置文件才启用谷歌服务，
+def googleJson = file('google-services.json')
+if (googleJson.exists() && googleJson.readLines().any { it.contains(appId) }) {
+    apply plugin: 'com.google.gms.google-services'
+    // 谷歌服务4.2版本有已知bug会导致其他无关依赖(smack4.3.4)莫名冲突，禁用相关检查解决，
+    // https://github.com/invertase/react-native-firebase/issues/1676
+    //noinspection UnnecessaryQualifiedReference
+    com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
+}
+
+android {
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+    packagingOptions {//加上这些代码
+        pickFirst 'lib/armeabi-v7a/libijkplayer.so'
+        pickFirst 'lib/armeabi-v8a/libijkplayer.so'
+        pickFirst 'lib/arm64-v8a/libijkplayer.so'
+        pickFirst 'lib/x86/libijkplayer.so'
+        pickFirst 'lib/x86_64/libijkplayer.so'
+
+        pickFirst 'lib/armeabi-v7a/libijksdl.so'
+        pickFirst 'lib/armeabi-v8a/libijksdl.so'
+        pickFirst 'lib/arm64-v8a/libijksdl.so'
+        pickFirst 'lib/x86/libijksdl.so'
+        pickFirst 'lib/x86_64/libijksdl.so'
+
+        pickFirst 'lib/armeabi-v7a/libijkffmpeg.so'
+        pickFirst 'lib/armeabi-v8a/libijkffmpeg.so'
+        pickFirst 'lib/arm64-v8a/libijkffmpeg.so'
+        pickFirst 'lib/x86/libijkffmpeg.so'
+        pickFirst 'lib/x86_64/libijkffmpeg.so'
+
+        pickFirst 'lib/*/libc++_shared.so'
+
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+
+        exclude 'META-INF/*.kotlin_module'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    compileSdkVersion compile_version
+
+    namespace "com.oort.weichat"
+
+    defaultConfig {
+//        applicationId appId
+
+        buildFeatures {
+            buildConfig true
+            aidl true
+        }
+
+        //版本号，不要出现4了
+        versionCode     1013
+        versionName "1.0.13" //版本号，不要出现4了
+        //版本号，不要出现4了
+        minSdkVersion min_version
+        targetSdkVersion target_version
+
+        vectorDrawables.useSupportLibrary = true
+
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
+
+        buildConfigField('String', "BUGLY_APP_ID", '"' + buglyAppId + '"')
+        buildConfigField('String', "BUGLY_APP_CHANNEL", '"' + buglyAppChannel + '"')
+        buildConfigField('String', "XIAOMI_APP_ID", '"' + xiaomiAppId + '"')
+        buildConfigField('String', "XIAOMI_APP_KEY", '"' + xiaomiAppKey + '"')
+        buildConfigField('String', "MEIZU_APP_ID", '"' + meizuAppId + '"')
+        buildConfigField('String', "MEIZU_APP_KEY", '"' + meizuAppKey + '"')
+        buildConfigField('String', "OPPO_APP_KEY", '"' + oppoAppKey + '"')
+        buildConfigField('String', "OPPO_APP_SECRET", '"' + oppoAppSecret + '"')
+        buildConfigField('String', "GOOGLE_API_KEY", '"' + googleApiKey + '"')
+        buildConfigField('String', "WECHAT_APP_ID", '"' + wechatAppId + '"')
+        buildConfigField('String', "QQ_APP_ID", '"' + qqAppId + '"')
+
+        manifestPlaceholders = [
+//                APP_ID        : appId,
+BAIDU_API_KEY : baiduApiKey,
+VIVO_APP_ID   : vivoAppId,
+VIVO_APP_KEY  : vivoAppKey,
+GOOGLE_API_KEY: googleApiKey,
+HUAWEI_APP_ID : huaweiAppId,
+QQ_APP_ID     : qqAppId,
+        ]
+
+        resConfigs "en", "zh-rCN","ar"
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON", "-DANDROID_STL=c++_shared"
+                cppFlags "-std=c++17"
+                cFlags "-DANDROID_PLATFORM=android-26"
+            }
+        }
+    }
+
+    // 高版本as中installRelease不会依赖assembleRelease也就不会复制apk,
+    afterEvaluate {
+        // 没配置签名的话，就没有installRelease，
+        if (tasks.findByName('installRelease')) {
+            installRelease.dependsOn 'assembleRelease'
+        }
+    }
+
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    useLibrary 'org.apache.http.legacy'
+
+    // ================================================
+    // 关键修改：开启 R8 优化并配置打包
+    // ================================================
+    buildTypes {
+        release {
+            // 开启代码优化
+            minifyEnabled true
+
+            // 关键：关闭资源压缩，避免 config.xml 结构被改
+            shrinkResources false
+
+            // 混淆文件位置 - 添加合并规则
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro',
+                    'proguard-merge-all.pro'
+
+            // 为消费者提供规则
+            consumerProguardFiles 'consumer-rules.pro'
+
+            buildConfigField('String', "VERSION_NAME_SUFFIX", '"' + buglyVersionNameSuffix + '"')
+        }
+        debug {
+            minifyEnabled false
+            buildConfigField('String', "VERSION_NAME_SUFFIX", '"' + "-DEBUG" + '"')
+            debuggable true
+        }
+    }
+
+    // 签名信息从signing.properties中获取，
+    def signingFile = rootProject.file('signing.properties')
+    if (signingFile.exists()) {
+        def input = signingFile.newInputStream()
+        def p = new Properties()
+        p.load(input)
+        def jks = rootProject.file(p['storeFile'])
+        if (jks.exists()) {
+            signingConfigs {
+                config {
+                    keyAlias p['keyAlias']
+                    keyPassword p['keyPassword']
+                    storeFile jks
+                    storePassword p['storePassword']
+                    v1SigningEnabled true
+                    v2SigningEnabled true
+                }
+            }
+            buildTypes {
+                debug {
+                    signingConfig signingConfigs.config
+                }
+                release {
+                    signingConfig signingConfigs.config
+                }
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        maven {
+            url = uri("${System.getProperty('user.home')}/.m2/repository")
+        }
+        flatDir {
+            dirs '../OortWebframeLib/libs'
+        }
+    }
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        // jitsi和imaging两个库都依赖fresco版本冲突了，
+//        if (details.requested.group == 'com.facebook.fresco') {
+//            details.useVersion '2.0.0'
+//        }
+    }
+    // 1.1.0会导致安卓5上webview崩溃，https://stackoverflow.com/a/58131421
+    resolutionStrategy.force 'androidx.appcompat:appcompat:1.3.1'
+}
+
+// ================================================
+// 关键配置：创建合并配置
+// ================================================
+configurations {
+    // 创建专门用于合并的配置 - 简化属性避免冲突
+    mergedImplementation {
+        canBeConsumed = false
+        canBeResolved = true
+        // 移除可能导致冲突的属性，让 Gradle 自动解析
+    }
+    implementation.extendsFrom(mergedImplementation)
+}
+
+dependencies {
+    // ================================================
+    // 将所有依赖迁移到 mergedImplementation
+    // ================================================
+
+    // 项目模块
+    mergedImplementation project(':oort_imagepick_sdk')
+    mergedImplementation project(':ToolsMain')
+    mergedImplementation project(':provider_lib')
+    mergedImplementation project(':pullToRefershLibraryMy')
+    mergedImplementation project(':jcvideoplayer-lib')
+    mergedImplementation project(':YZxing-lib')
+    mergedImplementation project(':OpenGLlibrary')
+    mergedImplementation project(':MPChartLib')
+    mergedImplementation project(':liveLibrary')
+    mergedImplementation project(':OortWebframeLib')
+    mergedImplementation project(':basemodule')
+    mergedImplementation project(':AppStore')
+    mergedImplementation project(':Contacts')
+    mergedImplementation project(':screenrecorder')
+    mergedImplementation project(':AIDICert')
+    mergedImplementation project(':giraffeplayer')
+    mergedImplementation project(':floatview')
+    mergedImplementation project(':offline')
+    mergedImplementation project(':sound_recon')
+    mergedImplementation project(':FrameLibrary')
+    mergedImplementation project(':Levc-lib')
+
+    // 文件依赖
+    mergedImplementation files('libs/all-20230425.jar')
+    mergedImplementation files('../provider_lib/libs/JITLogSupport1.0.0.jar')
+    mergedImplementation files('libs/simkeylibrary-release.aar')
+    mergedImplementation files('libs/kplayer-androidx-5.0.5-20240704-1.aar')
+    mergedImplementation files('libs/alipaySdk-15.5.9-20181123210601.aar')
+    mergedImplementation files('libs/xjgarsdklibrary-release-9.2.1-2019-08-31.aar')
+    mergedImplementation files('libs/libfriapkrecord-r1.0.1.aar')
+    mergedImplementation files('libs/android-async-http-1.4.5.jar')
+    mergedImplementation files('libs/BaiduLBS_Android.jar')
+    mergedImplementation files('libs/httpmime-4.2.jar')
+    mergedImplementation files('libs/nineoldandroids.jar')
+    mergedImplementation files('libs/ormlite-android-4.48.jar')
+    mergedImplementation files('libs/ormlite-core-4.48.jar')
+    mergedImplementation files('libs/universal-image-loader-1.9.0.jar')
+    mergedImplementation files('libs/open_sdk_r6199_lite.jar')
+    mergedImplementation files('libs/MiPush_SDK_Client_3_6_18.jar')
+    mergedImplementation files('libs/vivopushsdk_v2.3.4.jar')
+    mergedImplementation files('libs/mcssdk-1.0.1.jar')
+
+    // 第三方库依赖
+    mergedImplementation 'com.github.bumptech.glide:glide:3.7.0'
+    mergedImplementation 'org.greenrobot:eventbus:3.1.1'
+    mergedImplementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.0.2'
+    mergedImplementation 'com.huawei.android.hms:push:2.5.2.300'
+    mergedImplementation 'com.huawei.android.hms:base:2.5.2.300'
+    mergedImplementation 'com.meizu.flyme.internet:push-internal:3.8.1@aar'
+    mergedImplementation 'com.google.firebase:firebase-core:16.0.9'
+    mergedImplementation 'com.google.firebase:firebase-messaging:18.0.0'
+    mergedImplementation 'com.github.AoEiuV020:jjdxm_ijkplayer:1.1.1'
+    mergedImplementation 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
+    mergedImplementation 'io.jsonwebtoken:jjwt:0.9.1'
+    mergedImplementation 'com.google.android.gms:play-services-maps:16.1.0'
+    mergedImplementation 'com.google.android.gms:play-services-location:16.0.0'
+    mergedImplementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    mergedImplementation 'com.danikula:videocache:2.7.1'
+    mergedImplementation 'com.github.yangjie10930:EpMedia:v0.9.5'
+    mergedImplementation 'top.zibin:Luban:1.1.3'
+    mergedImplementation 'cc.aoeiuv020:imaging:1.0'
+    mergedImplementation 'com.hyman:flowlayout-lib:1.1.2'
+    mergedImplementation 'me.leolin:ShortcutBadger:1.1.22'
+    mergedImplementation 'com.tencent.bugly:crashreport:4.1.9'
+    mergedImplementation 'org.jsoup:jsoup:1.10.3'
+    mergedImplementation 'com.makeramen:roundedimageview:2.3.0'
+    mergedImplementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-28'
+    mergedImplementation 'org.bouncycastle:bcprov-jdk15on:1.57'
+    mergedImplementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    mergedImplementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    mergedImplementation 'io.reactivex.rxjava2:rxjava:2.2.3'
+    mergedImplementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    mergedImplementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
+    mergedImplementation 'com.joybar.calendar:librarycalendar:1.0.6'
+    mergedImplementation 'com.google.android.flexbox:flexbox:3.0.0'
+    mergedImplementation 'org.litepal.android:core:1.6.1'
+    mergedImplementation 'com.github.xuexiangjys:XUpdate:2.1.4'
+    mergedImplementation 'com.github.xuexiangjys:XUI:1.2.1'
+    mergedImplementation 'androidx.work:work-runtime:2.7.1'
+    mergedImplementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
+    mergedImplementation 'com.contrarywind:Android-PickerView:4.1.7'
+    mergedImplementation 'com.jakewharton.threetenabp:threetenabp:1.4.6'
+    mergedImplementation "log4j:log4j:1.2.17"
+    mergedImplementation "me.imid.swipebacklayout.lib:library:1.1.0"
+    mergedImplementation "com.leo618:zip:0.0.1"
+
+    // Smack
+    var smackVersion = "4.4.6"
+    mergedImplementation "org.igniterealtime.smack:smack-tcp:$smackVersion"
+    mergedImplementation "org.igniterealtime.smack:smack-im:$smackVersion"
+    mergedImplementation "org.igniterealtime.smack:smack-extensions:$smackVersion"
+    mergedImplementation "org.igniterealtime.smack:smack-xmlparser-xpp3:$smackVersion"
+    mergedImplementation "org.igniterealtime.smack:smack-experimental:$smackVersion"
+    mergedImplementation "org.igniterealtime.smack:smack-android:$smackVersion"
+    mergedImplementation "org.igniterealtime.smack:smack-sasl-provided:$smackVersion"
+    mergedImplementation "org.igniterealtime.smack:smack-resolver-minidns:$smackVersion"
+
+    // 其他必要依赖保持不变
+    implementation 'androidx.room:room-runtime:2.3.0'
+    implementation libs.fragment
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.huangyz0918:androidwm-light:0.1.2'
+    implementation libs.react.native
+    implementation  (libs.jitsi.meet.sdk)
+
+    kapt "androidx.room:room-compiler:2.3.0"
+}
+
+// ================================================
+// 关键：创建混淆规则文件
+// ================================================
+
+// 创建合并混淆规则文件
+def createProguardMergeFile() {
+    def mergeFile = file('proguard-merge-all.pro')
+    if (!mergeFile.exists()) {
+        mergeFile.text = """
+# ================================================
+# 合并所有依赖的混淆规则
+# ================================================
+
+# 核心优化配置
+-optimizationpasses 5
+-allowaccessmodification
+-overloadaggressively
+-mergeinterfacesaggressively
+
+# 保持所有必要的类
+
+# 核心 SDK 类
+-keep class com.oort.weichat.** { *; }
+-keep class com.oort.provider.** { *; }
+-keep class com.oort.web.** { *; }
+-keep class com.oort.basemodule.** { *; }
+-keep class com.oort.tools.** { *; }
+-keep class com.oort.image.** { *; }
+-keep class com.oort.contacts.** { *; }
+-keep class com.oort.store.** { *; }
+-keep class com.oort.media.** { *; }
+-keep class com.oort.ai.** { *; }
+
+# 第三方库关键类
+-keep class com.tencent.** { *; }
+-keep class com.huawei.** { *; }
+-keep class com.xiaomi.** { *; }
+-keep class com.google.** { *; }
+-keep class com.github.bumptech.glide.** { *; }
+-keep class org.greenrobot.eventbus.** { *; }
+-keep class com.squareup.** { *; }
+-keep class io.reactivex.** { *; }
+-keep class org.bouncycastle.** { *; }
+-keep class com.tencent.bugly.** { *; }
+-keep class com.baidu.** { *; }
+-keep class org.igniterealtime.smack.** { *; }
+
+# 序列化类
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+}
+
+# 资源类
+-keepclassmembers class **.R\$* {
+    public static <fields>;
+}
+
+# BuildConfig
+-keep class **.BuildConfig
+
+# 注解
+-keepattributes *Annotation*, Signature, InnerClasses
+
+# 移除日志（减小体积）
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+    public static *** w(...);
+    public static *** e(...);
+}
+
+# 不要警告任何类（确保编译通过）
+-dontwarn **
+"""
+    }
+}
+
+// 创建消费者规则文件
+def createConsumerRulesFile() {
+    def consumerFile = file('consumer-rules.pro')
+    if (!consumerFile.exists()) {
+        consumerFile.text = """
+# ================================================
+# 消费者混淆规则
+# ================================================
+
+# 保持 SDK 所有公开 API
+-keep class com.oort.weichat.** {
+    public *;
+}
+
+# 保持所有接口
+-keep interface com.oort.weichat.** {
+    *;
+}
+
+# 保持所有注解
+-keepattributes *Annotation*
+
+# 不要警告 SDK 内部代码
+-dontwarn com.oort.**
+-dontwarn com.tencent.**
+-dontwarn com.huawei.**
+-dontwarn com.google.**
+"""
+    }
+}
+
+// 在配置阶段创建规则文件
+afterEvaluate {
+    createProguardMergeFile()
+    createConsumerRulesFile()
+}
+
+// ================================================
+// 使用 Variant API 实现一站式打包
+// ================================================
+
+import com.android.build.api.artifact.SingleArtifact
+import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.file.ConfigurableFileCollection
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.TaskAction
+import org.gradle.api.attributes.Usage
+import org.gradle.api.attributes.Category
+import org.gradle.api.artifacts.ProjectDependency
+import java.util.jar.JarOutputStream
+import java.util.zip.ZipEntry
+
+// 自定义任务：合并所有依赖到 AAR
+abstract class MergeAllDependenciesTask extends DefaultTask {
+    
+    @InputDirectory
+    abstract DirectoryProperty getAarDirectory()
+    
+    @InputFiles
+    abstract ConfigurableFileCollection getDependencyFiles()
+    
+    @OutputFile
+    abstract RegularFileProperty getOutputAar()
+    
+    @TaskAction
+    void mergeAllDependencies() {
+        println "🔄 [Variant API] 开始合并所有依赖..."
+        
+        // 查找原始 AAR
+        def aarDir = aarDirectory.get().asFile
+        def originalAar = aarDir.listFiles()?.find { it.name.endsWith('.aar') }
+        
+        if (!originalAar || !originalAar.exists()) {
+            println "❌ 原始 AAR 不存在于: ${aarDir.path}"
+            return
+        }
+        
+        println "📦 找到原始 AAR: ${originalAar.name}"
+        
+        // 创建临时目录
+        def tempDir = new File(project.buildDir, "temp/variant-merge/")
+        tempDir.deleteDir()
+        tempDir.mkdirs()
+        
+        // 解压原始 AAR
+        project.copy {
+            from project.zipTree(originalAar)
+            into tempDir
+        }
+        
+        // 创建合并的 classes 目录
+        def mergedClassesDir = new File(tempDir, "merged-classes/")
+        mergedClassesDir.mkdirs()
+        
+        // 先复制原始的 classes.jar 内容
+        def originalClassesJar = new File(tempDir, "classes.jar")
+        if (originalClassesJar.exists()) {
+            project.copy {
+                from project.zipTree(originalClassesJar)
+                include '**/*.class'
+                into mergedClassesDir
+            }
+            println "  ✅ 提取原始 classes.jar"
+        }
+        
+        // 收集所有依赖的类文件
+        def dependencyCount = 0
+        def depFiles = dependencyFiles.files
+        
+        depFiles.each { file ->
+            if (file.exists()) {
+                dependencyCount++
+                
+                if (file.name.endsWith('.jar')) {
+                    // 合并 JAR 文件
+                    try {
+                        project.copy {
+                            from project.zipTree(file)
+                            include '**/*.class'
+                            exclude 'META-INF/**'
+                            exclude 'module-info.class'
+                            into mergedClassesDir
+                            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                        }
+                        println "  ✅ 合并 JAR: ${file.name}"
+                    } catch (Exception e) {
+                        println "  ⚠️  跳过 JAR: ${file.name} - ${e.message}"
+                    }
+                    
+                } else if (file.name.endsWith('.aar')) {
+                    // 合并 AAR 中的 classes.jar
+                    try {
+                        def tempAarDir = new File(tempDir, "temp-aar-${file.name.replace('.aar', '')}/")
+                        tempAarDir.mkdirs()
+                        
+                        project.copy {
+                            from project.zipTree(file)
+                            include 'classes.jar'
+                            into tempAarDir
+                        }
+                        
+                        def classesJar = new File(tempAarDir, "classes.jar")
+                        if (classesJar.exists()) {
+                            project.copy {
+                                from project.zipTree(classesJar)
+                                include '**/*.class'
+                                exclude 'META-INF/**'
+                                exclude 'module-info.class'
+                                into mergedClassesDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                            println "  ✅ 合并 AAR: ${file.name}"
+                        }
+                        
+                        tempAarDir.deleteDir()
+                    } catch (Exception e) {
+                        println "  ⚠️  跳过 AAR: ${file.name} - ${e.message}"
+                    }
+                }
+            }
+        }
+        
+        println "📊 共处理 ${dependencyCount} 个依赖文件"
+        
+        // 创建新的 classes.jar
+        if (mergedClassesDir.listFiles()?.size() > 0) {
+            println "📦 创建合并的 classes.jar..."
+            
+            def mergedJarFile = new File(tempDir, "classes-merged.jar")
+            def jarOutput = new JarOutputStream(new FileOutputStream(mergedJarFile))
+            
+            // 收集所有 class 文件
+            def classFiles = []
+            mergedClassesDir.eachFileRecurse { file ->
+                if (file.isFile() && file.name.endsWith('.class')) {
+                    classFiles << file
+                }
+            }
+            
+            // 写入 JAR
+            classFiles.each { file ->
+                def entryName = mergedClassesDir.toURI().relativize(file.toURI()).toString()
+                jarOutput.putNextEntry(new ZipEntry(entryName))
+                jarOutput.write(file.bytes)
+                jarOutput.closeEntry()
+            }
+            jarOutput.close()
+            
+            // 替换原始的 classes.jar
+            if (originalClassesJar.exists()) {
+                originalClassesJar.delete()
+            }
+            mergedJarFile.renameTo(originalClassesJar)
+            
+            println "✅ 类文件合并完成 (${classFiles.size()} 个类)"
+        }
+        
+        // 清理临时目录
+        mergedClassesDir.deleteDir()
+        new File(tempDir, "temp-aar/").deleteDir()
+        
+        // 重新打包为 AAR
+        def outputFile = outputAar.get().asFile
+        outputFile.parentFile.mkdirs()
+        
+        project.ant.zip(destfile: outputFile) {
+            fileset(dir: tempDir) {
+                include(name: "**/*")
+                exclude(name: "merged-classes/**")
+                exclude(name: "temp-aar*/**")
+            }
+        }
+        
+        println """
+🎉 [Variant API] 一站式打包完成！
+📊 统计信息:
+  - 原始 AAR: ${String.format("%.2f", originalAar.size() / 1024 / 1024)} MB
+  - 合并后 AAR: ${String.format("%.2f", outputFile.size() / 1024 / 1024)} MB
+  - 处理依赖数: ${dependencyCount}
+📍 输出文件: ${outputFile.path}
+        """
+    }
+}
+
+// ================================================
+// 使用 Variant API 注册任务
+// ================================================
+
+androidComponents {
+    onVariants(selector().withBuildType("release")) { variant ->
+        
+        // 注册合并依赖任务
+        def mergeTask = project.tasks.register(
+            "merge${variant.name.capitalize()}Dependencies",
+            MergeAllDependenciesTask.class
+        ) { task ->
+            // 输入：原始 AAR 目录 - 使用 bundleReleaseAar 任务的输出目录
+            task.aarDirectory.set(
+                project.layout.buildDirectory.dir("outputs/aar")
+            )
+            
+            // 依赖 bundleReleaseAar 任务
+            task.dependsOn("bundle${variant.name.capitalize()}Aar")
+            
+            println "🔧 [配置阶段] 正在配置合并任务..."
+            
+            // 确保所有项目依赖的 AAR 都已构建
+            def projectDeps = []
+            project.configurations.mergedImplementation.dependencies.each { dep ->
+                if (dep instanceof ProjectDependency) {
+                    def depProject = dep.dependencyProject
+                    projectDeps << depProject.name
+                    
+                    // 依赖每个项目的 bundle 任务
+                    def bundleTaskName = "bundle${variant.name.capitalize()}Aar"
+                    try {
+                        def depBundleTask = depProject.tasks.findByName(bundleTaskName)
+                        if (depBundleTask) {
+                            task.dependsOn(depBundleTask)
+                            println "  ✅ 添加依赖: ${depProject.name}:${bundleTaskName}"
+                        } else {
+                            println "  ⚠️  未找到任务: ${depProject.name}:${bundleTaskName}"
+                        }
+                    } catch (Exception e) {
+                        println "  ⚠️  配置依赖失败: ${depProject.name} - ${e.message}"
+                    }
+                }
+            }
+            
+            println "📦 项目依赖总数: ${projectDeps.size()}"
+            
+            // 输入：依赖文件集合 - 在执行阶段动态收集
+            task.dependencyFiles.from(
+                project.provider {
+                    println "\n🔍 [执行阶段] 开始收集依赖文件..."
+                    def files = []
+                    def projectAars = []
+                    def externalJars = []
+                    def externalAars = []
+                    
+                    // 1. 收集项目依赖的 AAR
+                    println "📦 收集项目依赖的 AAR..."
+                    project.configurations.mergedImplementation.dependencies.each { dep ->
+                        if (dep instanceof ProjectDependency) {
+                            def depProject = dep.dependencyProject
+                            def aarDir = new File(depProject.buildDir, "outputs/aar")
+                            
+                            if (aarDir.exists()) {
+                                def found = false
+                                aarDir.listFiles()?.each { file ->
+                                    if (file.name.endsWith('.aar') && file.name.contains('release')) {
+                                        files << file
+                                        projectAars << file.name
+                                        found = true
+                                        println "  ✅ ${depProject.name}: ${file.name} (${String.format("%.2f", file.size() / 1024 / 1024)} MB)"
+                                    }
+                                }
+                                if (!found) {
+                                    println "  ⚠️  ${depProject.name}: 未找到 release AAR 在 ${aarDir.path}"
+                                }
+                            } else {
+                                println "  ❌ ${depProject.name}: AAR 目录不存在 ${aarDir.path}"
+                            }
+                        }
+                    }
+                    
+                    // 2. 收集外部依赖和文件依赖
+                    println "\n📚 收集外部依赖..."
+                    try {
+                        def resolvedArtifacts = project.configurations.mergedImplementation.resolvedConfiguration.resolvedArtifacts
+                        println "  解析到 ${resolvedArtifacts.size()} 个依赖"
+                        
+                        resolvedArtifacts.each { artifact ->
+                            def file = artifact.file
+                            
+                            // 只收集外部依赖（非项目依赖）
+                            if (file.exists()) {
+                                // 排除已经收集的项目 AAR
+                                def isProjectAar = projectAars.any { it == file.name }
+                                
+                                if (!isProjectAar) {
+                                    if (file.name.endsWith('.jar')) {
+                                        files << file
+                                        externalJars << file.name
+                                        println "  ✅ JAR: ${file.name}"
+                                    } else if (file.name.endsWith('.aar')) {
+                                        files << file
+                                        externalAars << file.name
+                                        println "  ✅ AAR: ${file.name}"
+                                    }
+                                }
+                            } else {
+                                println "  ⚠️  文件不存在: ${file.path}"
+                            }
+                        }
+                    } catch (Exception e) {
+                        println "  ❌ 解析外部依赖时出错: ${e.message}"
+                        e.printStackTrace()
+                    }
+                    
+                    println "\n📊 依赖收集统计:"
+                    println "  - 项目 AAR: ${projectAars.size()}"
+                    println "  - 外部 AAR: ${externalAars.size()}"
+                    println "  - 外部 JAR: ${externalJars.size()}"
+                    println "  - 总计: ${files.size()} 个文件"
+                    
+                    if (files.isEmpty()) {
+                        println "\n⚠️  警告: 未收集到任何依赖文件！"
+                    }
+                    
+                    return files
+                }
+            )
+            
+            // 输出：合并后的 AAR
+            task.outputAar.set(
+                new File(project.buildDir, "outputs/aar/${variant.name}-complete.aar")
+            )
+            
+            task.group = 'build'
+            task.description = "合并 ${variant.name} 的所有依赖到单个 AAR"
+        }
+        
+        println "✅ 已注册任务: merge${variant.name.capitalize()}Dependencies"
+    }
+}
+
+// ================================================
+// 创建发布包任务
+// ================================================
+
+task createCompleteSdkPackage {
+    dependsOn 'mergeReleaseDependencies'
+    
+    doLast {
+        def sourceAar = file("$buildDir/outputs/aar/release-complete.aar")
+        
+        if (!sourceAar.exists()) {
+            println "❌ 找不到合并后的 AAR: ${sourceAar.path}"
+            return
+        }
+        
+        def publishDir = file("$buildDir/publish/")
+        publishDir.mkdirs()
+        
+        // 复制到发布目录
+        copy {
+            from sourceAar
+            into publishDir
+            rename { 'wechat-sdk-complete.aar' }
+        }
+        
+        // 生成使用说明
+        def readmeFile = file("$publishDir/README.md")
+        readmeFile.text = """# 奥陌陌微信 SDK 完整版
+
+## 版本信息
+- 版本号: ${android.defaultConfig.versionName}
+- 构建时间: ${new Date().format('yyyy-MM-dd HH:mm:ss')}
+- 打包方式: Variant API + R8 优化 + 依赖合并
+
+## 特点
+- 单一 AAR 文件 - 包含所有代码、资源和依赖
+- 无需其他配置 - 第三方只需这一行依赖
+- R8 优化 - 自动移除未使用代码
+- 完整功能 - 所有模块功能都可用
+- Variant API - 使用最新的 Gradle 构建 API
+
+## 使用方法
+
+### 第一步：复制文件
+将 wechat-sdk-complete.aar 复制到项目的 libs 目录
+
+### 第二步：配置依赖
+在 app/buildxxx.gradle 中添加：
+
+```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    // 只需要这一行！
+    implementation(name: 'wechat-sdk-complete', ext: 'aar')
+}
+```
+
+### 第三步：使用代码
+
+```kotlin
+// 初始化
+WeChatSdk.init(context)
+
+// 使用所有功能
+val contacts = WeChatSdk.getContacts()
+WeChatSdk.startVideoCall("user123")
+WeChatSdk.payWithWeChat("order123")
+// 所有功能都可用！
+```
+
+## 包含模块
+${configurations.mergedImplementation.dependencies.findAll { it instanceof ProjectDependency }.collect { "- ${it.name}" }.join('\n')}
+
+## 技术支持
+- 官网: https://www.oortcloud.com
+- 支持: support@oortcloud.com
+
+## 构建信息
+- 使用 Variant API 构建
+- 自动合并所有依赖
+- R8 代码优化和混淆
+"""
+        
+        println """
+[Variant API] 发布包已生成！
+位置: $publishDir
+
+包含:
+- wechat-sdk-complete.aar (完整SDK - ${String.format("%.2f", sourceAar.size() / 1024 / 1024)} MB)
+- README.md (使用说明)
+
+第三方使用只需:
+1. 复制 wechat-sdk-complete.aar 到 libs 目录
+2. 添加一行依赖: implementation(name: 'wechat-sdk-complete', ext: 'aar')
+3. 无需任何其他配置
+        """
+    }
+}
+
+// 一键构建任务
+task buildAllInOne {
+    group = 'build'
+    description = '一键构建完整的 SDK 发布包'
+    
+    dependsOn 'clean', 'assembleRelease', 'createCompleteSdkPackage'
+    
+    doLast {
+        println """
+[Variant API] 一站式打包完成！
+输出目录: $buildDir/publish/
+
+查看结果:
+  Windows: dir $buildDir\\publish
+  Linux/Mac: ls -la $buildDir/publish/
+        """
+    }
+}
+
+// 确保任务执行顺序
+afterEvaluate {
+    def assembleTask = tasks.findByName('assembleRelease')
+    def createTask = tasks.findByName('createCompleteSdkPackage')
+    
+    if (assembleTask) {
+        assembleTask.mustRunAfter 'clean'
+    }
+    if (createTask && assembleTask) {
+        createTask.mustRunAfter assembleTask
+    }
+}
+
+// ================================================
+// 发布到 Maven
+// ================================================
+
+afterEvaluate {
+    publishing {
+        publications {
+            complete(MavenPublication) {
+                groupId = 'com.oortcloud'
+                artifactId = 'wechat-sdk-complete'
+                version = android.defaultConfig.versionName
+
+                // 使用 Variant API 生成的合并后的 AAR
+                artifact(file("$buildDir/outputs/aar/release-complete.aar")) {
+                    builtBy tasks.named('mergeReleaseDependencies')
+                }
+
+                pom {
+                    name = '奥陌陌微信 SDK 完整版'
+                    description = '一站式微信解决方案 SDK，使用 Variant API 构建，包含所有功能和依赖'
+                    url = 'https://www.oortcloud.com'
+
+                    licenses {
+                        license {
+                            name = 'Apache License 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = 'oortcloud'
+                            name = '奥陌陌团队'
+                            email = 'dev@oortcloud.com'
+                        }
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                name = 'local'
+                url = uri("${buildDir}/repo")
+            }
+            
+            // 可选：发布到 Maven Central
+            // maven {
+            //     name = 'sonatype'
+            //     url = version.endsWith('SNAPSHOT') 
+            //         ? 'https://oss.sonatype.org/content/repositories/snapshots/'
+            //         : 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            //     credentials {
+            //         username = project.findProperty('ossrhUsername') ?: ''
+            //         password = project.findProperty('ossrhPassword') ?: ''
+            //     }
+            // }
+        }
+    }
+}
+
+// ================================================
+// 配置依赖排除
+// ================================================
+
+configurations {
+    all*.exclude group: 'xpp3', module: 'xpp3'
+}
+
+// ================================================
+// 构建脚本
+// ================================================
+
+// 创建构建脚本文件
+task createBuildScript {
+    doLast {
+        def scriptFile = file("$buildDir/build-allinone.sh")
+        scriptFile.text = """#!/bin/bash
+# 奥陌陌微信 SDK 一站式打包脚本
+
+echo "🚀 开始构建奥陌陌微信 SDK 完整版..."
+
+# 清理
+./gradlew clean
+
+echo "🔧 编译主模块..."
+./gradlew assembleRelease
+
+echo "🔄 合并所有依赖..."
+./gradlew mergeAllDependencies
+
+echo "📦 创建发布包..."
+./gradlew createCompleteSdkPackage
+
+echo ""
+echo "🎉 构建完成！"
+echo ""
+echo "📦 发布文件:"
+echo "   $buildDir/publish/wechat-sdk-complete.aar"
+echo "   $buildDir/publish/README.md"
+echo ""
+echo "📋 第三方使用:"
+echo "   1. 复制 wechat-sdk-complete.aar 到 libs 目录"
+echo "   2. 添加一行依赖"
+echo "   3. 无需任何其他配置"
+"""
+        scriptFile.setExecutable(true)
+
+        println "📜 构建脚本已创建: ${scriptFile.path}"
+        println "运行: ./${scriptFile.name}"
+    }
+}

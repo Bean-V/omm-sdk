@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffffff">
+
+    <FrameLayout
+        android:id="@+id/welcome_ly"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+<!--        android:background="@drawable/live_background"-->
+
+<!--        icon_launch_bg-->
+        <ImageView
+            android:id="@+id/welcome_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/splash_pic"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop" />
+
+<!--        <ImageView-->
+<!--            android:layout_width="106dp"-->
+<!--            android:layout_height="125dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:background="@mipmap/icon_launch_log"-->
+<!--            android:padding="6dp" />-->
+        <ProgressBar
+            android:id="@+id/pull_to_refresh_progress"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@anim/check_list_loading"
+            android:padding="6dp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_zs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text=""
+        android:gravity="center_vertical"
+        android:textSize="16sp"/>
+</FrameLayout>

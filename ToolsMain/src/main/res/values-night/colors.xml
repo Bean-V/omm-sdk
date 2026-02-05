@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FDFDFD</color>
+    <color name="purple_700">#F9F8FA</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black_usb">#FFFDFD</color>
+    <color name="white_tm">#101010</color>
+    <color name="mainColor">#1156A6</color>
+    <color name="colorAccent">#0E0E0E</color>
+    <color name="colorBg">#f2f2f2</color>
+    <color name="colorSeg">#2D6CFF</color>
+
+    <color name="colorZT33">#ffffff</color>
+
+    <color name="colorZTMain">#ffffff</color>
+    <color name="colorZT66">#ffffff</color>
+    <color name="colorZT99">#ffffff</color>
+    <color name="colorZTNav">#ffffff</color>
+
+    <color name="clearColor">#0f000000</color>
+    <color name="colorf2">#f2f2f2</color>
+    <color name="colorGreen">#0DE423</color>
+    <color name="colorRed">#ff0000</color>
+</resources>

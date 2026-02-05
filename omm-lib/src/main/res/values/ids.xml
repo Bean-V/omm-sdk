@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="tag_key_list_item_view" type="id" />
+    <item name="tag_key_list_item_type" type="id" />
+    <item name="thumb_request" type="id" />
+    <item name="key_avatar" type="id" />
+    <item name="av_chat" type="id" />
+    <item name="key_downloader_view_aware" type="id" />
+    <item name="badge_view_tag" type="id" />
+    <item name="tab_badge_tag" type="id" />
+    <item name="tab_icon_tag" type="id" />
+    <item name="tab_label_tag" type="id" />
+    <!-- 用于存储 Tab 图标控件的 Tag Key -->
+    <!-- 用于存储 Tab 角标控件的 Tag Key -->
+    <!-- 用于存储 Tab 唯一标识的 Tag Key -->
+    <item name="tab_id_tag" type="id"/>
+    <item name="tab_icon_cache_key" type="id" />
+    <item name="tab_icon_current_id" type="id" /> <!-- 存储当前Tab的唯一ID -->
+    <item name="tab_icon_is_selected" type="id" />
+    <item name="design_bottom_sheet" type="id" />
+    <item name="ib_clip_cancel" type="id" />
+    <item name="ib_clip_done" type="id" />
+    <item name="tv_clip_reset" type="id" />
+    <item name="ib_clip_rotate" type="id" /> <!-- 存储当前Tab的选中状态 -->
+
+
+</resources>

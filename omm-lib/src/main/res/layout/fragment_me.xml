@@ -1,0 +1,631 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7f7f7"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/rlInfoBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:background="#ffffff">
+
+            <com.oort.weichat.view.MergerStatus
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:background="@color/app_skin_normal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:background="@color/app_skin_normal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="@string/my"
+                        android:textColor="@color/title_text_color"
+                        android:textSize="19sp"
+                        android:textAlignment="viewStart"/>
+                    <TextView
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="7dp"
+                        style="@style/TabTitleIndicator"
+                        android:layout_marginBottom="7dp"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+            </com.oort.weichat.view.MergerStatus>
+
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottom_view"
+                android:background="#ffffff"
+                app:srlEnableAutoLoadMore="true"
+                android:layout_marginTop="0dp"
+                app:srlEnableLoadMore="true">
+                <com.oort.weichat.view.PullRefreshHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#f7f7f7"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#f7f7f7"
+                                android:orientation="vertical">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:visibility="gone">
+
+                                    <ImageView
+                                        android:id="@+id/iv_title_add"
+                                        android:layout_width="@dimen/menu_item_size"
+                                        android:layout_height="@dimen/menu_item_size"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:padding="@dimen/menu_item_padding"
+                                        android:src="@mipmap/more_icon"
+                                        app:tint="@color/white" />
+
+                                </RelativeLayout>
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="114dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    app:cardElevation="0dp"
+                                    app:cardCornerRadius="8dp">
+                                    <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:id="@+id/info_rl"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="74dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_marginTop="20dp">
+
+                                        <ImageView
+                                            android:id="@+id/imageView3"
+                                            android:layout_width="18dp"
+                                            android:layout_height="18dp"
+                                            android:layout_marginEnd="44dp"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            android:src="@mipmap/qr_code_icon"
+                                            />
+
+                                        <ImageView
+                                            android:id="@+id/imageView2"
+                                            style="@style/IMTbleLine_ArrowImg.Me"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/ic_arrow_gray"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginEnd="28dp"
+                                            android:contentDescription="@string/app_name"
+                                            app:tint="@color/white"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent" />
+
+                                        <!--                                app:srcCompat="@drawable/ic_arrow_gray"-->
+                                        <!--                                app:riv_oval="true"-->
+                                        <com.makeramen.roundedimageview.RoundedImageView
+                                            android:id="@+id/avatar_img"
+                                            android:layout_width="68dp"
+                                            android:layout_height="68dp"
+                                            android:layout_marginStart="20dp"
+                                            android:layout_marginTop="0dp"
+                                            android:layout_marginBottom="0dp"
+                                            android:contentDescription="@string/app_name"
+                                            android:scaleType="centerCrop"
+                                            android:src="@drawable/avatar_normal"
+                                            app:layout_constraintBottom_toBottomOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            app:riv_corner_radius="8dp"
+
+                                            tools:ignore="MissingConstraints"
+                                            tools:src="@drawable/welcome_bg" />
+
+                                        <TextView
+                                            android:id="@+id/nick_name_tv"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="12dp"
+                                            android:layout_marginTop="0dp"
+                                            android:layout_marginEnd="8dp"
+                                            android:ellipsize="end"
+                                            android:singleLine="true"
+                                            android:textColor="#333333"
+                                            android:textSize="18sp"
+                                            android:textStyle="bold"
+                                            android:paddingBottom="5dp"
+                                            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                                            app:layout_constraintHorizontal_bias="0.0"
+                                            app:layout_constraintStart_toEndOf="@+id/avatar_img"
+                                            app:layout_constraintTop_toTopOf="@+id/avatar_img"
+                                            tools:text="@string/example_name"
+                                            android:textAlignment="viewStart"/>
+
+                                        <TextView
+                                            android:id="@+id/phone_number_tv"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="12dp"
+                                            android:layout_marginTop="38dp"
+                                            android:layout_marginEnd="8dp"
+                                            android:ellipsize="end"
+                                            android:singleLine="true"
+                                            android:textColor="#666666"
+                                            android:textSize="14sp"
+                                            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                                            app:layout_constraintHorizontal_bias="0.0"
+                                            app:layout_constraintStart_toEndOf="@+id/avatar_img"
+                                            app:layout_constraintTop_toTopOf="@+id/avatar_img"
+                                            tools:text="17724494001" />
+
+                                        <ImageView
+                                            android:visibility="gone"
+                                            android:id="@+id/add_state_iv"
+                                            android:layout_width="46dp"
+                                            android:layout_height="18dp"
+                                            android:layout_marginStart="12dp"
+                                            android:layout_marginTop="5dp"
+                                            android:background="@mipmap/add_state"
+                                            app:layout_constraintBottom_toBottomOf="@+id/avatar_img"
+                                            app:layout_constraintStart_toEndOf="@+id/avatar_img"
+                                            tools:ignore="MissingConstraints" />
+                                        <com.makeramen.roundedimageview.RoundedImageView
+                                            android:id="@+id/add_state1_iv"
+                                            android:layout_width="16dp"
+                                            android:layout_height="16dp"
+                                            android:layout_marginStart="12dp"
+                                            android:visibility="gone"
+                                            android:scaleType="centerCrop"
+                                            android:src="@drawable/state_mzz"
+                                            app:layout_constraintBottom_toBottomOf="@+id/avatar_img"
+                                            app:layout_constraintStart_toEndOf="@+id/avatar_img"
+                                            app:riv_oval="true"
+                                            tools:ignore="MissingConstraints" />
+                                        <TextView
+                                            android:id="@+id/add_state1_tv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="30dp"
+                                            android:text="美滋滋"
+                                            android:textSize="12sp"
+                                            android:visibility="gone"
+                                            android:textColor="#3E75F4"
+                                            app:layout_constraintBottom_toBottomOf="@+id/avatar_img"
+                                            app:layout_constraintStart_toEndOf="@+id/avatar_img"
+                                            tools:ignore="MissingConstraints" />
+
+
+                                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                        <com.oortcloud.basemodule.views.AutoHeightRecyclerView
+                            android:id="@+id/my_hrv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#ffffff"
+                            android:fadingEdge="none"
+                            android:overScrollMode="never" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/me_radiu_bg"
+                            android:orientation="vertical"
+                            android:paddingTop="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="9dp"
+                                android:divider="@drawable/me_divider"
+                                android:orientation="vertical"
+                                android:showDividers="middle">
+
+                                <RelativeLayout
+                                    android:id="@+id/up_password_rl"
+                                    style="@style/IMTbleLine_No_bg">
+
+                                    <!--                        app:srcLight="@drawable/my_collection_light"-->
+                                    <com.oort.weichat.view.LightImageView
+                                        android:layout_width="@dimen/dp40"
+                                        android:layout_height="@dimen/dp40"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:src="@mipmap/my_passwprd_up"
+                                        />
+
+                                    <TextView
+                                        android:id="@+id/up_password_tv"
+                                        style="@style/IMTbleLine_TextName"
+                                        android:layout_centerVertical="true"
+                                        android:text="@string/change_password" />
+
+                                    <ImageView
+                                        style="@style/IMTbleLine_ArrowImg.Me"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/ic_arrow_gray"
+                                        android:contentDescription="@string/app_name" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/my_monry"
+                                    style="@style/IMTbleLine_No_bg"
+                                    android:visibility="gone">
+
+                                    <com.oort.weichat.view.LightImageView
+                                        android:layout_width="@dimen/dp20"
+                                        android:layout_height="@dimen/dp20"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/my_set_yuer"
+                                        app:srcLight="@mipmap/my_wallet" />
+
+                                    <TextView
+                                        style="@style/IMTbleLine_TextName"
+                                        android:text="@string/my_purse" />
+
+                                    <ImageView
+                                        style="@style/IMTbleLine_ArrowImg.Me"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/ic_arrow_gray"
+                                        android:contentDescription="@string/app_name" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/my_space_rl"
+                                    style="@style/IMTbleLine_No_bg"
+                                    android:visibility="gone">
+
+                                    <ImageView
+                                        style="@style/IMTbleLine_ArrowImg.Me"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/ic_arrow_gray"
+                                        android:contentDescription="@string/app_name" />
+
+                                    <com.oort.weichat.view.LightImageView
+                                        android:layout_width="@dimen/dp20"
+                                        android:layout_height="@dimen/dp20"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/my_set_speace"
+                                        app:srcLight="@mipmap/my_dynamics" />
+
+                                    <TextView
+                                        android:id="@+id/MySky"
+                                        style="@style/IMTbleLine_TextName"
+                                        android:layout_centerVertical="true"
+                                        android:text="@string/my_moments" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/my_collection_rl"
+                                    style="@style/IMTbleLine_No_bg"
+                                    android:visibility="visible">
+
+                                    <com.oort.weichat.view.LightImageView
+                                        android:layout_width="@dimen/dp20"
+                                        android:layout_height="@dimen/dp20"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/my_collection"
+                                        app:srcLight="@drawable/my_collection_light" />
+
+                                    <TextView
+                                        android:id="@+id/my_collection_tv"
+                                        style="@style/IMTbleLine_TextName"
+                                        android:layout_centerVertical="true"
+                                        android:text="@string/my_collection" />
+
+                                    <ImageView
+                                        style="@style/IMTbleLine_ArrowImg.Me"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/ic_arrow_gray"
+                                        android:contentDescription="@string/app_name" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/my_debug_rl"
+                                    style="@style/IMTbleLine_No_bg"
+                                    android:visibility="gone">
+
+                                    <com.oort.weichat.view.LightImageView
+                                        android:layout_width="@dimen/dp40"
+                                        android:layout_height="@dimen/dp40"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/my_collection"
+                                        app:srcLight="@drawable/my_collection_light" />
+
+                                    <TextView
+                                        android:id="@+id/my_debug_tv"
+                                        style="@style/IMTbleLine_TextName"
+                                        android:layout_centerVertical="true"
+                                        android:text="@string/my_debug" />
+
+                                    <ImageView
+                                        style="@style/IMTbleLine_ArrowImg.Me"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/ic_arrow_gray"
+                                        android:contentDescription="@string/app_name" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/local_course_rl"
+                                    style="@style/IMTbleLine_No_bg"
+                                    android:visibility="gone">
+
+                                    <com.oort.weichat.view.LightImageView
+                                        android:layout_width="@dimen/dp20"
+                                        android:layout_height="@dimen/dp20"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:src="@drawable/my_course"
+                                        app:srcLight="@drawable/my_course_light" />
+
+                                    <TextView
+                                        android:id="@+id/my_course_tv"
+                                        style="@style/IMTbleLine_TextName"
+                                        android:layout_centerVertical="true"
+                                        android:text="@string/my_course" />
+
+                                    <ImageView
+                                        style="@style/IMTbleLine_ArrowImg.Me"
+                                        android:layout_alignParentEnd="true"
+                                        android:background="@drawable/ic_arrow_gray"
+                                        android:contentDescription="@string/app_name" />
+
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/ll_more"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:divider="@drawable/me_divider"
+                                    android:orientation="vertical"
+                                    android:showDividers="middle"
+                                    android:visibility="gone">
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="8dp"
+                                        android:layout_marginTop="-2dp"
+                                        android:layout_marginBottom="-2dp"
+                                        android:background="@color/normal_bg" />
+
+                                    <RelativeLayout
+                                        android:id="@+id/meeting_rl"
+                                        style="@style/IMTbleLine_No_bg"
+                                        android:visibility="gone">
+
+                                        <com.oort.weichat.view.LightImageView
+                                            android:layout_width="@dimen/dp20"
+                                            android:layout_height="@dimen/dp20"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_centerVertical="true"
+                                            android:src="@drawable/my_meeting"
+                                            app:srcLight="@drawable/my_meeting_light" />
+
+                                        <TextView
+                                            style="@style/IMTbleLine_TextName"
+                                            android:layout_centerVertical="true"
+                                            android:text="@string/chat_video_conference" />
+
+                                        <ImageView
+                                            style="@style/IMTbleLine_ArrowImg.Me"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true"
+                                            android:background="@drawable/ic_arrow_gray"
+                                            android:contentDescription="@string/app_name" />
+
+                                    </RelativeLayout>
+
+                                    <RelativeLayout
+                                        android:id="@+id/live_rl"
+                                        style="@style/IMTbleLine_No_bg"
+                                        android:visibility="gone">
+
+                                        <com.oort.weichat.view.LightImageView
+                                            android:layout_width="@dimen/dp20"
+                                            android:layout_height="@dimen/dp20"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_centerVertical="true"
+                                            android:src="@drawable/my_live"
+                                            app:srcLight="@drawable/my_live_light" />
+
+                                        <TextView
+                                            style="@style/IMTbleLine_TextName"
+                                            android:layout_centerVertical="true"
+                                            android:text="@string/live_demo" />
+
+                                        <ImageView
+                                            style="@style/IMTbleLine_ArrowImg.Me"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true"
+                                            android:background="@drawable/ic_arrow_gray"
+                                            android:contentDescription="@string/app_name" />
+
+                                    </RelativeLayout>
+
+                                    <RelativeLayout
+                                        android:id="@+id/douyin_rl"
+                                        style="@style/IMTbleLine_No_bg"
+                                        android:visibility="gone">
+
+                                        <com.oort.weichat.view.LightImageView
+                                            android:layout_width="@dimen/dp20"
+                                            android:layout_height="@dimen/dp20"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_centerVertical="true"
+                                            android:src="@drawable/my_douyin"
+                                            app:srcLight="@drawable/my_douyin_light" />
+
+                                        <TextView
+                                            style="@style/IMTbleLine_TextName"
+                                            android:layout_centerVertical="true"
+                                            android:text="@string/douyin" />
+
+                                        <ImageView
+                                            style="@style/IMTbleLine_ArrowImg.Me"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true"
+                                            android:background="@drawable/ic_arrow_gray"
+                                            android:contentDescription="@string/app_name" />
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="8dp"
+                                    android:layout_marginTop="-2dp"
+                                    android:layout_marginBottom="-2dp"
+                                    android:background="@color/normal_bg"
+                                    android:visibility="gone" />
+
+                                <RelativeLayout
+                                    android:id="@+id/setting_rl"
+                                    style="@style/IMTbleLine_No_bg">
+                                    <!--                        app:srcLight="@drawable/my_set_title_light"-->
+                                    <com.oort.weichat.view.LightImageView
+                                        android:layout_width="@dimen/dp40"
+                                        android:layout_height="@dimen/dp40"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:src="@mipmap/my_set_title"
+                                        />
+
+                                    <TextView
+                                        android:id="@+id/SettingTv"
+                                        style="@style/IMTbleLine_TextName"
+                                        android:layout_centerVertical="true"
+                                        android:text="@string/settings" />
+
+                                    <ImageView
+                                        style="@style/IMTbleLine_ArrowImg.Me"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/ic_arrow_gray"
+                                        android:contentDescription="@string/app_name" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/about_rl"
+                                    style="@style/IMTbleLine_No_bg">
+                                    <!--                        app:srcLight="@drawable/my_set_title_light-->
+                                    <com.oort.weichat.view.LightImageView
+                                        android:layout_width="@dimen/dp40"
+                                        android:layout_height="@dimen/dp40"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_centerVertical="true"
+                                        android:src="@mipmap/my_about"
+                                        />
+
+                                    <TextView
+                                        android:id="@+id/aboutTv"
+                                        style="@style/IMTbleLine_TextName"
+                                        android:layout_centerVertical="true"
+                                        android:text="@string/about_us_" />
+
+                                    <ImageView
+                                        style="@style/IMTbleLine_ArrowImg.Me"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/ic_arrow_gray"
+                                        android:contentDescription="@string/app_name" />
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/exit_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="20dp"
+                            android:background="#ffffff"
+                            android:text="@string/logout"
+                            android:textColor="#000000"
+                            android:visibility="visible"
+                            android:textSize="16dp" />
+
+
+                        <Button
+                            android:id="@+id/btn_clear"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="20dp"
+                            android:background="#ffffff"
+                            android:text="注销当前账号"
+                            android:textColor="#000000"
+                            android:visibility="gone"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+
+                </ScrollView>
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

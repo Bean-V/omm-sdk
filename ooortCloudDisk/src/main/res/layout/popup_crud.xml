@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_cd"
+    android:dividerPadding="12dp"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <LinearLayout
+        android:id="@+id/download_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/popup_more_bg"
+        android:gravity="center_vertical"
+        android:minHeight="48dp"
+        android:minWidth="196dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginLeft="16dp"
+            android:text="下载到设备"
+            android:textColor="@color/color_666"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/copy_move_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/popup_more_bg"
+        android:gravity="center_vertical"
+        android:minHeight="48dp"
+        android:minWidth="196dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp">
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:layout_width="18dp"-->
+<!--            android:layout_height="18dp"-->
+<!--            android:src="@mipmap/add_icon1" />-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginLeft="16dp"
+            android:text="复制/移动"
+            android:textColor="@color/color_666"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/delete_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/popup_more_bg"
+        android:gravity="center_vertical"
+        android:minHeight="48dp"
+        android:minWidth="196dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginLeft="16dp"
+            android:text="删除"
+            android:textColor="@color/color_666"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

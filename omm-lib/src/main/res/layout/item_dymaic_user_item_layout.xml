@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_height="72dp"
+    android:background="@drawable/bg_f6_6"
+    android:gravity="center_vertical">
+    <ImageView
+        android:id="@+id/iv_file_icon"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@mipmap/default_head_portrait"
+        android:background="@drawable/button_shape_gray"
+
+        android:layout_marginLeft="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_marginLeft="15dp"
+            android:text="测绘银屏测绘银"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+        <TextView
+            android:id="@+id/tv_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:text="测绘银屏测绘银"
+            android:textSize="13sp"
+            android:textColor="#666666"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

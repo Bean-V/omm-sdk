@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:elevation="8dp">
+
+    <!-- 搜索表单 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="400dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 任务编号 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="任务编号"
+                    android:textSize="14sp"
+                    android:textColor="#333333" />
+
+                <EditText
+                    android:id="@+id/et_incident_number"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="示例：YJ202401010001"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:paddingHorizontal="10dp"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <!-- 执行人姓名 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="执行人姓名"
+                    android:textSize="14sp"
+                    android:textColor="#333333" />
+
+                <EditText
+                    android:id="@+id/et_reporter_name"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="示例：李警官"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:paddingHorizontal="10dp"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <!-- 执行人电话 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="执行人电话"
+                    android:textSize="14sp"
+                    android:textColor="#333333" />
+
+                <EditText
+                    android:id="@+id/et_reporter_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="示例：13800138000"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:paddingHorizontal="10dp"
+                    android:singleLine="true"
+                    android:inputType="phone" />
+
+            </LinearLayout>
+
+            <!-- 执行单位 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="执行单位"
+                    android:textSize="14sp"
+                    android:textColor="#333333" />
+
+                <EditText
+                    android:id="@+id/et_handling_unit"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="示例：监区中队"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:paddingHorizontal="10dp"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+            <!-- 任务状态 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="任务状态"
+                    android:textSize="14sp"
+                    android:textColor="#333333" />
+
+                <LinearLayout
+                    android:id="@+id/ll_status_selector"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/selector_background"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="全部"
+                        android:textSize="14sp"
+                        android:textColor="#333333" />
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_arrow_right"
+                        android:layout_marginStart="6dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 任务级别 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="任务级别"
+                    android:textSize="14sp"
+                    android:textColor="#333333" />
+
+                <LinearLayout
+                    android:id="@+id/ll_level_selector"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/selector_background"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_level"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="全部"
+                        android:textSize="14sp"
+                        android:textColor="#333333" />
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_arrow_right"
+                        android:layout_marginStart="6dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 任务时间 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="任务时间"
+                    android:textSize="14sp"
+                    android:textColor="#333333" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_background"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="10dp">
+
+                        <EditText
+                            android:id="@+id/et_start_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="示例：2024-01-01"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:singleLine="true"
+                            android:inputType="datetime"
+                            android:focusable="false"
+                            android:clickable="true" />
+
+                        <ImageView
+                            android:id="@+id/iv_clear_start_time"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:visibility="gone"
+                            android:clickable="true"
+                            android:focusable="true" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" - "
+                        android:textSize="14sp"
+                        android:textColor="#999999"
+                        android:layout_marginHorizontal="6dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_text_background"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="10dp">
+
+                        <EditText
+                            android:id="@+id/et_end_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="示例：2024-01-31"
+                            android:textSize="14sp"
+                            android:textColor="#333333"
+                            android:textColorHint="#999999"
+                            android:singleLine="true"
+                            android:inputType="datetime"
+                            android:focusable="false"
+                            android:clickable="true" />
+
+                        <ImageView
+                            android:id="@+id/iv_clear_end_time"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:visibility="gone"
+                            android:clickable="true"
+                            android:focusable="true" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- 底部按钮 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="#F8F8F8">
+
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/button_reset_background"
+            android:text="重置"
+            android:textSize="14sp"
+            android:textColor="#666666" />
+
+        <Button
+            android:id="@+id/btn_filter"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/button_filter_background"
+            android:text="筛选"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</LinearLayout>

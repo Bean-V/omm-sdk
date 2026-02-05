@@ -1,0 +1,178 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "6287e9b2a8500eed971eb8397d1444e1",
+    "entities": [
+      {
+        "tableName": "SysTask",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`path` TEXT NOT NULL, `name` TEXT, `android_id` TEXT, `type` TEXT, `disk_uuid` TEXT, `from` TEXT, `to` TEXT, `postion` INTEGER NOT NULL, `statu` INTEGER NOT NULL, `statu_des` TEXT, `md5` TEXT, `to_md5` TEXT, `to_dir_path` TEXT, `to_dir_path_ch` TEXT, `to_dir_path_en` TEXT, `to_dir_path_ja` TEXT, `to_archive_path` TEXT, `to_archive_path_ch` TEXT, `to_archive_path_en` TEXT, `to_archive_path_ja` TEXT, `sys_node` TEXT, `extra0` TEXT, `extra1` TEXT, `extra2` TEXT, `extra3` TEXT, PRIMARY KEY(`path`))",
+        "fields": [
+          {
+            "fieldPath": "path",
+            "columnName": "path",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "androidId",
+            "columnName": "android_id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "disk_uuid",
+            "columnName": "disk_uuid",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "from",
+            "columnName": "from",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "to",
+            "columnName": "to",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "postion",
+            "columnName": "postion",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "statu",
+            "columnName": "statu",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "statuDes",
+            "columnName": "statu_des",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "md5",
+            "columnName": "md5",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toMd5",
+            "columnName": "to_md5",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toDirPath",
+            "columnName": "to_dir_path",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toDirPath_CH",
+            "columnName": "to_dir_path_ch",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toDirPath_EN",
+            "columnName": "to_dir_path_en",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toDirPath_JA",
+            "columnName": "to_dir_path_ja",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toArchiveDirPath",
+            "columnName": "to_archive_path",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toArchiveDirPath_CH",
+            "columnName": "to_archive_path_ch",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toArchiveDirPath_EN",
+            "columnName": "to_archive_path_en",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "toArchiveDirPath_JA",
+            "columnName": "to_archive_path_ja",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sysNode",
+            "columnName": "sys_node",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "extra0",
+            "columnName": "extra0",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "extra1",
+            "columnName": "extra1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "extra2",
+            "columnName": "extra2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "extra3",
+            "columnName": "extra3",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "path"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6287e9b2a8500eed971eb8397d1444e1')"
+    ]
+  }
+}

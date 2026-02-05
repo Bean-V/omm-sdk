@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="48dp"> <!-- 缩进显示，与一级分组区分 -->
+    <ImageView
+        android:id="@+id/iv_group_icon"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:src="@drawable/ic_tab_single_chat"/>
+    <TextView
+        android:id="@+id/tv_sub_label_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
+
+</LinearLayout>

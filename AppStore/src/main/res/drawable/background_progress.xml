@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+<!--    &lt;!&ndash; 设置背景色（黑色） &ndash;&gt;-->
+
+
+<!--    <item android:id="@android:id/background">-->
+
+<!--        <shape>-->
+
+<!--&lt;!&ndash;            <corners android:radius="@dimen/dp12"></corners>&ndash;&gt;-->
+<!--            <solid android:color="#331000"></solid>-->
+
+<!--        </shape>-->
+
+<!--    </item>-->
+
+<!--    &lt;!&ndash; 设置进度条颜色（白色） &ndash;&gt;-->
+
+
+<!--    <item android:id="@android:id/progress">-->
+
+<!--        <clip>-->
+<!--            <shape>-->
+
+<!--                <gradient-->
+<!--                    android:angle="45"-->
+<!--                    android:endColor="#2DC8FE"-->
+<!--                    android:startColor="#149EFF"></gradient>-->
+<!--&lt;!&ndash;                <corners android:radius="@dimen/dp4"></corners>&ndash;&gt;-->
+
+<!--            </shape>-->
+
+<!--        </clip>-->
+
+<!--    </item>-->
+
+<!--</layer-list>-->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--  设置背景色（黑色）  -->
+    <item  android:id="@android:id/background" >
+        <shape>
+            <corners android:radius="5dip" />
+            <gradient android:startColor="#EFEFF4"
+                android:endColor="#EFEFF4" />
+        </shape>
+    </item>
+
+    <!--  设置进度条颜色（白色）  -->
+    <item  android:id="@android:id/progress" >
+        <clip>
+            <shape>
+                <corners android:radius="5dip" />
+                <gradient  android:startColor="#85848A"
+                    android:endColor="#85848A" />
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

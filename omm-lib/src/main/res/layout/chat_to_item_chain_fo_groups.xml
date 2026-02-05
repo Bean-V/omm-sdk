@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/chat_item_padding_left"
+    android:paddingTop="@dimen/chat_item_padding_top"
+    android:paddingRight="@dimen/chat_item_padding_right"
+    android:paddingBottom="@dimen/chat_item_padding_bottom">
+
+    <TextView
+        android:id="@+id/time_tv"
+        style="@style/ChattingUISystem"
+        android:visibility="gone" />
+
+    <com.oort.weichat.view.HeadView
+        android:id="@+id/chat_head_iv"
+        android:layout_width="@dimen/chat_head_size"
+        android:layout_height="@dimen/chat_head_size"
+        android:layout_below="@id/time_tv"
+        android:layout_marginStart="@dimen/chat_head_left"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_marginEnd="@dimen/chat_head_right"
+        android:layout_toRightOf="@id/chat_msc"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/avatar_normal" />
+
+    <CheckBox
+        android:id="@+id/chat_msc"
+        style="@style/CustomCheckBoxTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chat_head_iv"
+        android:layout_marginTop="@dimen/dp10_contact"
+        android:clickable="false"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/nick_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_tv"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_toRightOf="@id/chat_head_iv"
+        android:textSize="@dimen/SmallerTextSize"
+        android:visibility="gone"
+        tools:text="sdfsdfs"
+        tools:visibility="visible" />
+
+    <!-- 接龙消息容器 -->
+    <LinearLayout
+        android:id="@+id/chat_warp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nick_name"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_toRightOf="@id/chat_head_iv"
+        android:orientation="vertical"
+        android:background="@drawable/chat_to_warp_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:minWidth="200dp"
+        android:padding="12dp">
+
+        <!-- 接龙标题行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/chain_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#接龙"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/chain_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="学习"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginStart="8dp" />
+
+        </LinearLayout>
+
+        <!-- 展开按钮 -->
+        <TextView
+            android:id="@+id/expand_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="...展开..."
+            android:textSize="14sp"
+            android:textColor="#4A90E2"
+            android:background="?attr/selectableItemBackground"
+            android:padding="4dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- 参与者列表容器 -->
+        <LinearLayout
+            android:id="@+id/participants_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- 参与者列表 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/participants_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_participate_chain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chat_warp_view"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_alignRight="@id/chat_warp_view"
+        android:textSize="@dimen/SmallerTextSize"
+        android:visibility="visible"
+        android:text="参与接龙"
+        tools:visibility="visible" />
+
+    <include
+        android:id="@+id/in_state"
+        layout="@layout/view_holder_state_to" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@id/chat_warp_view"
+        android:layout_alignBottom="@id/chat_warp_view"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@id/in_state">
+
+        <TextView
+            android:id="@+id/tv_fire_time"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_danmu"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:visibility="gone"
+            tools:text="12"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

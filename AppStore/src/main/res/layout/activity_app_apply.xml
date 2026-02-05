@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f2f2f2"
+    tools:context=".activity.AppDetailedActivity">
+
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/toolbar_layout" />
+
+
+
+
+    <LinearLayout
+        android:layout_below="@id/title"
+        android:layout_above="@id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.oortcloud.appstore.widget.RoundImageView
+                android:id="@+id/app_icon"
+                android:layout_width="73dp"
+                android:layout_height="73dp"
+                android:layout_marginLeft="16dp"
+                app:radius="5dp"
+                android:src="@mipmap/default_app_icon" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="13.3dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="应用商城"
+                    android:textColor="@color/color_1A1A1A"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_app_name"
+                    android:layout_marginTop="6.67dp"
+                    android:text=""
+                    android:textColor="@color/color_666666"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_app_des"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_class"
+                    android:layout_marginTop="3dp"
+                    android:text=""
+                    android:textColor="@color/color_666666"
+                    android:textSize="13sp" />
+
+
+
+
+            </RelativeLayout>
+
+            <com.oortcloud.appstore.widget.RoundImageView
+                android:id="@+id/iv_apply_flag"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="16dp"
+                app:radius="5dp"
+                android:src="@mipmap/icon_appapply_apply" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/ll_apply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/app_apply"
+                    android:textColor="@color/color_333"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+                <EditText
+                    android:id="@+id/et_reason"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="135dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:textSize="14sp"
+                    android:hint="@string/apply_reason"
+                    android:inputType="textImeMultiLine"
+                    android:textColor="@color/color_333"
+                    android:gravity="top"
+                    android:background="@color/white"
+
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/app_apply"
+                    android:textColor="@color/color_333"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/tv_reason"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="135dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:textColor="@color/color_333"
+                    android:textSize="14sp"
+                    android:text="企业内部应用开发者发布版本时，可自行设置期望的应用权限、应用能力、数据范围和可用性范围，由企业管理员或指定审核人进行审核。对自建应用进行审核可以确保企业管理员及时掌握企业内应用的发布与更新信息。"
+
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_reject"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:text="@string/apply_reason"
+                        android:textColor="@color/color_333"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/tv_reason_reject"
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginRight="14dp"
+                        android:textColor="@color/color_333"
+                        android:textSize="14sp"
+                        android:text="企业内部应用开发者发布版本时，可自行设置期望的应用权限、应用能力、数据范围和可用性范围，由企业管理员或指定审核人进行审核。对自建应用进行审核可以确保企业管理员及时掌握企业内应用的发布与更新信息。"
+
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:orientation="vertical"
+                android:background="#f2f2f2"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="14dp"
+                        android:text="@string/review_feedback"
+                        android:textColor="@color/color_333"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/tv_reject_coment"
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="135dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginRight="14dp"
+                        android:textColor="@color/color_333"
+                        android:textSize="14sp"
+                        android:text="企业内部应用开发者发布版本时，可自行设置期望的应用权限、应用能力、数据范围和可用性范围，由企业管理员或指定审核人进行审核。对自建应用进行审核可以确保企业管理员及时掌握企业内应用的发布与更新信息。"
+
+
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+        </FrameLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/colorBackgroundWhite"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_D8D8D8" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/btn_apply"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/main_color"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/white"
+            android:text="提交申请"
+            android:textStyle="bold"
+            android:textSize="16sp"  />
+    </LinearLayout>
+
+</LinearLayout>

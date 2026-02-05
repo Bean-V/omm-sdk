@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f2f2f2"
+        />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+    
+    <Button
+        android:id="@+id/btn_fm_oper_copy"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:drawableTop="@mipmap/ic_fm_copy"
+        android:text="@string/fm_copytolocal"
+        android:paddingTop="5dp"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorZT33"
+        android:background="@color/white"/>
+    <Button
+        android:id="@+id/btn_fm_oper_rename"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:drawableTop="@mipmap/ic_fm_rename"
+        android:text="@string/fm_rename"
+        android:paddingTop="5dp"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorZT33"
+        android:background="@color/white"/>
+    <Button
+        android:id="@+id/btn_fm_oper_newfile"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:drawableTop="@mipmap/ic_fm_newfile"
+        android:text="@string/fm_newfile"
+        android:paddingTop="5dp"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorZT33"
+        android:background="@color/white"/>
+    <Button
+        android:id="@+id/btn_fm_oper_del"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:drawableTop="@mipmap/ic_fm_del"
+        android:text="@string/fm_del"
+        android:paddingTop="5dp"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorZT33"
+        android:background="@color/white"/>
+    
+    
+
+</LinearLayout>
+</LinearLayout>

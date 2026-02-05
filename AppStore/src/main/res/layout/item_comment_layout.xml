@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            android:id="@+id/img_head_portait"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_left_16"
+            android:src="@mipmap/default_head_portrait" />
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/img_head_portait"
+            android:textColor="@color/color_666666"
+            android:textSize="16sp"
+            tools:text="张三"/>
+
+        <com.oortcloud.appstore.widget.RatingBarView
+            android:id="@+id/rating_bar_view"
+            android:layout_marginLeft="@dimen/margin_left_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:starCount="5"
+            app:starEmpty="@mipmap/rating"
+            app:starHalf="@mipmap/rating_half"
+            app:starFill="@mipmap/rating_selected"
+            app:starImageSize="12dp"
+            app:starStep="0"
+            app:clickable="false"
+            app:stepSize="Half"
+            android:layout_below="@id/tv_user_name"
+            android:layout_toRightOf="@id/img_head_portait">
+        </com.oortcloud.appstore.widget.RatingBarView>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            tools:text="2020-4-14"/>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_comment_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp"
+        tools:text="测试评论测试评论测试评论测试评论测试评论测试评论测试评论测试评论"/>
+     <TextView
+         android:id="@+id/tv_comment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="8dp"
+         android:layout_marginRight="16dp"
+         android:textColor="@color/color_999999"
+         android:textSize="10dp"
+        tools:text="评论时间 2小时前"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_two_level_comment"
+            android:background="@color/color_F3F3F3"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="16dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content"/>
+</LinearLayout>

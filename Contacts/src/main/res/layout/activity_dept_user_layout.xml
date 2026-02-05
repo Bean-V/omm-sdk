@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="#ffffff">
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:gravity="center"
+        android:background="@color/main_color"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_title"
+            android:textSize="@dimen/sp_16"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_2"
+        android:layout_below="@id/ll_1"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_14"
+        android:layout_marginRight="@dimen/dp_14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.oortcloud.contacts.widget.SearchView
+            android:id="@+id/search_view"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/search_tv"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+
+            android:background="@drawable/et_search_bg"
+            android:drawableLeft="@drawable/icon_search_commodity"
+            android:drawablePadding="@dimen/dp_8"
+            android:paddingLeft="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:hint="@string/search_org"
+            android:textColor="@color/dark_grey"
+            android:textColorHint="@color/grey_a7"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_depart"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_below="@id/ll_2"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="0dp"
+        android:background="#ffffff"
+        android:overScrollMode="never"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_24" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hail_fellow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:layout_below="@id/rv_depart" />
+
+    <com.oortcloud.contacts.widget.LetterIndexView
+        android:id="@+id/letter_index_view"
+        android:layout_width="12dp"
+        android:layout_height="491dp"
+        android:layout_below="@id/ll_1"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="9dp"
+        android:visibility="gone"
+        android:layout_marginRight="9dp" />
+    <FrameLayout
+        android:id="@+id/fl_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/icon_empty"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:text="@string/no_data"
+        android:textColor="#000000"
+        android:textSize="@dimen/sp_12" />
+    </FrameLayout>
+
+</RelativeLayout>

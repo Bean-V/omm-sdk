@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:stateListAnimator="@drawable/touch_raise"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="0.5dp"
+        tools:ignore="UnusedAttribute">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_module_name"
+            android:layout_marginTop="@dimen/margin_top_9"
+            android:layout_marginStart="@dimen/margin_left_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/color_1A1A1A"
+            android:text="@string/my_app"/>
+        <TextView
+            android:id="@+id/tv_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_left_4"
+            android:layout_marginTop="@dimen/margin_top_9"
+            android:layout_alignBottom="@id/tv_module_name"
+            android:layout_toRightOf="@id/tv_module_name"
+            android:visibility="gone"
+            android:textSize="@dimen/text_size_10"
+            android:text="@string/current_home_disappear"/>
+        <TextView
+            android:id="@+id/drag_text"
+            android:layout_marginStart="@dimen/margin_left_4"
+            android:layout_marginTop="@dimen/margin_top_9"
+            android:layout_alignBottom="@id/tv_module_name"
+            android:layout_toRightOf="@id/tv_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_10"
+            android:text="@string/shift_position_str"/>
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/tv_delete"
+            android:textSize="@dimen/text_size_12"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:background="@drawable/bg_click"
+            android:paddingBottom="@dimen/margin_bottom_10"
+            android:paddingEnd="15dp"
+            android:textColor="@color/color_666666"
+            android:layout_centerVertical="true"
+            android:text="@string/edit_app"/>
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_12"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_right_8"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="@dimen/margin_bottom_10"
+            android:background="@drawable/bg_click"
+            android:textColor="@color/color_EE3F30"
+            android:text="@string/del_str"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="@dimen/margin_left_10"
+        android:layout_marginEnd="@dimen/margin_right_10"
+        android:background="@color/color_D8D8D8"/>
+
+    <com.oortcloud.appstore.widget.CustomGridView
+        android:descendantFocusability="blocksDescendants"
+        android:id="@+id/module_app_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"
+        android:layout_marginTop="18dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="4"
+        android:layout_marginBottom="@dimen/margin_bottom_8"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="10dip"
+        android:verticalSpacing="10dip">
+
+    </com.oortcloud.appstore.widget.CustomGridView>
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--    <string name="app_name">DAB</string>-->
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="tab_home">トップページ</string>
+    <string name="tab_find">検出</string>
+    <string name="tab_set">設定</string>
+    <string name="file_manager">ファイル管理</string>
+    <string name="file_my">マイファイル</string>
+    <string name="file_wx">ウィチャットファイル</string>
+    <string name="file_transfer">ファイル転送</string>
+    <string name="file_pic">画像</string>
+    <string name="file_video">ビデオ</string>
+    <string name="file_audio">オーディオ</string>
+    <string name="file_doc">ドキュメント</string>
+    <string name="file_other">その他</string>
+    <string name="back_up_contact">アドレス帳のバックアップ</string>
+    <string name="all_size">総容量</string>
+    <string name="res_size">ざんりゅうようりょう</string>
+    <string name="fm_cancel">キャンセル</string>
+    <string name="fm_use_total">使用済み/総容量</string>
+
+    <string name="fm_local">ネイティブ</string>
+    <string name="fm_u">Uディスク</string>
+
+    <string name="fm_u_out">イジェクト</string>
+    <string name="fm_copytoU">Uディスクにコピー</string>
+    <string name="fm_rename">名前を変更</string>
+    <string name="fm_newfile">新規フォルダ</string>
+    <string name="fm_post">貼り付け</string>
+    <string name="fm_del">削除</string>
+    <string name="fm_copytolocal">携帯電話にコピー</string>
+
+    <string name="find">検出</string>
+    <string name="find_tm">天猫旗艦店</string>
+    <string name="find_dy">抖店</string>
+    <string name="find_jd">京東旗艦店</string>
+
+    <string name="setting">設定</string>
+    <string name="changeLangage">言語切り替え</string>
+    <string name="abut_us">私たちについて</string>
+    <string name="privacy_p">プライバシーポリシー</string>
+    <string name="sys_task">同期</string>
+    <string name="no_usb">USBディスクを挿入してください</string>
+    <string name="selectAll">すべて選択</string>
+    <string name="not_selectAll">すべて選択しない</string>
+    <string name="back">リターンマッチ</string>
+
+
+
+
+
+    <string name="checking">検出中</string>
+
+    <string name="request_u_permisson">USBアクセス権の要求</string>
+
+    <string name="u_ejected">イジェクト済み</string>
+
+    <string name="read_files_to_del">ファイルの削除準備中</string>
+
+    <string name="USB_connnect">デバイスが接続されています</string>
+
+    <string name="loading">ロード中</string>
+
+    <string name="copying">コピー中</string>
+
+    <string name="copy_list">転送リスト</string>
+
+    <string name="add_copy_lists">コピーリストに追加</string>
+
+    <string name="read_files_to_copy">ファイルのコピー準備中</string>
+
+    <string name="read_files_to_move">ファイルの移動準備中</string>
+    <string name="read_files_to_encrypt">暗号化ファイルの準備中</string>
+    <string name="read_files_to_share">共有の準備中</string>
+
+    <string name="read_directory">ディレクトリの読み取り</string>
+    <string name="read_fileData">ファイルデータを読み込む</string>
+    <string name="reading">読み取り中</string>
+
+    <string name="confirm_del_finsh_list">完了したコピーされたレコードの削除を確認しますか？</string>
+
+    <string name="confirm_del_unfinsh_list">未完了コピーされたレコードの削除を確認しますか？</string>
+
+    <string name="confirm_del_finsh_list_addtion">コピーが完了したファイルも削除して、携帯電話のメモリを解放します</string>
+
+    <string name="deleting">削除中</string>
+    <string name="addpasing">暗号化中</string>
+    <string name="decrypting">復号中</string>
+
+    <string name="current_file">現在のファイル</string>
+    <string name="all_files">合計ファイル</string>
+
+    <string name="tip">ヒント</string>
+    <string name="decrypt">復号</string>
+
+    <string name="confirm_del_file">ファイルの削除のOK</string>
+
+    <string name="confirm_copy_file">コピーファイルの決定</string>
+    <string name="confirm_move_file">ファイルの移動を決定する</string>
+
+    <string name="confirm_addpas_file">暗号化されたファイルの特定</string>
+    <string name="confirm_share_file">共有ファイルの決定</string>
+
+    <string name="files">個のファイル</string>
+
+    <string name="unselect_file">ファイルが選択されていません</string>
+
+    <string name="confirm">を選択して、</string>
+
+    <string name="need_permisson_to_fm">ファイルデータにアクセスするには、ファイル管理権限を付与する必要があります</string>
+
+    <string name="input_new_name">新しい名前を入力してください</string>
+    <string name="input_pass">パスワードを入力してください</string>
+
+    <string name="invaild_file">無効なファイル</string>
+    <string name="unsupport_open_file">このようなファイルを開くことはサポートされていません</string>
+    <string name="no_app_installed">関連アプリケーションがインストールされていません</string>
+    <string name="Lower_version">バージョンが低い</string>
+
+    <string name="eject_the_USB_stick">Uディスクをイジェクトしてよろしいですか</string>
+    <string name="wait_to_copy">コピー対象</string>
+    <string name="tap_to_requset_usb_permisson">ポイントこれにより、USBアクセス権を取得できます</string>
+    <string name="check_task">未完了のタスクが検出されました。続行しますか？</string>
+
+    <string name="countinue">続行</string>
+
+    <string name="Transferring">転送中</string>
+
+    <string name="Transfer_succeeded">転送成功</string>
+
+
+    <string name="contact_backup_title">アドレス帳</string>
+    <string name="contactUnbackup">連絡先がバックアップされていません</string>
+
+    <string name="contactBackuped">バックアップされた連絡先</string>
+    <string name="contactBackup">アドレス帳のバックアップ</string>
+    <string name="contactSys">アドレス帳の復元</string>
+
+    <string name="contactSys_tip">ファイルをクリックしてノードのアドレスデータを復元する</string>
+
+    <string name="fm_copyto">コピー先</string>
+    <string name="fm_moveto">移動先</string>
+    <string name="fm_add_pass">暗号化</string>
+
+    <string name="success">成功</string>
+    <string name="failure">に失敗</string>
+    <string name="finsh_encrypt">暗号化が完了しました</string>
+    <string name="finsh_decrypt">復号が完了しました</string>
+    <string name="go_find">表示する</string>
+    <string name="encrpty_list">暗号化リスト</string>
+
+
+
+    <string name="privacy_exit">終了</string>
+    <string name="privacy_agree">に同意</string>
+    <string name="users_note">個人情報保護ガイドライン</string>
+    <string name="privacy_tips_key2">『プライバシーポリシー』</string>
+    <string name="privacy_tips">ファイル転送サービスを提供するためには、画像やビデオ、オーディオなどの個人情報を収集する必要があります。詳細については、『プライバシーポリシー』を読むことができます。ご同意の場合は、「同意」をクリックしてサービスの受付を開始してください。</string>
+    <string name="confirmed">確認済み</string>
+    <string name="opt_terms">サービスプロトコル</string>
+    <string name="opt_privacy">プライバシーポリシー</string>
+
+    <string name="permission_request_denied">Permission request denied</string>
+    <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
+    <string name="album_name_all">全部</string>
+
+    <string name="button_preview">预览</string>
+    <string name="button_apply_default">使用</string>
+    <string name="button_apply">使用(%1$d)</string>
+    <string name="button_back">返回</string>
+    <string name="photo_grid_capture">拍一张</string>
+    <string name="empty_text">还没有图片或视频</string>
+    <string name="button_ok">我知道了</string>
+
+
+    <string name="error_over_count_default">您已经达到最大选择数量</string>
+    <string name="error_over_count">最多只能选择 %1$d 个文件</string>
+    <string name="error_under_quality">图片质量太低</string>
+    <string name="error_over_quality">图片质量太高</string>
+    <string name="error_file_type">不支持的文件类型</string>
+    <string name="error_type_conflict">不能同时选择图片和视频</string>
+    <string name="error_no_video_activity">没有支持视频预览的应用</string>
+    <string name="error_over_original_size">"该照片大于 %1$d M，无法上传将取消勾选原图"</string>
+    <string name="error_over_original_count">"有 %1$d 张照片大于 %2$d M\n无法上传，将取消勾选原图"</string>
+    <string name="button_original">原图</string>
+    <string name="button_sure_default">确定</string>
+    <string name="button_sure">确定(%1$d)</string>
+    <string name="title_activity_file_path_selector">Activity_filePathSelector</string>
+
+    <string name="migrate_phone_device">携帯電話からデバイスへ</string>
+    <string name="migrate_device_phone">デバイスから携帯電話へ</string>
+    <string name="migrate">いどう</string>
+    <string name="migrate_cancel">移行のキャンセル</string>
+    <string name="migrate_delete">移行レコードの削除</string>
+    <string name="migrate_back_tip">バックアップ中で、前のインタフェースに戻ることはできません</string>
+    <string name="migrate_no_data">バックアップレコードが見つかりません</string>
+    <string name="migrate_done">完了</string>
+    <string name="migrate_un_done">未完了</string>
+
+    <string name="migrate_del_usb_tip">既存のバックアップレコードが検出されました。レコードを削除し、再バックアップする必要があるかどうか</string>
+    <string name="migrate_del_local_tip">リカバリされたレコードが検出されました。レコードを削除し、再リカバリする必要があるかどうか</string>
+    <string name="migrate_recovery">バックアップのリストア</string>
+
+    <string name="migrate_Duplicate_file">重複ファイル</string>
+    <string name="fm_share">分かち合う</string>
+    <string name="dup_see">表示＃ヒョウジ＃</string>
+    <string name="comfirm_open_tip">同期をオンにしますか？オンにすると、USBメモリを挿入すると自動的に携帯電話内のファイルがUSBメモリに同期されます。</string>
+
+    <string name="comfirm_close">OK：同期をキャンセルしますか？</string>
+
+    <string name="sys_tasking">自動同期中</string>
+
+    <string name="sys_task_stoped">自動同期が停止されました</string>
+
+    <string name="sys_task_close">自動同期がオンになっていません</string>
+    <string name="sys_see_detail">詳細の表示</string>
+
+
+
+</resources>

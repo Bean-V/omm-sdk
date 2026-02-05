@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- 整体翻转组 -->
+    <group
+        android:scaleX="-1"
+        android:pivotX="12"
+        android:pivotY="12">
+
+        <!-- 摄像机外形 -->
+        <path
+            android:fillColor="#f0FFFFFF"
+            android:pathData="M20,4H16L15,2H9L8,4H4C2.9,4 2,4.9 2,6V18C2,19.1 2.9,20 4,20H20C21.1,20 22,19.1 22,18V6C22,4.9 21.1,4 20,4Z"/>
+
+        <!-- 镜头外圈 -->
+        <path
+            android:fillColor="#00FFFFFF"
+            android:pathData="M12,5C9.24,5 7,7.24 7,10C7,12.76 9.24,15 12,15C14.76,15 17,12.76 17,10C17,7.24 14.76,5 12,5Z"/>
+
+        <!-- 镜头内空心圈 -->
+        <path
+            android:fillColor="@android:color/transparent"
+            android:strokeColor="#999999"
+            android:strokeWidth="1.5"
+            android:pathData="M12,7
+                A3,3 0 1,1 11.999,7
+                Z"/>
+    </group>
+</vector>

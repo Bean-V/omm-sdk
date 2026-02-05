@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/pop_white"
+    android:divider="@drawable/popu_message_divider"
+    android:dividerPadding="12dp"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <LinearLayout
+        android:id="@+id/szs_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="深圳市人民检察院"
+            android:textColor="#999999 "
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/qhs_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="前海蛇口自贸区检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ftq_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="福田区人民检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/luohuqu_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="罗湖区人民检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ytq_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="盐田区人民检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/nsq_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp"
+        android:visibility="visible">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="南山区人民检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/baq_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="宝安区人民检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lgq_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="龙岗区人民检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lhq_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="龙华区人民检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/psq_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="坪山区人民检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/gmq_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp"
+        android:visibility="visible">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="光明区人民检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/scq_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_selector_background_ripple"
+        android:gravity="center_vertical"
+        android:minWidth="140dp"
+        android:minHeight="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="深汕特别合作区检察院"
+            android:textColor="#999999"
+            android:textSize="@dimen/pop_window" />
+
+    </LinearLayout>
+
+</LinearLayout>

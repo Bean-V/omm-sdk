@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.oortcloud.appstore.widget.SearchLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+
+    <RelativeLayout
+
+        android:layout_marginTop="@dimen/margin_top_12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/type_recycler_view"
+            android:layout_width="90dp"
+            android:background="@color/color_F2F2F2"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:fadingEdge="none"/>
+
+
+        <RelativeLayout
+            android:layout_toEndOf="@id/type_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_type_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_1A1A1A"
+                android:textSize="@dimen/text_size_16"
+                android:layout_marginStart="@dimen/margin_left_16"
+                android:text="移动执法"/>
+
+            <TextView
+                android:id="@+id/tv_show_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/main_color"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/text_size_16"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/margin_right_16"
+                android:visibility="gone"
+                android:text="@string/show_all_str"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/all_app_recycler_view"
+                android:layout_below="@id/tv_type_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:fadingEdge="none"/>
+
+
+            <TextView
+                android:id="@+id/count_show_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_1A1A1A"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/text_size_16"
+                android:background="@drawable/bg_click"
+                android:layout_alignParentBottom="true"
+                android:paddingTop="@dimen/margin_bottom_8"
+                android:paddingBottom="@dimen/margin_bottom_10"
+                android:paddingStart="@dimen/margin_left_6"
+                android:paddingEnd="@dimen/margin_right_6"
+                android:text="@string/show_all_str"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,78 @@
+// ================================================
+// 奥陌陌 SDK 完整依赖配置
+// ================================================
+// 
+// 使用方法：
+// 1. 将此文件和 omm-lib-release.aar 一起提供给第三方
+// 2. 第三方在项目的 app/build.gradle 中添加：
+//
+//    repositories {
+//        flatDir { dirs 'libs' }
+//    }
+//
+//    dependencies {
+//        implementation(name: 'omm-lib-release', ext: 'aar')
+//        apply from: 'omm-sdk-dependencies.gradle'  // 引入此文件
+//    }
+//
+// 说明：
+// - omm-lib-release.aar 已包含所有内部模块的代码（通过 Variant API 合并）
+// - 此文件只列出第三方库依赖，第三方需要自己添加这些依赖
+// ================================================
+
+dependencies {
+    // ===== 注意：不需要再次声明 omm-lib，第三方已经在自己的 build.gradle 中声明了 =====
+    // implementation(name: 'omm-lib-release', ext: 'aar')  // 删除这行，避免重复
+    
+    // ===== 必需的 AndroidX 库 =====
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.room:room-runtime:2.3.0'
+    implementation 'androidx.work:work-runtime:2.7.1'
+    
+    // ===== 第三方库 =====
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.0.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    
+    // ===== 推送服务 =====
+    implementation 'com.huawei.android.hms:push:2.5.2.300'
+    implementation 'com.huawei.android.hms:base:2.5.2.300'
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-messaging:18.0.0'
+    
+    // ===== 其他依赖 =====
+    implementation 'com.tencent.bugly:crashreport:4.1.9'
+    implementation 'org.jsoup:jsoup:1.10.3'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-28'
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.57'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation 'org.litepal.android:core:1.6.1'
+    implementation 'com.contrarywind:Android-PickerView:4.1.7'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.4.6'
+    implementation 'log4j:log4j:1.2.17'
+    
+    // ===== Smack XMPP =====
+    def smackVersion = "4.4.6"
+    implementation "org.igniterealtime.smack:smack-tcp:$smackVersion"
+    implementation "org.igniterealtime.smack:smack-im:$smackVersion"
+    implementation "org.igniterealtime.smack:smack-extensions:$smackVersion"
+    implementation "org.igniterealtime.smack:smack-xmlparser-xpp3:$smackVersion"
+    implementation "org.igniterealtime.smack:smack-experimental:$smackVersion"
+    implementation "org.igniterealtime.smack:smack-android:$smackVersion"
+    implementation "org.igniterealtime.smack:smack-sasl-provided:$smackVersion"
+    implementation "org.igniterealtime.smack:smack-resolver-minidns:$smackVersion"
+}

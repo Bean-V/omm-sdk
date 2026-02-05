@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_10">10sp</dimen>
+    <dimen name="text_size_11">11sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_46">46sp</dimen>
+    <dimen name="text_size_48">48sp</dimen>
+    <dimen name="sp_21">21sp</dimen>
+    <dimen name="sp_10">10sp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+
+
+    <dimen name="margin_top_4">4dp</dimen>
+    <dimen name="margin_top_6">6dp</dimen>
+    <dimen name="margin_top_8">8dp</dimen>
+    <dimen name="margin_top_9">9dp</dimen>
+    <dimen name="margin_top_10">10dp</dimen>
+    <dimen name="margin_top_12">12dp</dimen>
+    <dimen name="margin_top_15">15dp</dimen>
+    <dimen name="margin_top_16">16dp</dimen>
+    <dimen name="margin_top_18">18dp</dimen>
+    <dimen name="margin_top_20">20dp</dimen>
+    <dimen name="margin_top_24">24dp</dimen>
+    <dimen name="margin_top_29">29dp</dimen>
+
+    <dimen name="margin_left_4">4dp</dimen>
+    <dimen name="margin_left_6">6dp</dimen>
+    <dimen name="margin_left_7">7dp</dimen>
+    <dimen name="margin_left_8">8dp</dimen>
+    <dimen name="margin_left_10">10dp</dimen>
+    <dimen name="margin_left_13">13dp</dimen>
+    <dimen name="margin_left_16">16dp</dimen>
+    <dimen name="margin_left_18">18dp</dimen>
+    <dimen name="margin_left_23">23dp</dimen>
+    <dimen name="margin_left_33">33dp</dimen>
+
+    <dimen name="margin_right_6">6dp</dimen>
+    <dimen name="margin_right_8">8dp</dimen>
+    <dimen name="margin_right_10">10dp</dimen>
+    <dimen name="margin_right_13">13dp</dimen>
+    <dimen name="margin_right_16">16dp</dimen>
+    <dimen name="margin_right_20">20dp</dimen>
+    <dimen name="margin_right_23">23dp</dimen>
+
+    <dimen name="margin_bottom_8">8dp</dimen>
+    <dimen name="margin_bottom_10">10dp</dimen>
+    <dimen name="margin_bottom_20">20dp</dimen>
+    <dimen name="dp_6">6dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
+
+
+    <dimen name="radius_5">5dp</dimen>
+    <dimen name="max_grid_view_height">300dp</dimen>
+
+
+</resources>

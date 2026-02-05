@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/bg_radius_cd"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_32"
+        android:layout_marginTop="@dimen/dp_24"
+        android:paddingTop="10dp"
+        android:text="@string/new_folder"
+        android:textStyle="bold"
+        android:textColor="@color/color_333"
+        android:textSize="16sp"
+        android:visibility="visible" />
+
+        <com.oortcloud.clouddisk.widget.CursorEditText
+            android:id="@+id/file_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_margin="@dimen/dp_16"
+            android:textSize="@dimen/sp_14"
+            android:textColorHint="@color/color_666"
+            android:textColor="@color/color_333"
+            android:gravity="top"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:hint="@string/file_name_hint"
+            android:textCursorDrawable="@drawable/color_cursor_cd"
+            android:background="@null"/>
+
+    <RelativeLayout
+        android:id="@+id/all_layout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom">
+
+        <TextView
+            android:id="@+id/confirm_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_32"
+            android:background="@drawable/cl_contact_cd"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:text="@string/button_ok"
+            android:textColor="@color/check_color"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_toLeftOf="@id/confirm_btn"
+            android:background="@drawable/cl_contact_cd"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:text="@string/cancel"
+            android:textColor="@color/check_color"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
+<!--    <item android:drawable="@mipmap/icon_launch_bg"/>-->
+<!--&lt;!&ndash;    android:bottom="90dp">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <item  android:drawable="@mipmap/libe"/>&ndash;&gt;-->
+    <item  android:drawable="@drawable/live_backgroud322"/>
+<!--        <item  android:drawable="@mipmap/icon_03"/>-->
+<!--    <item-->
+<!--        android:bottom="0dp"-->
+<!--        android:gravity="top|center"-->
+<!--        >-->
+<!--        <bitmap-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@mipmap/icon001"-->
+<!--            />-->
+<!--    </item>-->
+<!--    <item-->
+<!--        android:gravity="center">-->
+<!--        <bitmap-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:antialias="true"-->
+<!--            android:gravity="center"-->
+<!--            android:src="@mipmap/icon_app_launch_center" />-->
+<!--    </item>-->
+</layer-list>

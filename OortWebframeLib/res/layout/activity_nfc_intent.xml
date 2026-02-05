@@ -1,0 +1,219 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/placeHolder"
+            android:text="请把身份证贴近手机"
+            android:textSize="36dp"
+            android:textColor="#ff0000"
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="160dp" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/placeHolder"
+            android:layout_margin="0dp"
+            android:columnCount="6"
+            android:columnWidth="30dp"
+            android:numColumns="auto_fit"
+            android:padding="0dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="0dp"
+            android:layout_marginLeft="5dp"
+            android:rowCount="8"
+            android:useDefaultMargins="false">
+
+            <TextView
+                style="@style/IDLabelStyle"
+                android:layout_columnSpan="1"
+                android:text="姓名" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/IDTextStyle"
+                android:layout_columnSpan="3"
+                android:layout_gravity="fill_horizontal" />
+
+            <ImageView
+                android:id="@+id/iv_photo"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_columnSpan="2"
+                android:layout_gravity="fill"
+                android:layout_rowSpan="5" />
+
+            <TextView
+                style="@style/IDLabelStyle"
+                android:layout_columnSpan="1"
+                android:text="英文" />
+
+            <TextView
+                android:id="@+id/tv_enname"
+                style="@style/IDTextStyle"
+                android:layout_columnSpan="3"
+                android:layout_gravity="fill_horizontal" />
+
+
+            <TextView
+                style="@style/IDLabelStyle"
+                android:layout_columnSpan="1"
+                android:text="性别" />
+
+            <TextView
+                android:id="@+id/tv_sex"
+                style="@style/IDTextStyle"
+                android:layout_columnSpan="1" />
+
+            <TextView
+                android:id="@+id/Labelehtnic"
+                style="@style/IDLabelStyle"
+                android:layout_columnSpan="1"
+                android:text="民族" />
+
+            <TextView
+                android:id="@+id/tv_ehtnic"
+                style="@style/IDTextStyle"
+                android:layout_columnSpan="1" />
+
+
+            <TextView
+                style="@style/IDLabelStyle"
+                android:layout_columnSpan="1"
+                android:text="出生" />
+
+            <TextView
+                android:id="@+id/tv_birthday"
+                style="@style/IDTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_columnSpan="3" />
+
+            <TextView
+                android:id="@+id/Lableaddress"
+                style="@style/IDLabelStyle"
+                android:layout_columnSpan="1"
+                android:text="住址" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_columnSpan="3"
+                android:layout_gravity="fill_horizontal"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/IDLabelStyle"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_columnSpan="2"
+                android:text="公民身份证号码" />
+
+            <TextView
+                android:id="@+id/tv_number"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_columnSpan="4"
+                android:layout_gravity="fill_horizontal"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/IDLabelStyle"
+                android:layout_width="100dp"
+                android:layout_columnSpan="2"
+                android:text="签发机关" />
+
+            <TextView
+                android:id="@+id/tv_signed"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_columnSpan="4"
+                android:layout_gravity="fill_horizontal"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/IDLabelStyle"
+                android:layout_width="100dp"
+                android:layout_columnSpan="2"
+                android:text="有效期限" />
+
+            <TextView
+                android:id="@+id/tv_validate"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_columnSpan="4"
+                android:layout_gravity="fill_horizontal"
+                android:textStyle="bold" />
+
+
+            <TextView
+                style="@style/IDLabelStyle"
+                android:layout_width="100dp"
+                android:layout_columnSpan="2"
+                android:text="通行证号码" />
+
+            <TextView
+                android:id="@+id/tv_passnumber"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_columnSpan="4"
+                android:layout_gravity="fill_horizontal"
+                android:textStyle="bold" />
+
+            <TextView
+                style="@style/IDLabelStyle"
+                android:layout_width="100dp"
+                android:layout_columnSpan="2"
+                android:text="签发次数" />
+
+            <TextView
+                android:id="@+id/tv_numberofissue"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_columnSpan="4"
+                android:layout_gravity="fill_horizontal"
+                android:textStyle="bold" />
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#0099CC" />
+
+            <TextView
+                android:id="@+id/tv_samid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_horizontal"
+
+                android:text=""
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+</LinearLayout>

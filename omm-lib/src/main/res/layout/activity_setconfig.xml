@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical">
+
+
+    <!-- 多点登录 -->
+    <!-- <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center_vertical"
+         android:orientation="horizontal"
+         android:paddingBottom="10dp"
+         android:paddingTop="10dp">
+
+         <TextView
+             android:id="@+id/multi_login_tv"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:gravity="center"
+             android:text="开启多点登录"
+             android:visibility="visible"/>
+
+         <com.suke.widget.SwitchButton
+             android:id="@+id/multi_login_btn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             app:sb_background="@color/app_white"
+             app:sb_checked_color="@color/main_color"
+             app:sb_effect_duration="100"
+             app:sb_shadow_radius="4dp"
+             app:sb_show_indicator="false"/>
+
+     </LinearLayout>
+
+     <ListView
+         android:id="@+id/lv_resource"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"/>-->
+    <include layout="@layout/a_view_actionbar" />
+
+    <ScrollView
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="网关I P:"
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/address_edit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:paddingLeft="4dp"
+                    android:hint="http://127.0.0.1"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:textSize="@dimen/message_nick_size" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="虚拟域名："
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/xm_pp_do_main"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:paddingLeft="4dp"
+                    android:hint="im.oortcloud.com"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:textSize="@dimen/message_nick_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="视频服务:"
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/jit_si_port"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:paddingLeft="4dp"
+                    android:hint="https://im.oortcloud.com:8080"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:textSize="@dimen/message_nick_size" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="网关端口:"
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/ip_port"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:inputType="number"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:hint="8080"
+                    android:textSize="@dimen/message_nick_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="IM端口:"
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/im_port"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:inputType="number"
+                    android:paddingLeft="4dp"
+                    android:hint="8080"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:textSize="@dimen/message_nick_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="上传端口:"
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/upload_port"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:inputType="number"
+                    android:paddingLeft="4dp"
+                    android:hint="8080"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:textSize="@dimen/message_nick_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="下载端口:"
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/down_port"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:inputType="number"
+                    android:paddingLeft="4dp"
+                    android:hint="8080"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:textSize="@dimen/message_nick_size" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="直播端口:"
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/live_port"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:inputType="number"
+                    android:paddingLeft="4dp"
+                    android:hint="8080"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:textSize="@dimen/message_nick_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="消息端口"
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/xmpp_port"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:inputType="number"
+                    android:paddingLeft="4dp"
+                    android:hint="8080"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:textSize="@dimen/message_nick_size" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/search_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:paddingRight="6dp"
+                    android:text="应用key"
+                    android:textColor="@color/main_color" />
+
+                <com.oort.weichat.view.ClearEditText
+                    android:id="@+id/api_key"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:background="@drawable/search_input"
+                    android:paddingLeft="4dp"
+                    android:hint="VIsidivSJy2020"
+                    android:textColor="@color/dark_grey"
+                    android:textColorHint="@color/grey_a7"
+                    android:textSize="@dimen/message_nick_size" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_search_ok"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_42"
+                android:layout_marginLeft="@dimen/dp_24"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_24"
+                android:background="@drawable/bg_radius_ord"
+                android:gravity="center"
+                android:text="@string/confirm"
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/dp15"
+                android:visibility="visible" />
+
+            <ListView
+                android:id="@+id/lv_setconfig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

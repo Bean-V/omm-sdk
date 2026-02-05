@@ -1,0 +1,1477 @@
+package com.sentaroh.android.Utilities3.LogUtil;
+
+/*
+The MIT License (MIT)
+Copyright (c) 2018 Sentaroh
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of 
+this software and associated documentation files (the "Software"), to deal 
+in the Software without restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject to 
+the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or 
+substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+*/
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnKeyListener;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.sentaroh.android.Utilities3.ContextButton.ContextButtonUtil;
+import com.sentaroh.android.Utilities3.Dialog.CommonDialog;
+import com.sentaroh.android.Utilities3.Dialog.CommonFileSelector2;
+import com.sentaroh.android.Utilities3.Dialog.MessageDialogFragment;
+import com.sentaroh.android.Utilities3.Dialog.ProgressBarDialogFragment;
+import com.sentaroh.android.Utilities3.LocalMountPoint;
+import com.sentaroh.android.Utilities3.NotifyEvent;
+import com.sentaroh.android.Utilities3.NotifyEvent.NotifyEventListener;
+import com.sentaroh.android.Utilities3.R;
+import com.sentaroh.android.Utilities3.SafFile3;
+import com.sentaroh.android.Utilities3.SafManager3;
+import com.sentaroh.android.Utilities3.StringUtil;
+import com.sentaroh.android.Utilities3.ThemeColorList;
+import com.sentaroh.android.Utilities3.ThemeUtil;
+import com.sentaroh.android.Utilities3.ThreadCtrl;
+import com.sentaroh.android.Utilities3.Widget.CustomSpinnerAdapter;
+import com.sentaroh.android.Utilities3.Zip.ZipUtil;
+
+import com.sentaroh.android.Utilities3.slf4j.Logger;
+import com.sentaroh.android.Utilities3.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
+
+public class CommonLogManagementFragment extends DialogFragment {
+    private final static Logger log= LoggerFactory.getLogger(CommonLogManagementFragment.class);
+    private static CommonLogParameters mClog=null;
+//	private final static boolean log.isInfoEnabled()=false;
+	private final static String APPLICATION_TAG="LogFileManagement";
+
+	private final static String MAIL_TO="gm.developer.fhoshino@gmail.com";
+
+	private Dialog mDialog=null;
+	private boolean mTerminateRequired=true;
+	private CommonLogManagementFragment mFragment=null;
+	private String mDialogTitle=null;
+	
+	private CommonLogFileListAdapter mLogFileManagementAdapter=null;
+	
+	private Activity mContext=null;
+	
+	private Handler mUiHandler=null;
+
+	private NotifyEvent mNotifyUpdateLogOption=null;
+	
+	private ArrayList<CommonLogFileListItem> mLogFileList=null;
+
+	private String mEnableMessage="";
+    private String mSendMessage="";
+    private String mSendSubject="";
+    private String mSendHint="";
+
+	public static CommonLogManagementFragment newInstance(boolean retainInstance, String title,
+                                                          String send_msg, String enable_msg, String send_subject) {
+		CommonLogManagementFragment frag = new CommonLogManagementFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("theme_id", "");
+        bundle.putBoolean("retainInstance", retainInstance);
+        bundle.putBoolean("showSaveButton", true);
+        bundle.putString("title", title);
+        bundle.putString("msgtext", send_msg);
+        bundle.putString("enableMsg", enable_msg);
+        bundle.putString("subject", send_subject);
+        bundle.putString("hint", "");
+        frag.setArguments(bundle);
+        return frag;
+    }
+
+    public static CommonLogManagementFragment newInstance(boolean retainInstance, String title,
+                                                          String send_msg, String enable_msg, String send_subject, String send_hint) {
+        CommonLogManagementFragment frag = new CommonLogManagementFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("theme_id", "");
+        bundle.putBoolean("retainInstance", retainInstance);
+        bundle.putBoolean("showSaveButton", true);
+        bundle.putString("title", title);
+        bundle.putString("msgtext", send_msg);
+        bundle.putString("enableMsg", enable_msg);
+        bundle.putString("subject", send_subject);
+        bundle.putString("hint", send_hint);
+        frag.setArguments(bundle);
+        return frag;
+    }
+
+//    public static CommonLogManagementFragment newInstance(String theme_id, boolean retainInstance, String title,
+//                                                              String send_msg, String enable_msg, String send_subject) {
+//        if (log.isInfoEnabled()) log.info("newInstance");
+//        CommonLogManagementFragment frag = new CommonLogManagementFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("theme_id", theme_id);
+//        bundle.putBoolean("retainInstance", retainInstance);
+//        bundle.putBoolean("showSaveButton", true);
+//        bundle.putString("title", title);
+//        bundle.putString("msgtext", send_msg);
+//        bundle.putString("enableMsg", enable_msg);
+//        bundle.putString("subject", send_subject);
+//        frag.setArguments(bundle);
+//        return frag;
+//    }
+
+    public CommonLogManagementFragment() {
+	};
+	
+	@Override
+	public void onAttach(Activity activity) {
+	    super.onAttach(activity);
+	};
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if(outState.isEmpty()){
+	        outState.putBoolean("WORKAROUND_FOR_BUG_19917_KEY", true);
+	    }
+    	saveViewContents();
+	};  
+	
+	@Override
+	public void onConfigurationChanged(final Configuration newConfig) {
+	    // Ignore orientation change to keep activity from restarting
+	    super.onConfigurationChanged(newConfig);
+	    reInitViewWidget();
+	};
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+	    super.onActivityCreated(savedInstanceState);
+	};
+	
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    	View view=super.onCreateView(inflater, container, savedInstanceState);
+    	return view;
+    };
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
+        mContext=getActivity();
+        mClog= CommonLogParametersFactory.getLogParms(mContext);
+        mUiHandler=new Handler();
+    	mFragment=this;
+        if (!mTerminateRequired) {
+//            mClog=(CommonGlobalParms)getActivity().getApplication();
+            Bundle bd=getArguments();
+            setRetainInstance(bd.getBoolean("retainInstance"));
+            mDialogTitle=bd.getString("title");
+            mEnableMessage=bd.getString("enableMsg");
+            mSendMessage=bd.getString("msgtext");
+            mSendSubject=bd.getString("subject");
+            String hint=bd.getString("hint");
+            if (hint!=null && hint.equals("")) mSendHint=mContext.getString(R.string.msgs_log_file_prob_question_desc_hint);
+            else mSendHint=hint;
+        	mLogFileList=CommonLogUtil.createLogFileList(mContext);
+        }
+    };
+    
+	@Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        mDialog=new Dialog(getActivity(), ThemeUtil.getAppTheme(getActivity()));
+
+        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		mDialog.setCanceledOnTouchOutside(false);
+
+		if (!mTerminateRequired) {
+			initViewWidget();
+		}
+		
+        return mDialog;
+    };
+    
+	@Override
+	public void onStart() {
+    	CommonDialog.setDlgBoxSizeLimit(mDialog,true);
+	    super.onStart();
+	    if (mTerminateRequired) mDialog.cancel();
+	    else {
+	    	mDialog.setOnKeyListener(new OnKeyListener(){
+    	        @Override
+	    	    public boolean onKey (DialogInterface dialog , int keyCode , KeyEvent event ){
+	    	        // disable search button action
+	    	        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction()== KeyEvent.ACTION_DOWN){
+	    	        	if (mLogFileManagementAdapter.isShowCheckBox()) {
+		    	        	for(int i=0;i<mLogFileManagementAdapter.getCount();i++) {
+		    	        		mLogFileManagementAdapter.getItem(i).isChecked=false;
+		    	        	}
+		    	        	mLogFileManagementAdapter.setShowCheckBox(false);
+		    	        	mLogFileManagementAdapter.notifyDataSetChanged();
+		    	        	setContextButtonNormalMode();
+		    	        	return true;
+	    	        	}
+	    	        }
+	    	        return false;
+	    	    }
+	    	});
+	    }
+	};
+	
+	@Override
+	public void onCancel(DialogInterface di) {
+		mFragment.dismiss();
+		super.onCancel(di);
+	};
+	
+	@Override
+	public void onDismiss(DialogInterface di) {
+		super.onDismiss(di);
+	};
+
+	@Override
+	public void onStop() {
+	    super.onStop();
+	};
+	
+	@Override
+	public void onDestroyView() {
+	    if (getDialog() != null && getRetainInstance())
+	        getDialog().setDismissMessage(null);
+	    super.onDestroyView();
+        deleteTempLogFile();
+//        deleteZipLogFile();
+	};
+	
+	@Override
+	public void onDetach() {
+	    super.onDetach();
+	};
+
+
+    private void reInitViewWidget() {
+    	if (!mTerminateRequired) {
+    		Handler hndl=new Handler();
+    		hndl.post(new Runnable(){
+				@Override
+				public void run() {
+					boolean scb=mLogFileManagementAdapter.isShowCheckBox();
+			    	ViewSaveValue sv=saveViewContents();
+			    	initViewWidget();
+			    	restoreViewContents(sv);
+		        	if (scb) {
+		        		mLogFileManagementAdapter.setShowCheckBox(true);
+		        		setContextButtonSelecteMode();
+		        	} else {
+		        		setContextButtonNormalMode();
+		        	}
+				}
+    		});
+    	}
+    };
+
+    class ViewSaveValue {
+        public boolean log_enabled=false;
+        public int log_level=0;
+    }
+    private ViewSaveValue saveViewContents() {
+        ViewSaveValue sv=new ViewSaveValue();
+        final Spinner sp_log_level=(Spinner)mDialog.findViewById(R.id.log_file_list_dlg_log_level);
+        final CheckBox cb_log_enabled=(CheckBox)mDialog.findViewById(R.id.log_file_list_dlg_log_enabled);
+        sv.log_enabled=cb_log_enabled.isChecked();
+        sv.log_level=sp_log_level.getSelectedItemPosition();
+    	return sv;
+    };
+    
+    private void restoreViewContents(ViewSaveValue sv) {
+        final Spinner sp_log_level=(Spinner)mDialog.findViewById(R.id.log_file_list_dlg_log_level);
+        final CheckBox cb_log_enabled=(CheckBox)mDialog.findViewById(R.id.log_file_list_dlg_log_enabled);
+    	sp_log_level.setSelection(sv.log_level);
+    	cb_log_enabled.setChecked(sv.log_enabled);
+    };
+    
+    private void initViewWidget() {
+    	mDialog.setContentView(R.layout.log_file_list_dlg);
+    	
+    	ThemeColorList tcl=ThemeUtil.getThemeColorList(getActivity());
+    	
+		final LinearLayout title_view=(LinearLayout) mDialog.findViewById(R.id.log_file_list_dlg_title_view);
+		title_view.setBackgroundColor(tcl.title_background_color);
+    	final TextView dlg_title=(TextView)mDialog.findViewById(R.id.log_file_list_dlg_title);
+		dlg_title.setTextColor(tcl.title_text_color);
+
+    	dlg_title.setText(mDialogTitle);
+    	final ImageButton dlg_done=(ImageButton)mDialog.findViewById(R.id.log_file_list_dlg_done);
+    	dlg_done.setVisibility(ImageButton.GONE);
+    	
+    	final ListView lv_log_file=(ListView)mDialog.findViewById(R.id.log_file_list_dlg_log_listview);
+    	final Button btn_close=(Button)mDialog.findViewById(R.id.log_file_list_dlg_log_close);
+
+    	NotifyEvent ntfy_cb_listener=new NotifyEvent(mContext);
+    	ntfy_cb_listener.setListener(new NotifyEventListener(){
+			@Override
+			public void positiveResponse(Context c, Object[] o) {
+				if (mLogFileManagementAdapter.isShowCheckBox()) {
+					setContextButtonSelecteMode();
+				}
+			};
+
+			@Override
+			public void negativeResponse(Context c, Object[] o) {}
+    	});
+    	
+    	mLogFileManagementAdapter=
+    				new CommonLogFileListAdapter(getActivity(), R.layout.log_file_list_item,mLogFileList, ntfy_cb_listener);
+    	lv_log_file.setAdapter(mLogFileManagementAdapter);
+    	
+    	setContextButtonListener();
+    	setContextButtonNormalMode();
+
+        final Spinner sp_log_level=(Spinner)mDialog.findViewById(R.id.log_file_list_dlg_log_level);
+        final LinearLayout ll_log_level_view=(LinearLayout) mDialog.findViewById(R.id.log_file_list_dlg_log_level_view);
+    	final Button btn_browse=(Button)mDialog.findViewById(R.id.log_file_list_dlg_log_browse_active_log);
+        final Button btn_export=(Button)mDialog.findViewById(R.id.log_file_list_dlg_log_export);
+    	final Button btn_send_dev=(Button)mDialog.findViewById(R.id.log_file_list_dlg_log_send);
+        final Button btn_archive=(Button)mDialog.findViewById(R.id.log_file_list_dlg_log_archive);
+    	final CheckBox cb_log_enabled=(CheckBox)mDialog.findViewById(R.id.log_file_list_dlg_log_enabled);
+//        CommonDialog.setButtonEnabled(getActivity(), btn_browse, mClog.isLogEnabled());
+//        CommonDialog.setButtonEnabled(getActivity(), btn_send_dev, mClog.isLogEnabled());
+//        CommonDialog.setSpinnerBackground(getActivity(), sp_log_level);
+//        CommonDialog.setViewEnabled(getActivity(), btn_archive, mClog.isLogEnabled());
+    	cb_log_enabled.setChecked(mClog.isLogEnabled());
+        mDisableChangeLogEnabled=true;
+
+        setButtonEnabled();
+
+        cb_log_enabled.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                CommonDialog.setViewEnabled(getActivity(), sp_log_level, cb_log_enabled.isChecked());
+                if (cb_log_enabled.isChecked()) ll_log_level_view.setAlpha(1.0f);
+                else ll_log_level_view.setAlpha(0.4f);
+                if (!mDisableChangeLogEnabled) confirmSettingsLogOption(isChecked);
+				mDisableChangeLogEnabled=false;
+
+//				if (isChecked) CommonDialog.setViewEnabled(getActivity(), btn_archive, isChecked);
+
+				setButtonEnabled();
+            }
+    	});
+    	mUiHandler.post(new Runnable(){
+            @Override
+            public void run() {
+                mDisableChangeLogEnabled=false;
+            }
+        });
+
+        btn_archive.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                if (cb_log_enabled.isChecked()) {
+                    performRotateLog();
+                    Handler hndl=new Handler();
+                    hndl.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mLogFileList=CommonLogUtil.createLogFileList(mContext);
+                            mLogFileManagementAdapter.replaceDataList(mLogFileList);
+                            mLogFileManagementAdapter.notifyDataSetChanged();
+                            if (mLogFileManagementAdapter.getCount()!=0) setContextButtonNormalMode();
+                        }
+                    },500);
+                }
+            }
+        });
+
+        btn_browse.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				browseLogFile();
+			}
+    	});
+
+        btn_export.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                exportLogZipFile();
+            }
+        });
+
+        btn_send_dev.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				confirmSendLog();
+			}
+    	});
+
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(getActivity(), android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        adapter.add(mContext.getString(R.string.msgs_log_file_log_level_no_debug));
+        adapter.add(mContext.getString(R.string.msgs_log_file_log_level_minimum_level));
+        adapter.add(mContext.getString(R.string.msgs_log_file_log_level_verbose_level));
+        adapter.add(mContext.getString(R.string.msgs_log_file_log_level_trace_level));
+        sp_log_level.setPrompt("Select Log level");
+        sp_log_level.setAdapter(adapter);
+        if (mClog.getLogLevel()>3) sp_log_level.setSelection(3, false);
+        else sp_log_level.setSelection(mClog.getLogLevel(), false);
+
+        sp_log_level.setEnabled(cb_log_enabled.isChecked());
+        if (cb_log_enabled.isChecked()) ll_log_level_view.setAlpha(1.0f);
+        else ll_log_level_view.setAlpha(0.4f);
+        sp_log_level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                mClog.setLogOptionLogLevel(mContext, sp_log_level.getSelectedItemPosition());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+        lv_log_file.setOnItemClickListener(new OnItemClickListener(){
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+				if (mLogFileManagementAdapter.getItem(0).log_file_name==null) return;
+				if (mLogFileManagementAdapter.isShowCheckBox()) {
+					mLogFileManagementAdapter.getItem(pos).isChecked=
+							!mLogFileManagementAdapter.getItem(pos).isChecked;
+					mLogFileManagementAdapter.notifyDataSetChanged();
+		        	setContextButtonSelecteMode();
+				} else {
+					showLogFile(mLogFileManagementAdapter,pos);
+				}
+			}
+    	});
+    	
+    	lv_log_file.setOnItemLongClickListener(new OnItemLongClickListener(){
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+				if (mLogFileManagementAdapter.isEmptyAdapter()) return true;
+				if (!mLogFileManagementAdapter.getItem(pos).isChecked) {
+					if (mLogFileManagementAdapter.isAnyItemSelected()) {
+						int down_sel_pos=-1, up_sel_pos=-1;
+						int tot_cnt=mLogFileManagementAdapter.getCount();
+						if (pos+1<=tot_cnt) {
+							for(int i=pos+1;i<tot_cnt;i++) {
+								if (mLogFileManagementAdapter.getItem(i).isChecked) {
+									up_sel_pos=i;
+									break;
+								}
+							}
+						}
+						if (pos>0) {
+							for(int i=pos;i>=0;i--) {
+								if (mLogFileManagementAdapter.getItem(i).isChecked) {
+									down_sel_pos=i;
+									break;
+								}
+							}
+						}
+						if (up_sel_pos!=-1 && down_sel_pos==-1) {
+							for (int i=pos;i<up_sel_pos;i++) 
+								mLogFileManagementAdapter.getItem(i).isChecked=true;
+						} else if (up_sel_pos!=-1 && down_sel_pos!=-1) {
+							for (int i=down_sel_pos+1;i<up_sel_pos;i++) 
+								mLogFileManagementAdapter.getItem(i).isChecked=true;
+						} else if (up_sel_pos==-1 && down_sel_pos!=-1) {
+							for (int i=down_sel_pos+1;i<=pos;i++) 
+								mLogFileManagementAdapter.getItem(i).isChecked=true;
+						}
+						mLogFileManagementAdapter.notifyDataSetChanged();
+					} else {
+						mLogFileManagementAdapter.setShowCheckBox(true);
+						mLogFileManagementAdapter.getItem(pos).isChecked=true;
+						mLogFileManagementAdapter.notifyDataSetChanged();
+					}
+					setContextButtonSelecteMode();
+				}
+				return true;
+			}
+    	});
+
+    	btn_close.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				mFragment.dismiss();
+			}
+    	});
+    	
+//    	CommonDialog.setDlgBoxSizeLimit(mDialog, true);
+    };
+    
+    private ThemeColorList mThemeColorList=null;
+	private void confirmSendLog() {
+		CommonLogUtil.flushLog(mContext);
+
+		long log_size=getTempLogFileSize();
+        if (log_size==0) {
+            MessageDialogFragment mdf =MessageDialogFragment.newInstance(false, "W",
+                    mContext.getString(R.string.msgs_log_file_list_empty_can_not_send), "");
+            mdf.showDialog(mFragment.getFragmentManager(), mdf, null);
+            return ;
+        }
+
+		mThemeColorList=ThemeUtil.getThemeColorList(getActivity());
+		createTempLogFile();
+
+
+        final Dialog dialog=new Dialog(getActivity(), ThemeUtil.getAppTheme(getActivity()));
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.setContentView(R.layout.confirm_send_log_dlg);
+		dialog.setCanceledOnTouchOutside(false);
+		
+		LinearLayout title_view=(LinearLayout)dialog.findViewById(R.id.confirm_send_log_dlg_title_view);
+		title_view.setBackgroundColor(mThemeColorList.title_background_color);
+		TextView title=(TextView)dialog.findViewById(R.id.confirm_send_log_dlg_title);
+		title.setTextColor(mThemeColorList.title_text_color);
+		final TextView msg=(TextView)dialog.findViewById(R.id.confirm_send_log_dlg_msg);
+//		msg.setTextColor(mThemeColorList.text_color_primary);
+//		msg.setBackgroundColor(mThemeColorList.dialog_msg_background_color);
+		msg.setText(mSendMessage);
+        final Button btn_send_password=(Button)dialog.findViewById(R.id.confirm_send_log_dlg_send_password);
+		final Button btn_ok=(Button)dialog.findViewById(R.id.confirm_send_log_dlg_ok_btn);
+		final Button btn_cancel=(Button)dialog.findViewById(R.id.confirm_send_log_dlg_cancel_btn);
+		final Button btn_preview=(Button)dialog.findViewById(R.id.confirm_send_log_dlg_preview);
+
+		CommonDialog.setDlgBoxSizeLimit(dialog, true);
+		
+		btn_preview.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+                try {
+                    startLogfileViewerIntent(mContext, getTempLogFilePath());
+                } catch (ActivityNotFoundException e) {
+                    CommonDialog mCommonDlg=new CommonDialog(getActivity(), getActivity().getSupportFragmentManager());
+                    mCommonDlg.showCommonDialog(false, "E",
+                            mContext.getString(R.string.msgs_log_file_browse_app_can_not_found), e.getMessage(), null);
+                } catch (Exception e) {
+                    String ste=printStackTrace(e);
+                    CommonDialog mCommonDlg=new CommonDialog(getActivity(), getActivity().getSupportFragmentManager());
+                    mCommonDlg.showCommonDialog(false, "E",
+                            mContext.getString(R.string.msgs_log_file_browse_app_error), e.getMessage()+"\n"+ste, null);
+                }
+            }
+		});
+
+        btn_send_password.setVisibility(Button.GONE);
+        CommonDialog.setViewEnabled(getActivity(), btn_send_password, true);
+        btn_send_password.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mZipFilePassword!=null && !mZipFilePassword.equals("")) {
+                    confirmSendPassword(mZipFilePassword);
+                }
+            }
+        });
+
+        btn_ok.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+                getProblemDescription(getTempLogFilePath(), btn_send_password);
+//				sendLogFileToDeveloper(getTempLogFilePath());
+//                dialog.dismiss();
+			}
+		});
+
+		btn_cancel.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				dialog.dismiss();
+                deleteTempLogFile();
+			}
+		});
+
+		dialog.setOnCancelListener(new OnCancelListener(){
+			@Override
+			public void onCancel(DialogInterface arg0) {
+				btn_cancel.performClick();
+			}
+		});
+
+		dialog.show();
+
+	};
+
+	public void startLogfileViewerIntent(Context c, String fpath) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        if (Build.VERSION.SDK_INT>=24) {
+            Uri uri= FileProvider.getUriForFile(mContext, mClog.getLogFileProviderAuth(), new File(getTempLogFilePath()));
+            intent.setDataAndType(uri, "text/plain");
+        } else {
+            intent.setDataAndType(Uri.parse("file://"+getTempLogFilePath()), "text/plain");
+        }
+        startActivity(intent);
+    }
+
+    private String mZipFilePassword=null;
+    private void getProblemDescription(final String fp, final Button btn_send_password) {
+        final Dialog dialog = new Dialog(getActivity(), ThemeUtil.getAppTheme(getActivity()));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.confirm_send_log_option_dlg);
+
+        final LinearLayout ll_dlg_view = (LinearLayout) dialog.findViewById(R.id.confirm_send_log_option_dlg_view);
+//        CommonUtilities.setDialogBoxOutline(mContext, ll_dlg_view);
+//        ll_dlg_view.setBackgroundColor(mGp.themeColorList.dialog_msg_background_color);
+
+        final LinearLayout title_view = (LinearLayout) dialog.findViewById(R.id.confirm_send_log_option_dlg_title_view);
+        final TextView tv_title = (TextView) dialog.findViewById(R.id.confirm_send_log_option_dlg_title);
+        title_view.setBackgroundColor(mThemeColorList.title_background_color);
+        tv_title.setTextColor(mThemeColorList.title_text_color);
+
+        final TextView tv_msg=(TextView)dialog.findViewById(R.id.confirm_send_log_option_dlg_msg);
+        tv_msg.setTextColor(mThemeColorList.text_color_error);
+        final EditText et_prob=(EditText)dialog.findViewById(R.id.confirm_send_log_option_dlg_question);
+        et_prob.setHint(mContext.getString(R.string.msgs_log_file_prob_question_desc_title));
+        et_prob.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+        final CheckedTextView ct_use_password=(CheckedTextView)dialog.findViewById(R.id.confirm_send_log_option_dlg_use_password);
+        final LinearLayout ll_password_view=(LinearLayout)dialog.findViewById(R.id.confirm_send_log_option_dlg_password_view);
+        final EditText et_password=(EditText)dialog.findViewById(R.id.confirm_send_log_option_dlg_password);
+        final EditText et_confirm_password=(EditText)dialog.findViewById(R.id.confirm_send_log_option_dlg_confirm_password);
+        final Button btn_ok=(Button)dialog.findViewById(R.id.confirm_send_log_option_dlg_ok_btn);
+        final Button btn_cancel=(Button)dialog.findViewById(R.id.confirm_send_log_option_dlg_cancel_btn);
+
+        CommonDialog.setDlgBoxSizeLimit(dialog,true);
+
+        ct_use_password.setChecked(false);
+        ll_password_view.setVisibility(LinearLayout.GONE);
+        ct_use_password.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked=!ct_use_password.isChecked();
+                ct_use_password.setChecked(isChecked);
+                if (isChecked) ll_password_view.setVisibility(LinearLayout.VISIBLE);
+                else ll_password_view.setVisibility(LinearLayout.GONE);
+                setSendButtonEnabled(dialog);
+            }
+        });
+        et_prob.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                setSendButtonEnabled(dialog);
+            }
+        });
+        et_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                setSendButtonEnabled(dialog);
+            }
+        });
+        et_confirm_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                setSendButtonEnabled(dialog);
+            }
+        });
+
+        setSendButtonEnabled(dialog);
+        btn_ok.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendLogFileToDeveloper(getTempLogFilePath(), et_prob.getText().toString(), et_password.getText().toString());
+                if (ct_use_password.isChecked() && !et_password.getText().toString().equals("")) {
+                    mZipFilePassword=et_password.getText().toString();
+                    btn_send_password.setVisibility(Button.VISIBLE);
+                }
+                dialog.dismiss();
+            }
+        });
+
+        btn_cancel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                btn_cancel.performClick();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void setSendButtonEnabled(Dialog dialog) {
+        final TextView msg=(TextView)dialog.findViewById(R.id.confirm_send_log_option_dlg_msg);
+
+        final Button btn_ok=(Button)dialog.findViewById(R.id.confirm_send_log_option_dlg_ok_btn);
+        final Button btn_cancel=(Button)dialog.findViewById(R.id.confirm_send_log_option_dlg_cancel_btn);
+
+        final CheckedTextView ct_use_password=(CheckedTextView)dialog.findViewById(R.id.confirm_send_log_option_dlg_use_password);
+        final LinearLayout ll_password_view=(LinearLayout)dialog.findViewById(R.id.confirm_send_log_option_dlg_password_view);
+        final EditText et_prob=(EditText)dialog.findViewById(R.id.confirm_send_log_option_dlg_question);
+        final EditText et_password=(EditText)dialog.findViewById(R.id.confirm_send_log_option_dlg_password);
+        final EditText et_confirm_password=(EditText)dialog.findViewById(R.id.confirm_send_log_option_dlg_confirm_password);
+        if(et_prob.getText().length()<10) {
+            msg.setText(mContext.getString(R.string.msgs_log_file_list_confirm_send_log_description));
+            CommonDialog.setViewEnabled(getActivity(), btn_ok, false);
+            et_prob.requestFocus();
+            return;
+        }
+        if (ct_use_password.isChecked()) {
+            if (et_password.length()==0) {
+                msg.setText(mContext.getString(R.string.msgs_log_file_list_confirm_send_log_password_not_specified));
+                CommonDialog.setViewEnabled(getActivity(), btn_ok, false);
+                return;
+            }
+            if (et_confirm_password.length()==0) {
+                msg.setText(mContext.getString(R.string.msgs_log_file_list_confirm_send_log_confirm_password_not_specified));
+                CommonDialog.setViewEnabled(getActivity(), btn_ok, false);
+                return;
+            }
+            if (et_password.getText().length()<6 || et_password.getText().length()>20) {
+                msg.setText(mContext.getString(R.string.msgs_log_file_list_confirm_send_log_password_length_error));
+                CommonDialog.setViewEnabled(getActivity(), btn_ok, false);
+                return;
+            }
+            if (!et_password.getText().toString().equals(et_confirm_password.getText().toString())) {
+                msg.setText(mContext.getString(R.string.msgs_log_file_list_confirm_send_log_password_and_confirm_password_not_matched));
+                CommonDialog.setViewEnabled(getActivity(), btn_ok, false);
+                return;
+            }
+        }
+        msg.setText("");
+        CommonDialog.setViewEnabled(getActivity(), btn_ok, true);
+    }
+
+
+    private void deleteTempLogFile() {
+        String fp=getTempLogFilePath();
+        if (fp!=null) {
+            File lf=new File(fp);
+            lf.delete();
+        }
+    }
+
+    private String getTempLogFilePath() {
+        if (mClog!=null) {
+//            log.info("path="+mClog.getLogFileCacheDirectory());
+            return mClog.getLogFileCacheDirectory()+"/"+mClog.getApplicationTag()+"_temp_log.txt";
+//            return mContext.getExternalCacheDirs()[0].getPath()+"/"+mClog.getApplicationTag()+"_temp_log.txt";
+        }
+        return null;
+    }
+
+    private void deleteZipLogFile() {
+        File lf=new File(getZipLogFilePath());
+        lf.delete();
+    }
+
+    private String getZipLogFilePath() {
+//        log.info("path="+mClog.getLogFileCacheDirectory());
+        return mClog.getLogFileCacheDirectory()+"/"+mClog.getApplicationTag()+"_log.zip";
+//        return mContext.getExternalCacheDirs()[0].getPath()+"/"+mClog.getApplicationTag()+"_log.zip";
+    }
+
+    private long getTempLogFileSize() {
+        long out_size=0L;
+        File olf=new File(getTempLogFilePath());
+        for(int i=mLogFileList.size()-1;i>=0;i--) {
+            if (mLogFileList.get(i).log_file_path!=null) {
+                out_size+=new File(mLogFileList.get(i).log_file_path).length();
+            }
+        }
+        out_size+=new File(mClog.getLogDirName()+"/"+mClog.getLogFileName()+".txt").length();
+        return out_size;
+    }
+
+    private long createTempLogFile() {
+        long out_size=0L;
+        File olf=new File(getTempLogFilePath());
+		ArrayList<File> in_log_file_list=new ArrayList<File>();
+        for(int i=mLogFileList.size()-1;i>=0;i--) {
+            if (mLogFileList.get(i).log_file_path!=null) {
+                in_log_file_list.add(new File(mLogFileList.get(i).log_file_path));
+                log.debug("log file appended, path="+mLogFileList.get(i).log_file_path);
+            }
+        }
+        in_log_file_list.add(new File(mClog.getLogDirName()+"/"+mClog.getLogFileName()+".txt"));
+		try {
+			FileOutputStream fos=new FileOutputStream(olf);
+            byte[] buff=new byte[1024*1024];
+            for(File in_file:in_log_file_list) {
+                FileInputStream fis=new FileInputStream(in_file);
+                int rc=0;
+                fos.write((new String(in_file.getPath()+"\n").getBytes()));
+                while((rc=fis.read(buff))>0) {
+                    fos.write(buff, 0, rc);
+                }
+                fis.close();
+                fos.write((new String("\n")).getBytes());
+            }
+            fos.flush();
+			fos.close();
+            out_size=olf.length();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return out_size;
+	};
+
+    private void exportLogZipFile() {
+        CommonLogUtil.flushLog(mContext);
+
+        final long file_size=getTempLogFileSize();
+        if (file_size==0) {
+            MessageDialogFragment mdf =MessageDialogFragment.newInstance(false, "W",
+                    mContext.getString(R.string.msgs_log_file_list_empty_can_not_send), "");
+            mdf.showDialog(mFragment.getFragmentManager(), mdf, null);
+            return;
+        }
+
+        final Handler hndl=new Handler();
+        NotifyEvent ntfy_file_select=new NotifyEvent(getActivity());
+        ntfy_file_select.setListener(new NotifyEventListener() {
+            @Override
+            public void positiveResponse(Context c, Object[] o) {
+                final Uri fpath = (Uri) o[0];
+                final SafFile3 sf=new SafFile3(getActivity(), fpath);
+                NotifyEvent ntfy_override_conf=new NotifyEvent(getActivity());
+                ntfy_override_conf.setListener(new NotifyEventListener() {
+                    @Override
+                    public void positiveResponse(Context c, Object[] o) {
+                        final Dialog pd=CommonDialog.showProgressSpinIndicator(getActivity());
+                        pd.show();
+                        Thread th=new Thread() {
+                            @Override
+                            public void run() {
+                                createTempLogFile();
+                                String log_file_path=getTempLogFilePath();
+                                CommonLogUtil.resetLogReceiver(mContext);
+                                String zip_file_name=getZipLogFilePath();
+                                final File lf=new File(zip_file_name);
+                                lf.delete();
+                                String lfd=new File(log_file_path).getParent();
+                                ZipUtil.createZipFile(mContext, null, null, zip_file_name, lfd, log_file_path);
+
+                                byte[] buff=new byte[1024*1024];
+                                try {
+                                    int rc=0;
+                                    sf.deleteIfExists();
+                                    OutputStream os=sf.getOutputStream();
+                                    InputStream is=new FileInputStream(lf);
+                                    while((rc=is.read(buff))>0) {
+                                        os.write(buff, 0, rc);
+                                    }
+                                    is.close();
+                                    os.flush();
+                                    os.close();
+                                    hndl.post(new Runnable(){
+                                        @Override
+                                        public void run() {
+                                            pd.dismiss();
+                                            MessageDialogFragment mdf =MessageDialogFragment.newInstance(false, "W",
+                                                    mContext.getString(R.string.msgs_log_file_list_log_file_export_file_log_was_exported), sf.getPath());
+                                            mdf.showDialog(mFragment.getFragmentManager(), mdf, null);
+                                        }
+                                    });
+                                } catch (Exception e) {
+                                    hndl.post(new Runnable(){
+                                        @Override
+                                        public void run() {
+                                            pd.dismiss();
+//                                                    MessageDialogFragment mdf =MessageDialogFragment.newInstance(false, "W",
+//                                                            mContext.getString(R.string.msgs_log_file_list_log_file_export_file_log_was_exported), sf.getPath());
+//                                                    mdf.showDialog(mFragment.getFragmentManager(), mdf, null);
+                                        }
+                                    });
+                                    e.printStackTrace();
+                                }
+                            }
+                        };
+                        th.start();
+                    }
+                    @Override
+                    public void negativeResponse(Context c, Object[] o) {}
+                });
+
+                if (sf.exists()) {
+                    MessageDialogFragment mdf =MessageDialogFragment.newInstance(true, "W",
+                            mContext.getString(R.string.msgs_log_file_list_log_file_export_file_already_exists), sf.getPath());
+                    mdf.showDialog(mFragment.getFragmentManager(), mdf, ntfy_override_conf);
+                } else {
+                    MessageDialogFragment mdf =MessageDialogFragment.newInstance(true, "W",
+                            mContext.getString(R.string.msgs_log_file_list_log_file_export_log_file_export_confirm), sf.getPath());
+                    mdf.showDialog(mFragment.getFragmentManager(), mdf, ntfy_override_conf);
+                }
+
+            }
+
+            @Override
+            public void negativeResponse(Context c, Object[] o) {}
+        });
+        String pkg_name=getActivity().getPackageName();
+        int lp=pkg_name.lastIndexOf(".");
+        String export_file_name="log.zip";
+        if (lp>0) {
+            String dt_time= StringUtil.convDateTimeTo_YearMonthDayHourMinSec(System.currentTimeMillis()).replaceAll("/","").replaceAll(":","").replaceAll(" ","_");
+            export_file_name=pkg_name.substring(lp+1)+"_log_"+dt_time+".zip";
+        }
+        CommonFileSelector2 fsdf=
+                CommonFileSelector2.newInstance(true, true, false, CommonFileSelector2.DIALOG_SELECT_CATEGORY_FILE,
+                        true, SafManager3.SAF_FILE_PRIMARY_UUID, "/SMBSync3", export_file_name, getActivity().getString(R.string.msgs_log_file_list_log_export_title));
+        fsdf.showDialog(false, getActivity().getSupportFragmentManager(), fsdf, ntfy_file_select);
+    }
+
+	private void sendLogFileToDeveloper(String log_file_path, String msg_text, String password) {
+		CommonLogUtil.resetLogReceiver(mContext);
+
+		String zip_file_name=getZipLogFilePath();
+
+		File lf=new File(zip_file_name);
+		lf.delete();
+
+//		createZipFile(zip_file_name,log_file_path);
+//		String[] lmp=LocalMountPoint.convertFilePathToMountpointFormat(mContext, log_file_path);
+//		ZipUtil.createZipFile(mContext, null, null, zip_file_name, lmp[0], log_file_path);
+        String lfd=new File(log_file_path).getParent();
+        if (password.equals("")) ZipUtil.createZipFile(mContext, null, null, zip_file_name, lfd, log_file_path);
+        else ZipUtil.createAes256EncZipFile(mContext, null, null, zip_file_name, lfd, password, log_file_path);
+
+	    Intent intent=new Intent();
+	    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	    intent.setAction(Intent.ACTION_SEND);
+//	    intent.setType("message/rfc822");
+//	    intent.setType("text/plain");
+	    intent.setType("application/zip");
+
+	    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{MAIL_TO});
+//		    intent.putExtra(Intent.EXTRA_CC, new String[]{"cc@example.com"});
+//		    intent.putExtra(Intent.EXTRA_BCC, new String[]{"bcc@example.com"});
+	    intent.putExtra(Intent.EXTRA_SUBJECT, mSendSubject);
+	    intent.putExtra(Intent.EXTRA_TEXT, msg_text);//mContext.getString(R.string.msgs_log_file_list_confirm_send_log_description));
+	    Uri uri= FileProvider.getUriForFile(mContext, mClog.getLogFileProviderAuth(), lf);
+	    intent.putExtra(Intent.EXTRA_STREAM, uri);
+	    mContext.startActivity(intent);
+	};
+
+	private void confirmSendPassword(final String password) {
+	    NotifyEvent ntfy=new NotifyEvent(mContext);
+	    ntfy.setListener(new NotifyEventListener() {
+            @Override
+            public void positiveResponse(Context c, Object[] o) {
+                sendPasswordMail(password);
+            }
+
+            @Override
+            public void negativeResponse(Context c, Object[] o) {
+
+            }
+        });
+	    MessageDialogFragment mdf=MessageDialogFragment.newInstance(true, "W",
+                mContext.getString(R.string.msgs_log_file_list_confirm_send_log_send_password_title),
+                mContext.getString(R.string.msgs_log_file_list_confirm_send_log_send_password_message));
+	    mdf.showDialog(getFragmentManager(), mdf, ntfy);
+    }
+
+
+	private void sendPasswordMail(String password) {
+        Intent intent=new Intent();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_SEND);
+	    intent.setType("text/plain");
+
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{MAIL_TO});
+        intent.putExtra(Intent.EXTRA_SUBJECT, "None");
+        intent.putExtra(Intent.EXTRA_TEXT, password);
+        mContext.startActivity(intent);
+    }
+
+    private void setButtonEnabled() {
+        final Spinner sp_log_level=(Spinner)mDialog.findViewById(R.id.log_file_list_dlg_log_level);
+        final LinearLayout ll_log_level_view=(LinearLayout) mDialog.findViewById(R.id.log_file_list_dlg_log_level_view);
+        final Button btn_browse=(Button)mDialog.findViewById(R.id.log_file_list_dlg_log_browse_active_log);
+        final Button btn_export=(Button)mDialog.findViewById(R.id.log_file_list_dlg_log_export);
+        final Button btn_send_dev=(Button)mDialog.findViewById(R.id.log_file_list_dlg_log_send);
+        final Button btn_archive=(Button)mDialog.findViewById(R.id.log_file_list_dlg_log_archive);
+        final CheckBox cb_log_enabled=(CheckBox)mDialog.findViewById(R.id.log_file_list_dlg_log_enabled);
+
+        long temp_log_size=getTempLogFileSize();
+
+        if (cb_log_enabled.isChecked()) CommonDialog.setViewEnabled(getActivity(), btn_archive, true);
+        else CommonDialog.setViewEnabled(getActivity(), btn_archive, false);
+
+        if (temp_log_size>0) {
+            CommonDialog.setViewEnabled(getActivity(), btn_browse, true);
+            CommonDialog.setViewEnabled(getActivity(), btn_export, true);
+            CommonDialog.setViewEnabled(getActivity(), btn_send_dev, true);
+        } else {
+            CommonDialog.setViewEnabled(getActivity(), btn_browse, false);
+            CommonDialog.setViewEnabled(getActivity(), btn_export, false);
+            CommonDialog.setViewEnabled(getActivity(), btn_send_dev, false);
+        }
+    }
+
+    private boolean mDisableChangeLogEnabled=false;
+	final private void confirmSettingsLogOption(final boolean enabled) {
+		NotifyEvent ntfy=new NotifyEvent(mContext);
+		ntfy.setListener(new NotifyEventListener(){
+			@Override
+			public void positiveResponse(Context c, Object[] o) {
+                final CheckBox cb_log_enabled=(CheckBox)mDialog.findViewById(R.id.log_file_list_dlg_log_enabled);
+			    mClog.setLogOptionLogEnabled(mContext, cb_log_enabled.isChecked());
+                if (!cb_log_enabled.isChecked()) performRotateLog();
+		    	Handler hndl=new Handler();
+		    	hndl.postDelayed(new Runnable(){
+					@Override
+					public void run() {
+                        setButtonEnabled();
+						mLogFileList=CommonLogUtil.createLogFileList(mContext);
+						mLogFileManagementAdapter.replaceDataList(mLogFileList);
+						mLogFileManagementAdapter.notifyDataSetChanged();
+						if (mLogFileManagementAdapter.getCount()!=0) setContextButtonNormalMode();
+					}
+		    	}, 200);
+			}
+			@Override
+			public void negativeResponse(Context c, Object[] o) {
+                final CheckBox cb_log_enabled=(CheckBox)mDialog.findViewById(R.id.log_file_list_dlg_log_enabled);
+                mDisableChangeLogEnabled=true;
+                cb_log_enabled.setChecked(!cb_log_enabled.isChecked());
+                Handler hndl=new Handler();
+                hndl.postDelayed(new Runnable(){
+                    @Override
+                    public void run() {
+                        setButtonEnabled();
+                    }
+                }, 200);
+			}
+		});
+		String msg="";
+		if (enabled) msg=mEnableMessage;
+        else  msg=getString(R.string.msgs_log_file_list_confirm_log_disable);
+        MessageDialogFragment cdf =MessageDialogFragment.newInstance(true, "W", msg, "");
+        cdf.showDialog(getFragmentManager(),cdf,ntfy);
+	};
+
+
+	private void setContextButtonListener() {
+		LinearLayout ll_prof=(LinearLayout) mDialog.findViewById(R.id.log_context_view);
+        ImageButton ib_delete=(ImageButton)ll_prof.findViewById(R.id.log_context_button_delete);
+        ImageButton ib_share=(ImageButton)ll_prof.findViewById(R.id.log_context_button_share);
+        ImageButton ib_select_all=(ImageButton)ll_prof.findViewById(R.id.log_context_button_select_all);
+        ImageButton ib_unselect_all=(ImageButton)ll_prof.findViewById(R.id.log_context_button_unselect_all);
+    	final ImageButton dlg_done=(ImageButton)mDialog.findViewById(R.id.log_file_list_dlg_done);
+
+    	if (ThemeUtil.isLightThemeUsed(getActivity())) ib_share.setImageResource(R.drawable.context_button_share_dark);
+    	else ib_share.setImageResource(R.drawable.context_button_share);
+
+    	dlg_done.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				mLogFileManagementAdapter.setAllItemChecked(false);
+				mLogFileManagementAdapter.setShowCheckBox(false);
+				mLogFileManagementAdapter.notifyDataSetChanged();
+				setContextButtonNormalMode();
+			}
+        });
+
+        ib_delete.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				confirmDeleteLogFile();
+			}
+        });
+        ContextButtonUtil.setButtonLabelListener(mContext, ib_delete,
+        		mContext.getString(R.string.msgs_log_file_list_label_delete));
+
+        ib_share.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				sendLogFile();
+			}
+        });
+        ContextButtonUtil.setButtonLabelListener(mContext, ib_share,
+        		mContext.getString(R.string.msgs_log_file_list_label_share));
+
+        ib_select_all.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				mLogFileManagementAdapter.setAllItemChecked(true);
+				mLogFileManagementAdapter.setShowCheckBox(true);
+				setContextButtonSelecteMode();
+			}
+        });
+        ContextButtonUtil.setButtonLabelListener(mContext, ib_select_all,
+        		mContext.getString(R.string.msgs_log_file_list_label_select_all));
+
+        ib_unselect_all.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				mLogFileManagementAdapter.setAllItemChecked(false);
+			}
+        });
+        ContextButtonUtil.setButtonLabelListener(mContext, ib_unselect_all,
+        		mContext.getString(R.string.msgs_log_file_list_label_unselect_all));
+
+	};
+
+	private void setContextButtonSelecteMode() {
+		final TextView dlg_title=(TextView)mDialog.findViewById(R.id.log_file_list_dlg_title);
+    	String sel=""+mLogFileManagementAdapter.getItemSelectedCount()+"/"+mLogFileManagementAdapter.getCount();
+    	dlg_title.setText(sel);
+
+    	final ImageButton dlg_done=(ImageButton)mDialog.findViewById(R.id.log_file_list_dlg_done);
+    	dlg_done.setVisibility(ImageButton.VISIBLE);
+
+		LinearLayout ll_prof=(LinearLayout) mDialog.findViewById(R.id.log_context_view);
+		LinearLayout ll_delete=(LinearLayout)ll_prof.findViewById(R.id.log_context_button_delete_view);
+		LinearLayout ll_share=(LinearLayout)ll_prof.findViewById(R.id.log_context_button_share_view);
+		LinearLayout ll_select_all=(LinearLayout)ll_prof.findViewById(R.id.log_context_button_select_all_view);
+		LinearLayout ll_unselect_all=(LinearLayout)ll_prof.findViewById(R.id.log_context_button_unselect_all_view);
+
+		boolean deletable_log_selected=false;
+		for(int i=0;i<mLogFileManagementAdapter.getCount();i++) {
+			if (mLogFileManagementAdapter.getItem(i).isChecked && !mLogFileManagementAdapter.getItem(i).isCurrentLogFile) {
+				deletable_log_selected=true;
+				break;
+			}
+		}
+		if (deletable_log_selected) ll_delete.setVisibility(LinearLayout.VISIBLE);
+		else ll_delete.setVisibility(LinearLayout.GONE);
+
+		if (mLogFileManagementAdapter.getItemSelectedCount()>0) ll_share.setVisibility(LinearLayout.VISIBLE);
+		else ll_share.setVisibility(LinearLayout.GONE);
+
+        ll_select_all.setVisibility(LinearLayout.VISIBLE);
+        if (mLogFileManagementAdapter.isAnyItemSelected()) ll_unselect_all.setVisibility(LinearLayout.VISIBLE);
+        else ll_unselect_all.setVisibility(LinearLayout.GONE);
+	};
+
+	private void setContextButtonNormalMode() {
+		final TextView dlg_title=(TextView)mDialog.findViewById(R.id.log_file_list_dlg_title);
+		dlg_title.setText(mDialogTitle);
+
+    	final ImageButton dlg_done=(ImageButton)mDialog.findViewById(R.id.log_file_list_dlg_done);
+    	dlg_done.setVisibility(ImageButton.GONE);
+
+		LinearLayout ll_prof=(LinearLayout) mDialog.findViewById(R.id.log_context_view);
+		LinearLayout ll_delete=(LinearLayout)ll_prof.findViewById(R.id.log_context_button_delete_view);
+		LinearLayout ll_share=(LinearLayout)ll_prof.findViewById(R.id.log_context_button_share_view);
+		LinearLayout ll_select_all=(LinearLayout)ll_prof.findViewById(R.id.log_context_button_select_all_view);
+		LinearLayout ll_unselect_all=(LinearLayout)ll_prof.findViewById(R.id.log_context_button_unselect_all_view);
+
+		ll_delete.setVisibility(LinearLayout.GONE);
+		ll_share.setVisibility(LinearLayout.GONE);
+
+    	if (mLogFileManagementAdapter.isEmptyAdapter()) {
+            ll_select_all.setVisibility(LinearLayout.GONE);
+            ll_unselect_all.setVisibility(LinearLayout.GONE);
+    	} else {
+            ll_select_all.setVisibility(LinearLayout.VISIBLE);
+            ll_unselect_all.setVisibility(LinearLayout.GONE);
+    	}
+	};
+
+    private void showLogFile(CommonLogFileListAdapter lfm_adapter, int pos) {
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		try {
+            if (Build.VERSION.SDK_INT>=24) {
+                Uri uri= FileProvider.getUriForFile(mContext, mClog.getLogFileProviderAuth(), new File(lfm_adapter.getItem(pos).log_file_path));
+                intent.setDataAndType(uri, "text/plain");
+            } else {
+                intent.setDataAndType(Uri.parse("file://"+lfm_adapter.getItem(pos).log_file_path), "text/plain");
+            }
+			startActivity(intent);
+		} catch (ActivityNotFoundException e) {
+			CommonDialog mCommonDlg=new CommonDialog(getActivity(), getActivity().getSupportFragmentManager());
+			mCommonDlg.showCommonDialog(false, "E", 
+					mContext.getString(R.string.msgs_log_file_browse_app_can_not_found), e.getMessage(), null);
+        } catch (Exception e) {
+		    String ste=printStackTrace(e);
+            CommonDialog mCommonDlg=new CommonDialog(getActivity(), getActivity().getSupportFragmentManager());
+            mCommonDlg.showCommonDialog(false, "E",
+                    mContext.getString(R.string.msgs_log_file_browse_app_error), e.getMessage()+"\n"+ste, null);
+		}
+    };
+
+    private static String printStackTrace(Exception e) {
+        final StringWriter sw = new StringWriter();
+        final PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        pw.flush();
+        pw.close();
+        return sw.toString();
+    }
+
+    private void sendLogFile() {
+		final String zip_file_name=getZipLogFilePath();
+
+		int no_of_files=0;
+		for (int i=0;i<mLogFileManagementAdapter.getCount();i++) {
+			if (mLogFileManagementAdapter.getItem(i).isChecked) no_of_files++;
+		}
+		final String[] file_name=new String[no_of_files];
+		int files_pos=0;
+		for (int i=0;i<mLogFileManagementAdapter.getCount();i++) {
+			if (mLogFileManagementAdapter.getItem(i).isChecked) {
+				file_name[files_pos]=mLogFileManagementAdapter.getItem(i).log_file_path;
+				files_pos++;
+			}
+		}
+		final ThreadCtrl tc=new ThreadCtrl();
+		NotifyEvent ntfy=new NotifyEvent(mContext);
+		ntfy.setListener(new NotifyEventListener(){
+			@Override
+			public void positiveResponse(Context c, Object[] o) {
+			}
+			@Override
+			public void negativeResponse(Context c, Object[] o) {
+				tc.setDisabled();
+			}
+		});
+
+		final ProgressBarDialogFragment pbdf=ProgressBarDialogFragment.newInstance(
+				mContext.getString(R.string.msgs_log_file_list_dlg_send_zip_file_creating),
+				"",
+				mContext.getString(R.string.msgs_common_dialog_cancel),
+				mContext.getString(R.string.msgs_common_dialog_cancel));
+		pbdf.showDialog(getFragmentManager(), pbdf, ntfy,true);
+		Thread th=new Thread() {
+			@Override
+			public void run() {
+				File lf=new File(zip_file_name);
+				lf.delete();
+				String[] lmp=LocalMountPoint.convertFilePathToMountpointFormat(mContext, file_name[0]);
+				ZipUtil.createZipFile(mContext, tc,pbdf,zip_file_name,lmp[0],file_name);
+				if (tc.isEnabled()) {
+				    Intent intent=new Intent();
+				    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				    intent.setAction(Intent.ACTION_SEND);
+//				    intent.setType("message/rfc822");
+//				    intent.setType("text/plain");
+				    intent.setType("application/zip");
+//				    log.info("fp="+mClog.getLogDirName()+"/"+mClog.getLogFileName()+".txt");
+                    Uri uri=createLogFileUri(mContext, mClog.getLogDirName()+"/"+mClog.getLogFileName()+".txt");
+				    intent.putExtra(Intent.EXTRA_STREAM, uri);
+				    mFragment.getActivity().startActivity(intent);
+
+				    mUiHandler.post(new Runnable(){
+						@Override
+						public void run() {
+                            mLogFileManagementAdapter.setAllItemChecked(false);
+                            mLogFileManagementAdapter.setShowCheckBox(false);
+                            mLogFileManagementAdapter.notifyDataSetChanged();
+							setContextButtonNormalMode();
+						}
+				    });
+				} else {
+					lf.delete();
+
+					MessageDialogFragment mdf =MessageDialogFragment.newInstance(false, "W",
+							mContext.getString(R.string.msgs_log_file_list_dlg_send_zip_file_cancelled),
+			        		"");
+			        mdf.showDialog(mFragment.getFragmentManager(), mdf, null);
+
+				}
+				pbdf.dismiss();
+			};
+		};
+		th.start();
+    };
+
+    public Uri createLogFileUri(Context c, String fpath) {
+        Uri uri=null;
+        if (Build.VERSION.SDK_INT>=24) {
+            uri= FileProvider.getUriForFile(mContext, mClog.getLogFileProviderAuth(), new File(fpath));
+        } else {
+            uri=Uri.parse("file://"+fpath);
+        }
+        return uri;
+    }
+
+    private void confirmDeleteLogFile() {
+    	String delete_list="",sep="";
+    	final ArrayList<String> file_path_list=new ArrayList<String>();
+    	for (int i=0;i<mLogFileManagementAdapter.getCount();i++) {
+    		CommonLogFileListItem item=mLogFileManagementAdapter.getItem(i);
+    		if (item.isChecked && !item.isCurrentLogFile) {
+    			delete_list+=sep+item.log_file_name;
+    			sep="\n";
+    			file_path_list.add(item.log_file_path);
+    		}
+    	}
+    	
+    	NotifyEvent ntfy=new NotifyEvent(null);
+    	ntfy.setListener(new NotifyEventListener(){
+			@Override
+			public void positiveResponse(Context c, Object[] o) {
+				for (int i=0;i<file_path_list.size();i++) {
+					File lf=new File(file_path_list.get(i));
+					lf.delete();
+				}
+
+                mLogFileManagementAdapter.setAllItemChecked(false);
+                mLogFileManagementAdapter.setShowCheckBox(false);
+				mLogFileList=CommonLogUtil.createLogFileList(mContext);
+                mLogFileManagementAdapter.replaceDataList(mLogFileList);
+                mLogFileManagementAdapter.notifyDataSetChanged();
+				setContextButtonNormalMode();
+
+				Handler hndl=new Handler();
+				hndl.postDelayed(new Runnable(){
+                    @Override
+                    public void run() {
+                        setButtonEnabled();
+                    }
+                },200);
+			}
+
+			@Override
+			public void negativeResponse(Context c, Object[] o) {}
+    	});
+        MessageDialogFragment cdf =MessageDialogFragment.newInstance(true, "W",
+        		mContext.getString(R.string.msgs_log_file_list_delete_confirm_msg),
+        		delete_list);
+        cdf.showDialog(mFragment.getFragmentManager(),cdf,ntfy);
+    };
+
+    public void performRotateLog() {
+        CommonLogUtil.rotateLogFile(mContext);
+    }
+
+    public void browseLogFile() {
+
+        CommonLogUtil.flushLog(mContext);
+
+        createTempLogFile();
+
+        mUiHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                String fp=getTempLogFilePath();
+                try {
+                    if (Build.VERSION.SDK_INT>=24) {
+//                        Uri uri= FileProvider.getUriForFile(mContext, mClog.getLogFileProviderAuth(), new File(mClog.getLogDirName()+"/"+mClog.getLogFileName()+".txt"));
+                        Uri uri= FileProvider.getUriForFile(mContext, mClog.getLogFileProviderAuth(), new File(fp));
+                        intent.setDataAndType(uri, "text/plain");
+                    } else {
+//                        intent.setDataAndType(Uri.parse("file://"+mClog.getLogDirName()+"/"+mClog.getLogFileName()+".txt"), "text/plain");
+                        intent.setDataAndType(Uri.parse("file://"+fp), "text/plain");
+                    }
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    CommonDialog mCommonDlg=new CommonDialog(getActivity(), getActivity().getSupportFragmentManager());
+                    mCommonDlg.showCommonDialog(false, "E",
+                            mContext.getString(R.string.msgs_log_file_browse_app_can_not_found), e.getMessage(), null);
+                } catch (Exception e) {
+                    String ste=printStackTrace(e);
+                    CommonDialog mCommonDlg=new CommonDialog(getActivity(), getActivity().getSupportFragmentManager());
+                    mCommonDlg.showCommonDialog(false, "E",
+                            mContext.getString(R.string.msgs_log_file_browse_app_error), e.getMessage()+"\n"+ste, null);
+                }
+            }
+        }, 100);
+    };
+
+    public void rotateLogFile() {
+        performRotateLog();
+
+    	mUiHandler.postDelayed(new Runnable(){
+			@Override
+			public void run() {
+				mLogFileManagementAdapter.setAllItemChecked(false);
+				mLogFileManagementAdapter.setShowCheckBox(false);
+				mLogFileList=CommonLogUtil.createLogFileList(mContext);
+				mLogFileManagementAdapter.replaceDataList(mLogFileList);
+				mLogFileManagementAdapter.notifyDataSetChanged();
+				setContextButtonNormalMode();
+			}
+    	},200);
+    };
+
+    public void showDialog(Context c, FragmentManager fm, Fragment frag, NotifyEvent ntfy) {
+        CommonLogParameters clog= CommonLogParametersFactory.getLogParms(c);
+        if (clog.isLogActivated()) {
+            mTerminateRequired=false;
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(frag,null);
+            ft.commitAllowingStateLoss();
+            mNotifyUpdateLogOption=ntfy;
+        } else {
+            File lf=c.getExternalFilesDirs(null)[0];
+            MessageDialogFragment mdf=MessageDialogFragment.newInstance(false, "E",
+                    c.getString(R.string.msgs_log_can_not_start_log_mgmt), "file="+lf);
+            mdf.showDialog(fm, mdf, null);
+        }
+    };
+
+
+}

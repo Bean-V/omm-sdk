@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="56dp"
+    android:layout_height="62dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:id="@+id/iv_pt_header"-->
+<!--        android:layout_width="35dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:src="@mipmap/labuser"-->
+<!--        app:shapeAppearance="@style/CircleStyle"-->
+<!--        />-->
+
+    <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+        android:id="@+id/iv_pt_header"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@mipmap/labuser"
+        />
+    <TextView
+        android:id="@+id/tv_pt_name"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="标签名称"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:textSize="12sp"
+        />
+</LinearLayout>

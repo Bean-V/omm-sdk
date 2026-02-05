@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <TextView
+        android:id="@+id/comment_fen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_top_10"
+        android:text="0"
+        android:textSize="@dimen/text_size_46" />
+
+    <RelativeLayout
+        android:id="@+id/comment_click_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_18"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/comment_str"
+            android:layout_centerVertical="true"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/text_size_16" />
+
+        <com.oortcloud.appstore.widget.RatingBarView
+            android:id="@+id/rating_bar_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/text"
+            android:layout_marginLeft="@dimen/margin_left_10"
+            app:clickable="true"
+            app:starCount="5"
+            app:starEmpty="@mipmap/rating"
+            app:starFill="@mipmap/rating_selected"
+            app:starHalf="@mipmap/rating_half"
+            app:starImageSize="25dp"
+            app:starStep="0"
+            app:stepSize="Half">
+
+        </com.oortcloud.appstore.widget.RatingBarView>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/comment_et"
+        android:layout_width="match_parent"
+        android:hint="  请写下您的反馈和建议"
+        android:layout_margin="10dp"
+        android:padding="8dp"
+        android:gravity="top"
+        android:background="@color/color_FAFFFFFF"
+        android:layout_height="188dp"/>
+
+</LinearLayout>

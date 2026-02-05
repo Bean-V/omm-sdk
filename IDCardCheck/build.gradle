@@ -1,0 +1,128 @@
+//plugins {
+//    id 'com.android.library'
+//   // id 'kotlin-android'
+//}
+//android {
+//    compileSdkVersion 28
+//    defaultConfig {
+//        //applicationId "cn.net.hylink.check.demo"
+//        minSdkVersion 23
+//        versionCode 11
+//       // versionName "basic_check_2.0.4.$versionCode"
+//        ndk {
+//            //noinspection ChromeOsAbiSupport
+//            abiFilters "armeabi-v7a"
+//        }
+//    }
+//
+////    buildFeatures {
+////        viewBinding = true
+////    }
+//
+//    signingConfigs {
+//        release {
+////            storeFile file('../hlink.jks')
+////            keyAlias 'hlink'
+////            keyPassword 'hlk1234'
+////            storePassword 'hlk123'
+//        }
+//    }
+//
+//
+//    buildTypes {
+//        debug {
+//            minifyEnabled false
+////            signingConfig signingConfigs.release
+////            matchingFallbacks = ['release', 'debug']
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//
+//        release {
+////            minifyEnabled true
+////            shrinkResources true
+////            zipAlignEnabled true
+////            jniDebuggable false
+////            debuggable false
+////            signingConfig signingConfigs.release
+////            matchingFallbacks = ['release', 'debug']
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+//                    '../../keystore/proguard-project.txt'
+//        }
+//    }
+//
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+//
+//    kotlinOptions {
+//        jvmTarget = '1.8'
+//    }
+//
+////    javaCompileOptions {
+////        annotationProcessorOptions {
+////            arguments += [
+////                    'add-opens': 'java.base/java.io=ALL-UNNAMED'
+////            ]
+////        }
+////    }
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['src/main/jniLibs']
+//        }
+//    }
+//
+//}
+
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+android {
+    compileSdkVersion 34
+    buildToolsVersion "29.0.2"
+    namespace "com.example.idcardreader"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+//    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+//    implementation 'androidx.core:core-ktx:1.3.2'
+//    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'com.google.android.material:material:1.3.0'
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+
+}
+
+

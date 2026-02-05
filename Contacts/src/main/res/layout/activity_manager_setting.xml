@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/title_rl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@color/nav_color">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/ic_back"
+            android:tint="@color/nav_icon_color"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_toRightOf="@id/back"
+            android:gravity="center"
+            android:text="@string/contacts_setting"
+            android:textColor="@color/nav_text_color"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/iv_title_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:drawableLeft="@mipmap/icon_setting"
+            android:drawablePadding="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_16"
+            android:text="@string/setting"
+            android:textColor="@color/nav_text_color"
+            android:textSize="@dimen/sp_18"
+            android:visibility="visible" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_rl"
+        android:layout_above="@id/bottom_ll"
+        android:orientation="vertical">
+<!--     app:tabMode="fixed"  -->
+    <com.oortcloud.contacts.view.ItemTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_26"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_16"
+        app:tabIndicator="@drawable/indicator_manager_setting"
+        app:tabGravity="center"
+        app:tabIndicatorGravity="stretch"
+        app:tabIndicatorColor="@color/check_color"
+        app:tabIndicatorFullWidth="true"
+        app:tabSelectedTextColor="@color/check_color"
+        app:tabTextColor="@color/color_999"
+        app:tabPaddingStart="15dp"
+        app:tabPaddingEnd="15dp"
+        android:overScrollMode="never"
+        app:tabRippleColor="@android:color/transparent"
+        app:tabTextAppearance="@style/AppTheme.TabLayout.TextAppearance"/>
+    <!--    -->
+    <com.oortcloud.contacts.view.SlitherViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_ll"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp10_contact"
+        android:paddingBottom="@dimen/dp_10"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/bg_cancel_set_btn"
+            android:layout_marginLeft="@dimen/dp_24"
+            android:layout_marginRight="@dimen/dp_4"
+            android:textColor="@color/color_999"
+            android:outlineProvider="none"
+            android:text="@string/cancel"/>
+
+        <Button
+            android:id="@+id/confirm_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginLeft="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_24"
+            android:background="@drawable/bg_confirm_set_btn"
+            android:outlineProvider="none"
+            android:textColor="#ffffff"
+            android:text="@string/confirm"/>
+    </LinearLayout>
+
+</RelativeLayout>

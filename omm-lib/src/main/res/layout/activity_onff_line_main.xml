@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.offline.OnffLineMainActivity">
+
+    <com.oort.weichat.view.viewpage.SuperViewPager
+        android:layout_weight="1"
+        android:id="@+id/superViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp50"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

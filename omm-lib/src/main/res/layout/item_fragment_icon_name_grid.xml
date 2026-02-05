@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/btn_bg_color_selector"
+        android:gravity="center_horizontal">
+
+    <!--            android:minHeight="68dp"-->
+    <!--            android:layout_weight="1"-->
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/card_icon"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            >
+            <ImageView
+                android:id="@+id/img_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:maxLines="2"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="#333333"
+            android:textSize="12sp"
+            android:gravity="center_horizontal" />
+
+    <FrameLayout
+        android:layout_width="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="@dimen/dp_20">
+        <TextView
+            android:id="@+id/tv_apply"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/text_size_10"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="可申请"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:textColor="#00BA4A"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:background="@drawable/background_apply"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+    </FrameLayout>
+    </LinearLayout>

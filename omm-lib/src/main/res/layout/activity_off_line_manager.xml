@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.offline.OffLineManagerActivity">
+
+    <include layout="@layout/a_view_actionbar" />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginStart="@dimen/dp15"
+        android:layout_marginTop="@dimen/dp30"
+        android:layout_marginEnd="@dimen/dp15"
+        android:background="@drawable/bg_offline"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp20"
+            android:text="初始化离线环境"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp10_contact"
+            android:text="自动获取目录初始化"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvStart"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp40"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:background="@drawable/bg_152_r_20"
+            android:gravity="center"
+            android:text="开始"
+            android:textColor="@color/white" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginStart="@dimen/dp15"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginEnd="@dimen/dp15"
+        android:background="@drawable/bg_offline_end"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp20"
+            android:text="销毁离线环境"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvOfflineDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp10_contact"
+            android:text="本机已在离线环境中"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvDestroy"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp40"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:background="@drawable/bg_2c8_r_20"
+            android:gravity="center"
+            android:text="销毁"
+            android:textColor="@color/white" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

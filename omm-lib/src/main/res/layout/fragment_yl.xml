@@ -1,0 +1,77 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottom_view"
+                android:layout_marginTop="0dp"
+                app:srlEnableAutoLoadMore="true"
+                app:srlEnableLoadMore="true">
+
+                <com.oort.weichat.view.PullRefreshHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ScrollView
+                    android:id="@+id/sv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_app"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:minHeight="100dp"
+                        card_view:cardBackgroundColor="@color/white"
+                        card_view:cardCornerRadius="12dp"
+                        card_view:cardElevation="0dp">
+
+                        <TextView
+                            android:id="@+id/tv_add_module"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/add_module"
+                            android:textAllCaps="false"
+                            android:textSize="20sp" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#ffffff">
+
+                            <TextView
+                                android:id="@+id/tv_add_app"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="60dp"
+                                android:gravity="center"
+                                android:text="@string/add_app"
+                                android:textAllCaps="false"
+                                android:textSize="20sp" />
+
+                            <com.oortcloud.basemodule.views.AutoHeightRecyclerView
+                                android:id="@+id/rv_list"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#ffffff" />
+                        </FrameLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </ScrollView>
+
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

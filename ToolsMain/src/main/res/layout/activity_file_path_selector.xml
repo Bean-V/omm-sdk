@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainColor"
+        android:fitsSystemWindows="true"
+        app:title="@string/back"
+        app:titleTextColor="@color/colorZTNav">
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            style="@style/MyFilePathSelectOrTablayoutstyle"
+            app:tabTextAppearance="@style/MyFilePathSelectOrTablayoutstyle"
+            android:layout_width="150dp"
+            android:layout_gravity="center"
+            android:layout_height="44dp"
+            app:tabIndicatorFullWidth="false">
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_oper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:gravity="right">
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:text="@string/fm_cancel"
+                android:paddingTop="8dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_bg_color_selector"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                />
+
+
+
+        </LinearLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorBg"
+        />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vg"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        />
+
+
+
+    <LinearLayout
+        android:id="@id/ll_oper"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/colorBg"
+        >
+        <Button
+            android:id="@+id/btn_newfile"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/button_bg_color_selector"
+            android:text="@string/fm_newfile"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            />
+        <TextView
+            android:layout_width="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorZT99"
+            />
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/button_bg_color_selector"
+            android:text="@string/fm_post"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            />
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

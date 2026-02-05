@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.lccontact.PersonPickActivity"
+    android:orientation="vertical">
+
+    <include layout="@layout/a_view_actionbar" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+<!--    <com.google.android.material.imageview.ShapeableImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="36dp"-->
+<!--        android:background="#f1f1f1"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:layout_marginRight="15dp"-->
+<!--        app:shapeAppearance="@style/Rounded4Style"-->
+<!--        />-->
+
+
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            card_view:cardCornerRadius="5dp"
+            card_view:cardElevation="0.5dp"
+            card_view:cardBackgroundColor="#f1f1f1"
+            >
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="0dp"
+                android:src="@mipmap/icon_sp_search"
+                android:layout_gravity="center_vertical"/>
+
+
+            <EditText
+
+                android:id="@+id/edit_search"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="20dp"
+                android:background="#f1f1f1"
+                android:hint="@string/search_personnel"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <ListView
+                android:id="@+id/list_Lab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="Hello World!"
+                android:background="#f1f1f1"
+                android:divider="#00ffffff"
+                />
+            <LinearLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:orientation="vertical"
+                >
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_search_container"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:id="@+id/fragment_search_container"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:orientation="vertical"
+                >
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="110dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="@string/select_person_default_str"
+                android:textSize="13sp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_selected_ps"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/btn_del_selectuser"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/icon_user_del"
+            android:background="@color/white"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

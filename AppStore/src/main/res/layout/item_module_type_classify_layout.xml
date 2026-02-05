@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_type_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_18"
+        android:layout_marginStart="@dimen/margin_left_16"
+        android:textSize="@dimen/text_size_14"
+        android:textColor="@color/color_333333"
+        android:text=""/>
+
+    <com.oortcloud.appstore.widget.CustomGridView
+        android:descendantFocusability="blocksDescendants"
+        android:id="@+id/dragGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_type_name"
+        android:layout_marginTop="12dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:gravity="center"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="4"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="10dip"
+        android:verticalSpacing="10dip"
+        android:layout_marginBottom="10dp" />
+
+
+
+
+</LinearLayout>

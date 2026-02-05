@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="82dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <!--        android:drawableLeft="@mipmap/ic_set_lang_sys"-->
+
+    <Button
+        android:id="@+id/btn_sys"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:paddingLeft="0dp"
+        android:text="@string/copy_list"
+        android:textSize="14sp"
+        android:textColor="@color/colorZT33"
+        android:background="@color/colorAccent"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:id="@+id/btn_ch"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:paddingLeft="0dp"
+        android:text="@string/encrpty_list"
+        android:textSize="14sp"
+        android:textColor="@color/colorZT33"
+        android:background="@color/colorAccent"
+        android:textAllCaps="false"
+        />
+
+</LinearLayout>

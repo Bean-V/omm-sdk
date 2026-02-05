@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"> <!-- 圆形 -->
+
+    <!-- 背景色：通常用红色表示未读 -->
+    <solid android:color="@color/red"/>
+
+    <!-- 圆角（oval形状下可省略，矩形需设置） -->
+    <corners android:radius="10dp"/>
+
+    <!-- 内边距：避免文字贴边 -->
+    <padding
+        android:left="2dp"
+        android:right="2dp"/>
+</shape>

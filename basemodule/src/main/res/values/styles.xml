@@ -1,0 +1,220 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="loading_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="laLoadingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="Animation">
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@null</item>
+        <item name="android:taskCloseEnterAnimation">@null</item>
+        <item name="android:taskCloseExitAnimation">@null</item>
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+        <item name="android:taskToFrontExitAnimation">@null</item>
+        <item name="android:taskToBackEnterAnimation">@null</item>
+        <item name="android:taskToBackExitAnimation">@null</item>
+    </style>
+
+
+
+    <style name="title_bar_style">
+
+    <item name="android:background">#1156A6</item>
+
+    <item name="android:paddingLeft">0.0dip</item>
+
+    <item name="android:paddingRight">0.0dip</item>
+
+    <item name="android:layout_width">fill_parent</item>
+
+    <item name="android:layout_height">56.0dip</item>
+
+    <item name="android:gravity">center_vertical</item>
+
+</style>
+
+
+    -<style name="home_title_bar_style">
+
+    <item name="android:background">#fff</item>
+
+    <item name="android:paddingLeft">0.0dip</item>
+
+    <item name="android:paddingRight">0.0dip</item>
+
+    <item name="android:layout_width">fill_parent</item>
+
+    <item name="android:layout_height">56.0dip</item>
+
+    <item name="android:gravity">center_vertical</item>
+
+</style>
+
+
+    -<style name="title_text_style">
+
+    <item name="android:textSize">20.0sp</item>
+
+    <item name="android:textColor">#ffeaeaea</item>
+
+</style>
+    -<style name="title_bar_button">
+
+    <item name="android:textSize">16.0sp</item>
+
+    <item name="android:textColor">#ffeaeaea</item>
+
+    <item name="android:gravity">center</item>
+
+    <item name="android:background">@null</item>
+
+    <item name="android:paddingLeft">5.0dip</item>
+
+    <item name="android:paddingRight">5.0dip</item>
+
+    <item name="android:layout_width">wrap_content</item>
+
+    <item name="android:layout_height">wrap_content</item>
+
+    <item name="android:layout_marginLeft">0.0dip</item>
+
+    <item name="android:layout_marginRight">24.0dip</item>
+
+</style>
+    <style parent="@style/title_bar_button" name="back_view">
+
+    <item name="android:gravity">center</item>
+
+    <item name="android:background">@drawable/btn_back</item>
+
+    <item name="android:paddingLeft">0.0dip</item>
+
+    <item name="android:paddingRight">0.0dip</item>
+
+    <item name="android:layout_marginLeft">16.0dip</item>
+
+    <item name="android:layout_marginRight">16.0dip</item>
+
+    <item name="android:text">@null</item>
+
+    <item name="android:drawableLeft">@null</item>
+
+</style>
+
+
+    <!-- popup dialog -->
+    <style name="Dialog_Common" parent="@android:style/Theme.Dialog">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 自己想要的背景 -->
+        <item name="android:background">@android:color/transparent</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+
+    </style>
+
+    <style name="CustomOriginalCheckBoxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+<!--        <item name="android:button">@drawable/circle_image_see</item>-->
+    </style>
+
+
+    <declare-styleable name="BallPulseFooter"><attr name="srlClassicsSpinnerStyle"/><attr format="color" name="srlAnimatingColor"/><attr format="color" name="srlNormalColor"/></declare-styleable>
+    <declare-styleable name="BezierRadarHeader"><attr name="srlPrimaryColor"/><attr name="srlAccentColor"/><attr name="srlEnableHorizontalDrag"/></declare-styleable>
+    <declare-styleable name="ClassicsFooter"><attr name="srlClassicsSpinnerStyle"/><attr name="srlPrimaryColor"/><attr name="srlAccentColor"/><attr name="srlFinishDuration"/><attr name="srlTextSizeTitle"/><attr name="srlDrawableArrow"/><attr name="srlDrawableProgress"/><attr name="srlDrawableMarginRight"/><attr name="srlDrawableSize"/><attr name="srlDrawableArrowSize"/><attr name="srlDrawableProgressSize"/><attr name="srlTextPulling"/><attr name="srlTextRelease"/><attr name="srlTextLoading"/><attr name="srlTextRefreshing"/><attr name="srlTextFinish"/><attr name="srlTextFailed"/><attr name="srlTextNothing"/></declare-styleable>
+    <declare-styleable name="ClassicsHeader"><attr name="srlClassicsSpinnerStyle"/><attr name="srlPrimaryColor"/><attr name="srlAccentColor"/><attr name="srlFinishDuration"/><attr name="srlDrawableArrow"/><attr name="srlDrawableProgress"/><attr name="srlDrawableMarginRight"/><attr name="srlDrawableSize"/><attr name="srlDrawableArrowSize"/><attr name="srlDrawableProgressSize"/><attr name="srlTextSizeTitle"/><attr name="srlTextSizeTime"/><attr format="dimension" name="srlTextTimeMarginTop"/><attr format="boolean" name="srlEnableLastTime"/><attr name="srlTextPulling"/><attr name="srlTextLoading"/><attr name="srlTextRelease"/><attr name="srlTextFinish"/><attr name="srlTextFailed"/><attr name="srlTextUpdate"/><attr name="srlTextSecondary"/><attr name="srlTextRefreshing"/></declare-styleable>
+    <declare-styleable name="SmartRefreshLayout"><attr name="srlPrimaryColor"/><attr name="srlAccentColor"/><attr format="integer" name="srlReboundDuration"/><attr format="dimension" name="srlHeaderHeight"/><attr format="dimension" name="srlFooterHeight"/><attr format="dimension" name="srlHeaderInsetStart"/><attr format="dimension" name="srlFooterInsetStart"/><attr format="float" name="srlDragRate"/><attr format="float" name="srlHeaderMaxDragRate"/><attr format="float" name="srlFooterMaxDragRate"/><attr format="float" name="srlHeaderTriggerRate"/><attr format="float" name="srlFooterTriggerRate"/><attr format="boolean" name="srlEnableRefresh"/><attr format="boolean" name="srlEnableLoadMore"/><attr format="boolean" name="srlEnableHeaderTranslationContent"/><attr format="boolean" name="srlEnableFooterTranslationContent"/><attr format="reference" name="srlHeaderTranslationViewId"/><attr format="reference" name="srlFooterTranslationViewId"/><attr format="boolean" name="srlEnablePreviewInEditMode"/><attr format="boolean" name="srlEnableAutoLoadMore"/><attr format="boolean" name="srlEnableOverScrollBounce"/><attr format="boolean" name="srlEnablePureScrollMode"/><attr format="boolean" name="srlEnableNestedScrolling"/><attr format="boolean" name="srlEnableScrollContentWhenLoaded"/><attr format="boolean" name="srlEnableScrollContentWhenRefreshed"/><attr format="boolean" name="srlEnableLoadMoreWhenContentNotFull"/><attr format="boolean" name="srlEnableFooterFollowWhenLoadFinished"/><attr format="boolean" name="srlEnableFooterFollowWhenNoMoreData"/><attr format="boolean" name="srlEnableClipHeaderWhenFixedBehind"/><attr format="boolean" name="srlEnableClipFooterWhenFixedBehind"/><attr format="boolean" name="srlEnableOverScrollDrag"/><attr format="boolean" name="srlDisableContentWhenRefresh"/><attr format="boolean" name="srlDisableContentWhenLoading"/><attr format="reference" name="srlFixedHeaderViewId"/><attr format="reference" name="srlFixedFooterViewId"/></declare-styleable>
+    <declare-styleable name="SmartRefreshLayout_Layout"><attr name="layout_srlSpinnerStyle"/><attr format="color" name="layout_srlBackgroundColor"/></declare-styleable>
+    <declare-styleable name="TwoLevelHeader"><attr format="float" name="srlMaxRage"/><attr format="float" name="srlFloorRage"/><attr format="float" name="srlRefreshRage"/><attr format="integer" name="srlFloorDuration"/><attr format="boolean" name="srlEnableTwoLevel"/><attr format="boolean" name="srlEnablePullToCloseTwoLevel"/></declare-styleable>
+
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="leftViewId" format="reference|integer"/>
+        <attr name="rightViewId" format="reference|integer"/>
+        <attr name="contentViewId" format="reference|integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="AbsLeafChart">
+
+        <attr name="lc_topPadding" format="dimension"/>
+        <attr name="lc_leftPadding" format="dimension"/>
+        <attr name="lc_bottomPadding" format="dimension"/>
+        <attr name="lc_rightPadding" format="dimension"/>
+
+        <attr name="lc_startMarginX" format="dimension"/>
+
+        <attr name="lc_startMarginY" format="dimension"/>
+
+        <attr name="lc_coordinateMode">
+            <enum name="across" value="1"/>
+            <enum name="intersect" value="2"/>
+            <enum name="x_across" value="3"/>
+            <enum name="y_across" value="4"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="OutsideLineChart">
+        <attr name="lc_step" format="dimension"/>
+    </declare-styleable>
+
+    <style name="MenuButtomAnimationStyle" parent="android:style/Theme.Dialog">
+        <!-- 是否有标题-->
+        <item name="android:windowNoTitle">true</item>
+        <!--背景颜色及透明程度-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowAnimationStyle">@style/MusicButtomAnimation</item>
+    </style>
+    <style name="MusicButtomAnimation">
+        <!-- 入场动画 -->
+        <item name="android:windowEnterAnimation">@anim/bottom_menu_enter</item>
+        <!-- 出厂动画 -->
+        <item name="android:windowExitAnimation">@anim/bottom_menu_exit</item>
+    </style>
+
+
+    <style name="IDLabelStyle">
+        <item name="android:layout_height">25dp</item>
+        <item name="android:textColor">#0d0f10</item>
+        <item name="android:layout_width">40dp</item>
+    </style>
+
+    <style name="IDTextStyle">
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+</resources>

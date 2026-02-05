@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_info"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="20sp"-->
+<!--            />-->
+<!--    </ScrollView>-->
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/mainColor"
+            android:fitsSystemWindows="true"
+            app:title="@string/setting"
+            app:titleTextColor="@color/colorZTNav"
+            android:gravity="right">
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+
+        tools:ignore="Suspicious0dp"
+        android:orientation="vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorf2"
+
+            tools:ignore="Suspicious0dp"
+            android:orientation="vertical" />
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/home_tab"
+            style="@style/Custom.TabRadioButton"
+            android:background="#00000000"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/tab_home_selector"
+            android:text="@string/tab_home"
+            />
+        <RadioButton
+            android:id="@+id/find_tab"
+            style="@style/Custom.TabRadioButton"
+            android:background="#00000000"
+            android:button="@null"
+            android:drawableTop="@drawable/tab_find_selector"
+            android:visibility="gone"
+            android:text="@string/tab_find" />
+        <RadioButton
+            android:id="@+id/set_tab"
+            style="@style/Custom.TabRadioButton"
+            android:background="#00000000"
+            android:button="@null"
+            android:drawableTop="@drawable/tab_set_selector"
+            android:text="@string/tab_set" />
+    </RadioGroup>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_agreeView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/ic_start_bg_1"
+        android:orientation="vertical"
+        android:gravity="bottom|center_horizontal">
+
+
+        <Button
+            android:id="@+id/btn_agree"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:background="@color/mainColor"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:text="同意隐私政策"/>
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            android:textColor="@color/mainColor"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:text="《隐私政策》"/>
+
+
+    </LinearLayout>
+
+</FrameLayout>

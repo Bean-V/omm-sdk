@@ -1,0 +1,62 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F5F5F5"
+    android:padding="8dp"
+    android:layout_margin="16dp"
+    android:radius="10dp"
+    android:orientation="horizontal">
+
+    <!-- 左侧图标 -->
+    <ImageView
+        android:id="@+id/iv_search_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:src="@android:drawable/ic_menu_search"
+        android:tint="#888888" />
+
+    <!-- 搜索输入框 -->
+    <EditText
+        android:id="@+id/et_search_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_search_icon"
+        android:layout_toStartOf="@id/iv_clear_icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:hint="请输入关键字搜索"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textColor="#333333"
+        android:textSize="16sp" />
+
+    <!-- 清除按钮 -->
+    <ImageView
+        android:id="@+id/iv_clear_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/tv_search_button"
+        android:visibility="gone"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:tint="#CCCCCC" />
+
+    <!-- 搜索按钮 -->
+    <TextView
+        android:id="@+id/tv_search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="搜索"
+        android:textColor="#4A90E2"
+        android:textSize="16sp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp" />
+</RelativeLayout>

@@ -1,0 +1,962 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0B1939 "
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.oort.weichat.view.MergerStatus
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:background="@color/app_skin_normal"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:background="@color/app_skin_normal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="@string/home"
+                        android:textColor="#FFFFFF"
+                        android:textAlignment="viewStart"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:layout_marginStart="27dp"
+                        android:layout_marginTop="5dp"
+                        style="@style/TabTitleIndicator"
+                        android:layout_marginBottom="10dp"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+            </com.oort.weichat.view.MergerStatus>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:visibility="gone"
+                    android:background="@mipmap/icon_home_bg"
+                    android:text="@string/hello_blank_fragment" />
+
+
+                <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                    android:id="@+id/refreshLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/bottom_view"
+                    app:srlEnableAutoLoadMore="true"
+                    android:layout_marginTop="0dp"
+                    app:srlEnableLoadMore="true">
+
+                    <com.oort.weichat.view.PullRefreshHeader
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <ScrollView
+                        android:id="@+id/sv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fillViewport="true"
+                        >
+                        <!--                    android:layout_marginTop="15dp"-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+
+                            android:orientation="vertical">
+
+                            <!--                        android:layout_marginStart="15dp"-->
+                            <!--                        android:layout_marginEnd="15dp"-->
+                            <!--                        android:layout_marginTop="10dp"-->
+                            <ImageView
+                                android:id="@+id/iv_banner"
+                                android:layout_width="match_parent"
+                                android:layout_height="130dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/icon_banner"
+                                android:visibility="gone"
+
+                                />
+
+                            <TextView android:id="@+id/tv_banner"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+
+                                android:textSize="60sp"
+                                android:textColor="#ffffff"
+                                android:textStyle="bold"
+                                android:text="公共法律服务一体化平台"
+                                android:gravity="center"
+
+                                />
+<!--                            android:layout_marginTop="20dp"-->
+<!--                            android:layout_marginBottom="20dp"-->
+
+                            <androidx.cardview.widget.CardView
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                xmlns:tools="http://schemas.android.com/tools"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                card_view:cardCornerRadius="12dp"
+                                card_view:cardElevation="0dp"
+                                card_view:cardBackgroundColor="@color/white"
+                                android:visibility="gone"
+                                >
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/log_user_info"
+                                            android:textSize="16sp"
+                                            android:textColor="@color/black"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_marginStart="10dp"
+                                            android:textStyle="bold"
+                                            />
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginEnd="10dp"
+                                            android:layout_marginTop="10dp"
+                                            android:background="#f2f2f2"
+                                            android:layout_height="1dp"/>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <com.makeramen.roundedimageview.RoundedImageView
+                                                android:id="@+id/iv_user_header"
+                                                android:layout_width="52dp"
+                                                android:layout_height="52dp"
+                                                android:layout_marginStart="10dp"
+                                                android:layout_gravity="center_vertical"
+                                                card_view:riv_corner_radius="32.5dp"
+                                                />
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:layout_marginBottom="10dp"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:id="@+id/tv_user_name"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="name"
+                                                    android:textSize="16sp"
+                                                    android:textColor="#333333"
+                                                    android:layout_marginTop="3dp"
+                                                    android:layout_marginStart="10dp"
+                                                    android:textStyle="bold"
+                                                    />
+                                                <TextView
+                                                    android:id="@+id/tv_user_depart"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="个人信息"
+                                                    android:textSize="12sp"
+                                                    android:textColor="#666666"
+                                                    android:layout_marginTop="3dp"
+                                                    android:layout_marginStart="10dp"
+                                                    />
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                        <com.xuexiang.xui.widget.textview.marqueen.MarqueeView
+
+                                            android:id="@+id/mv_not"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            android:layout_marginBottom="10dp"
+                                            android:visibility="gone"/>
+
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cv_app"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="6"
+                                android:minHeight="100dp"
+                                app:cardBackgroundColor="#323E59"
+                                app:cardCornerRadius="12dp"
+                                app:cardElevation="0dp"
+
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:id="@+id/tv_time"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:text="16:34:35"
+                                            android:textColor="#ffffff"
+                                            android:textSize="80sp"
+                                            android:textStyle="bold" />
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="50dp"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:id="@+id/tv_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center"
+                                                android:text="2002年5月21日"
+                                                android:textColor="#ffffff"
+                                                android:textSize="26sp"
+                                                android:textStyle="bold"
+
+                                                />
+
+                                            <TextView
+                                                android:id="@+id/tv_week"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:gravity="center"
+                                                android:text="星期五"
+                                                android:textColor="#ffffff"
+                                                android:textSize="26sp"
+                                                android:textStyle="bold" />
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+                                    <com.oortcloud.basemodule.views.AutoHeightRecyclerView
+                                        android:id="@+id/rv_list"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="7"
+                                        android:background="#323E59"
+                                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                        app:spanCount="5"
+                                        tools:itemCount="10"
+                                        tools:listitem="@layout/item_home_app_lang_layout" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_weight="1" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tv_add_module"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="@string/add_module"
+                                    android:textAllCaps="false"
+                                    android:textSize="20sp"
+                                    android:visibility="gone"></TextView>
+
+
+                            </androidx.cardview.widget.CardView>
+
+
+                            <androidx.cardview.widget.CardView
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                xmlns:tools="http://schemas.android.com/tools"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:minHeight="100dp"
+                                card_view:cardCornerRadius="12dp"
+                                card_view:cardElevation="0dp"
+                                card_view:cardBackgroundColor="@color/white"
+                                android:id="@+id/cv_school"
+                                android:visibility="gone"
+                                >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:orientation="horizontal"
+                                            android:gravity="center_vertical">
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/cloud_school"
+                                                android:layout_marginStart="10dp"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textAlignment="viewStart"
+                                                />
+
+                                            <TextView
+
+                                                android:id="@+id/tv_school_more"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/more"
+                                                android:textColor="#666666"
+
+                                                android:layout_marginEnd="5dp"
+                                                android:padding="5dp"
+                                                android:textSize="12sp"
+                                                android:drawableEnd="@mipmap/ic_arrow_gray"
+                                                />
+                                        </LinearLayout>
+                                        <!--                                    <com.xuexiang.xui.widget.banner.recycler.BannerLayout-->
+                                        <!--                                        android:id="@+id/bl_horizontal"-->
+                                        <!--                                        android:layout_width="match_parent"-->
+                                        <!--                                        android:layout_marginStart="30dp"-->
+                                        <!--                                        android:layout_marginEnd="30dp"-->
+                                        <!--                                        android:layout_height="200dp"-->
+                                        <!--                                        app:bl_autoPlaying="true"-->
+                                        <!--                                        app:bl_centerScale="1.5"-->
+                                        <!--                                        app:bl_itemSpace="-10dp"-->
+                                        <!--                                        app:bl_moveSpeed="1.8"-->
+                                        <!--                                        app:bl_showIndicator="true"/>-->
+                                        <com.oortcloud.basemodule.widget.mzbanner.MZBannerView
+                                            android:id="@+id/bl_horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="200dp"
+                                            android:padding="10dp"
+                                            app:open_mz_mode="true"
+                                            app:canLoop="true"
+                                            app:indicatorAlign="center"
+                                            app:indicatorPaddingLeft="10dp"/>
+
+
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                xmlns:tools="http://schemas.android.com/tools"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                card_view:cardCornerRadius="12dp"
+                                card_view:cardElevation="0dp"
+                                card_view:cardBackgroundColor="@color/white"
+
+                                android:id="@+id/cv_gayw"
+                                android:visibility="gone"
+                                >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:orientation="horizontal"
+                                            android:gravity="center_vertical">
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/police_news"
+                                                android:layout_marginStart="10dp"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textAlignment="viewStart"
+                                                />
+
+                                            <TextView
+                                                android:id="@+id/tv_gnyw_more"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/more"
+                                                android:textColor="#666666"
+                                                android:layout_marginEnd="5dp"
+                                                android:drawableEnd="@mipmap/ic_arrow_gray"
+                                                android:padding="5dp"
+
+                                                android:textSize="12sp" />
+                                        </LinearLayout>
+
+                                        <com.oortcloud.basemodule.views.AutoHeightRecyclerView
+                                            android:id="@+id/rv_gayw"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                xmlns:tools="http://schemas.android.com/tools"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                card_view:cardCornerRadius="12dp"
+                                card_view:cardElevation="0dp"
+                                card_view:cardBackgroundColor="@color/white"
+                                android:id="@+id/cv_jxrt"
+                                android:visibility="gone"
+                                >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:orientation="horizontal"
+                                            android:gravity="center_vertical">
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginStart="10dp"
+                                                android:text="@string/police_hot"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textAlignment="viewStart"
+                                                />
+
+                                            <TextView
+                                                android:id="@+id/tv_jxrt_more"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/more"
+                                                android:textColor="#666666"
+                                                android:layout_marginEnd="5dp"
+                                                android:drawableEnd="@mipmap/ic_arrow_gray"
+                                                android:padding="5dp"
+                                                android:textSize="12sp" />
+                                        </LinearLayout>
+                                        <com.oortcloud.basemodule.views.AutoHeightRecyclerView
+                                            android:id="@+id/rv_jxrt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+
+
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                xmlns:tools="http://schemas.android.com/tools"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="25dp"
+                                card_view:cardCornerRadius="12dp"
+                                card_view:cardElevation="0dp"
+                                card_view:cardBackgroundColor="@color/white"
+                                android:id="@+id/cv_lddp"
+                                android:visibility="gone"
+                                >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:orientation="horizontal"
+                                            android:gravity="center_vertical">
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginStart="10dp"
+                                                android:text="@string/leader_comment"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textAlignment="viewStart"
+                                                />
+
+                                            <TextView
+                                                android:id="@+id/tv_lddp_more"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="@string/more"
+                                                android:textColor="#666666"
+                                                android:layout_marginEnd="5dp"
+                                                android:drawableEnd="@mipmap/ic_arrow_gray"
+                                                android:padding="5dp"
+                                                android:textSize="12sp" />
+                                        </LinearLayout>
+
+                                        <com.oortcloud.basemodule.views.AutoHeightRecyclerView
+                                            android:id="@+id/rv_lddp"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+
+
+
+                            </androidx.cardview.widget.CardView>
+
+
+                            <androidx.cardview.widget.CardView
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                xmlns:tools="http://schemas.android.com/tools"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="25dp"
+                                card_view:cardCornerRadius="12dp"
+                                card_view:cardElevation="0dp"
+                                card_view:cardBackgroundColor="@color/white"
+                                android:id="@+id/cv_level"
+                                android:visibility="gone"
+                                >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:orientation="horizontal"
+                                            android:gravity="center_vertical">
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginStart="10dp"
+                                                android:text="使用排名"
+                                                android:textSize="16sp"
+                                                android:textColor="@color/black"
+                                                android:textStyle="bold"
+                                                android:textAlignment="viewStart"
+                                                />
+
+                                            <TextView
+                                                android:id="@+id/tv_sypm_more"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="更多>"
+                                                android:textColor="#666666"
+                                                android:layout_marginEnd="15dp"
+                                                android:textSize="12sp" />
+                                        </LinearLayout>
+
+                                        <com.oortcloud.basemodule.views.leafchart.LeafSquareChart
+                                            android:id="@+id/leaf_chart"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="400dp"
+                                            android:background="#ffffff"/>
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                />
+
+                        </LinearLayout>
+
+
+                    </ScrollView>
+
+                </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_weight="6">
+
+                <androidx.cardview.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:minHeight="100dp"
+                    card_view:cardCornerRadius="12dp"
+                    card_view:cardElevation="0dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_gradient_green"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="10dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:orientation="horizontal"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical">
+                            <ImageView android:id="@+id/iv_right_01"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/icon_remote_meet"
+                                />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:orientation="vertical">
+                                <TextView android:id="@+id/tv_remote"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="28sp"
+                                    android:textColor="#ffffff"
+                                    android:textStyle="bold"
+                                    android:text="远程会见"
+
+                                    />
+                                <TextView android:id="@+id/tv_remote_des"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:textColor="#ffffff"
+                                    android:maxLines="2"
+                                    android:text="司法全面覆盖与监狱，戒毒所，看守所进行远程视频会见业务"
+                                    />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <androidx.cardview.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:minHeight="100dp"
+                    card_view:cardCornerRadius="12dp"
+                    card_view:cardElevation="0dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_gradient_blue"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical">
+                            <ImageView android:id="@+id/iv_right_02"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/icon_legal_help"
+                                />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:orientation="vertical">
+                                <TextView android:id="@+id/tv_legal_help"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="26sp"
+                                    android:textColor="#ffffff"
+                                    android:textStyle="bold"
+                                    android:text="法律援助"
+
+                                    />
+                                <TextView android:id="@+id/tv_legal_help_des"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:textColor="#ffffff"
+                                    android:text="可为寻求法律援助的人员提供在线服务"
+
+                                    />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <androidx.cardview.widget.CardView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:minHeight="100dp"
+                    card_view:cardCornerRadius="12dp"
+                    card_view:cardElevation="0dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_gradient_purple"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="10dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:orientation="horizontal"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical">
+                            <ImageView android:id="@+id/iv_right_03"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/icon_lawyer_"
+                                />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:orientation="vertical">
+                                <TextView android:id="@+id/tv_lawyer"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="26sp"
+                                    android:textColor="#ffffff"
+                                    android:textStyle="bold"
+                                    android:text="律师咨询"
+
+                                    />
+                                <TextView android:id="@+id/tv_lawyer_des"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="16sp"
+                                    android:textColor="#ffffff"
+                                    android:text="多家律师所律师免费线上服务，全方位的法律方案解决您的一切难题"
+
+                                    />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

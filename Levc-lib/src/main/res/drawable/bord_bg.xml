@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFFFFF"/> <!-- 填充颜色 -->
+    <stroke
+        android:width="2dp"
+        android:color="#dddddd"/>     <!-- 边框颜色 -->
+    <padding
+        android:left="5dp"
+        android:top="5dp"
+        android:right="5dp"
+        android:bottom="5dp" />
+    <!-- 如果需要圆角，可以添加以下属性 -->
+    <!-- <corners android:radius="5dp" /> -->
+</shape>

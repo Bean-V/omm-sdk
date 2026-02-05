@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+android:width="106dp"
+android:height="24dp"
+android:viewportWidth="106"
+android:viewportHeight="24">
+
+<group>
+    <!-- 左边圆角梯形 -->
+    <path
+        android:fillColor="@color/severity_level_three"
+        android:pathData="M6,2 L30,2 L35,22 L6,22 A4,4 0,0 1,2 18 L2,6 A4,4 0,0 1,6 2 Z" />
+
+    <!-- 右边直角梯形，紧挨着左边 -->
+    <path
+        android:strokeColor="@color/severity_level_three"
+        android:strokeWidth="0.5"
+        android:pathData="M30,2.3 L100,2.3 L106,21.7 L35,21.7 Z" />
+</group>
+
+</vector>

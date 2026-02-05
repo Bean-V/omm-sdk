@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sentaroh.android.upantool.contact.Fragment_contact_backuplist">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_contact"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        />
+
+
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/contactSys_tip"
+        android:textColor="@color/colorZT99"
+        android:textSize="10sp"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="14sp"
+        android:background="@color/mainColor"
+        >
+        <Button
+            android:id="@+id/btn_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_bg_color_selector"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:text="@string/back_up_contact"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

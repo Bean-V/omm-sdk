@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:slide="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/rl_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/a_view_actionbar"
+            android:visibility="gone"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingTop="9dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="9dp"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/search_edit"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/et_search_bg"
+                android:drawableLeft="@drawable/search"
+                android:drawablePadding="9dp"
+                android:gravity="center_vertical"
+                android:hint="@string/search_public_number"
+                android:paddingLeft="9dp"
+                android:paddingRight="9dp"
+                android:textColor="@color/dark_grey"
+                android:textColorHint="@color/grey_a7"
+                android:textSize="@dimen/message_search_size"
+                tools:ignore="RtlSymmetry" />
+
+
+        </LinearLayout>
+<!--        android:divider="@drawable/label_divider"-->
+        <com.roamer.slidelistview.SlideListView
+            android:id="@+id/notice_account_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:dividerHeight="0px"
+            android:overScrollFooter="@android:color/transparent"
+            slide:slideMode="right"
+            slide:slideRightAction="reveal" />
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

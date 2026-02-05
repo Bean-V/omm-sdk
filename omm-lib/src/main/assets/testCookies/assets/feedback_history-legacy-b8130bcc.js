@@ -1,0 +1,1 @@
+System.register(["./index-legacy-18636006.js"],(function(e,t){"use strict";var n,r,u;return{setters:[e=>{n=e._,r=e.o,u=e.l}],execute:function(){e("default",n({},[["render",function(e,t){return r(),u("div",null,"反馈列表")}]]))}}}));

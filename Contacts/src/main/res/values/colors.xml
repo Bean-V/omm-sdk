@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_primary">#3F51B5</color>
+
+    <color name="color_primary_dark_contact">#303F9F</color>
+
+    <color name="color_accent">#FF4081</color>
+
+    <color name="color_f6f">#F6F6F9</color>
+    <color name="color_666">#666666</color>
+    <color name="color_D8D">#D8D8D8</color>
+
+    <color name="black00_contact">#ff000000</color>
+    <color name="color_a0a">#a0a0a0</color>
+
+    <color name="color_ece">#ECEBEF</color>
+    <color name="color_4d7">#4d7cfe</color>
+    <color name="gray">#ff999999</color>
+    <color name="color_3b5">#3B5699</color>
+    <color name="normal_bg">#f2f2f2</color>
+
+    <color name="whiteff_contact">#FFFFFF</color>
+    <color name="color_1a1">#1A1A1A</color>
+    <color name="color_333">#FF333333</color>
+    <color name="color_999">#999999</color>
+    <color name="color_efe">#EFEFEF</color>
+    <color name="color_f7f">#F7F7F7</color>
+    <color name="color_d8d">#D8D8D8 </color>
+    <color name="color_000">#000000 </color>
+    <color name="color_ff3">#FF3F70FF </color>
+    <color name="color_007">#007AFF </color>
+    <color name="div_bg">#BDBDBD</color>
+    <color name="color_226">#2265B1</color>
+    <color name="dark_grey">#ff7a7a7a</color>
+    <color name="grey_a7">#ffa7a7a7</color>
+    <color name="grey_200_contact">#EEEEEE</color>
+    <color name="color_FAFFFFFF">#FAFFFFFF</color>
+    <color name="statusbar_bg">#1156a6</color>
+    <color name="color_8e9">#8E9295</color>
+    <color name="color_131">#131313</color>
+    <color name="color_e3e">#E3E3E3</color>
+    <color name="color_3f7">#3F70FF</color>
+    <color name="color_467">#4672F2</color>
+    <color name="c_f8f">#F8F9FB</color>
+
+</resources>

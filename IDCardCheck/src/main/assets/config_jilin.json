@@ -1,0 +1,24 @@
+{
+  "urlConfigBean": {
+    "version": "1",
+    "appId": "220000000000-3-1-6ee0d24653e342d8a4edf9428abb3077",
+    "orgId": "220000000000",
+    "networkAreaCode": "3",
+    "packageName": "cn.net.hylink.check",
+    "regionalismCode": "220000000000",
+    "networkCode": "3"
+  },
+  "list": [
+    {
+      "url": "/gacz-data-service/verification/checkRY",
+      "resourceId": "220000000000-3-0100-1d0a9678ac5542bfa7e7ac4037c5aedb"
+    },
+    {
+      "url": "/gacz-data-service/verification/checCL",
+      "resourceId": "220000000000-3-0100-468fee39c2c441cb808f963c7ecb0e83"
+    }
+  ]
+}
+
+
+

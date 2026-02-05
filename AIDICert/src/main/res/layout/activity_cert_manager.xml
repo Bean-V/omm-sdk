@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PIN：" />
+
+            <EditText
+                android:id="@+id/edt_pin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入PIN码"
+                android:text="" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="登录"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_export_user_cert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="导出签名证书\nSOF_ExportUserCert()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_export_exchange_cert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="导出加密证书\nSOF_ExportExChangeUserCert()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_get_cert_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="获取证书信息\nSOF_GetCertInfo()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_get_cert_info_by_oid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="获取证书扩展信息\nSOF_GetCertInfoByOid()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_sign_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="数字签名\nSOF_SignData()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_verify_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="数字签名验证\nSOF_VerifySignedData()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_sign_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="消息签名\nSOF_SignMessage()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_verify_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="消息签名验证\nSOF_VerifySignedMessage()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_encrypt_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="数字信封加密\nSOF_EncryptData()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_decrypt_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="数字信封解密\nSOF_DecryptData()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_set_sign_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="设置签名算法\nSOF_SetSignMethod()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_get_sign_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="获取签名算法\nSOF_GetSignMethod()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_nakeSign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="裸签加密\nSKF_NakedSignData()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_nakeVerify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="裸签解密"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_set_encrypt_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="设置加密算法\nSOF_SetEncryptMethod()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_get_encrypt_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="获取加密算法\nSOF_GetEncryptMethod()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_symmetric_encrypt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="对称加密\nSOF_symmetricEnc()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_symmetric_decrypt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="对称解密\n_SOF_symmetricDec()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_cipher_file"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="三段式加密\nSOF_SymInit()\nSOF_SymUpdate()\nSOF_SymDoFinal()"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/btn_multi_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="一键测试"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_clear_svs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="清空日志"
+            android:textAppearance="?android:textAppearanceSmall" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
+

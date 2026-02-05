@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!--主题色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--强调色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--点缀色-->
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <!--    toolbar样式-->
+    <style name="toolbar_style" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">18sp</item>
+        <item name="android:colorBackground">@color/color_FAFFFFFF</item>
+        <item name="android:textColor">@color/color_1A1A1A</item>
+        <!--新增一个item，用于控制menu-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuBlackStyle</item>
+    </style>
+
+    <style name="OverflowMenuBlackStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="android:actionMenuTextColor">@color/color_1A1A1A</item>
+        <!--把该属性改为false即可使menu位置位于toolbar之下-->
+        <item name="overlapAnchor">false</item>
+    </style>
+
+
+    <style name="radingStyle" parent="@android:style/Widget.RatingBar">
+    <!-- 定义星星图片 -->
+    <item name="android:progressDrawable">@drawable/rating_layer</item>
+    <!-- 根据自定义星星图片的大小,设置相应的值,否则可能显示不全 -->
+    <item name="android:minHeight">55dp</item>
+    <item name="android:maxHeight">55dp</item>
+
+    </style>
+
+
+
+
+    <style name="Tabtext">
+        <item name="android:textColor">@drawable/selector_tab_text</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+     
+
+    <style name="LoadProgressDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">false</item><!-- 模糊 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimAmount">0.0</item><!-- 灰度 -->
+        <!--Dialog图标着色-->
+        <!--<item name="colorAccent">#ffffff</item>-->
+    </style>
+
+    <style name="MyDynaCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+</resources>

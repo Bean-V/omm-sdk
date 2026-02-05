@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/chat_warp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nick_name"
+        android:layout_marginTop="@dimen/chat_head_top"
+        android:layout_toRightOf="@id/chat_head_iv"
+        android:background="@drawable/chat_to_warp_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:minWidth="50dp"
+        android:minHeight="@dimen/chat_head_size">
+
+        <com.oort.weichat.util.link.HttpTextView
+            android:id="@+id/chat_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxWidth="210dp"
+            android:paddingLeft="@dimen/chat_text_right_pd"
+            android:paddingRight="@dimen/chat_text_right_pd"
+            android:textSize="16sp"
+            tools:text="sdfsdfsdfs" />
+
+    </RelativeLayout>

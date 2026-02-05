@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/margin_top_18"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_set_type"
+            android:layout_marginLeft="@dimen/margin_left_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/host_app_str"
+            android:textColor="@color/color_1A1A1A"
+            android:textSize="@dimen/text_size_18" />
+        <TextView
+            android:layout_marginLeft="@dimen/margin_left_16"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_1A1A1A"/>
+        <TextView
+            android:id="@+id/tv_show_all"
+            android:text="@string/show_all_str"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingTop="2dp"
+            android:layout_marginRight="@dimen/margin_right_13"
+            android:textSize="@dimen/text_size_12"
+            android:paddingLeft="@dimen/margin_left_10"
+            android:paddingRight="@dimen/margin_right_10"
+            android:paddingBottom="5dp"
+            android:background="@drawable/bg_click"
+            android:textColor="@color/main_color" />
+
+
+    </LinearLayout>
+
+
+        <com.oortcloud.basemodule.views.AutoHeightRecyclerView
+            android:id="@+id/more_duty_person_app"
+            android:layout_below="@id/tv_set_type"
+            android:layout_marginTop="@dimen/margin_top_15"
+            android:layout_marginLeft="@dimen/margin_left_16"
+            android:layout_marginRight="@dimen/margin_right_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <com.oortcloud.basemodule.views.AutoHeightRecyclerView
+        android:id="@+id/recommend_grid_view"
+        android:layout_below="@id/tv_set_type"
+        android:layout_marginTop="@dimen/margin_top_15"
+        android:layout_marginLeft="@dimen/margin_left_16"
+        android:layout_marginRight="@dimen/margin_right_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="4"
+        />
+
+<!--    <com.oortcloud.appstore.widget.CustomGridView-->
+<!--        android:descendantFocusability="blocksDescendants"-->
+<!--        android:id="@+id/recommend_grid_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tv_set_type"-->
+<!--        android:layout_marginTop="18dp"-->
+<!--        android:cacheColorHint="@android:color/transparent"-->
+<!--        android:gravity="center"-->
+<!--        android:listSelector="@android:color/transparent"-->
+<!--        android:numColumns="4"-->
+<!--        android:layout_marginBottom="@dimen/margin_bottom_8"-->
+<!--        android:stretchMode="columnWidth"-->
+<!--        android:horizontalSpacing="10dip"-->
+<!--        android:visibility="gone"-->
+<!--        android:verticalSpacing="10dip">-->
+
+<!--    </com.oortcloud.appstore.widget.CustomGridView>-->
+
+
+
+
+</LinearLayout>

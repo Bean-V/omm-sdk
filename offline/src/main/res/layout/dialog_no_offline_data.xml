@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/bg_white_r_5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:drawablePadding="@dimen/dp10"
+        android:textSize="@dimen/sp12"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/hint"
+        android:text="@string/tip_str"
+        android:layout_marginEnd="@dimen/dp15"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginStart="@dimen/dp15"
+        android:textColor="@color/c_333"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:drawablePadding="@dimen/dp10"
+        android:drawableStart="@drawable/point"
+        android:layout_marginTop="@dimen/dp10"
+        android:text="当前没有离线运行环境，需要在管理平台的离线管理里，导出离线环境，并通过“同步助手”，同步到移动端设备"
+        android:layout_marginEnd="@dimen/dp15"
+        android:layout_marginStart="@dimen/dp15"
+        android:textColor="@color/c_333"
+        android:textSize="@dimen/sp11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvOk"
+        android:background="@drawable/ripple_bg_245_r"
+        android:layout_marginBottom="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginEnd="@dimen/dp15"
+        android:layout_marginStart="@dimen/dp15"
+        android:gravity="center"
+        android:textSize="@dimen/sp15"
+        android:text="我已了解"
+        android:textColor="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"/>
+
+
+
+</LinearLayout>

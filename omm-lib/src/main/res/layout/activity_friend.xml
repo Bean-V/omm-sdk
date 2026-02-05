@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.oort.weichat.view.MergerStatus
+        android:id="@+id/mergerStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/nav_color">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:padding="@dimen/dp_8"
+            android:visibility="gone"
+            android:src="@drawable/btn_back"
+            android:tint="@color/nav_icon_color"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_width="300dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="10dp"
+            app:tabGravity="fill"
+            app:tabIndicator="@drawable/tab_layout_indicator"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="auto"
+            app:tabSelectedTextColor="@color/nav_text_color"
+            app:tabTextColor="@color/main_tab_text_normal_grey"
+            android:overScrollMode="never"
+            app:tabPaddingEnd="-1dp"
+            app:tabPaddingStart="-1dp"
+            app:tabTextAppearance="@style/MyCustomTextAppearance"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <com.oort.weichat.view.SkinImageView
+            android:id="@+id/add_img"
+            android:layout_width="@dimen/menu_item_size"
+            android:layout_height="@dimen/menu_item_size"
+            android:layout_marginTop="3dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/dp15"
+            android:src="@mipmap/more_icon"
+            android:tint="@color/nav_icon_color"/>
+    </LinearLayout>
+    </com.oort.weichat.view.MergerStatus>
+
+    <com.oortcloud.revision.widget.NoScrollViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

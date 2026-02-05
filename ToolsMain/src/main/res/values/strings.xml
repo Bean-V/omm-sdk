@@ -1,0 +1,223 @@
+<resources>
+<!--    <string name="app_name">档案宝</string>-->
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="tab_home">首页</string>
+    <string name="tab_find">发现</string>
+    <string name="tab_set">设置</string>
+    <string name="file_manager">文件管理</string>
+    <string name="file_my">我的文件</string>
+    <string name="file_wx">微信文件</string>
+    <string name="file_transfer">文件传输</string>
+    <string name="file_pic">图片</string>
+    <string name="file_video">视频</string>
+    <string name="file_audio">音频</string>
+    <string name="file_doc">文档</string>
+    <string name="file_other">其他</string>
+    <string name="back_up_contact">备份通讯录</string>
+    <string name="all_size">总容量</string>
+    <string name="res_size">剩余容量</string>
+    <string name="fm_cancel">取消</string>
+    <string name="fm_use_total">已使用/总容量</string>
+
+    <string name="fm_local">本机</string>
+    <string name="fm_u">移动外设</string>
+
+    <string name="fm_u_out">弹出</string>
+    <string name="fm_copytoU">复制到移动外设</string>
+    <string name="fm_rename">重命名</string>
+    <string name="fm_newfile">新建文件夹</string>
+    <string name="fm_post">粘贴</string>
+    <string name="fm_del">删除</string>
+    <string name="fm_copytolocal">复制到手机</string>
+
+    <string name="find">发现</string>
+    <string name="find_tm">天猫旗舰店</string>
+    <string name="find_dy">抖店</string>
+    <string name="find_jd">京东旗舰店</string>
+
+    <string name="setting">设置</string>
+    <string name="changeLangage">语言切换</string>
+    <string name="abut_us">关于我们</string>
+    <string name="privacy_p">隐私政策</string>
+
+
+    <string name="no_usb">请插入移动外设</string>
+    <string name="selectAll">全选</string>
+    <string name="not_selectAll">全不选</string>
+    <string name="back">返回</string>
+
+
+    <string name="checking">正在检测</string>
+
+    <string name="request_u_permisson">请求移动外设权限</string>
+
+    <string name="u_ejected">已弹出</string>
+
+    <string name="read_files_to_del">正在准备删除文件</string>
+
+    <string name="USB_connnect">设备已连接</string>
+
+    <string name="loading">加载中</string>
+
+    <string name="copying">正在复制</string>
+
+    <string name="copy_list">传输列表</string>
+
+    <string name="add_copy_lists">添加到复制列表</string>
+
+    <string name="read_files_to_copy">正在准备复制文件</string>
+
+
+    <string name="read_files_to_move">正在准备移动文件</string>
+    <string name="read_files_to_encrypt">正在准备加密文件</string>
+    <string name="read_files_to_share">正在准备分享</string>
+
+    <string name="read_directory">读取目录</string>
+    <string name="read_fileData">读取文件数据</string>
+    <string name="reading">读取中</string>
+
+    <string name="confirm_del_finsh_list">确认删除已完成复制的记录吗</string>
+
+    <string name="confirm_del_unfinsh_list">确认删除未完成复制的记录吗</string>
+
+    <string name="confirm_del_finsh_list_addtion">同时删除已完成复制的文件，以释放手机内存</string>
+
+    <string name="deleting">正在删除</string>
+    <string name="addpasing">正在加密</string>
+    <string name="decrypting">正在解密</string>
+    <string name="current_file">当前文件</string>
+    <string name="all_files">总文件</string>
+
+    <string name="decrypt">解密</string>
+
+    <string name="tip">提示</string>
+
+    <string name="confirm_del_file">确定删除文件</string>
+
+    <string name="confirm_copy_file">确定复制文件</string>
+    <string name="confirm_move_file">确定移动文件</string>
+    <string name="confirm_addpas_file">确定加密文件</string>
+    <string name="confirm_share_file">确定分享文件</string>
+
+    <string name="files">个文件</string>
+
+    <string name="unselect_file">未选中文件</string>
+
+    <string name="confirm">确定</string>
+
+    <string name="need_permisson_to_fm">需要您授权文件管理权限，才可以访问文件数据</string>
+
+    <string name="input_new_name">请输入新名称</string>
+    <string name="input_pass">请输入密码</string>
+
+    <string name="invaild_file">无效文件</string>
+    <string name="unsupport_open_file">不支持打开此类文件</string>
+    <string name="no_app_installed">未安装相关应用</string>
+    <string name="Lower_version">版本较低</string>
+
+    <string name="eject_the_USB_stick">确定弹出移动外设吗</string>
+    <string name="wait_to_copy">待复制</string>
+    <string name="tap_to_requset_usb_permisson">点此允许获取移动外设权限</string>
+    <string name="check_task">检测到有未完成的任务，是否继续？</string>
+
+    <string name="countinue">继续</string>
+
+    <string name="Transferring">正在传输</string>
+
+    <string name="Transfer_succeeded">传输成功</string>
+
+
+    <string name="contact_backup_title">通讯录</string>
+    <string name="contactUnbackup">未备份联系人</string>
+
+    <string name="contactBackuped">已备份联系人</string>
+    <string name="contactBackup">备份通讯录</string>
+    <string name="contactSys">恢复通讯录</string>
+
+    <string name="contactSys_tip">点击文件可恢复该节点的通讯录数据</string>
+
+    <string name="fm_copyto">复制到</string>
+    <string name="fm_moveto">移动到</string>
+    <string name="fm_add_pass">加密</string>
+    <string name="success">成功</string>
+    <string name="failure">失败</string>
+    <string name="finsh_encrypt">已完成加密</string>
+    <string name="finsh_decrypt">已完成解密</string>
+    <string name="go_find">去查看</string>
+    <string name="encrpty_list">加密库</string>
+
+
+    <string name="privacy_exit">退出</string>
+    <string name="privacy_agree">同意</string>
+    <string name="users_note">个人信息保护指引</string>
+    <string name="privacy_tips_key2">《隐私政策》</string>
+    <string name="privacy_tips">请您务必审慎阅读、充分理解”隐私政策”各条款，包括但不限于:为了向你提供文件传输服务，我们需要收集你的图片或视频、音频等个人信息。 你可以阅读《隐私政策》了解详细信息。如您同意，请点击”同意”开始接受我们的服务。</string>
+    <string name="confirmed">已确认</string>
+    <string name="opt_terms">服务协议</string>
+    <string name="opt_privacy">隐私政策</string>
+
+    <string name="permission_request_denied">Permission request denied</string>
+    <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
+    <string name="album_name_all">全部</string>
+
+    <string name="button_preview">预览</string>
+    <string name="button_apply_default">使用</string>
+    <string name="button_apply">使用(%1$d)</string>
+    <string name="button_back">返回</string>
+    <string name="photo_grid_capture">拍一张</string>
+    <string name="empty_text">还没有图片或视频</string>
+    <string name="button_ok">我知道了</string>
+
+
+    <string name="error_over_count_default">您已经达到最大选择数量</string>
+    <string name="error_over_count">最多只能选择 %1$d 个文件</string>
+    <string name="error_under_quality">图片质量太低</string>
+    <string name="error_over_quality">图片质量太高</string>
+    <string name="error_file_type">不支持的文件类型</string>
+    <string name="error_type_conflict">不能同时选择图片和视频</string>
+    <string name="error_no_video_activity">没有支持视频预览的应用</string>
+    <string name="error_over_original_size">"该照片大于 %1$d M，无法上传将取消勾选原图"</string>
+    <string name="error_over_original_count">"有 %1$d 张照片大于 %2$d M\n无法上传，将取消勾选原图"</string>
+    <string name="button_original">原图</string>
+    <string name="button_sure_default">确定</string>
+    <string name="button_sure">确定(%1$d)</string>
+    <string name="title_activity_file_path_selector">Activity_filePathSelector</string>
+    <string name="migrate_phone_device">手机到设备</string>
+    <string name="migrate_device_phone">设备到手机</string>
+    <string name="migrate">一键备份</string>
+    <string name="migrate_cancel">取消备份</string>
+    <string name="migrate_delete">删除备份记录</string>
+    <string name="migrate_back_tip">正在备份，不能返回上一界面</string>
+    <string name="migrate_no_data">未找到备份记录</string>
+    <string name="migrate_done">完成</string>
+    <string name="migrate_un_done">未完成</string>
+
+    <string name="migrate_del_usb_tip">检测到已有备份记录，是否需要删除记录，重新备份</string>
+    <string name="migrate_del_local_tip">检测到已有恢复记录，是否需要删除记录，重新恢复</string>
+    <string name="migrate_recovery">一键恢复</string>
+    <string name="migrate_Duplicate_file">重复文件</string>
+    <string name="fm_share">分享到微信</string>
+    <string name="dup_see">查看</string>
+
+    <string name="comfirm_open_tip">确定开启同步吗？开启后，插入移动外设会自动将手机内的文件同步到移动外设中。</string>
+
+    <string name="comfirm_close">确定取消同步?</string>
+
+    <string name="sys_task">自动同步</string>
+
+    <string name="sys_tasking">正在自动同步</string>
+    <string name="sys_task_stoped">已停止自动同步</string>
+
+    <string name="sys_task_close">未开启自动同步</string>
+
+    <string name="sys_see_detail">查看详情</string>
+
+
+
+
+
+
+
+
+</resources>

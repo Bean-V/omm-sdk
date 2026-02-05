@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical">
+
+    <com.oortcloud.appstore.widget.RoundImageView
+        android:id="@+id/app_img"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        app:radius="48dp"
+        android:src="@mipmap/default_app_icon"/>
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:gravity="center_horizontal"
+        android:lines="2"
+        android:singleLine="false"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_6"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/text_size_18"
+        android:text="视频会议"/>
+
+    <com.oortcloud.appstore.widget.DownloadProgressButton
+        android:id="@+id/tv_install"
+        android:textColor="@color/main_color"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/margin_top_6"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:visibility="gone"
+        android:background="@drawable/background_install"
+        app:progress_btn_background_color="@color/main_color"
+        app:progress_btn_background_second_color ="@color/color_F2F2F2"
+        app:progress_btn_ball_style="STYLE_BALL_PULSE"
+        app:progress_btn_radius="5dp"
+        app:progress_btn_border_width="2dp"
+        android:text=""/>
+
+
+
+</LinearLayout>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/normal_bg"
+    android:orientation="vertical">
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:visibility="gone"
+        app:columnCount="4">
+    </androidx.gridlayout.widget.GridLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/new_friend_rl"
+            android:visibility="gone"
+            style="@style/ContactsLearItem">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+                    android:id="@+id/new_friend"
+                    android:layout_width="@dimen/contacts_head_image_size"
+                    android:layout_height="@dimen/contacts_head_image_size"
+                    android:background="@drawable/friend_fragment1" />
+
+                <TextView
+                    android:id="@+id/num_tv"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignEnd="@+id/new_friend"
+                    android:layout_alignRight="@+id/new_friend"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="-10dp"
+                    android:layout_marginRight="-10dp"
+                    android:background="@drawable/tab_unread_bg"
+                    android:gravity="center"
+                    android:text=""
+
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/contacts_head_size"
+                    android:visibility="gone"
+                    tools:text="2"
+                    tools:visibility="visible" />
+
+            </RelativeLayout>
+
+            <TextView
+                style="@style/ContactsGridItemText"
+                android:text="@string/new_friend" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/colleague_rl"
+            style="@style/ContactsLearItem">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+                android:id="@+id/colleague_iv"
+                android:layout_width="@dimen/contacts_head_image_size"
+                android:layout_height="@dimen/contacts_head_image_size"
+                android:background="@drawable/friend_fragment2" />
+
+            <TextView
+                style="@style/ContactsGridItemText"
+                android:text="@string/my_colleague" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/group_rl"
+            android:visibility="gone"
+            style="@style/ContactsLearItem">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+                android:id="@+id/group"
+                android:layout_width="@dimen/contacts_head_image_size"
+                android:layout_height="@dimen/contacts_head_image_size"
+                android:background="@drawable/friend_fragment5" />
+
+            <TextView
+                style="@style/ContactsGridItemText"
+                android:text="@string/group" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/notice_rl"
+            android:visibility="gone"
+            style="@style/ContactsLearItem">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+                android:id="@+id/notice_number"
+                android:layout_width="@dimen/contacts_head_image_size"
+                android:layout_height="@dimen/contacts_head_image_size"
+                android:background="@drawable/friend_fragment4" />
+
+            <TextView
+                style="@style/ContactsGridItemText"
+                android:text="@string/service_number" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/black_rl"
+            android:visibility="gone"
+            style="@style/ContactsLearItem">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+                android:id="@+id/black_iv"
+                android:layout_width="@dimen/dp_34"
+                android:layout_height="@dimen/dp_34"
+
+                android:background="@drawable/friend_fragment6" />
+
+            <TextView
+                style="@style/ContactsGridItemText"
+
+                android:text="@string/black_list" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/label_rl"
+            android:visibility="visible"
+            style="@style/ContactsLearItem">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+                android:id="@+id/label"
+                android:layout_width="@dimen/contacts_head_image_size"
+                android:layout_height="@dimen/contacts_head_image_size"
+                android:src="@drawable/friend_fragment8" />
+
+            <TextView
+                style="@style/ContactsGridItemText"
+                android:text="@string/tag" />
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            style="@style/ContactsLearItem">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:paddingTop="@dimen/dp18"
+                android:paddingBottom="@dimen/dp18"
+                android:textColor="@color/color_333"
+                android:text="@string/most_recent_contact"
+
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_14"
+                android:textAlignment="viewStart"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/contacts_rl"
+            android:visibility="gone"
+            style="@style/ContactsGridItem">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/contacts_head_image_size">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+                    android:id="@+id/contacts"
+                    android:layout_width="@dimen/contacts_head_image_size"
+                    android:layout_height="@dimen/contacts_head_image_size"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/friend_fragment3" />
+
+                <TextView
+                    android:id="@+id/num_tv2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignEnd="@+id/contacts"
+                    android:layout_alignRight="@+id/contacts"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="-10dp"
+                    android:layout_marginRight="-10dp"
+                    android:background="@drawable/tab_unread_bg"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/contacts_head_size"
+                    android:visibility="gone"
+                    tools:text="3"
+                    tools:visibility="visible" />
+
+            </RelativeLayout>
+
+            <TextView
+                style="@style/ContactsGridItemText"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/phone_contact" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/device_rl"
+            android:visibility="gone"
+            style="@style/ContactsGridItem">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                app:riv_corner_radius="8dp"
+                android:id="@+id/device_iv"
+                android:layout_width="@dimen/contacts_head_image_size"
+                android:layout_height="@dimen/contacts_head_image_size"
+                android:background="@drawable/friend_fragment7" />
+
+            <TextView
+                style="@style/ContactsGridItemText"
+                android:text="@string/my_device" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

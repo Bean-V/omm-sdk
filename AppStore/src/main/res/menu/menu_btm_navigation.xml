@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+   >
+    <item
+        android:id="@+id/item_mine"
+        android:icon="@mipmap/mine_icon"
+        android:title="@string/mine_str" />
+    <item
+        android:icon="@mipmap/recommend_icon"
+        android:id="@+id/item_recommend"
+        android:title="@string/recommend_str" />
+    <item
+        android:icon="@mipmap/classify_icon"
+        android:id="@+id/item_classify"
+        android:title="@string/classify_str" />
+    <item
+        android:icon="@mipmap/manage_icon"
+        android:id="@+id/item_manage"
+        android:title="@string/manage_str" />
+
+
+</menu>

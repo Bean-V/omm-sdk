@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LetterIndexView">
+        <attr name="letterColor" format="color"/>
+        <attr name="selectLetterColor" format="color"/>
+        <attr name="selectBackgroundColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="ThreeStateCheckbox">
+        <attr name="state_middle" format="boolean" />
+    </declare-styleable>
+
+</resources>

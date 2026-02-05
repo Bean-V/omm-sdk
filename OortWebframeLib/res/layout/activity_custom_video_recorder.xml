@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000">
+
+        <!-- 1. 摄像头预览（占满屏幕，避免拉伸） -->
+
+        <!-- 2. 顶部状态栏（时间、电池等）适配 -->
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <View
+            android:id="@+id/statusBarPlaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="#00000066" />
+
+        <ImageView
+            android:id="@+id/cancelButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/statusBarPlaceholder"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_close"
+            android:padding="8dp"
+            app:tint="#FFFFFF" />
+
+        <!-- 3. 录制计时器（顶部居中） -->
+        <TextView
+            android:id="@+id/timerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/statusBarPlaceholder"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:shadowColor="#000000"
+            android:text="00:00"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- 4. 前后摄像头切换按钮（顶部右侧） -->
+        <ImageView
+            android:id="@+id/switchCameraBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/statusBarPlaceholder"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/btn_circle_bg"
+            android:padding="8dp"
+            android:src="@drawable/ic_switch_camera"
+            app:tint="#FFFFFF" />
+
+        <!-- 5. 底部操作栏（录制按钮居中） -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:background="#00000066"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- 录制按钮（放大居中，带状态变化） -->
+            <ImageView
+                android:id="@+id/recordButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/btn_record_selector"
+
+                android:elevation="4dp" />
+
+            <!-- 录制提示文本（如“点击录制”“点击停止”） -->
+            <TextView
+                android:id="@+id/recordTipText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击开始录制"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/recordingHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="120dp"
+            android:background="#AA000000"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="正在录制..."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#ff000000">
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+        <!-- 播放控制面板 -->
+        <LinearLayout
+            android:id="@+id/controlPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottomPanel"
+            android:background="#66000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/btnPlayPause"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_play"
+                android:contentDescription="播放/暂停" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <!-- 底部取消/确认按钮 -->
+        <LinearLayout
+            android:id="@+id/bottomPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#66000000"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/btnCancel"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_close" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/btnConfirm"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_ok" />
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_contact"
+        android:icon="@drawable/ic_pop_contact"
+        android:title="通讯录"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_av"
+        android:icon="@drawable/ic_pop_av"
+        android:title="音视频"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_map"
+        android:icon="@drawable/ic_pop_map"
+        android:title="地图"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@drawable/ic_pop_exit"
+        android:title="退出登录"
+        app:showAsAction="always" />
+</menu>

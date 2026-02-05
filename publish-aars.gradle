@@ -1,0 +1,55 @@
+// publish-aar.gradle - 使用Gradle内置Maven发布
+apply plugin: 'maven-publish'
+
+// 创建一个配置来存放AAR文件
+configurations {
+    aarFiles
+}
+
+// 将AAR文件添加到配置
+def aarFiles = [
+        'simkeylibrary-release.aar',
+        'kplayer-androidx-5.0.5-20240704-1.aar',
+        'alipaySdk-15.5.9-20181123210601.aar',
+        'xjgarsdklibrary-release-9.2.1-2019-08-31.aar',
+        'libfriapkrecord-r1.0.1.aar'
+]
+
+// 为每个AAR文件创建发布任务
+aarFiles.each { aarName ->
+    def aarFile = file("omm-lib/libs/${aarName}")
+
+    if (aarFile.exists()) {
+        // 创建发布配置
+        publishing {
+            publications {
+                // 动态创建发布配置，例如: publishSimkeylibraryReleaseAarPublicationToMavenLocal
+                create(aarName.replace('.aar', '') + 'Aar', MavenPublication) {
+                    groupId = 'local.omm-lib'
+                    artifactId = aarName.replace('.aar', '')
+                    version = '1.0.0'
+
+                    artifact(aarFile)
+                }
+            }
+        }
+    }
+}
+
+// 创建统一发布任务
+task publishLocalAarsToMavenLocal {
+    dependsOn tasks.withType(PublishToMavenLocal)
+
+    doFirst {
+        println "=== 开始发布AAR到本地Maven仓库 ==="
+        println "使用Gradle内置Maven发布功能，无需安装Maven"
+    }
+
+    doLast {
+        println "=== 发布完成 ==="
+        println "AAR已发布到: ${System.getProperty('user.home')}/.m2/repository/local/omm-lib/"
+    }
+}
+
+// 执行把aar包转到本地创库：./gradlew publishLocalAarsToMavenLocal --no-configuration-cache
+//执行打包aar文件包：./gradlew :omm-lib:bundleReleaseAar

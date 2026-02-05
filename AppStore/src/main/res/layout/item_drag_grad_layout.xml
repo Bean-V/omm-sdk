@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    最外层使用RelativeLayout 导致 @+id/img_remove 加载不出来问题-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <com.oortcloud.appstore.widget.RoundImageView
+        android:id="@+id/app_icon"
+        android:scaleType="centerCrop"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/margin_top_8"
+        android:layout_centerHorizontal="true"
+        app:radius="@dimen/radius_5"
+        android:src="@mipmap/default_app_icon"
+       />
+
+
+    <ImageView
+        android:id="@+id/img_remove"
+        android:layout_toEndOf="@id/app_icon"
+        android:layout_width="16dp"
+        android:layout_marginStart="@dimen/margin_left_23"
+        android:layout_height="16dp"
+        android:visibility="gone"
+        android:src="@mipmap/remove_icon"
+      />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="false"
+        android:lines="2"
+        android:layout_marginTop="@dimen/margin_top_10"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/app_icon"
+        android:layout_centerHorizontal="true" >
+    </TextView>
+
+</LinearLayout>

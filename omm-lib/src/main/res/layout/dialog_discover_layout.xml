@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="50dp"
+    android:background="@drawable/bg_discover">
+
+    <TextView
+        android:id="@+id/share_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:text="分享" />
+    <TextView
+        android:id="@+id/repeat_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:text="转发" />
+     <TextView
+         android:id="@+id/report_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:text="举报" />
+     <TextView
+         android:id="@+id/cancel_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:textColor="#333333"
+
+        android:gravity="center"
+        android:text="取消" />
+
+</LinearLayout>

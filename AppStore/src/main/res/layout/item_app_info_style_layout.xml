@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:gravity="center_horizontal"
+    android:paddingBottom="@dimen/margin_bottom_10"
+    android:orientation="vertical">
+
+    <com.oortcloud.appstore.widget.RoundImageView
+        android:id="@+id/app_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:radius="@dimen/radius_5"
+        android:src="@mipmap/default_app_icon"/>
+    <TextView
+
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/text_size_14"
+        android:text="Task Manager"
+        android:maxLines="3"
+        android:gravity="center"
+        android:textColor="@color/color_1A1A1A"
+        android:layout_marginTop="@dimen/margin_top_4"
+        android:layout_height="wrap_content"
+        />
+<!--    android:autoSizeTextType="uniform"-->
+<!--    android:autoSizeMinTextSize="10sp"-->
+<!--    android:autoSizeStepGranularity="1sp"-->
+    <TextView
+        android:id="@+id/tv_app_type"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/text_size_12"
+        android:gravity="center"
+        android:text="工具"
+        android:maxLines="3"
+        android:textColor="@color/color_999999"
+        android:layout_marginTop="@dimen/margin_top_4"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_apply"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/text_size_10"
+        android:gravity="center"
+        android:text="可申请"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:textColor="#00BA4A"
+        android:layout_marginBottom="@dimen/dp_5"
+        android:background="@drawable/background_apply"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

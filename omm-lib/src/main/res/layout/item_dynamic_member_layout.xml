@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="12dp"
+    android:descendantFocusability="afterDescendants">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_header"
+        android:layout_marginTop="@dimen/dp10_contact"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="4dp"/>
+
+
+    <ImageView
+        android:id="@+id/iv_add_people"
+        android:layout_marginTop="@dimen/dp10_contact"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@mipmap/icon_dynamic_add_member" />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@mipmap/icon_dynamic_cancel_img"
+        android:layout_marginLeft="50dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_marginTop="70dp"
+        android:layout_width="55dp"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:text="名称"
+        android:textColor="#666666"
+        />
+
+</FrameLayout>

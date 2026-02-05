@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="kl.cds.tools.aidldemo.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvAppInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tvICertManag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/cert_manage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="证书管理[本地操作]" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="演示的主要功能：\n导出证书、数字签名、消息签名、数字信封加密、获取证书中的信息" />
+
+        <Button
+            android:id="@+id/cert_manager_svs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="svs签名验签[网络操作]" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="演示的主要功能：\n本地签名，远端验签；远端签名，本地验签" />
+
+        <Button
+            android:id="@+id/little_tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="小工具" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="演示的主要功能：\n获取终端标识、终端标识的SM3结果的Base64值" />
+
+    </LinearLayout>
+</ScrollView>

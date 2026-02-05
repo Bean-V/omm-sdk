@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:background="@color/transparent">
+
+    <com.oort.weichat.view.MergerStatus
+        android:id="@+id/mergerStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/color_ff3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_title_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:ellipsize="middle"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginBottom="15dp"
+                    android:maxWidth="200dp"
+                    android:singleLine="true"
+                    android:text="@string/work_dynamice"
+                    android:textColor="@color/title_text_color"
+                    android:textSize="@dimen/sp_18_text_size" />
+
+                <TextView
+
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="5dp"
+                    style="@style/TabTitleIndicator"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="gone"/>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"/>
+
+
+            <ImageView
+                android:id="@+id/iv_my"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="3dp"
+                android:padding="4dp"
+                android:src="@mipmap/icon_dynamic_home_user"
+                android:tint="@color/nav_text_color"/>
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:src="@mipmap/icon_dynamic_home_search"
+                android:tint="@color/nav_text_color"/>
+            <ImageView
+                android:id="@+id/iv_dynamic_push"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:src="@mipmap/icon_dynamic_home_push"
+                android:tint="@color/nav_text_color"/>
+
+        </LinearLayout>
+
+    </com.oort.weichat.view.MergerStatus>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tab_layout"
+                        style="@style/TabLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        app:tabMinWidth="40dp"
+
+                        app:tabTextAppearance="@style/MyDynaCustomTextAppearance"
+                        />
+
+                </LinearLayout>
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible" >
+
+                    <Button
+                        android:id="@+id/btn_ok__01"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_bg_21_main_color"
+                        android:text="确定"
+                        android:textColor="#ffffff" />
+                </androidx.viewpager.widget.ViewPager>
+
+                <com.oort.weichat.fragment.dynamic.views.MusicButton
+
+                    android:id="@+id/cv_audio"
+                    android:layout_gravity="right|bottom"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="@dimen/dp60"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:cardBackgroundColor="#000000"
+                    android:visibility="gone"
+                    app:cardCornerRadius="30dp">
+                    <com.makeramen.roundedimageview.RoundedImageView
+
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/ic_home_audio_icon"
+                        android:layout_gravity="center"/>
+
+                </com.oort.weichat.fragment.dynamic.views.MusicButton>
+
+            </FrameLayout>
+
+
+            </LinearLayout>
+        <com.xuexiang.xui.widget.layout.ExpandableLayout
+            android:id="@+id/expandable_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2d000000"
+            android:visibility="gone"
+            app:el_duration="1000"
+            app:el_expanded="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top_dialog_bg_16_ff"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设置置顶"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#333333"
+                    android:layout_marginBottom="10dp"/>
+
+                <com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_margin="4dp"
+                    android:background="#ffffff"
+                    app:alignContent="space_around"
+                    app:flexWrap="wrap">
+
+                    <RadioButton
+                        android:id="@+id/rb01"
+                        android:layout_width="73dp"
+                        android:layout_height="36dp"
+                        android:gravity="center"
+                        android:checked="true"
+                        android:button="@null"
+                        android:text="置顶一"
+                        android:background="@drawable/tv_bg_18_selector"
+                        android:textColor="@drawable/tv_text_33_mian_color_selector"
+                        android:textSize="@dimen/three_level_content"
+                        android:layout_margin="8dp"
+                        android:visibility="visible"/>
+
+                    <RadioButton
+                        android:id="@+id/rb02"
+                        android:button="@null"
+                        android:layout_width="73dp"
+                        android:layout_height="36dp"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:text="置顶二"
+                        android:background="@drawable/tv_bg_18_selector"
+                        android:textColor="@drawable/tv_text_33_mian_color_selector"
+                        android:textSize="@dimen/three_level_content" />
+
+                    <RadioButton
+                        android:id="@+id/rb03"
+                        android:layout_width="73dp"
+                        android:layout_height="36dp"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:text="置顶三"
+                        android:background="@drawable/tv_bg_18_selector"
+                        android:textColor="@drawable/tv_text_33_mian_color_selector"
+                        android:textSize="@dimen/three_level_content" />
+
+                    <RadioButton
+                        android:id="@+id/rb04"
+                        android:layout_width="73dp"
+                        android:layout_height="36dp"
+                        android:layout_margin="8dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="置顶四"
+                        android:background="@drawable/tv_bg_18_selector"
+                        android:textColor="@drawable/tv_text_33_mian_color_selector"
+                        android:textSize="@dimen/three_level_content" />
+
+                    <RadioButton
+                        android:id="@+id/rb05"
+                        android:layout_width="73dp"
+                        android:layout_height="36dp"
+                        android:layout_margin="8dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="置顶五"
+                        android:background="@drawable/tv_bg_18_selector"
+                        android:textColor="@drawable/tv_text_33_mian_color_selector"
+                        android:textSize="@dimen/three_level_content" />
+
+
+
+
+                </com.google.android.flexbox.FlexboxLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="取消"
+                        android:background="@drawable/tv_bg_21_f7"
+                        android:textColor="#333333"/>
+                    <Button
+                        android:id="@+id/btn_ok"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="20dp"
+                        android:text="确定"
+                        android:background="@drawable/tv_bg_21_main_color"
+                        android:textColor="#ffffff"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </com.xuexiang.xui.widget.layout.ExpandableLayout>
+
+        <com.xuexiang.xui.widget.layout.ExpandableLayout
+            android:id="@+id/expandable_layout01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2d000000"
+            android:visibility="visible"
+            app:el_duration="1000"
+            app:el_expanded="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top_dialog_bg_16_ff"
+                android:orientation="vertical">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/keyword"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#333333"
+                    android:layout_marginBottom="10dp"/>
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:padding="10dp"
+                    android:height="43dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edit_text_bg_radius"
+                    android:hint="@string/input_please"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/btn_cancel_01"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="@string/cancel"
+                        android:background="@drawable/tv_bg_21_f7"
+                        android:textColor="#333333"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </com.xuexiang.xui.widget.layout.ExpandableLayout>
+    </FrameLayout>
+
+
+
+
+
+</LinearLayout>

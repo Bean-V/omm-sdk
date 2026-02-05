@@ -1,0 +1,51 @@
+//pluginManagement {
+//    repositories {
+//        google {
+//            content {
+//                includeGroupByRegex("com\\.android.*")
+//                includeGroupByRegex("com\\.google.*")
+//                includeGroupByRegex("androidx.*")
+//            }
+//        }
+//        mavenCentral()
+//        gradlePluginPortal()
+//    }
+//}
+//dependencyResolutionManagement {
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//}
+
+rootProject.name = "ommSDK"
+include ':app'
+
+include ':ooortCloudDisk'
+include ':MPChartLib'
+include ':matisse'
+include ':ToolsMain'
+include ':provider_lib'
+include ':OortWebframeLib'
+include ':basemodule'
+include ':pullToRefershLibraryMy'
+include ':AppStore'
+include ':giraffeplayer'
+include ':sound_recon'
+include ':floatview'
+include ':offline'
+include ':FrameLibrary'
+include ':omm-lib'
+include ':YZxing-lib'
+include ':Contacts'
+include ':Utilities3-1.0.3'
+include ':liveLibrary'
+include ':AIDICert'
+include ':Levc-lib'
+include ':oort_imagepick_sdk'
+include ':BaseLibrary'
+include ':jcvideoplayer-lib'
+include ':screenrecorder'
+include ':IDCardCheck'
+include ':OpenGLlibrary'

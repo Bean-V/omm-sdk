@@ -1,0 +1,85 @@
+<!-- TODO: Remove or change this placeholder text -->
+<resources>
+    <string name="basepopup_error_non_act_context">Can not find host Activity. Please ensure that at least one Activity is opened.</string>
+    <string name="basepopup_error_thread">Please operate on the main thread.</string>
+    <string name="basepopup_error_destroyed">This BasePopup has already been destroyed, unable to continue showing.</string>
+    <string name="basepopup_error_decorview">PopupWindow requires %s DecorView is WindowToken, please check if DecorView exists.</string>
+    <string name="basepopup_window_not_prepare">%s window is not ready yet, wait for it to be ready and then pop up.</string>
+    <string name="basepopup_window_prepared">%s window is ready, execute pop up.</string>
+    <string name="basepopup_has_been_shown">BasePopup has already been displayed.</string>
+    <string name="basepopup_shown_successful">Popup successful.</string>
+    <string name="basepopup_host">Host (%s)</string>
+    <string name="basepopup_host_destroyed">Host has been destroyed.</string>
+    <string name="find_new_version">New version</string>
+    <string name="version_des">Version description:</string>
+    <string name="use_old">Continue using old version</string>
+    <string name="update_version">Update now</string>
+    <string name="base_cancel">Cancel</string>
+    <string name="pull_to_refresh_pull_label">Pull down to refresh</string>
+    <string name="pull_to_refresh_release_label">Release to refresh</string>
+    <string name="pull_to_refresh_refreshing_label">Refreshing</string>
+
+    <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
+    <string name="pull_to_refresh_from_bottom_pull_label">Pull up to load more</string>
+    <string name="pull_to_refresh_from_bottom_release_label">Release to load more</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">Loading...</string>
+
+    <string name="support_recycler_data_empty">No data available for the moment.</string>
+    <string name="support_recycler_more_not">No more data available.</string>
+    <string name="support_recycler_click_load_more">Click to load more</string>
+    <string name="support_recycler_load_error">Loading error, please try again later.</string>
+    <string name="support_recycler_load_more_message">Loading more data, please wait...</string>
+    <string name="xupdate_lab_update">Update</string>
+    <string name="xupdate_lab_background_update">Background update</string>
+    <string name="xupdate_lab_install">Install</string>
+
+    <string name="xupdate_lab_ignore">Ignore this version</string>
+    <string name="xupdate_tip_permissions_reject">Please authorize access to storage space permissions, otherwise the app cannot be updated!</string>
+    <string name="xupdate_connecting_service">Connecting to server...</string>
+    <string name="xupdate_start_download">Starting download</string>
+    <string name="xupdate_download_complete">Download complete, click to install</string>
+    <string name="xupdate_lab_ready_update">Are you sure to upgrade to version %s?</string>
+    <string name="xupdate_lab_new_version_size">New version size:</string>
+    <string name="xupdate_lab_downloading">Downloading:</string>
+    <string name="xupdate_tip_download_url_error">New version download URL is incorrect</string>
+    <string name="xupdate_error_install_failed">Failed to install APK!</string>
+    <string name="xupdate_error_download_permission_denied">Unable to download: Storage permission denied!</string>
+    <string name="xupdate_error_download_failed">Download failed!</string>
+    <string name="xupdate_error_prompt_activity_destroy">Prompt failed: Activity has been destroyed!</string>
+    <string name="xupdate_error_prompt_unknown">Prompt failed: Unknown error!</string>
+    <string name="xupdate_error_check_apk_cache_dir_empty">Update failed: The download cache directory for APK is empty!</string>
+    <string name="xupdate_error_check_ignored_version">Update failed: The version has been ignored!</string>
+    <string name="xupdate_error_check_parse">Query failed: Parse Json error!</string>
+    <string name="xupdate_error_check_json_empty">Query failed: Json is empty!</string>
+    <string name="xupdate_error_check_no_new_version">It is the latest version!</string>
+    <string name="xupdate_error_check_updating">Version updating in progress!</string>
+    <string name="xupdate_error_check_no_network">Query failed: No network!</string>
+    <string name="xupdate_error_check_no_wifi">Query failed: No WIFI!</string>
+    <string name="xupdate_error_check_net_request">Query failed: Network request error!</string>
+
+    <string name="base_data_exception">Data exception, please try again later</string>
+    <string name="base_net_exception">Network exception, please try again later</string>
+    <string name="base_request_exception">Network exception, please try again later</string>
+    <string name="base_tip_unkown_error_place_holder">Unknown exception, %s</string>
+    <string name="base_install">Installing...</string>
+
+    <string name="app_name">WImagePreview</string>
+
+    <string name="num_indicator_text">%1$d/%2$d</string>
+
+    <!-- 异常消息 -->
+    <!-- 图片为空 -->
+    <string name="exception_image_empty">Unable to get image file;</string>
+    <!-- 图片集合为空 -->
+    <string name="exception_image_list_empty">The minimum length of the image array is 1, actual 0;</string>
+    <!-- 图片类型无效 -->
+    <string name="exception_image_type_invalid">Invalid image file type;</string>
+    <!-- 图片集合越界 -->
+    <string name="exception_array_out_of_bounds">Array index out of bounds;</string>
+    <string name="exception_array_index">Index: %1$d;</string>
+    <string name="exception_array_index_size">Index: %1$d, size: %2$d;</string>
+    <!-- 未知参数 -->
+    <string name="exception_illegal_argument">Illegal argument: %s;</string>
+    <string name="base_save">Save</string>
+
+</resources>

@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="22dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="22.0"
+    android:tint="?attr/colorControlNormal">
+
+    <!-- 第一个圆点（左） - 纵向居中 -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M6,12C7.1,12 8,11.1 8,10C8,8.9 7.1,8 6,8C4.9,8 4,8.9 4,10C4,11.1 4.9,12 6,12Z" />
+
+    <!-- 第二个圆点（中） - 纵向居中 -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M12,12C13.1,12 14,11.1 14,10C14,8.9 13.1,8 12,8C10.9,8 10,8.9 10,10C10,11.1 10.9,12 12,12Z" />
+
+    <!-- 第三个圆点（右） - 纵向居中 -->
+    <path
+        android:fillColor="#333333"
+        android:pathData="M18,12C19.1,12 20,11.1 20,10C20,8.9 19.1,8 18,8C16.9,8 16,8.9 16,10C16,11.1 16.9,12 18,12Z" />
+</vector>

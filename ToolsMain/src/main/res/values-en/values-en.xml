@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <string name="app_name">DAB</string>-->
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="tab_home">Home</string>
+    <string name="tab_find">Discover</string>
+    <string name="tab_set">Setting</string>
+    <string name="file_manager">File Manager</string>
+    <string name="file_my">My files</string>
+    <string name="file_wx">WeChat</string>
+    <string name="file_transfer">File Transfer</string>
+    <string name="file_pic">Picture</string>
+    <string name="file_video">Video</string>
+    <string name="file_audio">Audio</string>
+    <string name="file_doc">Doc</string>
+    <string name="file_other">Other</string>
+    <string name="back_up_contact">Contact</string>
+    <string name="all_size">Fullsize</string>
+    <string name="res_size">Freeszie</string>
+    <string name="fm_cancel">Cancel</string>
+    <string name="fm_use_total">Used/Total</string>
+
+    <string name="fm_local">Local</string>
+    <string name="fm_u">USB</string>
+    <string name="fm_u_out">Eject</string>
+    <string name="fm_copytoU">ToUSB</string>
+    <string name="fm_rename">Rename</string>
+    <string name="fm_newfile">New folder</string>
+    <string name="fm_post">Post</string>
+    <string name="fm_del">Delete</string>
+    <string name="fm_copytolocal">ToLocal</string>
+
+    <string name="find">Discover</string>
+    <string name="find_tm">TianMao</string>
+    <string name="find_dy">DouDian</string>
+    <string name="find_jd">JD</string>
+
+    <string name="setting">Setting</string>
+    <string name="changeLangage">Change langage</string>
+    <string name="abut_us">Abut us</string>
+    <string name="privacy_p">Privacy Policy</string>
+
+    <string name="sys_task">Synchronization</string>
+    <string name="no_usb">Please insert USB </string>
+
+    <string name="selectAll">All</string>
+    <string name="not_selectAll">UnAll</string>
+    <string name="back">Back</string>
+
+
+
+    <string name="checking">Checking USB</string>
+
+    <string name="request_u_permisson">Request permisson for USB</string>
+
+    <string name="u_ejected">USB has been ejected</string>
+
+    <string name="USB_connnect">USB connected</string>
+
+    <string name="loading">loading</string>
+
+    <string name="copying">Copying</string>
+
+    <string name="copy_list">Copy list</string>
+
+    <string name="add_copy_lists">Add to copy lists</string>
+
+    <string name="read_directory">Read directory</string>
+    <string name="read_fileData">Read file data</string>
+    <string name="reading">Reading</string>
+
+    <string name="read_files_to_copy">Read file to copy</string>
+    <string name="read_files_to_del">Read file to delete</string>
+    <string name="read_files_to_move">Read file to move</string>
+    <string name="read_files_to_encrypt">Read file to encrypt</string>
+    <string name="read_files_to_share">Read file to share</string>
+
+
+
+
+    <string name="confirm_del_finsh_list">Confirm to delete record of copyed files</string>
+
+    <string name="confirm_del_unfinsh_list">Confirm to delete record of unfinished files</string>
+
+    <string name="confirm_del_finsh_list_addtion">At the same time, delete the copied files to free the phone memory</string>
+
+    <string name="deleting">Deleting</string>
+    <string name="addpasing">Encrypting</string>
+    <string name="decrypting">Decrypting</string>
+    <string name="current_file">Current file</string>
+    <string name="all_files">All files</string>
+
+    <string name="tip">Tip</string>
+    <string name="decrypt">Decrypt</string>
+
+    <string name="confirm_del_file">Confirm delete files</string>
+
+    <string name="confirm_copy_file">Confirm copy files</string>
+    <string name="confirm_move_file">Confirm move files</string>
+    <string name="confirm_addpas_file">Confirm encrypt files</string>
+    <string name="confirm_share_file">Confirm share files</string>
+
+    <string name="files">files</string>
+
+    <string name="unselect_file">unselect file</string>
+
+    <string name="confirm">OK</string>
+
+    <string name="need_permisson_to_fm">need to authorize file management permission to access file data</string>
+
+    <string name="Transferring">Unfinished</string>
+    <string name="Transfer_succeeded">Finished</string>
+
+    <string name="contact_backup_title">Contact</string>
+    <string name="contactUnbackup">UnBackup</string>
+
+    <string name="contactBackuped">Backuped</string>
+    <string name="contactBackup">Backup</string>
+    <string name="contactSys">Recovery</string>
+
+    <string name="contactSys_tip">Click file item can recovery</string>
+
+    <string name="fm_copyto">Copy to</string>
+    <string name="fm_moveto">Move to</string>
+    <string name="fm_add_pass">Encrypt</string>
+
+    <string name="success">Success</string>
+    <string name="failure">Failure</string>
+    <string name="finsh_encrypt">Encrypt finshed</string>
+    <string name="finsh_decrypt">Decryption completed</string>
+    <string name="go_find">Go to check</string>
+    <string name="encrpty_list">Encrypted</string>
+
+
+
+    <string name="input_new_name">Input new file name</string>
+
+    <string name="input_pass">Input password</string>
+    <string name="invaild_file">Invaild_file</string>
+    <string name="unsupport_open_file">Unsupport to open file</string>
+    <string name="no_app_installed">no app installed can open file</string>
+    <string name="Lower_version">Lower version</string>
+
+    <string name="eject_the_USB_stick">Eject the USB stick</string>
+    <string name="wait_to_copy">Waiting to Copy</string>
+
+    <string name="tap_to_requset_usb_permisson">Tap to requset USB permisson</string>
+    <string name="check_task">Incomplete task detected, continue?</string>
+
+    <string name="countinue">Continue</string>
+
+
+<!--    <string name="button_back">Back</string>-->
+<!--    <string name="button_original">Original</string>-->
+
+    <string name="album_name_all">All Media</string>
+
+    <string name="button_preview">Preview</string>
+    <string name="button_apply_default">Apply</string>
+    <string name="button_apply">Apply(%1$d)</string>
+    <string name="button_back">Back</string>
+    <string name="photo_grid_capture">Camera</string>
+    <string name="empty_text">No media yet</string>
+    <string name="button_ok">OK</string>
+
+    <string name="error_over_count_default">You have reached max selectable</string>
+    <string name="error_over_count">You can only select up to %1$d media files</string>
+    <string name="error_under_quality">Under quality</string>
+    <string name="error_over_quality">Over quality</string>
+    <string name="error_file_type">Unsupported file type</string>
+    <string name="error_type_conflict">Can\'t select images and videos at the same time</string>
+    <string name="error_no_video_activity">No App found supporting video preview</string>
+    <string name="error_over_original_size">Can\'t select the images larger than %1$d MB</string>
+    <string name="error_over_original_count">%1$d images over %2$d MB. Original will be unchecked</string>
+    <string name="button_original">Original</string>
+    <string name="button_sure_default">Sure</string>
+    <string name="button_sure">Sure(%1$d)</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="migrate_phone_device">From phone to USB</string>
+    <string name="migrate_device_phone">From USB to phone</string>
+    <string name="migrate">Migration</string>
+    <string name="migrate_cancel">Cancel migration</string>
+    <string name="migrate_delete">Delete migration record</string>
+    <string name="migrate_back_tip">Backing up, cannot return to the previous interface</string>
+    <string name="migrate_no_data">Backup record not found</string>
+    <string name="migrate_done">Done</string>
+    <string name="migrate_un_done">Undone</string>
+
+    <string name="migrate_del_usb_tip">Detected existing backup records. Do you need to delete the records and back up again</string>
+    <string name="migrate_del_local_tip">Detected existing recovery record. Do you want to delete the record and restore it again</string>
+    <string name="migrate_recovery">Restore backup</string>
+
+    <string name="migrate_Duplicate_file">Duplicate file</string>
+
+    <string name="fm_share">Share </string>
+    <string name="dup_see">see</string>
+
+    <string name="comfirm_open_tip">Are you sure to start synchronization? When on, inserting the USB flash drive will automatically sync the files in the phone to the USB flash drive.</string>
+
+    <string name="comfirm_close">Are you sure to cancel synchronization?</string>
+
+    <string name="sys_tasking">Automatic synchronization in progress</string>
+    <string name="sys_task_stoped">Automatic synchronization stopped</string>
+    <string name="sys_task_close">Automatic synchronization is not turned on</string>
+    <string name="sys_see_detail">View details</string>
+
+
+
+
+
+
+
+
+
+
+
+</resources>

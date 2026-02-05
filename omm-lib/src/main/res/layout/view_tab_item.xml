@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 核心内容：图标+文字（垂直排列） -->
+    <LinearLayout
+        android:id="@+id/ll_tab_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingBottom="@dimen/tab_padding_bottom"
+        android:layout_marginBottom="2dp">
+
+        <!-- 图标 -->
+        <ImageView
+            android:id="@+id/iv_tab_icon"
+            android:layout_width="@dimen/tab_icon_size"
+            android:layout_height="@dimen/tab_icon_size"
+            android:scaleType="centerInside"/>
+
+        <!-- 文字 -->
+        <TextView
+            android:id="@+id/tv_tab_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/tab_text_size"
+            android:layout_marginTop="@dimen/tab_drawable_padding"/>
+    </LinearLayout>
+
+    <!-- 未读角标（默认隐藏） -->
+    <TextView
+        android:id="@+id/tv_badge"
+        android:layout_width="@dimen/badge_size"
+        android:layout_height="@dimen/badge_size"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/badge_red_circle"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+</FrameLayout>

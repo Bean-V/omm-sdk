@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="16dp">
+
+    <ImageView
+        android:id="@+id/iv_group_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
+
+    <TextView
+        android:id="@+id/tv_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="分组名称"
+        android:textSize="16sp"
+        android:layout_marginStart="12dp"/>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/iv_arrow"-->
+<!--        android:layout_width="20dp"-->
+<!--        android:layout_height="20dp"-->
+<!--        android:src="@drawable/ic_arrow_right"-->
+<!--        android:layout_marginStart="auto"-->
+<!--        android:tint="@android:color/darker_gray"/>-->
+
+</LinearLayout>

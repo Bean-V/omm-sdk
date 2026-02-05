@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:background="#ffffff">
+    <ImageView
+        android:id="@+id/iv_left"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/timg"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/iv_left"
+        android:layout_marginBottom="15dp"
+        android:layout_centerVertical="true"
+        android:text="bumena"
+        android:textColor="#000000"/>
+    <ImageView
+        android:id="@+id/iv_right"
+        android:layout_width="20dp"
+        android:layout_height="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_right_arrow"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_ece"/>
+</RelativeLayout>

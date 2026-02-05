@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/edit_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="invisible">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/toolbar_layout" />
+
+<!--        <com.oortcloud.appmall.widget.RecyclerScrollView-->
+<!--            android:layout_below="@id/title"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@id/title">-->
+
+<!--    </androidx.core.widget.NestedScrollView>-->
+
+
+    <RelativeLayout
+        android:layout_below="@id/title"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_18"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_module_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_left_23"
+                android:drawableEnd="@mipmap/edit_icom"
+                android:drawablePadding="15dp"
+                android:text="@string/my_app"
+                android:layout_centerVertical="true"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/text_size_14" />
+
+            <TextView
+                android:id="@+id/tv_cue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_left_23"
+                android:layout_below="@id/tv_module_name"
+                android:text="@string/shift_position_str"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_size_12" />
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_right_16"
+                android:checked="true"
+                android:button="@drawable/checkbox"/>
+
+
+            <TextView
+                android:id="@+id/tv_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_page_show_str"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/checkbox"
+                android:textColor="@color/color_666666"
+                android:layout_marginEnd="12dp"
+                android:textSize="@dimen/text_size_12" />
+
+
+        </RelativeLayout>
+
+        <com.oortcloud.appstore.widget.DragGridView
+            android:descendantFocusability="blocksDescendants"
+            android:id="@+id/dragGridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="320dp"
+            android:layout_below="@id/line1"
+            android:layout_marginTop="18dp"
+            android:cacheColorHint="@android:color/transparent"
+            android:gravity="center"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:horizontalSpacing="10dip"
+            android:verticalSpacing="10dip">
+
+        </com.oortcloud.appstore.widget.DragGridView>
+
+        <TextView
+            android:id="@+id/tv_hint"
+            android:layout_below="@id/dragGridView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:visibility="gone"
+            android:text="没有下载应用，请去下载更新"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/editor_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dragGridView"
+            android:layout_marginTop="@dimen/margin_top_12"
+            android:background="@color/color_FAFFFFFF"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/check_color"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/check_color"
+            app:tabTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+            app:tabTextColor="@color/color_A1A1A1">
+
+        </com.google.android.material.tabs.TabLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/edit_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editor_tab_layout" />
+
+    </RelativeLayout>
+
+
+<!--    </com.oortcloud.appmall.widget.RecyclerScrollView>-->
+
+
+</RelativeLayout>

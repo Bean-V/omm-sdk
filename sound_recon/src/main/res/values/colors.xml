@@ -1,0 +1,12 @@
+<resources>
+	<color name="colorPrimary">#2F69F8</color>
+	<color name="colorPrimaryDark">#2F69F8</color>
+	<color name="colorAccent">#2F69F8</color>
+	<color name="colorControlHighlight">#2F69F8</color>
+	<color name="colorControlNormal">#9F9FF9</color>
+    <color name="backgroundColorDark">#222327</color>
+    <color name="backgroundColorLight">#E8D8FB</color>
+    <color name="textColorLight">#feb</color>
+    <color name="textColorDark">#222327</color>
+	<color name="mainColor">#2F69F8</color>
+</resources>

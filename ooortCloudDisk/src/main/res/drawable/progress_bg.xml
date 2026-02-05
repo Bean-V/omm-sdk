@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<!--&lt;!&ndash;    &lt;!&ndash;  设置背景色图像资源  &ndash;&gt;&ndash;&gt;-->
+<!--    <item android:id="@android:id/background" android:drawable="#D3D3D3" />-->
+<!--&lt;!&ndash;    &lt;!&ndash;  设置第一级进度条颜色图像资源  &ndash;&gt;&ndash;&gt;-->
+<!--    <item android:id="@android:id/progress"   android:drawable="@color/color_239"/>-->
+
+    <!--  设置背景色（黑色）  -->
+    <item  android:id="@android:id/background" >
+        <shape>
+            <corners android:radius="5dip" />
+            <gradient android:startColor="#D8D8D8"
+                android:endColor="#D8D8D8" />
+        </shape>
+    </item>
+
+    <!--  设置进度条颜色（白色）  -->
+    <item  android:id="@android:id/progress" >
+        <clip>
+            <shape>
+                <corners android:radius="5dip" />
+                <gradient  android:startColor="@color/main_color"
+                    android:endColor="@color/main_color" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>
+

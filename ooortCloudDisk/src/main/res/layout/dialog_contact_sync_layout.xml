@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_radius_cd"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16sp"
+        android:layout_marginTop="@dimen/dp_31"
+        android:paddingTop="10dp"
+        android:text="更改联系人同步方式"
+        android:textColor="@color/color_333"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/merge_tv"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="@dimen/dp_36"
+        android:layout_marginTop="@dimen/dp_26"
+        android:layout_marginRight="@dimen/dp_36"
+        android:background="@drawable/cheek_contact_selector"
+        android:gravity="center"
+        android:text="合并安全区联系人"
+        android:textColor="@color/main_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/cover_tv"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="@dimen/dp_36"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_36"
+        android:layout_marginBottom="@dimen/dp_36"
+        android:background="@drawable/cheek_contact"
+        android:gravity="center"
+        android:text="覆盖安全区联系人"
+        android:textColor="@color/color_999"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:id="@+id/all_layout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom">
+
+        <TextView
+            android:id="@+id/confirm_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_31"
+            android:background="@drawable/cl_contact_cd"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:text="确定"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_toLeftOf="@id/confirm_btn"
+            android:background="@drawable/cl_contact_cd"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:text="取消"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#007AFF</color>
+    <color name="colorPrimaryDark">#007AFF</color>
+    <color name="colorAccent">#007AFF</color>
+
+    <color name="color_007AFF">#007AFF</color>
+    <color name="check_color">#1156a6</color>
+    <color name="nav_color">#1156a6</color>
+    <color name="nav_icon_color">#ffffff</color>
+    <color name="nav_text_color">#ffffff</color>
+    <color name="nav_search_text_color">#1156a6</color>
+    <color name="main_color">#1156a6</color>
+    <color name="title_color">#000000</color>
+    <color name="back_icon_color">#000000</color>
+    <color name="color_999999">#999999</color>
+    <color name="colorBackgroundWhite">#fdfdfe</color>
+    <color name="color_FAFFFFFF">#FAFFFFFF</color>
+    <color name="color_A1A1A1">#A1A1A1</color>
+    <color name="color_D8D8D8">#D8D8D8</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_FBA213">#FBA213</color>
+    <color name="color_FCD46A">#FCD46A</color>
+    <color name="color_F2F2F2">#F2F2F2</color>
+    <color name="color_1A1A1A">#1A1A1A</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_86858B">#86858B</color>
+    <color name="color_EE3F30">#EE3F30</color>
+    <color name="color_F51500">#F51500</color>
+    <color name="color_FF007AFF">#FF007AFF</color>
+    <color name="color_FF3F70FF">#FF3F70FF</color>
+    <color name="color_F3F3F3">#F3F3F3</color>
+     <color name="color_808080">#808080</color>
+     <color name="color_dd0">#DD001B</color>
+
+
+
+
+
+    <color name="colorDownload">#509dfe</color>
+
+
+    <!-- 下拉刷新时，颜色值 -->
+    <color name="fresh_color1">#ff00ddff</color>
+    <color name="fresh_color2">#ffffbb33</color>
+    <color name="fresh_color3">#ffff4444</color>
+    <color name="fresh_color4">#ffaa66cc</color>
+    <color name="fresh_color5">#1A1A1A</color>
+    <color name="fresh_color6">#24cf5f</color>
+
+
+    <color name="download_loading_view_bg_color">#c8000000</color>
+</resources>

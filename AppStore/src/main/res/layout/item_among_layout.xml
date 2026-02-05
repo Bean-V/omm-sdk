@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="68dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginLeft="16dp"
+        android:gravity="center"
+        android:text="1" />
+
+
+    <com.oortcloud.appstore.widget.RoundImageView
+        android:id="@+id/image"
+        android:layout_width="49.13dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="24dp"
+        android:layout_toRightOf="@id/tv_number"
+        app:radius="@dimen/radius_5"
+        android:src="@mipmap/app_icon" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/image"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/color_333333"
+                android:textSize="14.67sp" />
+
+            <com.oortcloud.appstore.widget.RatingBarView
+                android:id="@+id/rating_bar_view"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:starCount="5"
+                app:starEmpty="@mipmap/rating"
+                app:starHalf="@mipmap/rating_half"
+                app:starFill="@mipmap/rating_selected"
+                app:starImageSize="15dp"
+                app:starStep="3"
+                app:clickable="false"
+                app:stepSize="Half">
+            </com.oortcloud.appstore.widget.RatingBarView>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_app_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text=""
+            android:textColor="@color/color_999999"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="99.5%"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/btn_download"
+      android:gravity="center"
+        android:layout_width="65dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="6dp"
+        android:shadowColor="@color/colorBackgroundWhite"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:background="@color/color_F2F2F2"
+        android:text="安装"
+        android:textColor="@color/colorDownload"
+        android:textSize="13.64sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_download"
+        android:layout_alignRight="@id/btn_download"
+        android:layout_marginTop="15dp"
+        android:text="甘肃省"
+        android:textSize="10.67sp" />
+
+
+</RelativeLayout>

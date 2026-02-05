@@ -1,0 +1,74 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.jakewharton.butterknife'
+android {
+    compileSdkVersion compile_version
+//    buildToolsVersion "29.0.3"
+    namespace "com.oortcloud.contacts"
+
+    defaultConfig {
+        minSdkVersion min_version
+        targetSdkVersion target_version
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        consumerProguardFiles 'consumer-rules.pro'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+    }
+    viewBinding {
+        enabled = true // 启用 ViewBinding
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation project(path: ':AppStore')
+    testImplementation 'junit:junit:4.12'
+
+    implementation 'com.belerweb:pinyin4j:2.5.0'
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0-beta9'
+//    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    //rxjava
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    //json解析
+    implementation 'com.google.code.gson:gson:2.8.5'
+    //rx系列与View生命周期同步
+    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
+    //network
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation project(path: ':basemodule')
+//    implementation project(path:':pictureselector')
+    //圆形图片
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    //butterknife
+//    implementation "com.jakewharton:butterknife:10.2.3"
+//    annotationProcessor "com.jakewharton:butterknife-compiler:10.2.3"
+
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.github.sevar83:indeterminate-checkbox:1.0.5@aar'
+    //快速KEY-VALUE存取库
+    implementation 'com.jeremyliao:fast-sharedpreferences:0.0.1'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+}

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="?attr/colorPrimary"/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white">
+
+        <TextView
+
+            android:id="@+id/tv_back"
+            android:layout_marginTop="40dp"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/back_icon"/>
+
+
+
+
+
+
+        <!-- 计时器显示 -->
+        <TextView
+            android:id="@+id/timer_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textSize="48sp"
+            android:textColor="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"/>
+
+
+        <!-- 自定义波形视图 -->
+        <sound.wave.oort.WavePlayerView
+            android:id="@+id/wavePlayerView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
+            app:waveColor1="#4a90e2"
+            app:waveColor2="#2d76c2"
+            app:waveStrokeWidth1="3dp"
+            app:waveStrokeWidth2="2dp"
+            app:waveSpeed="0.8"
+            app:wave2Visible="true" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:scrollbars="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/resultContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="12dp" />
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:lineSpacingExtra="4sp"
+                android:maxLines="10000" />
+
+
+            </LinearLayout>
+
+    </ScrollView>
+
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="20dp"
+            android:text="开始录音"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/button_selector" />
+    </LinearLayout>
+
+</LinearLayout>
