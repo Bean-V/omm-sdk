@@ -97,31 +97,31 @@ android {
 
 dependencies {
 //    implementation files('libs/omm-lib-release.aar')
-    implementation('com.oort:omm-lib:1.0.0') {
-        exclude group: 'ommSDK'  // 排除所有 ommSDK 依赖
-    }
+//    implementation('com.oort:omm-lib:1.0.0') {
+//        exclude group: 'ommSDK'  // 排除所有 ommSDK 依赖
+//    }
 
-    implementation project(path: ':oort_imagepick_sdk')
-    implementation project(path: ':ToolsMain')
-    implementation project(path: ':provider_lib')
-    implementation project(path: ':pullToRefershLibraryMy')
-    implementation project(path: ':jcvideoplayer-lib')
-    implementation project(path: ':YZxing-lib')
-    implementation project(path: ':OpenGLlibrary')
-    implementation project(path: ':MPChartLib')
-    implementation project(path: ':liveLibrary')
-    implementation project(path: ':OortWebframeLib')
-    implementation project(path: ':basemodule')
-    implementation project(path: ':AppStore')
-    implementation project(path: ':Contacts')
-    implementation project(path: ':screenrecorder')
-    implementation project(path: ':AIDICert')
-    implementation project(path: ':sound_recon')
-    implementation project(path: ':FrameLibrary')
-    implementation project(path: ':Levc-lib')
-    implementation project(path: ':giraffeplayer')
-    implementation project(path: ':floatview')
-    implementation project(path: ':offline')
+//    implementation project(path: ':oort_imagepick_sdk')
+//    implementation project(path: ':ToolsMain')
+//    implementation project(path: ':provider_lib')
+//    implementation project(path: ':pullToRefershLibraryMy')
+//    implementation project(path: ':jcvideoplayer-lib')
+//    implementation project(path: ':YZxing-lib')
+//    implementation project(path: ':OpenGLlibrary')
+//    implementation project(path: ':MPChartLib')
+//    implementation project(path: ':liveLibrary')
+//    implementation project(path: ':OortWebframeLib')
+//    implementation project(path: ':basemodule')
+//    implementation project(path: ':AppStore')
+//    implementation project(path: ':Contacts')
+//    implementation project(path: ':screenrecorder')
+//    implementation project(path: ':AIDICert')
+//    implementation project(path: ':sound_recon')
+//    implementation project(path: ':FrameLibrary')
+//    implementation project(path: ':Levc-lib')
+//    implementation project(path: ':giraffeplayer')
+//    implementation project(path: ':floatview')
+//    implementation project(path: ':offline')
 
     implementation libs.appcompat
     implementation libs.material
@@ -131,4 +131,7 @@ dependencies {
     androidTestImplementation libs.espresso.core
 //    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 //    implementation project(':omm-lib')
+
+//    implementation 'com.github.Bean-V:omm-sdk:1.0.0'
+//    implementation("com.github.Bean-V:omm-sdk:Tag")
 }
