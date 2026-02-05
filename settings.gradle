@@ -20,7 +20,7 @@
 //}
 
 rootProject.name = "ommSDK"
-include ':app'
+//include ':app'
 
 include ':ooortCloudDisk'
 include ':MPChartLib'
