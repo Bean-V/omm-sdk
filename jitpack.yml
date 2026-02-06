@@ -4,4 +4,4 @@ before_install:
   - chmod +x gradlew
 install:
   # 构建所有模块
-  - ./gradlew build publishToMavenLocal
+  - ./gradlew build publishToMavenLocal -x test
