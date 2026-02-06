@@ -49,4 +49,4 @@ include ':screenrecorder'
 include ':IDCardCheck'
 include ':OpenGLlibrary'
 
-include ':app'
+//include ':app'
