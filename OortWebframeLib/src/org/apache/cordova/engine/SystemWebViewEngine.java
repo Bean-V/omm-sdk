@@ -190,9 +190,11 @@ public class SystemWebViewEngine implements CordovaWebViewEngine {
 
         // Enable AppCache
         // Fix for CB-2282
-        settings.setAppCacheMaxSize(5 * 1048576);
-        settings.setAppCachePath(databasePath);
-        settings.setAppCacheEnabled(true);
+//        settings.setAppCacheMaxSize(5 * 1048576);
+//        settings.setAppCachePath(databasePath);
+//        settings.setAppCacheEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setDatabaseEnabled(true);
 
         // Fix for CB-1405
         // Google issue 4641

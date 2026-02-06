@@ -2,13 +2,12 @@ apply plugin: 'com.android.library'
 //apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion compile_version
+    compileSdk compile_version
 //    buildToolsVersion "28.0.3"
-
     namespace "com.oortcloud.appstore"
     defaultConfig {
-        minSdkVersion min_version
-        targetSdkVersion target_version
+        minSdk min_version
+        targetSdk target_version
         versionCode 1
         versionName "1.0"
 

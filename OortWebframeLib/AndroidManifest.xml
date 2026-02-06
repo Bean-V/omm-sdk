@@ -25,21 +25,21 @@
     <application>
 <!--        <activity android:name="com.plugins.oortcloud.nfcPlugin.NFC_IntentActivity" />-->
 
-        <provider
-            android:name="com.plugins.mediacapture.FileProvider"
-            android:authorities="${applicationId}.cordova.plugin.mediacapture.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/media_capture_provider_paths" />
-        </provider>
+<!--        <provider-->
+<!--            android:name="com.plugins.mediacapture.FileProvider"-->
+<!--            android:authorities="${applicationId}.cordova.plugin.mediacapture.provider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/media_capture_provider_paths" />-->
+<!--        </provider>-->
 
-        <activity android:name="com.plugins.mediacapture.CustomVideoRecorderActivity"
-            android:theme="@style/NoActionBar"
-            android:exported="true"/>
-        <activity android:name="com.plugins.mediacapture.PreviewActivity"
-            android:theme="@style/NoActionBar"
-            android:exported="true"/>
+<!--        <activity android:name="com.plugins.mediacapture.CustomVideoRecorderActivity"-->
+<!--            android:theme="@style/NoActionBar"-->
+<!--            android:exported="true"/>-->
+<!--        <activity android:name="com.plugins.mediacapture.PreviewActivity"-->
+<!--            android:theme="@style/NoActionBar"-->
+<!--            android:exported="true"/>-->
     </application>
 </manifest>

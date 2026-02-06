@@ -9,18 +9,16 @@ android {
 //        }
 //    }
     namespace "com.sentaroh.android.upantool"
-    compileSdkVersion 31
-    buildToolsVersion '30.0.3'
+    compileSdk compile_version
+
 //    storePassword=Oort@2019
 //    keyAlias=oort
 //    keyPassword=Oort@2019
     defaultConfig {
         //applicationId "com.oortcloud.danganbao"
 
-        minSdkVersion minSdkVersion
-//        targetSdkVersion 21  //Android 5.0
-//        targetSdkVersion 23  //Android 6.0
-        targetSdkVersion 29
+        minSdkVersion min_version
+        targetSdk target_version
 
 //
         versionCode 198

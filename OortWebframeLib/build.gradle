@@ -72,7 +72,8 @@ android {
 //    useLibrary 'org.apache.http.legacy'
     // For the Android Cordova Lib, we will hardcode the minSdkVersion and not allow changes.
     defaultConfig {
-        minSdkVersion min_version
+        minSdk min_version
+
     }
 
     sourceSets {
