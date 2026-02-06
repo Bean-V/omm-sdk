@@ -145,6 +145,8 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+# 忽略所有名为 app 的目录
+app/
 
 /OmmMain/class_files.txt
 /

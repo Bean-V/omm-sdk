@@ -463,22 +463,49 @@ configurations {
 //    }
 //}
 
+// 定义扩展属性，便于管理
+ext {
+    PUBLISH_GROUP_ID = 'com.github.Bean-V'
+    PUBLISH_ARTIFACT_ID = 'omm-sdk'  // 必须与GitHub仓库名一致！
+    PUBLISH_VERSION = '1.0.0'
+}
+
 afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 from components.release
 
-                // 设置坐标信息
-                groupId = 'com.github.Bean-V'  // ⚠️ 修改这里！
-                artifactId = 'ommSDK'                    // JitPack上的名称
-                version = '1.0.0'                       // ⚠️ 与标签一致
+                // 使用定义的属性
+                groupId = PUBLISH_GROUP_ID
+                artifactId = PUBLISH_ARTIFACT_ID
+                version = PUBLISH_VERSION
 
-                // 可选：添加POM信息
                 pom {
-                    name = 'OMM SDK'
-                    description = '聚合所有功能的Android SDK'
-                    url = 'https://github.com/Bean-V/ommSDK'
+                    name = PUBLISH_ARTIFACT_ID
+                    description = 'OMM Android SDK'
+                    url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
+
+                    licenses {
+                        license {
+                            name = 'Apache License 2.0'
+                            url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = 'Bean-V'
+                            name = 'Bean V'
+                            email = 'your-email@example.com'
+                        }
+                    }
+
+                    scm {
+                        connection = "scm:git:git://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}.git"
+                        developerConnection = "scm:git:ssh://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}.git"
+                        url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
+                    }
                 }
             }
         }

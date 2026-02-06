@@ -48,3 +48,5 @@ include ':jcvideoplayer-lib'
 include ':screenrecorder'
 include ':IDCardCheck'
 include ':OpenGLlibrary'
+
+include ':app'
