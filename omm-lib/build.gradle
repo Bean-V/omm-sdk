@@ -242,6 +242,8 @@ configurations.all {
 
 configurations.maybeCreate("publishAar")
 
+// 在文件顶部定义变量
+def isLocalBuild = false
 dependencies {
     // ========== AndroidX 核心库 ==========
     implementation 'androidx.appcompat:appcompat:1.3.1'
@@ -256,27 +258,53 @@ dependencies {
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
     // ========== 项目模块依赖 ==========
-    implementation project(path: ':oort_imagepick_sdk')
-    implementation project(path: ':ToolsMain')
-    implementation project(path: ':provider_lib')
-    implementation project(path: ':pullToRefershLibraryMy')
-    implementation project(path: ':jcvideoplayer-lib')
-    implementation project(path: ':YZxing-lib')
-    implementation project(path: ':OpenGLlibrary')
-    implementation project(path: ':MPChartLib')
-    implementation project(path: ':liveLibrary')
-    implementation project(path: ':OortWebframeLib')
-    implementation project(path: ':basemodule')
-    implementation project(path: ':AppStore')
-    implementation project(path: ':Contacts')
-    implementation project(path: ':screenrecorder')
-    implementation project(path: ':AIDICert')
-    implementation project(path: ':sound_recon')
-    implementation project(path: ':FrameLibrary')
-    implementation project(path: ':Levc-lib')
-    implementation project(path: ':giraffeplayer')
-    implementation project(path: ':floatview')
-    implementation project(path: ':offline')
+    if (isLocalBuild) {
+        // 开发时使用本地模块
+        implementation project(path: ':oort_imagepick_sdk')
+        implementation project(path: ':ToolsMain')
+        implementation project(path: ':provider_lib')
+        implementation project(path: ':pullToRefershLibraryMy')
+        implementation project(path: ':jcvideoplayer-lib')
+        implementation project(path: ':YZxing-lib')
+        implementation project(path: ':OpenGLlibrary')
+        implementation project(path: ':MPChartLib')
+        implementation project(path: ':liveLibrary')
+        implementation project(path: ':OortWebframeLib')
+        implementation project(path: ':basemodule')
+        implementation project(path: ':AppStore')
+        implementation project(path: ':Contacts')
+        implementation project(path: ':screenrecorder')
+        implementation project(path: ':AIDICert')
+        implementation project(path: ':sound_recon')
+        implementation project(path: ':FrameLibrary')
+        implementation project(path: ':Levc-lib')
+        implementation project(path: ':giraffeplayer')
+        implementation project(path: ':floatview')
+        implementation project(path: ':offline')
+    } else {
+        // 发布时使用远程依赖（JitPack构建）
+        implementation 'com.github.Bean-V:oort_imagepick_sdk:1.0.0'
+        implementation 'com.github.Bean-V:ToolsMain:1.0.0'
+        implementation 'com.github.Bean-V:provider_lib:1.0.0'
+        implementation 'com.github.Bean-V:pullToRefershLibraryMy:1.0.0'
+        implementation 'com.github.Bean-V:jcvideoplayer-lib:1.0.0'
+        implementation 'com.github.Bean-V:YZxing-lib:1.0.0'
+        implementation 'com.github.Bean-V:OpenGLlibrary:1.0.0'
+        implementation 'com.github.Bean-V:MPChartLib:1.0.0'
+        implementation 'com.github.Bean-V:liveLibrary:1.0.0'
+        implementation 'com.github.Bean-V:OortWebframeLib:1.0.0'
+        implementation 'com.github.Bean-V:basemodule:1.0.0'
+        implementation 'com.github.Bean-V:AppStore:1.0.0'
+        implementation 'com.github.Bean-V:Contacts:1.0.0'
+        implementation 'com.github.Bean-V:screenrecorder:1.0.0'
+        implementation 'com.github.Bean-V:AIDICert:1.0.0'
+        implementation 'com.github.Bean-V:sound_recon:1.0.0'
+        implementation 'com.github.Bean-V:FrameLibrary:1.0.0'
+        implementation 'com.github.Bean-V:Levc-lib:1.0.0'
+        implementation 'com.github.Bean-V:giraffeplayer:1.0.0'
+        implementation 'com.github.Bean-V:floatview:1.0.0'
+        implementation 'com.github.Bean-V:offline:1.0.0'
+    }
 
     // ========== 数据库相关 ==========
     implementation 'androidx.room:room-runtime:2.3.0'

@@ -101,25 +101,45 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+// 根build.gradle中添加
 subprojects {
-    // 为Android库模块添加命名空间（必须）
+    apply plugin: 'maven-publish'
+
     afterEvaluate { project ->
         if (project.plugins.hasPlugin('com.android.library')) {
-//            android {
-//                namespace = "com.oort.${project.name.toLowerCase()}"  // 按需修改
-//                compileSdk 34
-//
-//                // 移除过时配置
-//                defaultConfig {
-//                    minSdk 21
-//                    targetSdk 34
-//                    versionCode 1
-//                    versionName "1.0.0"
-//                }
-//
-//                // 移除 buildToolsVersion
-//                // 移除 dexOptions
-//            }
+            publishing {
+                publications {
+                    release(MavenPublication) {
+//                        from components.release
+
+                        // 设置Maven坐标
+                        groupId = 'com.github.Bean-V'
+                        artifactId = project.name  // 使用模块名作为artifactId
+                        version = '1.0.0'
+
+                        pom {
+                            name = project.name
+                            description = "OMM SDK - ${project.name} module"
+                            url = 'https://github.com/Bean-V/omm-sdk'
+
+                            licenses {
+                                license {
+                                    name = 'Apache License 2.0'
+                                    url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                                }
+                            }
+
+                            developers {
+                                developer {
+                                    id = 'Bean-V'
+                                    name = 'Bean V'
+                                    email = 'your-email@example.com'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

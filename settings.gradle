@@ -19,7 +19,7 @@
 //    }
 //}
 
-rootProject.name = "ommSDK"
+rootProject.name = "omm-sdk"
 
 include ':ooortCloudDisk'
 include ':MPChartLib'
@@ -49,4 +49,4 @@ include ':screenrecorder'
 include ':IDCardCheck'
 include ':OpenGLlibrary'
 
-//include ':app'
+include ':app'
