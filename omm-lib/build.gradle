@@ -720,107 +720,24 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
                             }
                         }
                         
-                        // 2. 合并资源文件 (res 目录) - 智能去重
+                        // 2. 合并资源文件 (res 目录) - 简单复制
                         def resDir = new File(tempAarDir, "res")
                         if (resDir.exists() && resDir.isDirectory()) {
                             def targetResDir = new File(tempDir, "res")
                             targetResDir.mkdirs()
                             
-                            def resFileCount = 0
-                            resDir.eachFileRecurse { resFile ->
-                                if (resFile.isFile()) {
-                                    resFileCount++
-                                }
+                            println "    📁 合并资源文件..."
+                            
+                            // ✅ 直接复制所有资源，使用 EXCLUDE 策略
+                            // 第一个文件会被保留，后续同名文件会被跳过
+                            // 这样可以避免 XML 格式问题，让 Android 构建系统处理重复
+                            project.copy {
+                                from resDir
+                                into targetResDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
                             }
                             
-                            println "    📁 发现 ${resFileCount} 个资源文件"
-                            
-                            // ✅ 智能合并资源，自动去重
-                            resDir.listFiles()?.each { subDir ->
-                                if (subDir.isDirectory()) {
-                                    def targetSubDir = new File(targetResDir, subDir.name)
-                                    targetSubDir.mkdirs()
-                                    
-                                    if (subDir.name.startsWith('values')) {
-                                        // values 目录：解析 XML 并去重
-                                        println "    🔀 合并 values 资源: ${subDir.name}"
-                                        subDir.listFiles()?.each { xmlFile ->
-                                            if (xmlFile.name.endsWith('.xml')) {
-                                                def targetXmlFile = new File(targetSubDir, xmlFile.name)
-                                                
-                                                try {
-                                                    if (targetXmlFile.exists()) {
-                                                        // 文件已存在，需要合并并去重
-                                                        def sourceXml = new XmlParser().parse(xmlFile)
-                                                        def targetXml = new XmlParser().parse(targetXmlFile)
-                                                        
-                                                        // 收集目标文件中已有的资源名称
-                                                        def existingResources = [:] // name -> type
-                                                        targetXml.children().each { node ->
-                                                            if (node instanceof groovy.util.Node) {
-                                                                def name = node.attribute('name')
-                                                                if (name) {
-                                                                    def type = node.name()
-                                                                    existingResources["${type}/${name}"] = true
-                                                                }
-                                                            }
-                                                        }
-                                                        
-                                                        // 只添加不存在的资源
-                                                        def addedCount = 0
-                                                        def skippedCount = 0
-                                                        sourceXml.children().each { node ->
-                                                            if (node instanceof groovy.util.Node) {
-                                                                def name = node.attribute('name')
-                                                                if (name) {
-                                                                    def type = node.name()
-                                                                    def key = "${type}/${name}"
-                                                                    
-                                                                    if (!existingResources.containsKey(key)) {
-                                                                        // 新资源，添加
-                                                                        targetXml.append(node)
-                                                                        addedCount++
-                                                                    } else {
-                                                                        // 重复资源，跳过
-                                                                        skippedCount++
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                        
-                                                        if (addedCount > 0 || skippedCount > 0) {
-                                                            // 写回文件
-                                                            targetXmlFile.withWriter('UTF-8') { writer ->
-                                                                groovy.xml.XmlUtil.serialize(targetXml, writer)
-                                                            }
-                                                            println "      ✅ ${xmlFile.name}: 添加 ${addedCount} 个, 跳过重复 ${skippedCount} 个"
-                                                        }
-                                                    } else {
-                                                        // 文件不存在，直接复制
-                                                        project.copy {
-                                                            from xmlFile
-                                                            into targetSubDir
-                                                        }
-                                                        println "      ✅ ${xmlFile.name}: 新文件"
-                                                    }
-                                                } catch (Exception e) {
-                                                    println "      ⚠️  处理 ${xmlFile.name} 失败: ${e.message}"
-                                                    // 失败时跳过，保留原有文件
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        // 其他资源目录：直接复制，跳过重复文件
-                                        project.copy {
-                                            from subDir
-                                            into targetSubDir
-                                            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            println "    ✅ 资源文件已合并（已自动去重）"
+                            println "    ✅ 资源文件已合并（保留第一个，跳过重复）"
                         } else {
                             println "    ⚠️  没有 res 目录"
                         }
@@ -988,116 +905,116 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
         
         println "\n📊 共处理 ${dependencyCount} 个依赖文件"
         
-        // ✅ 重要：最后再次处理 omm-lib 自己的资源，确保优先级最高
-        println "\n🔝 确保 omm-lib 自身资源优先级最高..."
+        // ✅ 合并所有模块的 values 资源
+        println "\n� 确合并 values 资源..."
+        def targetResDir = new File(tempDir, "res")
+        def allValuesFiles = [:] // "values/colors.xml" -> [file1, file2, ...]
         
-        // 解压 omm-lib 的资源到临时目录
-        def ommResTemp = new File(tempDir, "omm-res-temp")
-        ommResTemp.mkdirs()
-        project.copy {
-            from project.zipTree(originalAar)
-            include 'res/**'
-            into ommResTemp
-        }
-        
-        def ommResDir = new File(ommResTemp, "res")
-        if (ommResDir.exists()) {
-            def targetResDir = new File(tempDir, "res")
-            
-            ommResDir.listFiles()?.each { subDir ->
-                if (subDir.isDirectory()) {
-                    def targetSubDir = new File(targetResDir, subDir.name)
-                    targetSubDir.mkdirs()
-                    
-                    if (subDir.name.startsWith('values')) {
-                        // values 目录：智能合并，omm-lib 的资源优先，去重
-                        println "  🔀 合并 omm-lib 的 values 资源: ${subDir.name}"
-                        subDir.listFiles()?.each { xmlFile ->
-                            if (xmlFile.name.endsWith('.xml')) {
-                                def targetXmlFile = new File(targetSubDir, xmlFile.name)
-                                
-                                try {
-                                    if (targetXmlFile.exists()) {
-                                        // 文件已存在，需要合并
-                                        def sourceXml = new XmlParser().parse(xmlFile)
-                                        def targetXml = new XmlParser().parse(targetXmlFile)
-                                        
-                                        // 收集目标文件中的资源
-                                        def targetResources = [:] // "type/name" -> node
-                                        targetXml.children().each { node ->
-                                            if (node instanceof groovy.util.Node) {
-                                                def name = node.attribute('name')
-                                                if (name) {
-                                                    def type = node.name()
-                                                    def key = "${type}/${name}"
-                                                    targetResources[key] = node
+        // 1. 收集所有模块的 values 文件
+        project.configurations.implementation.allDependencies.each { dep ->
+            if (dep instanceof ProjectDependency) {
+                def depProject = dep.dependencyProject
+                def aarDir = new File(depProject.buildDir, "outputs/aar")
+                
+                aarDir.listFiles()?.each { aarFile ->
+                    if (aarFile.name.endsWith('.aar') && aarFile.name.contains('release')) {
+                        try {
+                            def tempAarDir = new File(tempDir, "temp-values-${depProject.name}")
+                            tempAarDir.mkdirs()
+                            
+                            project.copy {
+                                from project.zipTree(aarFile)
+                                include 'res/values*/**'
+                                into tempAarDir
+                            }
+                            
+                            def resDir = new File(tempAarDir, "res")
+                            if (resDir.exists()) {
+                                resDir.listFiles()?.each { valuesDir ->
+                                    if (valuesDir.isDirectory() && valuesDir.name.startsWith('values')) {
+                                        valuesDir.listFiles()?.each { xmlFile ->
+                                            if (xmlFile.name.endsWith('.xml')) {
+                                                def key = "${valuesDir.name}/${xmlFile.name}"
+                                                if (!allValuesFiles.containsKey(key)) {
+                                                    allValuesFiles[key] = []
                                                 }
+                                                allValuesFiles[key] << xmlFile
                                             }
                                         }
-                                        
-                                        // 处理 omm-lib 的资源：替换同名资源，添加新资源
-                                        def replacedCount = 0
-                                        def addedCount = 0
-                                        sourceXml.children().each { sourceNode ->
-                                            if (sourceNode instanceof groovy.util.Node) {
-                                                def name = sourceNode.attribute('name')
-                                                if (name) {
-                                                    def type = sourceNode.name()
-                                                    def key = "${type}/${name}"
-                                                    
-                                                    if (targetResources.containsKey(key)) {
-                                                        // 资源已存在，用 omm-lib 的替换
-                                                        def targetNode = targetResources[key]
-                                                        def parent = targetNode.parent()
-                                                        def index = parent.children().indexOf(targetNode)
-                                                        parent.remove(targetNode)
-                                                        parent.children().add(index, sourceNode)
-                                                        replacedCount++
-                                                    } else {
-                                                        // 新资源，添加
-                                                        targetXml.append(sourceNode)
-                                                        addedCount++
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        
-                                        // 写回文件
-                                        targetXmlFile.withWriter('UTF-8') { writer ->
-                                            groovy.xml.XmlUtil.serialize(targetXml, writer)
-                                        }
-                                        
-                                        if (replacedCount > 0 || addedCount > 0) {
-                                            println "    ✅ ${xmlFile.name}: 替换 ${replacedCount} 个, 添加 ${addedCount} 个"
-                                        }
-                                    } else {
-                                        // 文件不存在，直接复制
-                                        project.copy {
-                                            from xmlFile
-                                            into targetSubDir
-                                        }
-                                        println "    ✅ ${xmlFile.name}: 新文件"
                                     }
-                                } catch (Exception e) {
-                                    println "    ⚠️  处理 ${xmlFile.name} 失败: ${e.message}"
                                 }
                             }
-                        }
-                    } else {
-                        // 其他资源目录：直接覆盖
-                        project.copy {
-                            from subDir
-                            into targetSubDir
-                            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+                            
+                            tempAarDir.deleteDir()
+                        } catch (Exception e) {
+                            println "  ⚠️  收集 ${depProject.name} 的 values 失败: ${e.message}"
                         }
                     }
                 }
             }
         }
         
-        // 清理临时目录
-        ommResTemp.deleteDir()
-        println "  ✅ omm-lib 资源已确保优先（已自动去重）"
+        // 2. 合并 values 文件（简单拼接，让 Android 构建系统处理去重）
+        allValuesFiles.each { key, files ->
+            if (files.size() > 1) {
+                def parts = key.split('/')
+                def valuesDir = parts[0]
+                def xmlName = parts[1]
+                
+                def targetValuesDir = new File(targetResDir, valuesDir)
+                targetValuesDir.mkdirs()
+                def targetXmlFile = new File(targetValuesDir, xmlName)
+                
+                // 如果目标文件已存在（来自 omm-lib），追加其他模块的内容
+                if (targetXmlFile.exists()) {
+                    def existingContent = targetXmlFile.text
+                    def mergedContent = new StringBuilder(existingContent)
+                    
+                    // 移除结束标签
+                    def endTagIndex = mergedContent.lastIndexOf('</resources>')
+                    if (endTagIndex > 0) {
+                        mergedContent.delete(endTagIndex, mergedContent.length())
+                    }
+                    
+                    // 追加其他文件的内容（跳过 XML 声明和 resources 标签）
+                    files.each { file ->
+                        def content = file.text
+                        def startIndex = content.indexOf('<resources>')
+                        def endIndex = content.lastIndexOf('</resources>')
+                        
+                        if (startIndex >= 0 && endIndex > startIndex) {
+                            def innerContent = content.substring(startIndex + '<resources>'.length(), endIndex)
+                            mergedContent.append(innerContent)
+                        }
+                    }
+                    
+                    // 添加结束标签
+                    mergedContent.append('</resources>')
+                    
+                    targetXmlFile.text = mergedContent.toString()
+                    println "  ✅ 合并 ${key} (${files.size()} 个文件)"
+                } else {
+                    // 目标文件不存在，直接复制第一个
+                    project.copy {
+                        from files[0]
+                        into targetValuesDir
+                    }
+                    println "  ✅ 复制 ${key}"
+                }
+            }
+        }
+        
+        println "  ✅ values 资源合并完成"
+        
+        // ✅ 重要：最后再次复制 omm-lib 自己的资源，确保优先级最高
+        println "\n🔝 确保 omm-lib 自身资源优先级最高..."
+        project.copy {
+            from project.zipTree(originalAar)
+            include 'res/**'
+            into tempDir
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE  // 强制覆盖
+        }
+        println "  ✅ omm-lib 资源已确保优先"
         
         // 创建新的 classes.jar
         if (mergedClassesDir.listFiles()?.size() > 0) {
