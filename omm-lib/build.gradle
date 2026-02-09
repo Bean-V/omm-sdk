@@ -696,17 +696,18 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
                     }
                     
                 } else if (file.name.endsWith('.aar')) {
-                    // 合并 AAR 中的 classes.jar
+                    // 合并 AAR 中的 classes.jar 和资源
                     try {
                         def tempAarDir = new File(tempDir, "temp-aar-${file.name.replace('.aar', '')}/")
                         tempAarDir.mkdirs()
                         
+                        // 解压整个 AAR
                         project.copy {
                             from project.zipTree(file)
-                            include 'classes.jar'
                             into tempAarDir
                         }
                         
+                        // 1. 合并 classes.jar
                         def classesJar = new File(tempAarDir, "classes.jar")
                         if (classesJar.exists()) {
                             project.copy {
@@ -717,8 +718,173 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
                                 into mergedClassesDir
                                 duplicatesStrategy = DuplicatesStrategy.EXCLUDE
                             }
-                            println "  ✅ 合并 AAR: ${file.name}"
                         }
+                        
+                        // 2. 合并资源文件 (res 目录)
+                        def resDir = new File(tempAarDir, "res")
+                        if (resDir.exists() && resDir.isDirectory()) {
+                            def targetResDir = new File(tempDir, "res")
+                            targetResDir.mkdirs()
+                            
+                            project.copy {
+                                from resDir
+                                into targetResDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+                        
+                        // 3. 合并 R.txt (资源 ID 文件)
+                        def rTxt = new File(tempAarDir, "R.txt")
+                        if (rTxt.exists()) {
+                            def targetRTxt = new File(tempDir, "R.txt")
+                            if (targetRTxt.exists()) {
+                                // 追加内容，避免覆盖
+                                targetRTxt.append(rTxt.text)
+                            } else {
+                                project.copy {
+                                    from rTxt
+                                    into tempDir
+                                }
+                            }
+                        }
+                        
+                        // 4. 合并 assets 目录
+                        def assetsDir = new File(tempAarDir, "assets")
+                        if (assetsDir.exists() && assetsDir.isDirectory()) {
+                            def targetAssetsDir = new File(tempDir, "assets")
+                            targetAssetsDir.mkdirs()
+                            
+                            project.copy {
+                                from assetsDir
+                                into targetAssetsDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+                        
+                        // 5. 合并 jni 目录 (native libraries)
+                        def jniDir = new File(tempAarDir, "jni")
+                        if (jniDir.exists() && jniDir.isDirectory()) {
+                            def targetJniDir = new File(tempDir, "jni")
+                            targetJniDir.mkdirs()
+                            
+                            project.copy {
+                                from jniDir
+                                into targetJniDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+                        
+                        // 6. 合并 libs 目录 (额外的 JAR 依赖)
+                        def libsDir = new File(tempAarDir, "libs")
+                        if (libsDir.exists() && libsDir.isDirectory()) {
+                            def targetLibsDir = new File(tempDir, "libs")
+                            targetLibsDir.mkdirs()
+                            
+                            project.copy {
+                                from libsDir
+                                into targetLibsDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+                        
+                        // 7. 合并 proguard.txt (ProGuard 规则)
+                        def proguardTxt = new File(tempAarDir, "proguard.txt")
+                        if (proguardTxt.exists()) {
+                            def targetProguardTxt = new File(tempDir, "proguard.txt")
+                            if (targetProguardTxt.exists()) {
+                                // 追加内容，避免覆盖
+                                targetProguardTxt.append("\n# From ${file.name}\n")
+                                targetProguardTxt.append(proguardTxt.text)
+                            } else {
+                                project.copy {
+                                    from proguardTxt
+                                    into tempDir
+                                }
+                            }
+                        }
+                        
+                        // 8. 合并 consumer-proguard-rules.pro (消费者 ProGuard 规则)
+                        def consumerProguard = new File(tempAarDir, "consumer-proguard-rules.pro")
+                        if (consumerProguard.exists()) {
+                            def targetConsumerProguard = new File(tempDir, "consumer-proguard-rules.pro")
+                            if (targetConsumerProguard.exists()) {
+                                // 追加内容，避免覆盖
+                                targetConsumerProguard.append("\n# From ${file.name}\n")
+                                targetConsumerProguard.append(consumerProguard.text)
+                            } else {
+                                project.copy {
+                                    from consumerProguard
+                                    into tempDir
+                                }
+                            }
+                        }
+                        
+                        // 9. 合并 public.txt (公共资源列表)
+                        def publicTxt = new File(tempAarDir, "public.txt")
+                        if (publicTxt.exists()) {
+                            def targetPublicTxt = new File(tempDir, "public.txt")
+                            if (targetPublicTxt.exists()) {
+                                // 追加内容，避免覆盖
+                                targetPublicTxt.append(publicTxt.text)
+                            } else {
+                                project.copy {
+                                    from publicTxt
+                                    into tempDir
+                                }
+                            }
+                        }
+                        
+                        // 10. 合并 aidl 目录 (AIDL 接口文件)
+                        def aidlDir = new File(tempAarDir, "aidl")
+                        if (aidlDir.exists() && aidlDir.isDirectory()) {
+                            def targetAidlDir = new File(tempDir, "aidl")
+                            targetAidlDir.mkdirs()
+                            
+                            project.copy {
+                                from aidlDir
+                                into targetAidlDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+                        
+                        // 11. 合并 annotations.zip (注解文件)
+                        def annotationsZip = new File(tempAarDir, "annotations.zip")
+                        if (annotationsZip.exists()) {
+                            def targetAnnotationsZip = new File(tempDir, "annotations.zip")
+                            if (!targetAnnotationsZip.exists()) {
+                                project.copy {
+                                    from annotationsZip
+                                    into tempDir
+                                }
+                            }
+                        }
+                        
+                        // 12. 合并 prefab 目录 (C/C++ 库配置)
+                        def prefabDir = new File(tempAarDir, "prefab")
+                        if (prefabDir.exists() && prefabDir.isDirectory()) {
+                            def targetPrefabDir = new File(tempDir, "prefab")
+                            targetPrefabDir.mkdirs()
+                            
+                            project.copy {
+                                from prefabDir
+                                into targetPrefabDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+                        
+                        // 13. 合并 navigation.json (Navigation 组件配置)
+                        def navigationJson = new File(tempAarDir, "navigation.json")
+                        if (navigationJson.exists()) {
+                            def targetNavigationJson = new File(tempDir, "navigation.json")
+                            if (!targetNavigationJson.exists()) {
+                                project.copy {
+                                    from navigationJson
+                                    into tempDir
+                                }
+                            }
+                        }
+                        
+                        println "  ✅ 合并 AAR: ${file.name}"
                         
                         tempAarDir.deleteDir()
                     } catch (Exception e) {
