@@ -17,16 +17,16 @@ install:
   
   # 步骤 2: 构建所有子模块的 AAR
   # 确保所有 21 个子模块都已构建
-  - ./gradlew assembleRelease -x test -x lint
+  - ./gradlew assembleRelease --no-configuration-cache -x test -x lint
   
   # 步骤 3: 合并所有依赖到单个完整 AAR
   # 这会生成 release-complete.aar，包含所有 21 个模块 + 第三方库
-  - ./gradlew :omm-lib:mergeReleaseDependencies -x test -x lint
+  - ./gradlew :omm-lib:mergeReleaseDependencies --no-configuration-cache -x test -x lint
   
   # 步骤 4: 发布完整 AAR 到 Maven
   # JitPack 会自动使用这个发布的 AAR
   # 注意：发布配置已修改为使用 release-complete.aar
-  - ./gradlew :omm-lib:publishToMavenLocal -x test -x lint
+  - ./gradlew :omm-lib:publishToMavenLocal --no-configuration-cache -x test -x lint
   
   # ========================================
   # 预期结果

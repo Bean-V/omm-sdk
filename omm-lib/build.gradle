@@ -501,6 +501,9 @@ ext {
 }
 
 afterEvaluate {
+    // 在闭包外部捕获 kotlin_version，避免配置缓存问题
+    def kotlinVersion = rootProject.ext.kotlin_version
+    
     publishing {
         publications {
             release(MavenPublication) {
@@ -574,7 +577,7 @@ afterEvaluate {
                             [group: 'androidx.constraintlayout', name: 'constraintlayout', version: '2.1.4'],
                             
                             // Kotlin
-                            [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: rootProject.ext.kotlin_version],
+                            [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlinVersion],
                         ]
                         
                         essentialDeps.each { dep ->
