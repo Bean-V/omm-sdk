@@ -1,0 +1,53 @@
+// ================================================
+// 通用模块发布配置
+// 用于将所有子模块发布到 JitPack
+// ================================================
+
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    // 只为 Android Library 模块配置发布
+    if (project.plugins.hasPlugin('com.android.library')) {
+        publishing {
+            publications {
+                release(MavenPublication) {
+                    // 使用 Android Library 的 release 组件
+                    from components.release
+                    
+                    // 设置 Maven 坐标
+                    groupId = rootProject.ext.PUBLISH_GROUP_ID ?: 'com.github.Bean-V'
+                    artifactId = project.name
+                    version = rootProject.ext.PUBLISH_VERSION ?: '1.0.0'
+                    
+                    pom {
+                        name = project.name
+                        description = "Part of OMM SDK - ${project.name} module"
+                        url = "https://github.com/Bean-V/omm-sdk"
+                        
+                        licenses {
+                            license {
+                                name = 'Apache License 2.0'
+                                url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                            }
+                        }
+                        
+                        developers {
+                            developer {
+                                id = 'Bean-V'
+                                name = 'Bean V'
+                            }
+                        }
+                        
+                        scm {
+                            connection = 'scm:git:git://github.com/Bean-V/omm-sdk.git'
+                            developerConnection = 'scm:git:ssh://github.com/Bean-V/omm-sdk.git'
+                            url = 'https://github.com/Bean-V/omm-sdk'
+                        }
+                    }
+                }
+            }
+        }
+        
+        println "✅ [发布配置] ${project.name} 已配置 Maven 发布"
+    }
+}
