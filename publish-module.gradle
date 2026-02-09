@@ -3,15 +3,15 @@
 // 用于将所有子模块发布到 JitPack
 // ================================================
 
-apply plugin: 'maven-publish'
-
-afterEvaluate {
-    // 只为 Android Library 模块配置发布
-    if (project.plugins.hasPlugin('com.android.library')) {
+// 只在 Android Library 插件应用后才配置发布
+plugins.withId('com.android.library') {
+    apply plugin: 'maven-publish'
+    
+    afterEvaluate {
         publishing {
             publications {
                 release(MavenPublication) {
-                    // 使用 Android Library 的 release 组件
+                    // 在 afterEvaluate 中，components.release 应该已经存在
                     from components.release
                     
                     // 设置 Maven 坐标
