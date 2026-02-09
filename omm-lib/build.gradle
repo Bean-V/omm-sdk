@@ -729,7 +729,9 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
                             project.copy {
                                 from resDir
                                 into targetResDir
-                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                                // 使用 WARN 策略，保留第一个但警告冲突
+                                // 这样可以看到哪些资源有冲突
+                                duplicatesStrategy = DuplicatesStrategy.WARN
                             }
                         }
                         
@@ -895,6 +897,16 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
         }
         
         println "\n📊 共处理 ${dependencyCount} 个依赖文件"
+        
+        // ✅ 重要：最后再次复制 omm-lib 自己的资源，确保优先级最高
+        println "\n🔝 确保 omm-lib 自身资源优先级最高..."
+        project.copy {
+            from project.zipTree(originalAar)
+            include 'res/**'
+            into tempDir
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE  // 覆盖已存在的文件
+        }
+        println "  ✅ omm-lib 资源已确保优先"
         
         // 创建新的 classes.jar
         if (mergedClassesDir.listFiles()?.size() > 0) {
