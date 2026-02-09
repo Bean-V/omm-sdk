@@ -1,7 +1,38 @@
 jdk:
   - openjdk17
+
 before_install:
   - chmod +x gradlew
+  - sdk install java 17.0.12-oracle
+  - sdk use java 17.0.12-oracle
+
 install:
-  # 构建所有模块
-  - ./gradlew build publishToMavenLocal -x test -x lint
+  # ========================================
+  # JitPack 构建流程 - 完整 AAR 方案
+  # ========================================
+  
+  # 步骤 1: 发布本地 AAR 文件到本地 Maven 仓库
+  # 这些是 omm-lib/libs 目录中的第三方 AAR
+  - ./gradlew publishLocalAarsToMavenLocal --no-configuration-cache -x test -x lint
+  
+  # 步骤 2: 构建所有子模块的 AAR
+  # 确保所有 21 个子模块都已构建
+  - ./gradlew assembleRelease -x test -x lint
+  
+  # 步骤 3: 合并所有依赖到单个完整 AAR
+  # 这会生成 release-complete.aar，包含所有 21 个模块 + 第三方库
+  - ./gradlew :omm-lib:mergeReleaseDependencies -x test -x lint
+  
+  # 步骤 4: 发布完整 AAR 到 Maven
+  # JitPack 会自动使用这个发布的 AAR
+  # 注意：发布配置已修改为使用 release-complete.aar
+  - ./gradlew :omm-lib:publishToMavenLocal -x test -x lint
+  
+  # ========================================
+  # 预期结果
+  # ========================================
+  # ✅ 第三方只需一行依赖：
+  #    implementation 'com.github.Bean-V:omm-sdk:版本号'
+  # ✅ 无需添加其他 21 个子模块依赖
+  # ✅ 无需配置额外的第三方库
+  # ========================================

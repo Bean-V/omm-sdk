@@ -243,7 +243,8 @@ configurations.all {
 configurations.maybeCreate("publishAar")
 
 // 在文件顶部定义变量
-def isLocalBuild = false
+// JitPack 构建时也应该使用本地项目依赖，因为所有模块都在同一个仓库中
+def isLocalBuild = true  // 始终使用本地项目依赖
 dependencies {
     // ========== AndroidX 核心库 ==========
     implementation 'androidx.appcompat:appcompat:1.3.1'
@@ -503,16 +504,38 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release
-
+                // ⚠️ 关键修改：不使用 from components.release
+                // 原因：from components.release 会在 POM 中声明所有项目依赖
+                // 但这些依赖在 JitPack 上不存在，导致第三方无法解析
+                
+                // 方案：直接发布合并后的完整 AAR，不声明项目依赖
+                // from components.release  // ❌ 注释掉
+                
                 // 使用定义的属性
                 groupId = PUBLISH_GROUP_ID
                 artifactId = PUBLISH_ARTIFACT_ID
                 version = PUBLISH_VERSION
+                
+                // ✅ 手动指定要发布的 AAR 文件
+                // 如果 release-complete.aar 存在，使用它；否则使用基础 AAR
+                artifact(project.provider {
+                    def completeAar = new File(project.buildDir, "outputs/aar/release-complete.aar")
+                    def baseAar = new File(project.buildDir, "outputs/aar/${project.name}-release.aar")
+                    
+                    if (completeAar.exists()) {
+                        println "📦 [发布] 使用完整 AAR: ${completeAar.name} (${String.format("%.2f", completeAar.size() / 1024 / 1024)} MB)"
+                        return completeAar
+                    } else if (baseAar.exists()) {
+                        println "⚠️  [发布] 完整 AAR 不存在，使用基础 AAR: ${baseAar.name}"
+                        return baseAar
+                    } else {
+                        throw new GradleException("❌ 未找到可发布的 AAR 文件")
+                    }
+                })
 
                 pom {
                     name = PUBLISH_ARTIFACT_ID
-                    description = 'OMM Android SDK'
+                    description = 'OMM Android SDK - Complete AAR with all dependencies'
                     url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
 
                     licenses {
@@ -535,8 +558,407 @@ afterEvaluate {
                         developerConnection = "scm:git:ssh://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}.git"
                         url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
                     }
+                    
+                    // ✅ 关键：明确声明没有项目依赖
+                    // 所有依赖都已经合并到 AAR 中了
+                    withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+                        
+                        // 只保留必要的外部依赖（AndroidX、Kotlin 等）
+                        // 这些依赖通常第三方项目也会有，不会冲突
+                        def essentialDeps = [
+                            // AndroidX 核心库
+                            [group: 'androidx.appcompat', name: 'appcompat', version: '1.3.1'],
+                            [group: 'com.google.android.material', name: 'material', version: '1.4.0'],
+                            [group: 'androidx.recyclerview', name: 'recyclerview', version: '1.2.1'],
+                            [group: 'androidx.constraintlayout', name: 'constraintlayout', version: '2.1.4'],
+                            
+                            // Kotlin
+                            [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version],
+                        ]
+                        
+                        essentialDeps.each { dep ->
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', dep.group)
+                            dependencyNode.appendNode('artifactId', dep.name)
+                            dependencyNode.appendNode('version', dep.version)
+                            dependencyNode.appendNode('scope', 'compile')
+                        }
+                        
+                        println "✅ [POM] 已配置最小依赖集（${essentialDeps.size()} 个）"
+                    }
                 }
             }
         }
+    }
+}
+
+
+// ================================================
+// Variant API: 合并所有依赖到单个 AAR
+// ================================================
+
+import com.android.build.api.variant.AndroidComponentsExtension
+import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.file.ConfigurableFileCollection
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.TaskAction
+import org.gradle.api.artifacts.ProjectDependency
+import java.util.jar.JarOutputStream
+import java.util.zip.ZipEntry
+
+// 自定义任务：合并所有依赖到 AAR
+abstract class MergeAllDependenciesTask extends DefaultTask {
+    
+    @InputDirectory
+    abstract DirectoryProperty getAarDirectory()
+    
+    @InputFiles
+    abstract ConfigurableFileCollection getDependencyFiles()
+    
+    @OutputFile
+    abstract RegularFileProperty getOutputAar()
+    
+    @TaskAction
+    void mergeAllDependencies() {
+        println "🔄 [Variant API] 开始合并所有依赖..."
+        
+        // 查找原始 AAR
+        def aarDir = aarDirectory.get().asFile
+        def originalAar = aarDir.listFiles()?.find { it.name.endsWith('.aar') && it.name.contains('release') }
+        
+        if (!originalAar || !originalAar.exists()) {
+            println "❌ 原始 AAR 不存在于: ${aarDir.path}"
+            throw new GradleException("Original AAR not found")
+        }
+        
+        println "📦 找到原始 AAR: ${originalAar.name} (${String.format("%.2f", originalAar.size() / 1024 / 1024)} MB)"
+        
+        // 创建临时目录
+        def tempDir = new File(project.buildDir, "temp/variant-merge/")
+        tempDir.deleteDir()
+        tempDir.mkdirs()
+        
+        // 解压原始 AAR
+        project.copy {
+            from project.zipTree(originalAar)
+            into tempDir
+        }
+        println "  ✅ 解压原始 AAR"
+        
+        // 创建合并的 classes 目录
+        def mergedClassesDir = new File(tempDir, "merged-classes/")
+        mergedClassesDir.mkdirs()
+        
+        // 先复制原始的 classes.jar 内容
+        def originalClassesJar = new File(tempDir, "classes.jar")
+        if (originalClassesJar.exists()) {
+            project.copy {
+                from project.zipTree(originalClassesJar)
+                include '**/*.class'
+                into mergedClassesDir
+                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+            }
+            println "  ✅ 提取原始 classes.jar"
+        }
+        
+        // 收集所有依赖的类文件
+        def dependencyCount = 0
+        def depFiles = dependencyFiles.files
+        
+        println "\n📚 开始合并依赖 (共 ${depFiles.size()} 个文件)..."
+        
+        depFiles.each { file ->
+            if (file.exists()) {
+                dependencyCount++
+                
+                if (file.name.endsWith('.jar')) {
+                    // 合并 JAR 文件
+                    try {
+                        project.copy {
+                            from project.zipTree(file)
+                            include '**/*.class'
+                            exclude 'META-INF/**'
+                            exclude 'module-info.class'
+                            into mergedClassesDir
+                            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                        }
+                        println "  ✅ 合并 JAR: ${file.name}"
+                    } catch (Exception e) {
+                        println "  ⚠️  跳过 JAR: ${file.name} - ${e.message}"
+                    }
+                    
+                } else if (file.name.endsWith('.aar')) {
+                    // 合并 AAR 中的 classes.jar
+                    try {
+                        def tempAarDir = new File(tempDir, "temp-aar-${file.name.replace('.aar', '')}/")
+                        tempAarDir.mkdirs()
+                        
+                        project.copy {
+                            from project.zipTree(file)
+                            include 'classes.jar'
+                            into tempAarDir
+                        }
+                        
+                        def classesJar = new File(tempAarDir, "classes.jar")
+                        if (classesJar.exists()) {
+                            project.copy {
+                                from project.zipTree(classesJar)
+                                include '**/*.class'
+                                exclude 'META-INF/**'
+                                exclude 'module-info.class'
+                                into mergedClassesDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                            println "  ✅ 合并 AAR: ${file.name}"
+                        }
+                        
+                        tempAarDir.deleteDir()
+                    } catch (Exception e) {
+                        println "  ⚠️  跳过 AAR: ${file.name} - ${e.message}"
+                    }
+                }
+            }
+        }
+        
+        println "\n📊 共处理 ${dependencyCount} 个依赖文件"
+        
+        // 创建新的 classes.jar
+        if (mergedClassesDir.listFiles()?.size() > 0) {
+            println "📦 创建合并的 classes.jar..."
+            
+            def mergedJarFile = new File(tempDir, "classes-merged.jar")
+            def jarOutput = new JarOutputStream(new FileOutputStream(mergedJarFile))
+            
+            // 收集所有 class 文件
+            def classFiles = []
+            mergedClassesDir.eachFileRecurse { file ->
+                if (file.isFile() && file.name.endsWith('.class')) {
+                    classFiles << file
+                }
+            }
+            
+            // 写入 JAR
+            classFiles.each { file ->
+                def entryName = mergedClassesDir.toURI().relativize(file.toURI()).toString()
+                jarOutput.putNextEntry(new ZipEntry(entryName))
+                jarOutput.write(file.bytes)
+                jarOutput.closeEntry()
+            }
+            jarOutput.close()
+            
+            // 替换原始的 classes.jar
+            if (originalClassesJar.exists()) {
+                originalClassesJar.delete()
+            }
+            mergedJarFile.renameTo(originalClassesJar)
+            
+            println "✅ 类文件合并完成 (${classFiles.size()} 个类)"
+        }
+        
+        // 清理临时目录
+        mergedClassesDir.deleteDir()
+        new File(tempDir, "temp-aar/").deleteDir()
+        
+        // 重新打包为 AAR
+        def outputFile = outputAar.get().asFile
+        outputFile.parentFile.mkdirs()
+        
+        project.ant.zip(destfile: outputFile) {
+            fileset(dir: tempDir) {
+                include(name: "**/*")
+                exclude(name: "merged-classes/**")
+                exclude(name: "temp-aar*/**")
+            }
+        }
+        
+        println """
+🎉 [Variant API] 一站式打包完成！
+📊 统计信息:
+  - 原始 AAR: ${String.format("%.2f", originalAar.size() / 1024 / 1024)} MB
+  - 合并后 AAR: ${String.format("%.2f", outputFile.size() / 1024 / 1024)} MB
+  - 处理依赖数: ${dependencyCount}
+📍 输出文件: ${outputFile.path}
+        """
+        
+        // 清理临时目录
+        tempDir.deleteDir()
+    }
+}
+
+// 使用 Variant API 注册任务
+androidComponents {
+    onVariants(selector().withBuildType("release")) { variant ->
+        
+        println "🔧 [配置阶段] 正在为 ${variant.name} 变体配置合并任务..."
+        
+        // 注册合并依赖任务
+        def mergeTask = project.tasks.register(
+            "merge${variant.name.capitalize()}Dependencies",
+            MergeAllDependenciesTask.class
+        ) { task ->
+            // 输入：原始 AAR 目录
+            task.aarDirectory.set(
+                project.layout.buildDirectory.dir("outputs/aar")
+            )
+            
+            // 依赖 bundleReleaseAar 任务
+            task.dependsOn("bundle${variant.name.capitalize()}Aar")
+            
+            // 确保所有项目依赖的 AAR 都已构建
+            def projectDeps = []
+            project.configurations.implementation.allDependencies.each { dep ->
+                if (dep instanceof ProjectDependency) {
+                    def depProject = dep.dependencyProject
+                    projectDeps << depProject.name
+                    
+                    // 依赖每个项目的 bundle 任务
+                    def bundleTaskName = "bundle${variant.name.capitalize()}Aar"
+                    try {
+                        def depBundleTask = depProject.tasks.findByName(bundleTaskName)
+                        if (depBundleTask) {
+                            task.dependsOn(depBundleTask)
+                            println "  ✅ 添加依赖: ${depProject.name}:${bundleTaskName}"
+                        }
+                    } catch (Exception e) {
+                        println "  ⚠️  配置依赖失败: ${depProject.name} - ${e.message}"
+                    }
+                }
+            }
+            
+            println "📦 项目依赖总数: ${projectDeps.size()}"
+            
+            // 输入：依赖文件集合 - 在执行阶段动态收集
+            task.dependencyFiles.from(
+                project.provider {
+                    println "\n🔍 [执行阶段] 开始收集依赖文件..."
+                    def files = []
+                    def projectAars = []
+                    def externalJars = []
+                    def externalAars = []
+                    
+                    // 1. 收集项目依赖的 AAR
+                    println "📦 收集项目依赖的 AAR..."
+                    project.configurations.implementation.allDependencies.each { dep ->
+                        if (dep instanceof ProjectDependency) {
+                            def depProject = dep.dependencyProject
+                            def aarDir = new File(depProject.buildDir, "outputs/aar")
+                            
+                            if (aarDir.exists()) {
+                                def found = false
+                                aarDir.listFiles()?.each { file ->
+                                    if (file.name.endsWith('.aar') && file.name.contains('release')) {
+                                        files << file
+                                        projectAars << file.name
+                                        found = true
+                                        println "  ✅ ${depProject.name}: ${file.name} (${String.format("%.2f", file.size() / 1024 / 1024)} MB)"
+                                    }
+                                }
+                                if (!found) {
+                                    println "  ⚠️  ${depProject.name}: 未找到 release AAR"
+                                }
+                            } else {
+                                println "  ❌ ${depProject.name}: AAR 目录不存在"
+                            }
+                        }
+                    }
+                    
+                    // 2. 收集外部依赖和文件依赖
+                    println "\n📚 收集外部依赖..."
+                    try {
+                        // 使用 runtimeClasspath 配置来解析依赖
+                        def runtimeConfig = project.configurations.findByName('releaseRuntimeClasspath')
+                        if (!runtimeConfig) {
+                            runtimeConfig = project.configurations.findByName('runtimeClasspath')
+                        }
+                        
+                        if (runtimeConfig) {
+                            def resolvedArtifacts = runtimeConfig.resolvedConfiguration.resolvedArtifacts
+                            println "  解析到 ${resolvedArtifacts.size()} 个依赖"
+                            
+                            resolvedArtifacts.each { artifact ->
+                                def file = artifact.file
+                                
+                                if (file.exists()) {
+                                    def isProjectAar = projectAars.any { it == file.name }
+                                    
+                                    if (!isProjectAar) {
+                                        if (file.name.endsWith('.jar')) {
+                                            files << file
+                                            externalJars << file.name
+                                            println "  ✅ JAR: ${file.name}"
+                                        } else if (file.name.endsWith('.aar')) {
+                                            files << file
+                                            externalAars << file.name
+                                            println "  ✅ AAR: ${file.name}"
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            println "  ⚠️  未找到可解析的 runtime 配置"
+                        }
+                    } catch (Exception e) {
+                        println "  ❌ 解析外部依赖时出错: ${e.message}"
+                        e.printStackTrace()
+                    }
+                    
+                    println "\n📊 依赖收集统计:"
+                    println "  - 项目 AAR: ${projectAars.size()}"
+                    println "  - 外部 AAR: ${externalAars.size()}"
+                    println "  - 外部 JAR: ${externalJars.size()}"
+                    println "  - 总计: ${files.size()} 个文件"
+                    
+                    if (files.isEmpty()) {
+                        println "\n⚠️  警告: 未收集到任何依赖文件！"
+                    }
+                    
+                    return files
+                }
+            )
+            
+            // 输出：合并后的 AAR
+            task.outputAar.set(
+                new File(project.buildDir, "outputs/aar/${variant.name}-complete.aar")
+            )
+            
+            task.group = 'build'
+            task.description = "合并 ${variant.name} 的所有依赖到单个 AAR"
+        }
+        
+        println "✅ 已注册任务: merge${variant.name.capitalize()}Dependencies"
+    }
+}
+
+// 一键构建任务
+task buildCompleteAar {
+    group = 'build'
+    description = '构建包含所有依赖的完整 AAR'
+    
+    dependsOn 'clean', 'mergeReleaseDependencies'
+    
+    doLast {
+        println """
+🎉 完整 AAR 构建完成！
+📍 输出文件: build/outputs/aar/release-complete.aar
+
+第三方使用方法:
+1. 将 release-complete.aar 重命名为 omm-sdk-complete.aar
+2. 复制到第三方项目的 libs 目录
+3. 在 build.gradle 中添加:
+   implementation(name: 'omm-sdk-complete', ext: 'aar')
+        """
+    }
+}
+
+// 确保任务执行顺序
+afterEvaluate {
+    def mergeTask = tasks.findByName('mergeReleaseDependencies')
+    if (mergeTask) {
+        mergeTask.mustRunAfter 'clean'
     }
 }
