@@ -574,7 +574,7 @@ afterEvaluate {
                             [group: 'androidx.constraintlayout', name: 'constraintlayout', version: '2.1.4'],
                             
                             // Kotlin
-                            [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version],
+                            [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: rootProject.ext.kotlin_version],
                         ]
                         
                         essentialDeps.each { dep ->

@@ -1,5 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply from: 'publish-aars.gradle'
+// 只在本地构建时应用 publish-aars.gradle
+if (file('publish-aars.gradle').exists()) {
+    apply from: 'publish-aars.gradle'
+}
 buildscript {
     ext {
         kotlin_version = "1.9.22"
