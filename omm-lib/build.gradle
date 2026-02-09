@@ -726,6 +726,15 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
                             def targetResDir = new File(tempDir, "res")
                             targetResDir.mkdirs()
                             
+                            def resFileCount = 0
+                            resDir.eachFileRecurse { resFile ->
+                                if (resFile.isFile()) {
+                                    resFileCount++
+                                }
+                            }
+                            
+                            println "    📁 发现 ${resFileCount} 个资源文件"
+                            
                             project.copy {
                                 from resDir
                                 into targetResDir
@@ -733,6 +742,10 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
                                 // 这样可以看到哪些资源有冲突
                                 duplicatesStrategy = DuplicatesStrategy.WARN
                             }
+                            
+                            println "    ✅ 资源文件已合并"
+                        } else {
+                            println "    ⚠️  没有 res 目录"
                         }
                         
                         // 3. 合并 R.txt (资源 ID 文件)
@@ -1050,6 +1063,11 @@ androidComponents {
                     
                     // 2. 收集外部依赖和文件依赖
                     println "\n📚 收集外部依赖..."
+                    // ⚠️ 暂时跳过外部依赖收集，避免配置阶段解析依赖导致的问题
+                    // 外部依赖（如 AndroidX）第三方项目也会有，不需要合并
+                    println "  ⚠️  跳过外部依赖收集（避免配置阶段解析问题）"
+                    
+                    /*
                     try {
                         // 使用 runtimeClasspath 配置来解析依赖
                         def runtimeConfig = project.configurations.findByName('releaseRuntimeClasspath')
@@ -1087,6 +1105,7 @@ androidComponents {
                         println "  ❌ 解析外部依赖时出错: ${e.message}"
                         e.printStackTrace()
                     }
+                    */
                     
                     println "\n📊 依赖收集统计:"
                     println "  - 项目 AAR: ${projectAars.size()}"
