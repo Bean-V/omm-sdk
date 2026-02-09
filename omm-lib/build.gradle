@@ -735,12 +735,78 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
                             
                             println "    📁 发现 ${resFileCount} 个资源文件"
                             
-                            project.copy {
-                                from resDir
-                                into targetResDir
-                                // 使用 WARN 策略，保留第一个但警告冲突
-                                // 这样可以看到哪些资源有冲突
-                                duplicatesStrategy = DuplicatesStrategy.WARN
+                            // 分别处理 values 目录和其他资源目录
+                            resDir.listFiles()?.each { subDir ->
+                                if (subDir.isDirectory()) {
+                                    def targetSubDir = new File(targetResDir, subDir.name)
+                                    targetSubDir.mkdirs()
+                                    
+                                    if (subDir.name.startsWith('values')) {
+                                        // ✅ values 目录需要合并 XML 内容
+                                        println "    🔀 合并 values 资源: ${subDir.name}"
+                                        subDir.listFiles()?.each { xmlFile ->
+                                            if (xmlFile.name.endsWith('.xml')) {
+                                                def targetXmlFile = new File(targetSubDir, xmlFile.name)
+                                                if (targetXmlFile.exists()) {
+                                                    // 合并 XML 内容
+                                                    try {
+                                                        def sourceXml = new XmlParser().parse(xmlFile)
+                                                        def targetXml = new XmlParser().parse(targetXmlFile)
+                                                        
+                                                        // 收集已存在的资源名称
+                                                        def existingNames = [] as Set
+                                                        targetXml.children().each { node ->
+                                                            if (node instanceof groovy.util.Node) {
+                                                                def name = node.attribute('name')
+                                                                if (name) {
+                                                                    existingNames.add(name)
+                                                                }
+                                                            }
+                                                        }
+                                                        
+                                                        // 添加新资源
+                                                        def addedCount = 0
+                                                        sourceXml.children().each { node ->
+                                                            if (node instanceof groovy.util.Node) {
+                                                                def name = node.attribute('name')
+                                                                if (name && !existingNames.contains(name)) {
+                                                                    targetXml.append(node)
+                                                                    addedCount++
+                                                                }
+                                                            }
+                                                        }
+                                                        
+                                                        if (addedCount > 0) {
+                                                            // 写回文件
+                                                            def writer = new FileWriter(targetXmlFile)
+                                                            def printer = new XmlNodePrinter(new PrintWriter(writer))
+                                                            printer.preserveWhitespace = true
+                                                            printer.print(targetXml)
+                                                            writer.close()
+                                                            println "      ✅ ${xmlFile.name}: 添加 ${addedCount} 个资源"
+                                                        }
+                                                    } catch (Exception e) {
+                                                        println "      ⚠️  合并 ${xmlFile.name} 失败: ${e.message}"
+                                                        // 失败时跳过，保留原有文件
+                                                    }
+                                                } else {
+                                                    // 文件不存在，直接复制
+                                                    project.copy {
+                                                        from xmlFile
+                                                        into targetSubDir
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        // 其他资源目录（drawable, layout 等）直接复制
+                                        project.copy {
+                                            from subDir
+                                            into targetSubDir
+                                            duplicatesStrategy = DuplicatesStrategy.WARN
+                                        }
+                                    }
+                                }
                             }
                             
                             println "    ✅ 资源文件已合并"
@@ -913,12 +979,107 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
         
         // ✅ 重要：最后再次复制 omm-lib 自己的资源，确保优先级最高
         println "\n🔝 确保 omm-lib 自身资源优先级最高..."
+        
+        // 解压 omm-lib 的 AAR 到临时目录
+        def ommResTemp = new File(tempDir, "omm-res-temp")
+        ommResTemp.mkdirs()
         project.copy {
             from project.zipTree(originalAar)
             include 'res/**'
-            into tempDir
-            duplicatesStrategy = DuplicatesStrategy.INCLUDE  // 覆盖已存在的文件
+            into ommResTemp
         }
+        
+        def ommResDir = new File(ommResTemp, "res")
+        if (ommResDir.exists()) {
+            def targetResDir = new File(tempDir, "res")
+            
+            ommResDir.listFiles()?.each { subDir ->
+                if (subDir.isDirectory()) {
+                    def targetSubDir = new File(targetResDir, subDir.name)
+                    targetSubDir.mkdirs()
+                    
+                    if (subDir.name.startsWith('values')) {
+                        // values 目录：合并 XML 内容，omm-lib 的资源优先
+                        println "  🔀 合并 omm-lib 的 values 资源: ${subDir.name}"
+                        subDir.listFiles()?.each { xmlFile ->
+                            if (xmlFile.name.endsWith('.xml')) {
+                                def targetXmlFile = new File(targetSubDir, xmlFile.name)
+                                if (targetXmlFile.exists()) {
+                                    try {
+                                        def sourceXml = new XmlParser().parse(xmlFile)
+                                        def targetXml = new XmlParser().parse(targetXmlFile)
+                                        
+                                        // 收集目标文件中的资源名称
+                                        def targetNames = [:] // name -> node
+                                        targetXml.children().each { node ->
+                                            if (node instanceof groovy.util.Node) {
+                                                def name = node.attribute('name')
+                                                if (name) {
+                                                    targetNames[name] = node
+                                                }
+                                            }
+                                        }
+                                        
+                                        // 用 omm-lib 的资源替换同名资源
+                                        def replacedCount = 0
+                                        def addedCount = 0
+                                        sourceXml.children().each { sourceNode ->
+                                            if (sourceNode instanceof groovy.util.Node) {
+                                                def name = sourceNode.attribute('name')
+                                                if (name) {
+                                                    if (targetNames.containsKey(name)) {
+                                                        // 替换已存在的资源
+                                                        def targetNode = targetNames[name]
+                                                        def parent = targetNode.parent()
+                                                        def index = parent.children().indexOf(targetNode)
+                                                        parent.remove(targetNode)
+                                                        parent.children().add(index, sourceNode)
+                                                        replacedCount++
+                                                    } else {
+                                                        // 添加新资源
+                                                        targetXml.append(sourceNode)
+                                                        addedCount++
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        // 写回文件
+                                        def writer = new FileWriter(targetXmlFile)
+                                        def printer = new XmlNodePrinter(new PrintWriter(writer))
+                                        printer.preserveWhitespace = true
+                                        printer.print(targetXml)
+                                        writer.close()
+                                        
+                                        if (replacedCount > 0 || addedCount > 0) {
+                                            println "    ✅ ${xmlFile.name}: 替换 ${replacedCount} 个, 添加 ${addedCount} 个"
+                                        }
+                                    } catch (Exception e) {
+                                        println "    ⚠️  合并 ${xmlFile.name} 失败: ${e.message}"
+                                    }
+                                } else {
+                                    // 文件不存在，直接复制
+                                    project.copy {
+                                        from xmlFile
+                                        into targetSubDir
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // 其他资源目录：直接覆盖
+                        project.copy {
+                            from subDir
+                            into targetSubDir
+                            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 清理临时目录
+        ommResTemp.deleteDir()
         println "  ✅ omm-lib 资源已确保优先"
         
         // 创建新的 classes.jar
