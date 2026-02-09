@@ -10,6 +10,10 @@ buildscript {
         min_version = 26
         target_version = 34
         rnVersion = "0.77.2"
+        
+        // ✅ 发布配置 - 所有模块使用统一版本
+        PUBLISH_GROUP_ID = 'com.github.Bean-V'
+        PUBLISH_VERSION = '2.0.0'  // 多模块发布版本
     }
     repositories {
         mavenLocal()
@@ -104,45 +108,17 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-// 根build.gradle中添加
+// ================================================
+// 为所有子模块配置发布
+// ================================================
 subprojects {
-    apply plugin: 'maven-publish'
-
     afterEvaluate { project ->
+        // 只为 Android Library 模块应用发布配置
         if (project.plugins.hasPlugin('com.android.library')) {
-            publishing {
-                publications {
-                    release(MavenPublication) {
-//                        from components.release
-
-                        // 设置Maven坐标
-                        groupId = 'com.github.Bean-V'
-                        artifactId = project.name  // 使用模块名作为artifactId
-                        version = '1.0.0'
-
-                        pom {
-                            name = project.name
-                            description = "OMM SDK - ${project.name} module"
-                            url = 'https://github.com/Bean-V/omm-sdk'
-
-                            licenses {
-                                license {
-                                    name = 'Apache License 2.0'
-                                    url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                                }
-                            }
-
-                            developers {
-                                developer {
-                                    id = 'Bean-V'
-                                    name = 'Bean V'
-                                    email = 'your-email@example.com'
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            // 应用通用发布配置
+            project.apply from: "${rootProject.projectDir}/publish-module.gradle"
+            
+            println "✅ [根配置] ${project.name} 已应用发布配置"
         }
     }
 }

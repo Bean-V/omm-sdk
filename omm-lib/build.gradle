@@ -507,38 +507,17 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                // ⚠️ 关键修改：不使用 from components.release
-                // 原因：from components.release 会在 POM 中声明所有项目依赖
-                // 但这些依赖在 JitPack 上不存在，导致第三方无法解析
-                
-                // 方案：直接发布合并后的完整 AAR，不声明项目依赖
-                // from components.release  // ❌ 注释掉
+                // ✅ 使用 from components.release 来自动包含依赖信息
+                from components.release
                 
                 // 使用定义的属性
                 groupId = PUBLISH_GROUP_ID
                 artifactId = PUBLISH_ARTIFACT_ID
                 version = PUBLISH_VERSION
-                
-                // ✅ 手动指定要发布的 AAR 文件
-                // 如果 release-complete.aar 存在，使用它；否则使用基础 AAR
-                artifact(project.provider {
-                    def completeAar = new File(project.buildDir, "outputs/aar/release-complete.aar")
-                    def baseAar = new File(project.buildDir, "outputs/aar/${project.name}-release.aar")
-                    
-                    if (completeAar.exists()) {
-                        println "📦 [发布] 使用完整 AAR: ${completeAar.name} (${String.format("%.2f", completeAar.size() / 1024 / 1024)} MB)"
-                        return completeAar
-                    } else if (baseAar.exists()) {
-                        println "⚠️  [发布] 完整 AAR 不存在，使用基础 AAR: ${baseAar.name}"
-                        return baseAar
-                    } else {
-                        throw new GradleException("❌ 未找到可发布的 AAR 文件")
-                    }
-                })
 
                 pom {
                     name = PUBLISH_ARTIFACT_ID
-                    description = 'OMM Android SDK - Complete AAR with all dependencies'
+                    description = 'OMM Android SDK - Multi-module library with automatic dependency resolution'
                     url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
 
                     licenses {
@@ -562,33 +541,62 @@ afterEvaluate {
                         url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
                     }
                     
-                    // ✅ 关键：明确声明没有项目依赖
-                    // 所有依赖都已经合并到 AAR 中了
+                    // ✅ 关键修改：将所有项目依赖转换为 JitPack 依赖
+                    // 这样第三方只需添加一个依赖，Gradle 会自动解析所有子模块
                     withXml {
-                        def dependenciesNode = asNode().appendNode('dependencies')
-                        
-                        // 只保留必要的外部依赖（AndroidX、Kotlin 等）
-                        // 这些依赖通常第三方项目也会有，不会冲突
-                        def essentialDeps = [
-                            // AndroidX 核心库
-                            [group: 'androidx.appcompat', name: 'appcompat', version: '1.3.1'],
-                            [group: 'com.google.android.material', name: 'material', version: '1.4.0'],
-                            [group: 'androidx.recyclerview', name: 'recyclerview', version: '1.2.1'],
-                            [group: 'androidx.constraintlayout', name: 'constraintlayout', version: '2.1.4'],
-                            
-                            // Kotlin
-                            [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlinVersion],
-                        ]
-                        
-                        essentialDeps.each { dep ->
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', dep.group)
-                            dependencyNode.appendNode('artifactId', dep.name)
-                            dependencyNode.appendNode('version', dep.version)
-                            dependencyNode.appendNode('scope', 'compile')
+                        def dependenciesNode = asNode().dependencies[0]
+                        if (!dependenciesNode) {
+                            dependenciesNode = asNode().appendNode('dependencies')
                         }
                         
-                        println "✅ [POM] 已配置最小依赖集（${essentialDeps.size()} 个）"
+                        // 移除所有现有的项目依赖节点
+                        def projectDepsToRemove = []
+                        dependenciesNode.dependency.each { dep ->
+                            def groupId = dep.groupId?.text()
+                            def artifactId = dep.artifactId?.text()
+                            // 如果是未分组的项目依赖（groupId 为空或为项目名）
+                            if (!groupId || groupId == 'omm-sdk' || groupId.startsWith(':')) {
+                                projectDepsToRemove << dep
+                            }
+                        }
+                        projectDepsToRemove.each { dependenciesNode.remove(it) }
+                        
+                        // 添加所有子模块作为 JitPack 依赖
+                        def subModules = [
+                            'oort_imagepick_sdk',
+                            'ToolsMain',
+                            'provider_lib',
+                            'pullToRefershLibraryMy',
+                            'jcvideoplayer-lib',
+                            'YZxing-lib',
+                            'OpenGLlibrary',
+                            'MPChartLib',
+                            'liveLibrary',
+                            'OortWebframeLib',
+                            'basemodule',
+                            'AppStore',
+                            'Contacts',
+                            'screenrecorder',
+                            'AIDICert',
+                            'sound_recon',
+                            'FrameLibrary',
+                            'Levc-lib',
+                            'giraffeplayer',
+                            'floatview',
+                            'offline'
+                        ]
+                        
+                        println "\n📦 [POM] 配置子模块依赖..."
+                        subModules.each { moduleName ->
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', PUBLISH_GROUP_ID)
+                            dependencyNode.appendNode('artifactId', moduleName)
+                            dependencyNode.appendNode('version', PUBLISH_VERSION)
+                            dependencyNode.appendNode('scope', 'compile')
+                            println "  ✅ ${moduleName}"
+                        }
+                        
+                        println "✅ [POM] 已配置 ${subModules.size()} 个子模块依赖"
                     }
                 }
             }
