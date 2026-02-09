@@ -507,13 +507,16 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                // ✅ 使用 from components.release 来自动包含依赖信息
-                from components.release
+                // ✅ 不使用 from components.release，直接指定 artifact
+                // 这样可以避免 components.release 不存在的问题
                 
                 // 使用定义的属性
                 groupId = PUBLISH_GROUP_ID
                 artifactId = PUBLISH_ARTIFACT_ID
                 version = PUBLISH_VERSION
+                
+                // 直接添加 AAR artifact
+                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
 
                 pom {
                     name = PUBLISH_ARTIFACT_ID
@@ -544,22 +547,7 @@ afterEvaluate {
                     // ✅ 关键修改：将所有项目依赖转换为 JitPack 依赖
                     // 这样第三方只需添加一个依赖，Gradle 会自动解析所有子模块
                     withXml {
-                        def dependenciesNode = asNode().dependencies[0]
-                        if (!dependenciesNode) {
-                            dependenciesNode = asNode().appendNode('dependencies')
-                        }
-                        
-                        // 移除所有现有的项目依赖节点
-                        def projectDepsToRemove = []
-                        dependenciesNode.dependency.each { dep ->
-                            def groupId = dep.groupId?.text()
-                            def artifactId = dep.artifactId?.text()
-                            // 如果是未分组的项目依赖（groupId 为空或为项目名）
-                            if (!groupId || groupId == 'omm-sdk' || groupId.startsWith(':')) {
-                                projectDepsToRemove << dep
-                            }
-                        }
-                        projectDepsToRemove.each { dependenciesNode.remove(it) }
+                        def dependenciesNode = asNode().appendNode('dependencies')
                         
                         // 添加所有子模块作为 JitPack 依赖
                         def subModules = [
@@ -602,6 +590,13 @@ afterEvaluate {
             }
         }
     }
+    
+    // 确保发布任务依赖于 AAR 构建任务
+    tasks.withType(PublishToMavenRepository) {
+        dependsOn 'bundleReleaseAar'
+    }
+    
+    println "✅ [omm-lib] 已配置 Maven 发布（使用 artifact 方式）"
 }
 
 
@@ -922,9 +917,9 @@ abstract class MergeAllDependenciesTask extends DefaultTask {
         project.configurations.implementation.allDependencies.each { dep ->
             if (dep instanceof ProjectDependency) {
                 def depProject = dep.dependencyProject
-                def aarDir = new File(depProject.buildDir, "outputs/aar")
+                def depAarDir = new File(depProject.buildDir, "outputs/aar")
                 
-                aarDir.listFiles()?.each { aarFile ->
+                depAarDir.listFiles()?.each { aarFile ->
                     if (aarFile.name.endsWith('.aar') && aarFile.name.contains('release')) {
                         try {
                             def tempAarDir = new File(tempDir, "temp-values-${depProject.name}")
@@ -1143,11 +1138,11 @@ androidComponents {
                     project.configurations.implementation.allDependencies.each { dep ->
                         if (dep instanceof ProjectDependency) {
                             def depProject = dep.dependencyProject
-                            def aarDir = new File(depProject.buildDir, "outputs/aar")
+                            def projectAarDir = new File(depProject.buildDir, "outputs/aar")
                             
-                            if (aarDir.exists()) {
+                            if (projectAarDir.exists()) {
                                 def found = false
-                                aarDir.listFiles()?.each { file ->
+                                projectAarDir.listFiles()?.each { file ->
                                     if (file.name.endsWith('.aar') && file.name.contains('release')) {
                                         files << file
                                         projectAars << file.name
