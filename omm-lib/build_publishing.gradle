@@ -1,0 +1,98 @@
+// ================================================
+// omm-lib 发布配置 - 手动配置方式
+// ================================================
+
+ext {
+    PUBLISH_GROUP_ID = 'com.github.Bean-V'
+    PUBLISH_ARTIFACT_ID = 'omm-sdk'
+    PUBLISH_VERSION = '2.0.0'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // 手动添加 AAR artifact（不使用 from components.release）
+                // 使用任务输出而不是文件路径，确保依赖关系正确
+                artifact(tasks.named("bundleReleaseAar").flatMap { it.archiveFile })
+                
+                groupId = PUBLISH_GROUP_ID
+                artifactId = PUBLISH_ARTIFACT_ID
+                version = PUBLISH_VERSION
+
+                pom {
+                    name = PUBLISH_ARTIFACT_ID
+                    description = 'OMM Android SDK - Multi-module library with automatic dependency resolution'
+                    url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
+
+                    licenses {
+                        license {
+                            name = 'Apache License 2.0'
+                            url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = 'Bean-V'
+                            name = 'Bean V'
+                            email = 'your-email@example.com'
+                        }
+                    }
+
+                    scm {
+                        connection = "scm:git:git://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}.git"
+                        developerConnection = "scm:git:ssh://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}.git"
+                        url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
+                    }
+                    
+                    withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+                        
+                        // 1. 添加所有子模块依赖
+                        def subModules = [
+                            'oort_imagepick_sdk', 'ToolsMain', 'provider_lib', 'pullToRefershLibraryMy',
+                            'jcvideoplayer-lib', 'YZxing-lib', 'OpenGLlibrary', 'MPChartLib',
+                            'liveLibrary', 'OortWebframeLib', 'basemodule', 'AppStore',
+                            'Contacts', 'screenrecorder', 'AIDICert', 'sound_recon',
+                            'FrameLibrary', 'Levc-lib', 'giraffeplayer', 'floatview', 'offline'
+                        ]
+                        
+                        println "\n📦 [POM] 添加子模块依赖..."
+                        subModules.each { moduleName ->
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', PUBLISH_GROUP_ID)
+                            dependencyNode.appendNode('artifactId', moduleName)
+                            dependencyNode.appendNode('version', PUBLISH_VERSION)
+                            dependencyNode.appendNode('scope', 'compile')
+                        }
+                        println "✅ [POM] 已添加 ${subModules.size()} 个子模块依赖"
+                        
+                        // 2. 添加所有外部依赖
+                        println "\n📚 [POM] 添加外部依赖..."
+                        def addedCount = 0
+                        configurations.implementation.allDependencies.each { dep ->
+                            if (dep.group != null && dep.name != null && dep.version != null) {
+                                if (!(dep instanceof org.gradle.api.artifacts.ProjectDependency)) {
+                                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                                    dependencyNode.appendNode('groupId', dep.group)
+                                    dependencyNode.appendNode('artifactId', dep.name)
+                                    dependencyNode.appendNode('version', dep.version)
+                                    dependencyNode.appendNode('scope', 'compile')
+                                    addedCount++
+                                }
+                            }
+                        }
+                        println "✅ [POM] 已添加 ${addedCount} 个外部依赖"
+                    }
+                }
+            }
+        }
+    }
+    
+    tasks.withType(PublishToMavenRepository) {
+        dependsOn 'bundleReleaseAar'
+    }
+    
+    println "✅ [omm-lib] 已配置 Maven 发布（手动配置方式）"
+}
