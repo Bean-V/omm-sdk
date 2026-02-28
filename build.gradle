@@ -115,10 +115,13 @@ subprojects {
     afterEvaluate { project ->
         // 只为 Android Library 模块应用发布配置
         if (project.plugins.hasPlugin('com.android.library')) {
-            // 应用通用发布配置
-            project.apply from: "${rootProject.projectDir}/publish-module.gradle"
-            
-            println "✅ [根配置] ${project.name} 已应用发布配置"
+            // omm-lib 使用自己的 build_publishing.gradle，跳过通用配置
+            if (project.name != 'omm-lib') {
+                // 应用通用发布配置
+                project.apply from: "${rootProject.projectDir}/publish-module.gradle"
+                
+                println "✅ [根配置] ${project.name} 已应用发布配置"
+            }
         }
     }
 }

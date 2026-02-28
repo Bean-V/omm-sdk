@@ -1,3 +1,6 @@
+import java.util.jar.JarOutputStream
+import java.util.zip.ZipEntry
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -493,597 +496,13 @@ configurations {
 //    }
 //}
 
-// 定义扩展属性，便于管理
-ext {
-    PUBLISH_GROUP_ID = 'com.github.Bean-V'
-    PUBLISH_ARTIFACT_ID = 'omm-sdk'  // 必须与GitHub仓库名一致！
-    PUBLISH_VERSION = '1.0.0'
-}
-
-afterEvaluate {
-    // 在闭包外部捕获 kotlin_version，避免配置缓存问题
-    def kotlinVersion = rootProject.ext.kotlin_version
-    
-    publishing {
-        publications {
-            release(MavenPublication) {
-                // ✅ 不使用 from components.release，直接指定 artifact
-                // 这样可以避免 components.release 不存在的问题
-                
-                // 使用定义的属性
-                groupId = PUBLISH_GROUP_ID
-                artifactId = PUBLISH_ARTIFACT_ID
-                version = PUBLISH_VERSION
-                
-                // 直接添加 AAR artifact
-                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
-
-                pom {
-                    name = PUBLISH_ARTIFACT_ID
-                    description = 'OMM Android SDK - Multi-module library with automatic dependency resolution'
-                    url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
-
-                    licenses {
-                        license {
-                            name = 'Apache License 2.0'
-                            url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id = 'Bean-V'
-                            name = 'Bean V'
-                            email = 'your-email@example.com'
-                        }
-                    }
-
-                    scm {
-                        connection = "scm:git:git://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}.git"
-                        developerConnection = "scm:git:ssh://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}.git"
-                        url = "https://github.com/Bean-V/${PUBLISH_ARTIFACT_ID}"
-                    }
-                    
-                    // ✅ 关键修改：将所有项目依赖转换为 JitPack 依赖
-                    // 这样第三方只需添加一个依赖，Gradle 会自动解析所有子模块
-                    withXml {
-                        def root = asNode()
-                        
-                        // 查找或创建 dependencies 节点
-                        def dependenciesNode = root.dependencies ? root.dependencies[0] : root.appendNode('dependencies')
-                        
-                        // 添加所有子模块作为 JitPack 依赖
-                        def subModules = [
-                            'oort_imagepick_sdk',
-                            'ToolsMain',
-                            'provider_lib',
-                            'pullToRefershLibraryMy',
-                            'jcvideoplayer-lib',
-                            'YZxing-lib',
-                            'OpenGLlibrary',
-                            'MPChartLib',
-                            'liveLibrary',
-                            'OortWebframeLib',
-                            'basemodule',
-                            'AppStore',
-                            'Contacts',
-                            'screenrecorder',
-                            'AIDICert',
-                            'sound_recon',
-                            'FrameLibrary',
-                            'Levc-lib',
-                            'giraffeplayer',
-                            'floatview',
-                            'offline'
-                        ]
-                        
-                        println "\n📦 [POM] 配置子模块依赖..."
-                        subModules.each { moduleName ->
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', PUBLISH_GROUP_ID)
-                            dependencyNode.appendNode('artifactId', moduleName)
-                            dependencyNode.appendNode('version', PUBLISH_VERSION)
-                            dependencyNode.appendNode('scope', 'compile')
-                            println "  ✅ ${moduleName}"
-                        }
-                        
-                        println "✅ [POM] 已配置 ${subModules.size()} 个子模块依赖"
-                    }
-                }
-            }
-        }
-    }
-    
-    // 确保发布任务依赖于 AAR 构建任务
-    tasks.withType(PublishToMavenRepository) {
-        dependsOn 'bundleReleaseAar'
-    }
-    
-    println "✅ [omm-lib] 已配置 Maven 发布（使用 artifact 方式）"
-}
-
-
 // ================================================
-// Variant API: 合并所有依赖到单个 AAR
+// 应用发布配置（使用独立的 build_publishing.gradle）
 // ================================================
-
-import com.android.build.api.variant.AndroidComponentsExtension
-import org.gradle.api.DefaultTask
-import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.file.RegularFileProperty
-import org.gradle.api.file.ConfigurableFileCollection
-import org.gradle.api.tasks.InputDirectory
-import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.OutputFile
-import org.gradle.api.tasks.TaskAction
-import org.gradle.api.artifacts.ProjectDependency
-import java.util.jar.JarOutputStream
-import java.util.zip.ZipEntry
+apply from: 'build_publishing.gradle'
 
 // 自定义任务：合并所有依赖到 AAR
-abstract class MergeAllDependenciesTask extends DefaultTask {
-    
-    @InputDirectory
-    abstract DirectoryProperty getAarDirectory()
-    
-    @InputFiles
-    abstract ConfigurableFileCollection getDependencyFiles()
-    
-    @OutputFile
-    abstract RegularFileProperty getOutputAar()
-    
-    @TaskAction
-    void mergeAllDependencies() {
-        println "🔄 [Variant API] 开始合并所有依赖..."
-        
-        // 查找原始 AAR
-        def aarDir = aarDirectory.get().asFile
-        def originalAar = aarDir.listFiles()?.find { it.name.endsWith('.aar') && it.name.contains('release') }
-        
-        if (!originalAar || !originalAar.exists()) {
-            println "❌ 原始 AAR 不存在于: ${aarDir.path}"
-            throw new GradleException("Original AAR not found")
-        }
-        
-        println "📦 找到原始 AAR: ${originalAar.name} (${String.format("%.2f", originalAar.size() / 1024 / 1024)} MB)"
-        
-        // 创建临时目录
-        def tempDir = new File(project.buildDir, "temp/variant-merge/")
-        tempDir.deleteDir()
-        tempDir.mkdirs()
-        
-        // 解压原始 AAR
-        project.copy {
-            from project.zipTree(originalAar)
-            into tempDir
-        }
-        println "  ✅ 解压原始 AAR"
-        
-        // 创建合并的 classes 目录
-        def mergedClassesDir = new File(tempDir, "merged-classes/")
-        mergedClassesDir.mkdirs()
-        
-        // 先复制原始的 classes.jar 内容
-        def originalClassesJar = new File(tempDir, "classes.jar")
-        if (originalClassesJar.exists()) {
-            project.copy {
-                from project.zipTree(originalClassesJar)
-                include '**/*.class'
-                into mergedClassesDir
-                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-            }
-            println "  ✅ 提取原始 classes.jar"
-        }
-        
-        // 收集所有依赖的类文件
-        def dependencyCount = 0
-        def depFiles = dependencyFiles.files
-        
-        println "\n📚 开始合并依赖 (共 ${depFiles.size()} 个文件)..."
-        
-        depFiles.each { file ->
-            if (file.exists()) {
-                dependencyCount++
-                
-                if (file.name.endsWith('.jar')) {
-                    // 合并 JAR 文件
-                    try {
-                        project.copy {
-                            from project.zipTree(file)
-                            include '**/*.class'
-                            exclude 'META-INF/**'
-                            exclude 'module-info.class'
-                            into mergedClassesDir
-                            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                        }
-                        println "  ✅ 合并 JAR: ${file.name}"
-                    } catch (Exception e) {
-                        println "  ⚠️  跳过 JAR: ${file.name} - ${e.message}"
-                    }
-                    
-                } else if (file.name.endsWith('.aar')) {
-                    // 合并 AAR 中的 classes.jar 和资源
-                    try {
-                        def tempAarDir = new File(tempDir, "temp-aar-${file.name.replace('.aar', '')}/")
-                        tempAarDir.mkdirs()
-                        
-                        // 解压整个 AAR
-                        project.copy {
-                            from project.zipTree(file)
-                            into tempAarDir
-                        }
-                        
-                        // 1. 合并 classes.jar
-                        def classesJar = new File(tempAarDir, "classes.jar")
-                        if (classesJar.exists()) {
-                            project.copy {
-                                from project.zipTree(classesJar)
-                                include '**/*.class'
-                                exclude 'META-INF/**'
-                                exclude 'module-info.class'
-                                into mergedClassesDir
-                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                            }
-                        }
-                        
-                        // 2. 合并资源文件 (res 目录) - 简单复制
-                        def resDir = new File(tempAarDir, "res")
-                        if (resDir.exists() && resDir.isDirectory()) {
-                            def targetResDir = new File(tempDir, "res")
-                            targetResDir.mkdirs()
-                            
-                            println "    📁 合并资源文件..."
-                            
-                            // ✅ 直接复制所有资源，使用 EXCLUDE 策略
-                            // 第一个文件会被保留，后续同名文件会被跳过
-                            // 这样可以避免 XML 格式问题，让 Android 构建系统处理重复
-                            project.copy {
-                                from resDir
-                                into targetResDir
-                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                            }
-                            
-                            println "    ✅ 资源文件已合并（保留第一个，跳过重复）"
-                        } else {
-                            println "    ⚠️  没有 res 目录"
-                        }
-                        
-                        // 3. 合并 R.txt (资源 ID 文件)
-                        def rTxt = new File(tempAarDir, "R.txt")
-                        if (rTxt.exists()) {
-                            def targetRTxt = new File(tempDir, "R.txt")
-                            if (targetRTxt.exists()) {
-                                // 追加内容，避免覆盖
-                                targetRTxt.append(rTxt.text)
-                            } else {
-                                project.copy {
-                                    from rTxt
-                                    into tempDir
-                                }
-                            }
-                        }
-                        
-                        // 4. 合并 assets 目录
-                        def assetsDir = new File(tempAarDir, "assets")
-                        if (assetsDir.exists() && assetsDir.isDirectory()) {
-                            def targetAssetsDir = new File(tempDir, "assets")
-                            targetAssetsDir.mkdirs()
-                            
-                            project.copy {
-                                from assetsDir
-                                into targetAssetsDir
-                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                            }
-                        }
-                        
-                        // 5. 合并 jni 目录 (native libraries)
-                        def jniDir = new File(tempAarDir, "jni")
-                        if (jniDir.exists() && jniDir.isDirectory()) {
-                            def targetJniDir = new File(tempDir, "jni")
-                            targetJniDir.mkdirs()
-                            
-                            project.copy {
-                                from jniDir
-                                into targetJniDir
-                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                            }
-                        }
-                        
-                        // 6. 合并 libs 目录 (额外的 JAR 依赖)
-                        def libsDir = new File(tempAarDir, "libs")
-                        if (libsDir.exists() && libsDir.isDirectory()) {
-                            def targetLibsDir = new File(tempDir, "libs")
-                            targetLibsDir.mkdirs()
-                            
-                            project.copy {
-                                from libsDir
-                                into targetLibsDir
-                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                            }
-                        }
-                        
-                        // 7. 合并 proguard.txt (ProGuard 规则)
-                        def proguardTxt = new File(tempAarDir, "proguard.txt")
-                        if (proguardTxt.exists()) {
-                            def targetProguardTxt = new File(tempDir, "proguard.txt")
-                            if (targetProguardTxt.exists()) {
-                                // 追加内容，避免覆盖
-                                targetProguardTxt.append("\n# From ${file.name}\n")
-                                targetProguardTxt.append(proguardTxt.text)
-                            } else {
-                                project.copy {
-                                    from proguardTxt
-                                    into tempDir
-                                }
-                            }
-                        }
-                        
-                        // 8. 合并 consumer-proguard-rules.pro (消费者 ProGuard 规则)
-                        def consumerProguard = new File(tempAarDir, "consumer-proguard-rules.pro")
-                        if (consumerProguard.exists()) {
-                            def targetConsumerProguard = new File(tempDir, "consumer-proguard-rules.pro")
-                            if (targetConsumerProguard.exists()) {
-                                // 追加内容，避免覆盖
-                                targetConsumerProguard.append("\n# From ${file.name}\n")
-                                targetConsumerProguard.append(consumerProguard.text)
-                            } else {
-                                project.copy {
-                                    from consumerProguard
-                                    into tempDir
-                                }
-                            }
-                        }
-                        
-                        // 9. 合并 public.txt (公共资源列表)
-                        def publicTxt = new File(tempAarDir, "public.txt")
-                        if (publicTxt.exists()) {
-                            def targetPublicTxt = new File(tempDir, "public.txt")
-                            if (targetPublicTxt.exists()) {
-                                // 追加内容，避免覆盖
-                                targetPublicTxt.append(publicTxt.text)
-                            } else {
-                                project.copy {
-                                    from publicTxt
-                                    into tempDir
-                                }
-                            }
-                        }
-                        
-                        // 10. 合并 aidl 目录 (AIDL 接口文件)
-                        def aidlDir = new File(tempAarDir, "aidl")
-                        if (aidlDir.exists() && aidlDir.isDirectory()) {
-                            def targetAidlDir = new File(tempDir, "aidl")
-                            targetAidlDir.mkdirs()
-                            
-                            project.copy {
-                                from aidlDir
-                                into targetAidlDir
-                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                            }
-                        }
-                        
-                        // 11. 合并 annotations.zip (注解文件)
-                        def annotationsZip = new File(tempAarDir, "annotations.zip")
-                        if (annotationsZip.exists()) {
-                            def targetAnnotationsZip = new File(tempDir, "annotations.zip")
-                            if (!targetAnnotationsZip.exists()) {
-                                project.copy {
-                                    from annotationsZip
-                                    into tempDir
-                                }
-                            }
-                        }
-                        
-                        // 12. 合并 prefab 目录 (C/C++ 库配置)
-                        def prefabDir = new File(tempAarDir, "prefab")
-                        if (prefabDir.exists() && prefabDir.isDirectory()) {
-                            def targetPrefabDir = new File(tempDir, "prefab")
-                            targetPrefabDir.mkdirs()
-                            
-                            project.copy {
-                                from prefabDir
-                                into targetPrefabDir
-                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                            }
-                        }
-                        
-                        // 13. 合并 navigation.json (Navigation 组件配置)
-                        def navigationJson = new File(tempAarDir, "navigation.json")
-                        if (navigationJson.exists()) {
-                            def targetNavigationJson = new File(tempDir, "navigation.json")
-                            if (!targetNavigationJson.exists()) {
-                                project.copy {
-                                    from navigationJson
-                                    into tempDir
-                                }
-                            }
-                        }
-                        
-                        println "  ✅ 合并 AAR: ${file.name}"
-                        
-                        tempAarDir.deleteDir()
-                    } catch (Exception e) {
-                        println "  ⚠️  跳过 AAR: ${file.name} - ${e.message}"
-                    }
-                }
-            }
-        }
-        
-        println "\n📊 共处理 ${dependencyCount} 个依赖文件"
-        
-        // ✅ 合并所有模块的 values 资源
-        println "\n� 确合并 values 资源..."
-        def targetResDir = new File(tempDir, "res")
-        def allValuesFiles = [:] // "values/colors.xml" -> [file1, file2, ...]
-        
-        // 1. 收集所有模块的 values 文件
-        project.configurations.implementation.allDependencies.each { dep ->
-            if (dep instanceof ProjectDependency) {
-                def depProject = dep.dependencyProject
-                def depAarDir = new File(depProject.buildDir, "outputs/aar")
-                
-                depAarDir.listFiles()?.each { aarFile ->
-                    if (aarFile.name.endsWith('.aar') && aarFile.name.contains('release')) {
-                        try {
-                            def tempAarDir = new File(tempDir, "temp-values-${depProject.name}")
-                            tempAarDir.mkdirs()
-                            
-                            project.copy {
-                                from project.zipTree(aarFile)
-                                include 'res/values*/**'
-                                into tempAarDir
-                            }
-                            
-                            def resDir = new File(tempAarDir, "res")
-                            if (resDir.exists()) {
-                                resDir.listFiles()?.each { valuesDir ->
-                                    if (valuesDir.isDirectory() && valuesDir.name.startsWith('values')) {
-                                        valuesDir.listFiles()?.each { xmlFile ->
-                                            if (xmlFile.name.endsWith('.xml')) {
-                                                def key = "${valuesDir.name}/${xmlFile.name}"
-                                                if (!allValuesFiles.containsKey(key)) {
-                                                    allValuesFiles[key] = []
-                                                }
-                                                allValuesFiles[key] << xmlFile
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            tempAarDir.deleteDir()
-                        } catch (Exception e) {
-                            println "  ⚠️  收集 ${depProject.name} 的 values 失败: ${e.message}"
-                        }
-                    }
-                }
-            }
-        }
-        
-        // 2. 合并 values 文件（简单拼接，让 Android 构建系统处理去重）
-        allValuesFiles.each { key, files ->
-            if (files.size() > 1) {
-                def parts = key.split('/')
-                def valuesDir = parts[0]
-                def xmlName = parts[1]
-                
-                def targetValuesDir = new File(targetResDir, valuesDir)
-                targetValuesDir.mkdirs()
-                def targetXmlFile = new File(targetValuesDir, xmlName)
-                
-                // 如果目标文件已存在（来自 omm-lib），追加其他模块的内容
-                if (targetXmlFile.exists()) {
-                    def existingContent = targetXmlFile.text
-                    def mergedContent = new StringBuilder(existingContent)
-                    
-                    // 移除结束标签
-                    def endTagIndex = mergedContent.lastIndexOf('</resources>')
-                    if (endTagIndex > 0) {
-                        mergedContent.delete(endTagIndex, mergedContent.length())
-                    }
-                    
-                    // 追加其他文件的内容（跳过 XML 声明和 resources 标签）
-                    files.each { file ->
-                        def content = file.text
-                        def startIndex = content.indexOf('<resources>')
-                        def endIndex = content.lastIndexOf('</resources>')
-                        
-                        if (startIndex >= 0 && endIndex > startIndex) {
-                            def innerContent = content.substring(startIndex + '<resources>'.length(), endIndex)
-                            mergedContent.append(innerContent)
-                        }
-                    }
-                    
-                    // 添加结束标签
-                    mergedContent.append('</resources>')
-                    
-                    targetXmlFile.text = mergedContent.toString()
-                    println "  ✅ 合并 ${key} (${files.size()} 个文件)"
-                } else {
-                    // 目标文件不存在，直接复制第一个
-                    project.copy {
-                        from files[0]
-                        into targetValuesDir
-                    }
-                    println "  ✅ 复制 ${key}"
-                }
-            }
-        }
-        
-        println "  ✅ values 资源合并完成"
-        
-        // ✅ 重要：最后再次复制 omm-lib 自己的资源，确保优先级最高
-        println "\n🔝 确保 omm-lib 自身资源优先级最高..."
-        project.copy {
-            from project.zipTree(originalAar)
-            include 'res/**'
-            into tempDir
-            duplicatesStrategy = DuplicatesStrategy.INCLUDE  // 强制覆盖
-        }
-        println "  ✅ omm-lib 资源已确保优先"
-        
-        // 创建新的 classes.jar
-        if (mergedClassesDir.listFiles()?.size() > 0) {
-            println "📦 创建合并的 classes.jar..."
-            
-            def mergedJarFile = new File(tempDir, "classes-merged.jar")
-            def jarOutput = new JarOutputStream(new FileOutputStream(mergedJarFile))
-            
-            // 收集所有 class 文件
-            def classFiles = []
-            mergedClassesDir.eachFileRecurse { file ->
-                if (file.isFile() && file.name.endsWith('.class')) {
-                    classFiles << file
-                }
-            }
-            
-            // 写入 JAR
-            classFiles.each { file ->
-                def entryName = mergedClassesDir.toURI().relativize(file.toURI()).toString()
-                jarOutput.putNextEntry(new ZipEntry(entryName))
-                jarOutput.write(file.bytes)
-                jarOutput.closeEntry()
-            }
-            jarOutput.close()
-            
-            // 替换原始的 classes.jar
-            if (originalClassesJar.exists()) {
-                originalClassesJar.delete()
-            }
-            mergedJarFile.renameTo(originalClassesJar)
-            
-            println "✅ 类文件合并完成 (${classFiles.size()} 个类)"
-        }
-        
-        // 清理临时目录
-        mergedClassesDir.deleteDir()
-        new File(tempDir, "temp-aar/").deleteDir()
-        
-        // 重新打包为 AAR
-        def outputFile = outputAar.get().asFile
-        outputFile.parentFile.mkdirs()
-        
-        project.ant.zip(destfile: outputFile) {
-            fileset(dir: tempDir) {
-                include(name: "**/*")
-                exclude(name: "merged-classes/**")
-                exclude(name: "temp-aar*/**")
-            }
-        }
-        
-        println """
-🎉 [Variant API] 一站式打包完成！
-📊 统计信息:
-  - 原始 AAR: ${String.format("%.2f", originalAar.size() / 1024 / 1024)} MB
-  - 合并后 AAR: ${String.format("%.2f", outputFile.size() / 1024 / 1024)} MB
-  - 处理依赖数: ${dependencyCount}
-📍 输出文件: ${outputFile.path}
-        """
-        
-        // 清理临时目录
-        tempDir.deleteDir()
-    }
-}
+
 
 // 使用 Variant API 注册任务
 androidComponents {
@@ -1261,5 +680,470 @@ afterEvaluate {
     def mergeTask = tasks.findByName('mergeReleaseDependencies')
     if (mergeTask) {
         mergeTask.mustRunAfter 'clean'
+    }
+}
+
+
+abstract class MergeAllDependenciesTask extends DefaultTask {
+
+    @InputDirectory
+    abstract DirectoryProperty getAarDirectory()
+
+    @InputFiles
+    abstract ConfigurableFileCollection getDependencyFiles()
+
+    @OutputFile
+    abstract RegularFileProperty getOutputAar()
+
+    @TaskAction
+    void mergeAllDependencies() {
+        println "🔄 [Variant API] 开始合并所有依赖..."
+
+        // 查找原始 AAR
+        def aarDir = aarDirectory.get().asFile
+        def originalAar = aarDir.listFiles()?.find { it.name.endsWith('.aar') && it.name.contains('release') }
+
+        if (!originalAar || !originalAar.exists()) {
+            println "❌ 原始 AAR 不存在于: ${aarDir.path}"
+            throw new GradleException("Original AAR not found")
+        }
+
+        println "📦 找到原始 AAR: ${originalAar.name} (${String.format("%.2f", originalAar.size() / 1024 / 1024)} MB)"
+
+        // 创建临时目录
+        def tempDir = new File(project.buildDir, "temp/variant-merge/")
+        tempDir.deleteDir()
+        tempDir.mkdirs()
+
+        // 解压原始 AAR
+        project.copy {
+            from project.zipTree(originalAar)
+            into tempDir
+        }
+        println "  ✅ 解压原始 AAR"
+
+        // 创建合并的 classes 目录
+        def mergedClassesDir = new File(tempDir, "merged-classes/")
+        mergedClassesDir.mkdirs()
+
+        // 先复制原始的 classes.jar 内容
+        def originalClassesJar = new File(tempDir, "classes.jar")
+        if (originalClassesJar.exists()) {
+            project.copy {
+                from project.zipTree(originalClassesJar)
+                include '**/*.class'
+                into mergedClassesDir
+                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+            }
+            println "  ✅ 提取原始 classes.jar"
+        }
+
+        // 收集所有依赖的类文件
+        def dependencyCount = 0
+        def depFiles = dependencyFiles.files
+
+        println "\n📚 开始合并依赖 (共 ${depFiles.size()} 个文件)..."
+
+        depFiles.each { file ->
+            if (file.exists()) {
+                dependencyCount++
+
+                if (file.name.endsWith('.jar')) {
+                    // 合并 JAR 文件
+                    try {
+                        project.copy {
+                            from project.zipTree(file)
+                            include '**/*.class'
+                            exclude 'META-INF/**'
+                            exclude 'module-info.class'
+                            into mergedClassesDir
+                            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                        }
+                        println "  ✅ 合并 JAR: ${file.name}"
+                    } catch (Exception e) {
+                        println "  ⚠️  跳过 JAR: ${file.name} - ${e.message}"
+                    }
+
+                } else if (file.name.endsWith('.aar')) {
+                    // 合并 AAR 中的 classes.jar 和资源
+                    try {
+                        def tempAarDir = new File(tempDir, "temp-aar-${file.name.replace('.aar', '')}/")
+                        tempAarDir.mkdirs()
+
+                        // 解压整个 AAR
+                        project.copy {
+                            from project.zipTree(file)
+                            into tempAarDir
+                        }
+
+                        // 1. 合并 classes.jar
+                        def classesJar = new File(tempAarDir, "classes.jar")
+                        if (classesJar.exists()) {
+                            project.copy {
+                                from project.zipTree(classesJar)
+                                include '**/*.class'
+                                exclude 'META-INF/**'
+                                exclude 'module-info.class'
+                                into mergedClassesDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+
+                        // 2. 合并资源文件 (res 目录) - 简单复制
+                        def resDir = new File(tempAarDir, "res")
+                        if (resDir.exists() && resDir.isDirectory()) {
+                            def targetResDir = new File(tempDir, "res")
+                            targetResDir.mkdirs()
+
+                            println "    📁 合并资源文件..."
+
+                            // ✅ 直接复制所有资源，使用 EXCLUDE 策略
+                            // 第一个文件会被保留，后续同名文件会被跳过
+                            // 这样可以避免 XML 格式问题，让 Android 构建系统处理重复
+                            project.copy {
+                                from resDir
+                                into targetResDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+
+                            println "    ✅ 资源文件已合并（保留第一个，跳过重复）"
+                        } else {
+                            println "    ⚠️  没有 res 目录"
+                        }
+
+                        // 3. 合并 R.txt (资源 ID 文件)
+                        def rTxt = new File(tempAarDir, "R.txt")
+                        if (rTxt.exists()) {
+                            def targetRTxt = new File(tempDir, "R.txt")
+                            if (targetRTxt.exists()) {
+                                // 追加内容，避免覆盖
+                                targetRTxt.append(rTxt.text)
+                            } else {
+                                project.copy {
+                                    from rTxt
+                                    into tempDir
+                                }
+                            }
+                        }
+
+                        // 4. 合并 assets 目录
+                        def assetsDir = new File(tempAarDir, "assets")
+                        if (assetsDir.exists() && assetsDir.isDirectory()) {
+                            def targetAssetsDir = new File(tempDir, "assets")
+                            targetAssetsDir.mkdirs()
+
+                            project.copy {
+                                from assetsDir
+                                into targetAssetsDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+
+                        // 5. 合并 jni 目录 (native libraries)
+                        def jniDir = new File(tempAarDir, "jni")
+                        if (jniDir.exists() && jniDir.isDirectory()) {
+                            def targetJniDir = new File(tempDir, "jni")
+                            targetJniDir.mkdirs()
+
+                            project.copy {
+                                from jniDir
+                                into targetJniDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+
+                        // 6. 合并 libs 目录 (额外的 JAR 依赖)
+                        def libsDir = new File(tempAarDir, "libs")
+                        if (libsDir.exists() && libsDir.isDirectory()) {
+                            def targetLibsDir = new File(tempDir, "libs")
+                            targetLibsDir.mkdirs()
+
+                            project.copy {
+                                from libsDir
+                                into targetLibsDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+
+                        // 7. 合并 proguard.txt (ProGuard 规则)
+                        def proguardTxt = new File(tempAarDir, "proguard.txt")
+                        if (proguardTxt.exists()) {
+                            def targetProguardTxt = new File(tempDir, "proguard.txt")
+                            if (targetProguardTxt.exists()) {
+                                // 追加内容，避免覆盖
+                                targetProguardTxt.append("\n# From ${file.name}\n")
+                                targetProguardTxt.append(proguardTxt.text)
+                            } else {
+                                project.copy {
+                                    from proguardTxt
+                                    into tempDir
+                                }
+                            }
+                        }
+
+                        // 8. 合并 consumer-proguard-rules.pro (消费者 ProGuard 规则)
+                        def consumerProguard = new File(tempAarDir, "consumer-proguard-rules.pro")
+                        if (consumerProguard.exists()) {
+                            def targetConsumerProguard = new File(tempDir, "consumer-proguard-rules.pro")
+                            if (targetConsumerProguard.exists()) {
+                                // 追加内容，避免覆盖
+                                targetConsumerProguard.append("\n# From ${file.name}\n")
+                                targetConsumerProguard.append(consumerProguard.text)
+                            } else {
+                                project.copy {
+                                    from consumerProguard
+                                    into tempDir
+                                }
+                            }
+                        }
+
+                        // 9. 合并 public.txt (公共资源列表)
+                        def publicTxt = new File(tempAarDir, "public.txt")
+                        if (publicTxt.exists()) {
+                            def targetPublicTxt = new File(tempDir, "public.txt")
+                            if (targetPublicTxt.exists()) {
+                                // 追加内容，避免覆盖
+                                targetPublicTxt.append(publicTxt.text)
+                            } else {
+                                project.copy {
+                                    from publicTxt
+                                    into tempDir
+                                }
+                            }
+                        }
+
+                        // 10. 合并 aidl 目录 (AIDL 接口文件)
+                        def aidlDir = new File(tempAarDir, "aidl")
+                        if (aidlDir.exists() && aidlDir.isDirectory()) {
+                            def targetAidlDir = new File(tempDir, "aidl")
+                            targetAidlDir.mkdirs()
+
+                            project.copy {
+                                from aidlDir
+                                into targetAidlDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+
+                        // 11. 合并 annotations.zip (注解文件)
+                        def annotationsZip = new File(tempAarDir, "annotations.zip")
+                        if (annotationsZip.exists()) {
+                            def targetAnnotationsZip = new File(tempDir, "annotations.zip")
+                            if (!targetAnnotationsZip.exists()) {
+                                project.copy {
+                                    from annotationsZip
+                                    into tempDir
+                                }
+                            }
+                        }
+
+                        // 12. 合并 prefab 目录 (C/C++ 库配置)
+                        def prefabDir = new File(tempAarDir, "prefab")
+                        if (prefabDir.exists() && prefabDir.isDirectory()) {
+                            def targetPrefabDir = new File(tempDir, "prefab")
+                            targetPrefabDir.mkdirs()
+
+                            project.copy {
+                                from prefabDir
+                                into targetPrefabDir
+                                duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            }
+                        }
+
+                        // 13. 合并 navigation.json (Navigation 组件配置)
+                        def navigationJson = new File(tempAarDir, "navigation.json")
+                        if (navigationJson.exists()) {
+                            def targetNavigationJson = new File(tempDir, "navigation.json")
+                            if (!targetNavigationJson.exists()) {
+                                project.copy {
+                                    from navigationJson
+                                    into tempDir
+                                }
+                            }
+                        }
+
+                        println "  ✅ 合并 AAR: ${file.name}"
+
+                        tempAarDir.deleteDir()
+                    } catch (Exception e) {
+                        println "  ⚠️  跳过 AAR: ${file.name} - ${e.message}"
+                    }
+                }
+            }
+        }
+
+        println "\n📊 共处理 ${dependencyCount} 个依赖文件"
+
+        // ✅ 合并所有模块的 values 资源
+        println "\n� 确合并 values 资源..."
+        def targetResDir = new File(tempDir, "res")
+        def allValuesFiles = [:] // "values/colors.xml" -> [file1, file2, ...]
+
+        // 1. 收集所有模块的 values 文件
+        project.configurations.implementation.allDependencies.each { dep ->
+            if (dep instanceof ProjectDependency) {
+                def depProject = dep.dependencyProject
+                def depAarDir = new File(depProject.buildDir, "outputs/aar")
+
+                depAarDir.listFiles()?.each { aarFile ->
+                    if (aarFile.name.endsWith('.aar') && aarFile.name.contains('release')) {
+                        try {
+                            def tempAarDir = new File(tempDir, "temp-values-${depProject.name}")
+                            tempAarDir.mkdirs()
+
+                            project.copy {
+                                from project.zipTree(aarFile)
+                                include 'res/values*/**'
+                                into tempAarDir
+                            }
+
+                            def resDir = new File(tempAarDir, "res")
+                            if (resDir.exists()) {
+                                resDir.listFiles()?.each { valuesDir ->
+                                    if (valuesDir.isDirectory() && valuesDir.name.startsWith('values')) {
+                                        valuesDir.listFiles()?.each { xmlFile ->
+                                            if (xmlFile.name.endsWith('.xml')) {
+                                                def key = "${valuesDir.name}/${xmlFile.name}"
+                                                if (!allValuesFiles.containsKey(key)) {
+                                                    allValuesFiles[key] = []
+                                                }
+                                                allValuesFiles[key] << xmlFile
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            tempAarDir.deleteDir()
+                        } catch (Exception e) {
+                            println "  ⚠️  收集 ${depProject.name} 的 values 失败: ${e.message}"
+                        }
+                    }
+                }
+            }
+        }
+
+        // 2. 合并 values 文件（简单拼接，让 Android 构建系统处理去重）
+        allValuesFiles.each { key, files ->
+            if (files.size() > 1) {
+                def parts = key.split('/')
+                def valuesDir = parts[0]
+                def xmlName = parts[1]
+
+                def targetValuesDir = new File(targetResDir, valuesDir)
+                targetValuesDir.mkdirs()
+                def targetXmlFile = new File(targetValuesDir, xmlName)
+
+                // 如果目标文件已存在（来自 omm-lib），追加其他模块的内容
+                if (targetXmlFile.exists()) {
+                    def existingContent = targetXmlFile.text
+                    def mergedContent = new StringBuilder(existingContent)
+
+                    // 移除结束标签
+                    def endTagIndex = mergedContent.lastIndexOf('</resources>')
+                    if (endTagIndex > 0) {
+                        mergedContent.delete(endTagIndex, mergedContent.length())
+                    }
+
+                    // 追加其他文件的内容（跳过 XML 声明和 resources 标签）
+                    files.each { file ->
+                        def content = file.text
+                        def startIndex = content.indexOf('<resources>')
+                        def endIndex = content.lastIndexOf('</resources>')
+
+                        if (startIndex >= 0 && endIndex > startIndex) {
+                            def innerContent = content.substring(startIndex + '<resources>'.length(), endIndex)
+                            mergedContent.append(innerContent)
+                        }
+                    }
+
+                    // 添加结束标签
+                    mergedContent.append('</resources>')
+
+                    targetXmlFile.text = mergedContent.toString()
+                    println "  ✅ 合并 ${key} (${files.size()} 个文件)"
+                } else {
+                    // 目标文件不存在，直接复制第一个
+                    project.copy {
+                        from files[0]
+                        into targetValuesDir
+                    }
+                    println "  ✅ 复制 ${key}"
+                }
+            }
+        }
+
+        println "  ✅ values 资源合并完成"
+
+        // ✅ 重要：最后再次复制 omm-lib 自己的资源，确保优先级最高
+        println "\n🔝 确保 omm-lib 自身资源优先级最高..."
+        project.copy {
+            from project.zipTree(originalAar)
+            include 'res/**'
+            into tempDir
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE  // 强制覆盖
+        }
+        println "  ✅ omm-lib 资源已确保优先"
+
+        // 创建新的 classes.jar
+        if (mergedClassesDir.listFiles()?.size() > 0) {
+            println "📦 创建合并的 classes.jar..."
+
+            def mergedJarFile = new File(tempDir, "classes-merged.jar")
+            def jarOutput = new JarOutputStream(new FileOutputStream(mergedJarFile))
+
+            // 收集所有 class 文件
+            def classFiles = []
+            mergedClassesDir.eachFileRecurse { file ->
+                if (file.isFile() && file.name.endsWith('.class')) {
+                    classFiles << file
+                }
+            }
+
+            // 写入 JAR
+            classFiles.each { file ->
+                def entryName = mergedClassesDir.toURI().relativize(file.toURI()).toString()
+                jarOutput.putNextEntry(new ZipEntry(entryName))
+                jarOutput.write(file.bytes)
+                jarOutput.closeEntry()
+            }
+            jarOutput.close()
+
+            // 替换原始的 classes.jar
+            if (originalClassesJar.exists()) {
+                originalClassesJar.delete()
+            }
+            mergedJarFile.renameTo(originalClassesJar)
+
+            println "✅ 类文件合并完成 (${classFiles.size()} 个类)"
+        }
+
+        // 清理临时目录
+        mergedClassesDir.deleteDir()
+        new File(tempDir, "temp-aar/").deleteDir()
+
+        // 重新打包为 AAR
+        def outputFile = outputAar.get().asFile
+        outputFile.parentFile.mkdirs()
+
+        project.ant.zip(destfile: outputFile) {
+            fileset(dir: tempDir) {
+                include(name: "**/*")
+                exclude(name: "merged-classes/**")
+                exclude(name: "temp-aar*/**")
+            }
+        }
+
+        println """
+🎉 [Variant API] 一站式打包完成！
+📊 统计信息:
+  - 原始 AAR: ${String.format("%.2f", originalAar.size() / 1024 / 1024)} MB
+  - 合并后 AAR: ${String.format("%.2f", outputFile.size() / 1024 / 1024)} MB
+  - 处理依赖数: ${dependencyCount}
+📍 输出文件: ${outputFile.path}
+        """
+
+        // 清理临时目录
+        tempDir.deleteDir()
     }
 }

@@ -13,7 +13,7 @@ plugins.withId('com.android.library') {
                 release(MavenPublication) {
                     groupId = rootProject.ext.PUBLISH_GROUP_ID ?: 'com.github.Bean-V'
                     artifactId = project.name
-                    version = rootProject.ext.PUBLISH_VERSION ?: '1.0.0'
+                    version = rootProject.ext.PUBLISH_VERSION ?: '2.0.0'
                     
                     // 直接添加 AAR artifact，不使用 components.release
                     artifact("$buildDir/outputs/aar/${project.name}-release.aar")
