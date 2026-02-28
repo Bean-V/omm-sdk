@@ -547,7 +547,10 @@ afterEvaluate {
                     // ✅ 关键修改：将所有项目依赖转换为 JitPack 依赖
                     // 这样第三方只需添加一个依赖，Gradle 会自动解析所有子模块
                     withXml {
-                        def dependenciesNode = asNode().appendNode('dependencies')
+                        def root = asNode()
+                        
+                        // 查找或创建 dependencies 节点
+                        def dependenciesNode = root.dependencies ? root.dependencies[0] : root.appendNode('dependencies')
                         
                         // 添加所有子模块作为 JitPack 依赖
                         def subModules = [
