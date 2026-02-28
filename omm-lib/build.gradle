@@ -263,7 +263,7 @@ dependencies {
 
     // ========== 项目模块依赖 ==========
     if (isLocalBuild) {
-        // 开发时使用本地模块
+        // 开发时使用本地模块（所有 25 个子模块）
         implementation project(path: ':oort_imagepick_sdk')
         implementation project(path: ':ToolsMain')
         implementation project(path: ':provider_lib')
@@ -285,6 +285,10 @@ dependencies {
         implementation project(path: ':giraffeplayer')
         implementation project(path: ':floatview')
         implementation project(path: ':offline')
+        implementation project(path: ':matisse')
+        implementation project(path: ':Utilities3-1.0.3')
+        implementation project(path: ':ooortCloudDisk')
+        implementation project(path: ':IDCardCheck')
     } else {
         // 发布时使用远程依赖（JitPack构建）
         implementation 'com.github.Bean-V:oort_imagepick_sdk:1.0.0'

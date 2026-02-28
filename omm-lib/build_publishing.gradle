@@ -5,7 +5,7 @@
 ext {
     PUBLISH_GROUP_ID = 'com.github.Bean-V'
     PUBLISH_ARTIFACT_ID = 'omm-sdk'
-    PUBLISH_VERSION = '2.0.0'
+    PUBLISH_VERSION = '2.0.5'
 }
 
 afterEvaluate {
@@ -55,7 +55,8 @@ afterEvaluate {
                             'jcvideoplayer-lib', 'YZxing-lib', 'OpenGLlibrary', 'MPChartLib',
                             'liveLibrary', 'OortWebframeLib', 'basemodule', 'AppStore',
                             'Contacts', 'screenrecorder', 'AIDICert', 'sound_recon',
-                            'FrameLibrary', 'Levc-lib', 'giraffeplayer', 'floatview', 'offline'
+                            'FrameLibrary', 'Levc-lib', 'giraffeplayer', 'floatview', 'offline',
+                            'matisse', 'Utilities3-1.0.3', 'ooortCloudDisk', 'IDCardCheck'  // ✅ 添加缺失的模块
                         ]
                         
                         println "\n📦 [POM] 添加子模块依赖..."

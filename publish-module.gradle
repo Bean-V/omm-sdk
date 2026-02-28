@@ -49,13 +49,16 @@ plugins.withId('com.android.library') {
                             
                             // 添加所有 implementation 依赖
                             configurations.implementation.allDependencies.each { dep ->
-                                // 只添加外部依赖，跳过项目依赖
+                                // ✅ 只添加外部依赖，跳过项目依赖
                                 if (dep.group != null && dep.name != null && dep.version != null) {
-                                    def dependencyNode = dependenciesNode.appendNode('dependency')
-                                    dependencyNode.appendNode('groupId', dep.group)
-                                    dependencyNode.appendNode('artifactId', dep.name)
-                                    dependencyNode.appendNode('version', dep.version)
-                                    dependencyNode.appendNode('scope', 'compile')
+                                    // ✅ 明确排除 ProjectDependency
+                                    if (!(dep instanceof org.gradle.api.artifacts.ProjectDependency)) {
+                                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                                        dependencyNode.appendNode('groupId', dep.group)
+                                        dependencyNode.appendNode('artifactId', dep.name)
+                                        dependencyNode.appendNode('version', dep.version)
+                                        dependencyNode.appendNode('scope', 'compile')
+                                    }
                                 }
                             }
                         }

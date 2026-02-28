@@ -23,7 +23,7 @@ aarFiles.each { aarName ->
         // 创建发布配置
         publishing {
             publications {
-                // 动态创建发布配置，例如: publishSimkeylibraryReleaseAarPublicationToMavenLocal
+                // 动态创建发布配置，例如:
                 create(aarName.replace('.aar', '') + 'Aar', MavenPublication) {
                     groupId = 'local.omm-lib'
                     artifactId = aarName.replace('.aar', '')

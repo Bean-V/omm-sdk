@@ -13,7 +13,7 @@ buildscript {
         
         // ✅ 发布配置 - 所有模块使用统一版本
         PUBLISH_GROUP_ID = 'com.github.Bean-V'
-        PUBLISH_VERSION = '2.0.0'  // 多模块发布版本
+        PUBLISH_VERSION = '2.0.5'  // 多模块发布版本（修复子模块依赖问题）
     }
     repositories {
         mavenLocal()
