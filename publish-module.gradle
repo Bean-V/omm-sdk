@@ -15,8 +15,8 @@ plugins.withId('com.android.library') {
                     artifactId = project.name
                     version = rootProject.ext.PUBLISH_VERSION ?: '2.0.0'
                     
-                    // 直接添加 AAR artifact，不使用 components.release
-                    artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+                    // 使用任务输出而不是文件路径，确保依赖关系正确
+                    artifact(tasks.named("bundleReleaseAar").flatMap { it.archiveFile })
                     
                     pom {
                         name = project.name
