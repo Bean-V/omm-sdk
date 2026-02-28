@@ -501,9 +501,6 @@ configurations {
 // ================================================
 apply from: 'build_publishing.gradle'
 
-// 自定义任务：合并所有依赖到 AAR
-
-
 // 使用 Variant API 注册任务
 androidComponents {
     onVariants(selector().withBuildType("release")) { variant ->
