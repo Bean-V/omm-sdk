@@ -359,7 +359,7 @@ dependencies {
     implementation 'com.hyman:flowlayout-lib:1.1.2'  // 流式布局
     implementation 'in.srain.cube:grid-view-with-header-footer:1.0.12'  // GridView
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'  // 开关按钮
-    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'  // ✅ 进度条（已声明）
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'  // 进度条（已声明）
     implementation 'com.github.ceryle:FitGridView:v1.0.5'  // 表格面板
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'  // 侧滑返回
     implementation 'com.leo618:zip:0.0.1'  // 快速SharedPreferences
