@@ -72,18 +72,42 @@ afterEvaluate {
                         // 2. 添加所有外部依赖
                         println "\n📚 [POM] 添加外部依赖..."
                         def addedCount = 0
+                        def aarDependencies = [
+                            'com.daimajia.numberprogressbar:library',
+                            'com.github.zcweng:switch-button',
+                            'com.meizu.flyme.internet:push-internal'
+                        ] as Set
+                        
+                        // 收集所有已添加的依赖，用于检查缺失
+                        def addedDeps = [] as Set
+                        
                         configurations.implementation.allDependencies.each { dep ->
                             if (dep.group != null && dep.name != null && dep.version != null) {
                                 if (!(dep instanceof org.gradle.api.artifacts.ProjectDependency)) {
+                                    def depKey = "${dep.group}:${dep.name}"
+                                    
+                                    // 检查是否需要添加 <type>aar</type>
+                                    def needsAarType = (depKey == 'com.daimajia.numberprogressbar:library' || 
+                                                       depKey == 'com.github.zcweng:switch-button' || 
+                                                       depKey == 'com.meizu.flyme.internet:push-internal')
+                                    
                                     def dependencyNode = dependenciesNode.appendNode('dependency')
                                     dependencyNode.appendNode('groupId', dep.group)
                                     dependencyNode.appendNode('artifactId', dep.name)
                                     dependencyNode.appendNode('version', dep.version)
+                                    
+                                    if (needsAarType) {
+                                        dependencyNode.appendNode('type', 'aar')
+                                        println "  📦 [AAR] ${depKey}:${dep.version} → 已添加 <type>aar</type>"
+                                    }
+                                    
                                     dependencyNode.appendNode('scope', 'compile')
+                                    addedDeps.add(depKey)
                                     addedCount++
                                 }
                             }
                         }
+                        
                         println "✅ [POM] 已添加 ${addedCount} 个外部依赖"
                     }
                 }
