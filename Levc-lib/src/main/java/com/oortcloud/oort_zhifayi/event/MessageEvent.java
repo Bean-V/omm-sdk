@@ -1,9 +1,0 @@
-package com.oortcloud.oort_zhifayi.event;
-
-public class MessageEvent {
-    public final String message;
-
-    public MessageEvent(String message) {
-        this.message = message;
-    }
-}
