@@ -281,7 +281,7 @@ dependencies {
     implementation project(path: ':AIDICert')
     implementation project(path: ':sound_recon')
     implementation project(path: ':FrameLibrary')
-    implementation project(path: ':Levc-lib')
+//    implementation project(path: ':Levc-lib')
     implementation project(path: ':giraffeplayer')
     implementation project(path: ':floatview')
     implementation project(path: ':offline')
@@ -420,9 +420,9 @@ dependencies {
     implementation 'androidx.work:work-runtime:2.7.1'  // 后台任务
     implementation "log4j:log4j:1.2.17"  // 日志
     implementation 'com.jeremyliao:fast-sharedpreferences:0.0.1'  // 快速存储
-    implementation('com.github.chrisbanes.bitmapcache:library:2.3') {  // Bitmap缓存
-        exclude group: 'com.google.android', module: 'support-v4'
-    }
+//    implementation('com.github.chrisbanes.bitmapcache:library:2.3') {  // Bitmap缓存
+//        exclude group: 'com.google.android', module: 'support-v4'
+//    }
 
     // ========== 已注释的依赖（保留供参考） ==========
     /*
@@ -451,6 +451,8 @@ dependencies {
 
 configurations {
     all*.exclude group: 'xpp3', module: 'xpp3'
+    // ✅ 排除旧版 support-v4:r7，避免与 AndroidX 冲突
+    all*.exclude group: 'com.google.android', module: 'support-v4'
 }
 
 // 设置版本和组

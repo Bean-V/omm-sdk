@@ -1,5 +1,6 @@
 package com.oort.weichat.helper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,8 +45,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import uk.co.senab.bitmapcache.BitmapLruCache;
-import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
+//import uk.co.senab.bitmapcache.BitmapLruCache;
+//import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 
 /**
  * 用户头像的上传和获取
@@ -54,7 +55,7 @@ public class AvatarHelper {
     private static final String TAG = "AvatarHelper";
     public static AvatarHelper INSTANCE;
     public Context mContext;
-    private BitmapLruCache bitmapCache;
+//    private BitmapLruCache bitmapCache;
     public Map<String, Bitmap> mVideoThumbMap = new HashMap<>();
 
 
@@ -102,12 +103,12 @@ public class AvatarHelper {
 
     private AvatarHelper(Context ctx) {
         this.mContext = ctx;
-        bitmapCache = new BitmapLruCache.Builder(ctx)
-                .setMemoryCacheEnabled(true)
-                .setMemoryCacheMaxSizeUsingHeapSize()
-                .setDiskCacheEnabled(true)
-                .setDiskCacheLocation(ctx.getCacheDir())
-                .build();
+//        bitmapCache = new BitmapLruCache.Builder(ctx)
+//                .setMemoryCacheEnabled(true)
+//                .setMemoryCacheMaxSizeUsingHeapSize()
+//                .setDiskCacheEnabled(true)
+//                .setDiskCacheLocation(ctx.getCacheDir())
+//                .build();
     }
 
     public static AvatarHelper getInstance() {
@@ -133,6 +134,7 @@ public class AvatarHelper {
      *
      * @return 不是系统号就返回null,
      */
+    @SuppressLint("ResourceType")
     @IdRes
     public static Integer getStaticAvatar(String userId) {
         Integer ret = null;
@@ -488,33 +490,33 @@ public class AvatarHelper {
                         AsyncUtils.doAsync(this, throwable -> {
                             Reporter.post("加载群头像失败,", throwable);
                         }, c -> {
-                            CacheableBitmapDrawable cacheDrawable = bitmapCache.get(friend.getRoomId() + time);
-                            if (cacheDrawable != null && cacheDrawable.getBitmap() != null) {
-                                c.uiThread(ref -> {
-                                    if (view.getTag(R.id.key_avatar) != url) {
-                                        return;
-                                    }
-                                    view.setImageBitmap(cacheDrawable.getBitmap());
-                                });
-                            } else {
-                                List<String> idList = RoomMemberDao.getInstance().getRoomMemberForAvatar(friend.getRoomId(), selfId);
-                                if (idList != null) {
-                                    // 可能没有刷过群成员列表，就查出空列表，
-                                    if (idList.size() > 0) {
-                                        c.uiThread(ref -> {
-                                            displayJoined(friend.getRoomId(), idList, headView);
-                                        });
-                                    } else {
-                                        c.uiThread(ref -> {
-                                            view.setImageResource(R.drawable.groupdefault);
-                                        });
-                                    }
-                                } else {
-                                    c.uiThread(ref -> {
-                                        view.setImageResource(R.drawable.groupdefault);
-                                    });
-                                }
-                            }
+//                            CacheableBitmapDrawable cacheDrawable = bitmapCache.get(friend.getRoomId() + time);
+//                            if (cacheDrawable != null && cacheDrawable.getBitmap() != null) {
+//                                c.uiThread(ref -> {
+//                                    if (view.getTag(R.id.key_avatar) != url) {
+//                                        return;
+//                                    }
+//                                    view.setImageBitmap(cacheDrawable.getBitmap());
+//                                });
+//                            } else {
+//                                List<String> idList = RoomMemberDao.getInstance().getRoomMemberForAvatar(friend.getRoomId(), selfId);
+//                                if (idList != null) {
+//                                    // 可能没有刷过群成员列表，就查出空列表，
+//                                    if (idList.size() > 0) {
+//                                        c.uiThread(ref -> {
+//                                            displayJoined(friend.getRoomId(), idList, headView);
+//                                        });
+//                                    } else {
+//                                        c.uiThread(ref -> {
+//                                            view.setImageResource(R.drawable.groupdefault);
+//                                        });
+//                                    }
+//                                } else {
+//                                    c.uiThread(ref -> {
+//                                        view.setImageResource(R.drawable.groupdefault);
+//                                    });
+//                                }
+//                            }
                         });
                     }
             );
@@ -523,12 +525,14 @@ public class AvatarHelper {
         }
     }
 
+//    public Bitmap getBitmapCode(Friend friend) {
+//        String time = UserAvatarDao.getInstance().getUpdateTime(friend.getRoomId());
+//        CacheableBitmapDrawable cacheDrawable = bitmapCache.get(friend.getRoomId() + time);
+//        return cacheDrawable.getBitmap();
+//    }
     public Bitmap getBitmapCode(Friend friend) {
-        String time = UserAvatarDao.getInstance().getUpdateTime(friend.getRoomId());
-        CacheableBitmapDrawable cacheDrawable = bitmapCache.get(friend.getRoomId() + time);
-        return cacheDrawable.getBitmap();
+        return null;
     }
-
     private void displayJoined(String roomId, List<String> idList, HeadView headView) {
         ImageView view = headView.getHeadImage();
         // 当前item项的头像个数
@@ -631,7 +635,7 @@ public class AvatarHelper {
     private void displayBitmap(String roomId, Bitmap bitmap, HeadView headView) {
         AsyncUtils.doAsync(this, c -> {
             String time = UserAvatarDao.getInstance().getUpdateTime(roomId);
-            bitmapCache.put(roomId + time, bitmap);
+//            bitmapCache.put(roomId + time, bitmap);
         });
         headView.getHeadImage().setImageBitmap(bitmap);
     }

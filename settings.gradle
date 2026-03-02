@@ -41,7 +41,7 @@ include ':Contacts'
 include ':Utilities3-1.0.3'
 include ':liveLibrary'
 include ':AIDICert'
-include ':Levc-lib'
+//include ':Levc-lib' 执法记录仪暂时不用
 include ':oort_imagepick_sdk'
 include ':BaseLibrary'
 include ':jcvideoplayer-lib'

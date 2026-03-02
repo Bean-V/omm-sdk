@@ -16,7 +16,7 @@ import com.oort.imagepicksdk.PictureRecording;
 import com.oort.imagepicksdk.model.ImagePickConfig;
 import com.oort.weichat.R;
 import com.oort.weichat.fragment.vs.file.up.FileUtils;
-import com.oortcloud.oort_zhifayi.ActivityTasks;
+//import com.oortcloud.oort_zhifayi.ActivityTasks;
 
 import java.util.List;
 
@@ -62,7 +62,7 @@ public class DispatchControlAdapter extends RecyclerView.Adapter<DispatchControl
                 photograph();
             }else{
                 //实时图传
-                mContext.startActivity(new Intent(mContext, ActivityTasks.class));
+//                mContext.startActivity(new Intent(mContext, ActivityTasks.class));
             }
         });
     }
