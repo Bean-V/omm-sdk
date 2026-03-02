@@ -111,7 +111,7 @@ android {
 
 dependencies {
 //    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])  // ✅ 改为 api 以便传递依赖
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'

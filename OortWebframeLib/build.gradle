@@ -185,7 +185,8 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
     implementation files('libs/STReadCardV2.0.14.jar')
     implementation project(':IDCardCheck')
-    implementation files('../IDCardCheck/libs/zkandroididcardreader.jar')
+    // ✅ 移除重复的 JAR 依赖 - 已通过 project(':IDCardCheck') 传递依赖获得
+    // implementation files('../IDCardCheck/libs/zkandroididcardreader.jar')
     implementation libs.iplayer
 
     // implementation 'net.alphacep:vosk-android:0.3.47'
