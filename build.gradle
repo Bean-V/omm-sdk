@@ -103,7 +103,7 @@ allprojects {
 
 
 tasks.register('clean', Delete) {
-    delete rootProject.getbuildDir()
+    delete layout.buildDirectory
 }
 
 // ================================================
