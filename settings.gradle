@@ -49,4 +49,4 @@ include ':screenrecorder'
 include ':IDCardCheck'
 include ':OpenGLlibrary'
 
-include ':app'
+include ':app' // 如果 app 模块不存在或导致路径问题，请注释此行

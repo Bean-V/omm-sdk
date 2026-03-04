@@ -78,15 +78,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 android {
-    compileSdkVersion 34
-    buildToolsVersion "29.0.2"
     namespace "com.example.idcardreader"
 
+    compileSdk compile_version
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
+        minSdk min_version
+        targetSdk target_version
+
     }
 
     buildTypes {

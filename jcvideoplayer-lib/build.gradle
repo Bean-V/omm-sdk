@@ -1,11 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion compile_version
     namespace "fm.jiecao.jcvideoplayer_lib"
+
+    compileSdk compile_version
     defaultConfig {
-        minSdkVersion min_version
-        targetSdkVersion target_version
+        minSdk min_version
+        targetSdk target_version
+
     }
 
     buildTypes {

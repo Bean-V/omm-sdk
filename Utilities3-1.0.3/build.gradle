@@ -1,11 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
     namespace "com.sentaroh.android.Utilities3"
+
+    compileSdk compile_version
     defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 29
+        minSdk min_version
+        targetSdk target_version
+
     }
     buildTypes {
         debug {

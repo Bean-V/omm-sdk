@@ -5,13 +5,10 @@ apply plugin: 'com.android.library'
 android {
     namespace "kl.cds.tools.aidldemo" // 替换为你的实际包名
 
-    compileSdkVersion compile_version
+    compileSdk compile_version
     defaultConfig {
         minSdkVersion min_version
-        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion target_version
-        versionName "v1.0.1"
-        versionCode 1
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled false
     }
@@ -32,13 +29,11 @@ android {
 
     buildTypes {
         debug {
-            debuggable false
             jniDebuggable false
             signingConfig signingConfigs.keyStore
         }
 
         release {
-            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.keyStore
@@ -73,9 +68,5 @@ dependencies {
     // 本地 JAR 依赖
     implementation files('libs/koalii_svs_client_v2.6.14_jdk1.6_20210508.jar_352.jar')
 
-    // 测试依赖
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:runner:1.5.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation project(":basemodule")
 }

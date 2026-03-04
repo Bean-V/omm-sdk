@@ -20,15 +20,13 @@ plugins {
 }
 android {
     namespace 'sound.wave.oort'
-    compileSdk 34
-    
+
+    compileSdk compile_version
     defaultConfig {
-        //applicationId "sound.wave.oort"
-        minSdk 24
-        targetSdk 34
-        versionCode 2
-        versionName "1.12"
-        
+        minSdk min_version
+        targetSdk target_version
+
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         
         vectorDrawables { 

@@ -15,65 +15,21 @@
    specific language governing permissions and limitations
    under the License.
 */
-
-ext {
-    apply from: 'cordova.gradle'
-    cdvCompileSdkVersion = privateHelpers.getProjectTarget()
-    cdvBuildToolsVersion = privateHelpers.findLatestInstalledBuildTools()
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        google()
-        jcenter()
-    }
-
-//    dependencies {
-//        // The gradle plugin and the maven plugin have to be updated after each version of Android
-//        // studio comes out
-////        classpath 'com.android.tools.build:gradle:3.4.1'
-//        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-//
-//    }
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-        google()
-        jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
-//        flatDir{
-//            dirs 'libs'
-//        }
-    }
-}
-
 apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
-//apply plugin: 'com.jfrog.bintray'
-
-//group = 'org.apache.cordova'
-//version = '8.1.0'
 
 android {
-    compileSdkVersion cdvCompileSdkVersion
-    buildToolsVersion cdvBuildToolsVersion
     namespace "org.apache.cordova"
+
+    compileSdk compile_version
+    defaultConfig {
+        minSdk min_version
+        targetSdk target_version
+
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-//    useLibrary 'org.apache.http.legacy'
-    // For the Android Cordova Lib, we will hardcode the minSdkVersion and not allow changes.
-    defaultConfig {
-        minSdk min_version
-
     }
 
     sourceSets {

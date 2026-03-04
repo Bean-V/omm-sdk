@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" tools:ignore="MissingTranslation">
+<resources >
     <array name="filter_effect">
         <item>正常</item>
         <item>阳光</item>
@@ -257,11 +257,11 @@
     <string name="cancel_praise">取消赞</string>
     <string name="comment">评论</string>
     <string name="send_gift">送礼物</string>
-    <string name="replay_text">回复<xliff:g id="nick_name">%1$s</xliff:g>:</string>
+    <string name="replay_text">回复</string>
     <string name="replay"> 回复 </string>
     <string name="upload_failed">上传失败</string>
     <string name="pictures">图片</string>
-    <string name="level_inner"><xliff:g id="level">%1$d</xliff:g>级</string>
+    <string name="level_inner">级</string>
     <!-- 商务圈发布界面 -->
     <string name="give_gift">送礼物</string>
     <string name="my_business_circle">我的职业圈</string>
@@ -278,11 +278,12 @@
     <string name="circle_select_image">选择图片，最多9张</string>
     <string name="circle_select_video">选择视频，最多1个</string>
 
+
     <!-- 群聊 -->
     <string name="circle_add_video">添加视频</string>
     <string name="message_detail">说说详情</string>
-    <string name="comment_count">评论数(<xliff:g id="count">%1$d</xliff:g>)</string>
-    <string name="add_chat_ok_btn">确定(<xliff:g id="count">%1$s</xliff:g>)</string>
+    <string name="comment_count">评论数</string>
+    <string name="add_chat_ok_btn">确定</string>
     <string name="select_contacts">选择联系人</string>
     <string name="please_input_room_name">请输入群组名</string>
     <string name="please_input_room_desc">请输入群组描述</string>

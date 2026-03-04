@@ -5,15 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion compile_version
     namespace "com.tencent.offline"
-    defaultConfig {
-        minSdkVersion min_version
-        targetSdkVersion target_version
-        versionCode 1
-        versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    compileSdk compile_version
+    defaultConfig {
+        minSdk min_version
+        targetSdk target_version
     }
 
     buildTypes {

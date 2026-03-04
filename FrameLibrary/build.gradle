@@ -3,14 +3,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 34
-//    buildToolsVersion "33"
     namespace "com.jun.framelibrary"
+
+    compileSdk compile_version
     defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion 34
-        versionCode 1
-        versionName "1.0"
+        minSdk min_version
+        targetSdk target_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

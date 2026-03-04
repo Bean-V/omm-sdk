@@ -3,10 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk compile_version
     namespace "com.jun.baselibrary"
+
+    compileSdk compile_version
     defaultConfig {
         minSdk min_version
+        targetSdk target_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

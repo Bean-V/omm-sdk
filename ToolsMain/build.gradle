@@ -9,20 +9,12 @@ android {
 //        }
 //    }
     namespace "com.sentaroh.android.upantool"
+
     compileSdk compile_version
-
-//    storePassword=Oort@2019
-//    keyAlias=oort
-//    keyPassword=Oort@2019
     defaultConfig {
-        //applicationId "com.oortcloud.danganbao"
-
-        minSdkVersion min_version
+        minSdk min_version
         targetSdk target_version
 
-//
-        versionCode 198
-        versionName "1.9.8"
         vectorDrawables.useSupportLibrary = true
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8

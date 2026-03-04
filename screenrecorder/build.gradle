@@ -1,18 +1,12 @@
 apply plugin: 'com.android.library'
 //apply plugin: 'com.jakewharton.butterknife'
 android {
-    compileSdkVersion compile_version
-    buildToolsVersion '28.0.3'
-
     namespace 'net.yrom.screenrecorder'
-    defaultConfig {
-        minSdkVersion min_version
-        targetSdkVersion target_version
-        versionCode 1
-        versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
+    compileSdk compile_version
+    defaultConfig {
+        minSdk min_version
+        targetSdk target_version
 
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "arm64-v8a"

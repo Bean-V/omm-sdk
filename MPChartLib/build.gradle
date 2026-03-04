@@ -3,14 +3,13 @@ apply plugin: 'com.android.library'
 
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion '28.0.3'
     namespace "com.github.mikephil.charting"
+
+    compileSdk compile_version
     defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion 33
-        versionCode 3
-        versionName '3.1.0'
+        minSdk min_version
+        targetSdk target_version
+
     }
     buildTypes {
         release {
@@ -25,7 +24,6 @@ android {
 
 dependencies {
     implementation 'androidx.annotation:annotation:1.0.0'
-    testImplementation 'junit:junit:4.12'
 }
 
 
