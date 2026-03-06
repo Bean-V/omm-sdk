@@ -20,7 +20,9 @@ public class TagPickerActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tag_picker);
 
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(this);
         TextView title = (TextView) findViewById(R.id.tv_title_center);
         title.setText(getString(R.string.title_select_tag));

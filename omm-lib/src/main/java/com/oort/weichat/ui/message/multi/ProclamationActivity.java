@@ -29,7 +29,9 @@ public class ProclamationActivity extends BaseActivity {
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(view -> finish());
         TextView mTvTitle = (TextView) findViewById(R.id.tv_title_center);
         mTvTitle.setText(R.string.group_bulletin);

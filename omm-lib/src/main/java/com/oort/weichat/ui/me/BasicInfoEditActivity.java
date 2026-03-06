@@ -124,7 +124,9 @@ public class BasicInfoEditActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initView() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(v -> finish());
         TextView tvTitle = (TextView) findViewById(R.id.tv_title_center);
         tvTitle.setText(getString(R.string.base_info));

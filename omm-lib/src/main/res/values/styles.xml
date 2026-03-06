@@ -1,6 +1,41 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <!-- 自定义 XUITheme.Phone：确保有 ActionBar -->
+    <!--    <style name="XUITheme.Phone" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <!--        &lt;!&ndash; 强制显示 ActionBar &ndash;&gt;-->
+    <!--        <item name="windowActionBar">true</item>-->
+    <!--        <item name="windowNoTitle">false</item>-->
+
+    <!--        &lt;!&ndash; 使用项目主题色 &ndash;&gt;-->
+    <!--        <item name="colorPrimary">@color/main_color</item>-->
+    <!--        <item name="colorPrimaryDark">@color/main_color</item>-->
+    <!--        <item name="colorAccent">@color/main_color</item>-->
+
+    <!--        &lt;!&ndash; 窗口背景 &ndash;&gt;-->
+    <!--        <item name="android:windowBackground">@color/white</item>-->
+
+    <!--        &lt;!&ndash; 禁用文本全大写 &ndash;&gt;-->
+    <!--        <item name="android:textAllCaps">false</item>-->
+    <!--    </style>-->
+
+    <!-- 基础主题：继承 XUITheme.Phone，添加自定义属性 -->
+    <!--    <style name="AppBaseTheme" parent="XUITheme.Phone">-->
+    <!--        <item name="windowActionBar">true</item>-->
+    <!--        <item name="windowNoTitle">false</item>-->
+    <!--        <item name="android:buttonStyle">@android:style/Widget.Button</item>-->
+    <!--        <item name="android:windowAnimationStyle">@style/IMAnimationStyle</item>-->
+    <!--        &lt;!&ndash;<item name="actionBarStyle">@style/IMActionBar</item>&ndash;&gt;-->
+    <!--        <item name="android:actionBarStyle">@style/myActionBar</item> &lt;!&ndash;设置ActionBarStyle&ndash;&gt;-->
+    <!--        <item name="homeAsUpIndicator">@mipmap/return_icon</item>-->
+    <!--        <item name="actionBarItemBackground">@drawable/actionbar_menu_selector</item>-->
+    <!--        <item name="android:listViewStyle">@style/IMListView</item>-->
+
+    <!--        &lt;!&ndash; res/values/themes.xml &ndash;&gt;-->
+    <!--    </style>-->
+
+    <style name="AppBaseTheme" parent="XUITheme.Phone">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
         <item name="android:buttonStyle">@android:style/Widget.Button</item>
         <item name="android:windowAnimationStyle">@style/IMAnimationStyle</item>
         <!--<item name="actionBarStyle">@style/IMActionBar</item>-->
@@ -13,8 +48,9 @@
         <!-- res/values/themes.xml -->
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
+
+    <!-- 应用主题 -->
+    <style name="AppThemeqw" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
@@ -42,7 +78,8 @@
 
         <item name="android:windowIsTranslucent">true</item>
     </style>
-    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar"/>
+
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar" />
 
     <!-- 给Theme设置backgroud,解决启动黑屏问题，不过这样的启动速度好像变得更慢了一些-->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -283,15 +320,19 @@
     <style name="setting_bg">
         <item name="android:background">@mipmap/ic_arrow_gray</item>
     </style>
+
     <style name="movie_bg">
         <item name="android:background">@mipmap/ic_movie</item>
     </style>
+
     <style name="updatelog_bg">
         <item name="android:background">@mipmap/ic_log</item>
     </style>
+
     <style name="apidoc_bg">
         <item name="android:background">@mipmap/ic_code</item>
     </style>
+
     <style name="checkupdate_bg">
         <item name="android:background">@mipmap/ic_upgrade</item>
     </style>
@@ -704,6 +745,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
     </style>
+
     <style name="NotTransparent" parent="Transparent">
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowDisablePreview">true</item>
@@ -741,6 +783,7 @@
         <!-- 模糊 -->
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="dialog" parent="android:style/Theme.Dialog">
         <item name="android:background">#00000000</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -748,6 +791,7 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
     <style name="ContactsLearItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_56</item>
@@ -763,6 +807,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>
     </style>
+
     <style name="TabLayoutStyle" parent="Base.Widget.Design.TabLayout">
 
         <item name="tabPaddingStart">12dp</item>
@@ -776,8 +821,6 @@
         <item name="android:textAllCaps">false</item>
 
     </style>
-
-
 
 
     <style name="TabTitleIndicator">

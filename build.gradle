@@ -6,9 +6,9 @@ if (file('publish-aars.gradle').exists()) {
 buildscript {
     ext {
         kotlin_version = "1.9.22"
-        compile_version = 35
+        compile_version = 34
         min_version = 26
-        target_version = 35
+        target_version = 34
         rnVersion = "0.77.2"
         
         // ✅ 发布配置 - 所有模块使用统一版本
@@ -43,7 +43,8 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        classpath 'com.android.tools.build:gradle:8.10.1'
+//        classpath 'com.android.tools.build:gradle:8.10.1'
+        classpath 'com.android.tools.build:gradle:8.3.0'
 
     }
 }
@@ -62,10 +63,10 @@ allprojects {
                         details.useVersion rootProject.ext.rnVersion
                     }
                 }
-                // 统一 Material 版本，避免资源冲突
-                if (details.requested.group == 'com.google.android.material' && details.requested.name == 'material') {
-                    details.useVersion '1.10.0'
-                }
+//                // 统一 Material 版本，避免资源冲突
+//                if (details.requested.group == 'com.google.android.material' && details.requested.name == 'material') {
+//                    details.useVersion '1.4.0'
+//                }
 
                 if (details.requested.group == 'org.jetbrains.kotlin') {
                     details.useVersion kotlin_version

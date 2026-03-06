@@ -96,7 +96,9 @@ public class PaymentReceiptMoneyActivity extends BaseActivity {
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(view -> finish());
         TextView titleTv = findViewById(R.id.tv_title_center);
         titleTv.setText(getString(R.string.rp_receipt2));

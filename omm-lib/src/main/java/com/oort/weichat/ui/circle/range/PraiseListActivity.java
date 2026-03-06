@@ -49,7 +49,9 @@ public class PraiseListActivity extends BaseListActivity<PraiseListActivity.MyVi
 
     @Override
     public void initView() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(v -> finish());
         TextView tvTitle = findViewById(R.id.tv_title_center);
         tvTitle.setText(R.string.praise_list);

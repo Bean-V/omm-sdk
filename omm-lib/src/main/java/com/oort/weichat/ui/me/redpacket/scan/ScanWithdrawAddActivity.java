@@ -49,7 +49,9 @@ public class ScanWithdrawAddActivity extends BaseActivity {
     }
 
     private void initActionbar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(v -> finish());
         TextView mTvTitle = findViewById(R.id.tv_title_center);
         mTvTitle.setText(mAddType == 1 ? getString(R.string.select_withdraw_add_alipay_account) : getString(R.string.select_withdraw_add_band_card_account));

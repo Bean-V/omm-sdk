@@ -25,7 +25,9 @@ public class PaymentCenterActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initView() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         iv_title_left = (SkinImageView) findViewById(R.id.iv_title_left);
         tv_title_center = (SkinTextView) findViewById(R.id.tv_title_center);
         tv_title_center.setText(getResources().getString(R.string.payment_center));

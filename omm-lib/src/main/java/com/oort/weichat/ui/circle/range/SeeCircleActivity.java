@@ -74,7 +74,9 @@ public class SeeCircleActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initAction() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(this);
         TextView title = (TextView) findViewById(R.id.tv_title_center);
         title.setText(getString(R.string.who_can_see));

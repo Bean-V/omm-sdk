@@ -47,7 +47,9 @@ public class MeetingActivity extends BaseActivity  implements RecyclerRefreshLay
     }
 
     private void  initActionBar(){
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         new DefaultNavigationBar.Builder(this).setTitle("视频会议").setMoreClickListener(view ->  {
 

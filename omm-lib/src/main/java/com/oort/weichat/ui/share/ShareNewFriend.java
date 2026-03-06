@@ -112,7 +112,9 @@ public class ShareNewFriend extends BaseActivity implements OnClickListener, Cha
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

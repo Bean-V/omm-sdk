@@ -50,7 +50,9 @@ public class CreateLiveActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         mAccessToken = IMUserInfoUtil.getInstance().getToken();
         mLoginUserId = coreManager.getSelf().getUserId();
         mLoginNickName = coreManager.getSelf().getNickName();

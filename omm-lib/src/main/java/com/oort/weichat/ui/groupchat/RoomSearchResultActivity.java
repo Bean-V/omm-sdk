@@ -20,7 +20,9 @@ public class RoomSearchResultActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_search_result);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         TextView mTvTitle = findViewById(R.id.tv_title_center);
         mTvTitle.setText(getString(R.string.group));
         findViewById(R.id.iv_title_left).setOnClickListener(v -> finish());

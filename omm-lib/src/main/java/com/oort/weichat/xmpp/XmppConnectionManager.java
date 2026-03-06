@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.oort.weichat.MyApplication;
 import com.oort.weichat.Reporter;
@@ -15,22 +14,21 @@ import com.oort.weichat.bean.User;
 import com.oort.weichat.bean.event.MessageEventBG;
 import com.oort.weichat.sp.UserSp;
 import com.oort.weichat.ui.base.CoreManager;
-import com.oort.weichat.util.AsyncUtils;
 import com.oort.weichat.util.Constants;
 import com.oort.weichat.util.HttpUtil;
 import com.oort.weichat.xmpp.util.XmppStringUtil;
+import com.oortcloud.basemodule.utils.OperLogUtil;
 
+import org.greenrobot.eventbus.EventBus;
 import org.jivesoftware.smack.AbstractConnectionListener;
-import org.jivesoftware.smack.SASLAuthentication;
+import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
-import org.jivesoftware.smack.sasl.SASLMechanism;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
-import org.jivesoftware.smack.util.ByteUtils;
 import org.jivesoftware.smackx.ping.PingFailedListener;
 import org.jivesoftware.smackx.ping.PingManager;
 import org.jxmpp.jid.DomainBareJid;
@@ -39,19 +37,13 @@ import org.jxmpp.jid.parts.Resourcepart;
 import org.jxmpp.stringprep.XmppStringprepException;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.util.Random;
-import java.util.concurrent.Callable;
-
-import javax.security.auth.callback.CallbackHandler;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * XMPP连接类
  */
 public class XmppConnectionManager {
-    private static final String TAG = "zq";
+    private static final String TAG = "zqconnnect";
 
     /* Handler */ // 这些值在监听状态的messageFragment还有用到，
     private static final int MSG_CONNECTING = 0;// 连接中...
@@ -73,7 +65,8 @@ public class XmppConnectionManager {
     private AbstractConnectionListener mAbstractConnectionListener = new AbstractConnectionListener() {
         @Override
         public void connected(XMPPConnection connection) {
-            Log.e(TAG, "connected：已连接");
+
+            OperLogUtil.e(TAG, "connected：已连接");
             mXMPPCurrentState = MSG_CONNECTED;
             if (mNotifyConnectionListener != null) {
                 mNotifyConnectionListener.notifyConnected(connection);
@@ -82,8 +75,8 @@ public class XmppConnectionManager {
 
         @Override
         public void authenticated(final XMPPConnection connection, boolean resumed) {
-            Log.e(TAG, "authenticated：认证成功");
-            Log.e(TAG, "resumed-->" + resumed);
+            OperLogUtil.e(TAG, "authenticated：认证成功");
+            OperLogUtil.e(TAG, "resumed-->" + resumed);
 
             mXMPPCurrentState = MSG_AUTHENTICATED;
             if (mNotifyConnectionListener != null) {
@@ -91,16 +84,16 @@ public class XmppConnectionManager {
             }
 
             if (mConnection.isSmResumptionPossible()) {
-                Log.e(TAG, "服务端开启了流");
+                OperLogUtil.e(TAG, "服务端开启了流");
             } else {
-                Log.e(TAG, "服务端关闭了流");
+                OperLogUtil.e(TAG, "服务端关闭了流");
                 MyApplication.IS_OPEN_RECEIPT = true;// 检查服务器是否启用了流管理，如关闭本地请求回执标志位一定为true
             }
         }
 
         @Override
         public void connectionClosed() {
-            Log.e(TAG, "connectionClosed：连接关闭");
+            OperLogUtil.e(TAG, "connectionClosed：连接关闭");
             mXMPPCurrentState = MSG_CONNECTION_CLOSED;
             if (mNotifyConnectionListener != null) {
                 mNotifyConnectionListener.notifyConnectionClosed();
@@ -111,8 +104,8 @@ public class XmppConnectionManager {
 
         @Override
         public void connectionClosedOnError(Exception e) {
-            Log.e(TAG, "connectionClosedOnError：连接异常");
-            Log.e(TAG, "connectionClosedOnError：" + e.getMessage());
+            OperLogUtil.e(TAG, "connectionClosedOnError：连接异常");
+            OperLogUtil.e(TAG, "connectionClosedOnError：" + e.getMessage());
             Reporter.post("xmpp connectionClosedOnError,", e);
             mXMPPCurrentState = MSG_CONNECTION_CLOSED_ON_ERROR;
             if (mNotifyConnectionListener != null) {
@@ -145,24 +138,36 @@ public class XmppConnectionManager {
             if (TextUtils.isEmpty(action)) {
                 return;
             }
-            Log.e(TAG, "监测到网络改变");
-            mIsNetWorkActive = isGprsOrWifiConnected();
-            if (isAuthenticated()) {
-                Log.e(TAG, "XMPP已认证，Return");
-                isReturned = true;
-                return;
-            }
-            if (mIsNetWorkActive) {// 有网
-                if (isLoginAllowed()) {
-                    Log.e(TAG, "有网，开始登录");
+            OperLogUtil.e(TAG, "监测到网络改变: " + action);
+            boolean newNetworkActive = HttpUtil.isGprsOrWifiConnected(mContext);
 
-                    login(mLoginUserId);
-                }
-            } else {// 无网
-                Log.e(TAG, "无网");
-                if (mLoginThread != null && mLoginThread.isAlive()) {
-                    Log.e(TAG, "无网且登录线程isAlive,打断该线程");
-                    mLoginThread.interrupt();
+            // 只有当网络状态真正改变时才处理
+            if (newNetworkActive != mIsNetWorkActive) {
+                mIsNetWorkActive = newNetworkActive;
+
+                if (mIsNetWorkActive) {// 有网
+                    OperLogUtil.e(TAG, "有网，检查XMPP连接状态");
+                    // 无论是否已认证，都检查连接状态，确保连接有效
+                    String userId = CoreManager.requireSelf(mContext).getUserId();
+                    if (!TextUtils.isEmpty(userId)) {
+                        // 如果连接已关闭或未认证，尝试重新登录
+                        if (!isAuthenticated() || !mConnection.isConnected()) {
+                            OperLogUtil.e(TAG, "XMPP未认证或连接已关闭，准备登录");
+                            doLogining = true;
+                            mLoginUserId = userId;
+                            login(mLoginUserId);
+                        } else {
+                            OperLogUtil.e(TAG, "XMPP已认证且连接正常，无需重连");
+                            isReturned = true;
+                        }
+                    }
+                } else {// 无网
+                    OperLogUtil.e(TAG, "无网，停止重连");
+                    if (mLoginThread != null && mLoginThread.isAlive()) {
+                        OperLogUtil.e(TAG, "无网且登录线程isAlive,打断该线程");
+                        mLoginThread.interrupt();
+                    }
+                    logout();
                 }
             }
         }
@@ -194,28 +199,20 @@ public class XmppConnectionManager {
             e.printStackTrace();
         }
 
-        InetAddress address = AsyncUtils.forceAsync(new Callable<InetAddress>() {
-            @Override
-            public InetAddress call() throws Exception {
-                try {
-                    return InetAddress.getByName(mXmppHost);
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        });
-
         XMPPTCPConnectionConfiguration.Builder builder = XMPPTCPConnectionConfiguration.builder()
-                .setHostAddress(address) // 服务器地址
+                .setHost(mXmppHost) // 直接使用主机名，让Smack内部处理DNS解析
                 .setPort(mXmppPort) // 服务器端口
                 .setXmppDomain(mDomainBareJid)
                 .setSecurityMode(XMPPTCPConnectionConfiguration.SecurityMode.ifpossible) // 是否开启安全模式
                 .setCompressionEnabled(true)
-                .setSendPresence(false);
-        if (Log.isLoggable("SMACK", Log.DEBUG)) {
-            // 为方便测试，留个启用方法，命令运行"adb shell setprop log.tag.SMACK D"启用，
-            builder.enableDefaultDebugger();
-        }
+                .setSendPresence(false)
+                .setConnectTimeout(10000) // 设置10秒连接超时
+                // .setSocketTimeout(10000) // 设置10秒Socket超时
+                .setDnssecMode(ConnectionConfiguration.DnssecMode.disabled); // 禁用DNSSEC，加快解析速度
+//        if (OperLogUtil.isLoggable("SMACK", OperLogUtil.DEBUG)) {
+//            // 为方便测试，留个启用方法，命令运行"adb shell setprop OperLogUtil.tag.SMACK D"启用，
+//            builder.enableDefaultDebugger();
+//        }
         // 如果本地有用户信息，取出来放进config里用于避免自动重连时崩溃，
         // 自动重连时connection中如果没有username就会从config中拿，还是优先connection中的参数，
         User self = CoreManager.getSelf(mContext);
@@ -245,14 +242,15 @@ public class XmppConnectionManager {
     }
 
     private boolean isGprsOrWifiConnected() {
-        if (!HttpUtil.isGprsOrWifiConnected(mContext)) {
+        boolean isConnected = HttpUtil.isGprsOrWifiConnected(mContext);
+        if (!isConnected) {
             logout();
         } else {
             if (!TextUtils.isEmpty(CoreManager.requireSelf(mContext).getUserId())
                     && !TextUtils.isEmpty(CoreManager.requireSelf(mContext).getPassword()))
                 login(CoreManager.requireSelf(mContext).getUserId());
         }
-        return true;
+        return isConnected;
     }
 
     /*********************
@@ -271,50 +269,60 @@ public class XmppConnectionManager {
     }
 
     public synchronized void login(final String userId) {
-        if (mConnection.isAuthenticated()) {
-            /*// 如果已经登陆
-            if (StringUtils.parseName(mConnection.getUser()).equals(userId)) {
-                // 如果登陆的用户和需要在登陆的是同一个用户，赋予可能改变的用户名和密码，返回
-                return;
-            } else {
-                mConnection.disconnect();
-            }*/
+        // 检查用户ID和密码是否有效
+        String password = UserSp.getInstance(mContext).getAccessToken();
+        if (TextUtils.isEmpty(userId) || TextUtils.isEmpty(password)) {
+            OperLogUtil.e(TAG, "用户ID或密码为空，无法登录");
             return;
         }
 
-        String password = UserSp.getInstance(mContext).getAccessToken();
-        if (TextUtils.isEmpty(password)) {
-            return;
+        // 检查是否已经认证且用户匹配
+        if (mConnection.isAuthenticated()) {
+            if (XmppStringUtil.parseName(mConnection.getUser().toString()).equals(userId)) {
+                OperLogUtil.e(TAG, "已经登录且用户匹配，无需重复登录");
+                return;
+            } else {
+                // 用户不匹配，断开连接重新登录
+                OperLogUtil.e(TAG, "已经登录但用户不匹配，断开连接重新登录");
+                try {
+                    mConnection.disconnect();
+                } catch (Exception e) {
+                    OperLogUtil.e(TAG, "断开连接异常: " + e.getMessage());
+                }
+            }
         }
+
         if (mLoginThread != null && mLoginThread.isAlive()) {
-            // 正在进行上一个用户的登陆中，或者用户密码变更，但是还在登陆中
+            // 正在进行上一个用户的登陆中
             if (mLoginThread.isSameUser(userId, password)) {
                 if (mLoginThread.getAttempts() > 13) {
-                    Log.e(TAG, "Currently logged in xmpp, but the attempts is too big.End the current thread,start a new LoginThread");
-                    // 当尝试次数大于13的时候，尝试的时间变得太长，果断结束点，开始一次新的尝试
+                    OperLogUtil.e(TAG, "当前正在登录，但尝试次数过大，结束当前线程并开始新的登录尝试");
+                    // 当尝试次数大于13的时候，尝试的时间变得太长，果断结束，开始一次新的尝试
                     mLoginThread.interrupt();
                     doLogining = false;
                 } else {
-                    Log.e(TAG, "Currently logged in xmpp,Repeated call login method,return." + "attempts--->" + mLoginThread.getAttempts());
+                    OperLogUtil.e(TAG, "当前正在登录同一用户，重复调用login方法，直接返回" + "attempts--->" + mLoginThread.getAttempts());
                     return;
                 }
             } else {
-                // 和之前在尝试登陆的用户属性一致，结束这个登陆的线程
+                // 正在登录不同用户，结束当前登录线程
+                OperLogUtil.e(TAG, "当前正在登录不同用户，结束当前登录线程");
                 mLoginThread.interrupt();
                 doLogining = false;
-                return;
+                // 等待线程结束，但设置超时
+                long time = System.currentTimeMillis();
+                while (mLoginThread != null && mLoginThread.isAlive()) {
+                    if (System.currentTimeMillis() - time > 2000) {
+                        break;
+                    }
+                }
             }
         }
-        // 等待上一个登陆线程的结束，才开始下一个
-        long time = System.currentTimeMillis();
-        while (mLoginThread != null && mLoginThread.isAlive()) {
-            if (System.currentTimeMillis() - time > 3000) {
-                // 防止结束线程时异常了，卡住主线程
-                break;
-            }
-        }
+
+        // 开始新的登录尝试
         doLogining = true;
         mLoginUserId = userId;
+        OperLogUtil.e(TAG, "开始新的XMPP登录尝试，用户ID: " + userId);
 
         mLoginThread = new LoginThread(userId, password);
         mLoginThread.start();
@@ -335,7 +343,7 @@ public class XmppConnectionManager {
         presenceOffline();
 
         if (mConnection.isConnected()) {
-            Log.e("zq", "断开连接" + 3);
+            OperLogUtil.e("zq", "断开连接" + 3);
             mConnection.disconnect();
         }
     }
@@ -351,7 +359,7 @@ public class XmppConnectionManager {
         presenceOffline();
 
         if (mConnection != null && mConnection.isConnected()) {
-            Log.e("zq", "断开连接" + 4);
+            OperLogUtil.e("zq", "断开连接" + 4);
             mConnection.disconnect();
         }
     }
@@ -457,30 +465,31 @@ public class XmppConnectionManager {
         }
 
         public void run() {
-            while (isLoginAllowed()) {
+            while (isLoginAllowed() && mIsNetWorkActive) {
                 mXMPPCurrentState = MSG_CONNECTING;
                 if (mNotifyConnectionListener != null) {
                     mNotifyConnectionListener.notifyConnecting();
                 }
                 try {
-                    if (!mConnection.isConnected()) {
+                    // 确保连接已断开，避免重复连接
+                    if (mConnection.isConnected()) {
                         try {
-                            mConnection.connect();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                       /* TrafficStats.setThreadStatsTag(0x01);
-                        try {
-                            ((XMPPTCPConnection) mConnection).connectWithoutLogin();
+                            mConnection.disconnect();
                         } catch (Exception e) {
-                            // 捕获到异常
-                        } finally {
-                            TrafficStats.clearThreadStatsTag();
-                        }*/
+                            OperLogUtil.e(TAG, "断开旧连接异常: " + e.getMessage());
+                        }
+                    }
+
+                    // 重新连接
+                    try {
+                        mConnection.connect();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        OperLogUtil.e(TAG, "连接被中断，重试中...");
+                        continue;
                     }
 
                     // 登录XMPP
-                    // resource 改为全局变量
                     Resourcepart mResourcepart;
                     if (MyApplication.IS_SUPPORT_MULTI_LOGIN) {
                         mResourcepart = Resourcepart.fromOrThrowUnchecked(MyApplication.MULTI_RESOURCE);
@@ -489,60 +498,88 @@ public class XmppConnectionManager {
                     }
 
                     try {
-//                        SASLMechanism sm = new SASLPlainMechanism();
-//                        SASLAuthentication.registerSASLMechanism(sm);
                         mConnection.login(loginUserId, loginPassword, mResourcepart);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                        OperLogUtil.e(TAG, "登录被中断，重试中...");
+                        continue;
                     }
 
                     if (mConnection.isAuthenticated()) {// 登录成功 已验证
                         PingManager.getInstanceFor(mConnection).setPingInterval(CoreManager.requireConfig(MyApplication.getInstance()).xmppPingTime);
-                        PingManager.getInstanceFor(mConnection).registerPingFailedListener(new PingFailedListener() {// 注册PING机制失败回调
+                        PingManager.getInstanceFor(mConnection).registerPingFailedListener(new PingFailedListener() {
                             @Override
                             public void pingFailed() {
-                                Log.e(TAG, "ping 失败了");
-                                // ping失败之后，我端在服务端的状态变为离线，且无法收发消息，同时因为ping失败之后不会回调到任何一个xmpp的监听，消息界面还显示在线，所以会造成一些bug
-                                // 1.本地调用断开连接的方法
+                                OperLogUtil.e(TAG, "ping 失败了");
                                 mAbstractConnectionListener.connectionClosed();
-                                // 2.发送广播到主界面，进行重连
                                 MyApplication.getInstance().sendBroadcast(new Intent(Constants.PING_FAILED));
+                                // 重新启动登录线程
+                                if (mIsNetWorkActive) {
+                                    String userId = CoreManager.requireSelf(mContext).getUserId();
+                                    if (!TextUtils.isEmpty(userId)) {
+                                        doLogining = true;
+                                        mLoginUserId = userId;
+                                        login(mLoginUserId);
+                                    }
+                                }
                             }
                         });
+                        OperLogUtil.e(TAG, "登录成功，设置连接活跃状态");
                     } else {
-                        Log.e("zq", "断开连接" + 1);
+                        OperLogUtil.e("zq", "登录失败，断开连接");
                         mConnection.disconnect();
                     }
                 } catch (SmackException | IOException e) {
-                    // Todo if SASL Authentication failed. No know authentication mechanisims. Need import Smack-sasl-provided.jar
+                    // 连接或IO异常，继续重试
                     e.printStackTrace();
+                    OperLogUtil.e(TAG, "连接异常，重试中...: " + e.getMessage());
                 } catch (XMPPException e) {
                     e.printStackTrace();
-                    if (!TextUtils.isEmpty(e.getMessage())
-                            && e.getMessage().contains("not-authorized")) { // org.jivesoftware.smack.sasl.SASLErrorException: SASLError using PLAIN: not-authorized
+                    OperLogUtil.e(TAG, "XMPP异常: " + e.getMessage());
+                    if (!TextUtils.isEmpty(e.getMessage()) && e.getMessage().contains("not-authorized")) {
+                        // 认证失败，无需重试
                         MyApplication.getInstance().sendBroadcast(new Intent(Constants.NOT_AUTHORIZED));
+                        return;
                     }
-                    return;
+                    // 其他XMPP异常，继续重试
+                } catch (Exception e) {
+                    // 捕获所有其他异常，避免登录线程崩溃
+                    e.printStackTrace();
+                    OperLogUtil.e(TAG, "登录过程中发生未知异常: " + e.getMessage());
                 }
+
                 if (mConnection.isAuthenticated()) {
                     if (!XmppStringUtil.parseName(mConnection.getUser().toString()).equals(loginUserId)) {
-                        Log.e("zq", "断开连接" + 2);
+                        OperLogUtil.e("zq", "用户不匹配，断开连接");
                         mConnection.disconnect();
                     } else {
+                        OperLogUtil.e(TAG, "登录成功，退出登录线程");
                         doLogining = false;
-                        // mAbstractConnectionListener.authenticated(mConnection);
+                        break;
                     }
                 } else {
-                    // Find how much time we should wait until the next try
+                    // 等待重试
                     int remainingSeconds = timeDelay2();
-                    Log.e(TAG, "login try delay：remainingSeconds：" + remainingSeconds);
-                    while (isLoginAllowed() && remainingSeconds > 0) {
-                        Log.e(TAG, "login try delay");
+                    OperLogUtil.e(TAG, "登录失败，等待" + remainingSeconds + "秒后重试");
+
+                    // 检查网络状态
+                    if (!HttpUtil.isGprsOrWifiConnected(mContext)) {
+                        OperLogUtil.e(TAG, "网络已断开，退出登录线程");
+                        mIsNetWorkActive = false;
+                        logout();
+                        break;
+                    }
+
+                    // 等待重试
+                    while (isLoginAllowed() && mIsNetWorkActive && remainingSeconds > 0) {
                         try {
                             Thread.sleep(1000);
                             remainingSeconds--;
-                        } catch (InterruptedException e1) {
+                        }
+                        catch (InterruptedException e1) {
                             e1.printStackTrace();
+                            OperLogUtil.e(TAG, "重试等待被中断，退出登录线程");
+                            return;
                         }
                     }
                 }

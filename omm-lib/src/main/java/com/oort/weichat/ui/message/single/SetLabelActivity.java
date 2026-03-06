@@ -79,7 +79,9 @@ public class SetLabelActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         ImageView imageView = findViewById(R.id.iv_title_left);
         imageView.setOnClickListener(this);
         TextView mTvTitle = (TextView) findViewById(R.id.tv_title_center);

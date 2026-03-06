@@ -51,7 +51,9 @@ public class ModifyCompanyName extends BaseActivity implements View.OnClickListe
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(this);
         TextView tvTitle = (TextView) findViewById(R.id.tv_title_center);
         tvTitle.setText(R.string.modify_company_name);

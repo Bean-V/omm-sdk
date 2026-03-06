@@ -98,7 +98,9 @@ public class SendRedPacketActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         findViewById(R.id.tv_title_left).setOnClickListener(new View.OnClickListener() {
             @Override

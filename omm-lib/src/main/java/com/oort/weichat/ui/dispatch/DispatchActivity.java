@@ -12,7 +12,9 @@ public class DispatchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 注意：这里没有 setContentView, 我们直接用 Fragment 填充
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         Timber.tag(TAG).i("onCreate: DispatchActivity");
         if (savedInstanceState == null) {
             getSupportFragmentManager()

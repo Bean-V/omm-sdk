@@ -38,7 +38,9 @@ public class CreateCompany extends BaseActivity implements View.OnClickListener 
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(this);
         TextView tvTitle = (TextView) findViewById(R.id.tv_title_center);
         tvTitle.setText(R.string.new_company);

@@ -111,7 +111,9 @@ public class ManagerCompany extends BaseActivity {
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         ImageView iv_title_left = findViewById(R.id.iv_title_left);
         iv_title_left.setImageDrawable(getResources().getDrawable(com.oortcloud.appstore.R.mipmap.back_icon));
         iv_title_left.setOnClickListener(new View.OnClickListener() {

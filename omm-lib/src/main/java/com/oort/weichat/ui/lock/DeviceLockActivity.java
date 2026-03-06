@@ -29,7 +29,9 @@ public class DeviceLockActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_lock);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setVisibility(View.GONE);
 
         PasswordInputView passwordInputView = findViewById(R.id.passwordInputView);

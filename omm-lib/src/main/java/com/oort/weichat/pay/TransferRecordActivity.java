@@ -42,7 +42,9 @@ public class TransferRecordActivity extends BaseActivity {
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener((view) -> finish());
         TextView tvTitle = (TextView) findViewById(R.id.tv_title_center);
         tvTitle.setText(getString(R.string.transfer_record));

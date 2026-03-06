@@ -118,7 +118,9 @@ public class LoginHistoryActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
 
         findViewById(R.id.iv_title_left).setVisibility(View.GONE);

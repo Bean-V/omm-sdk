@@ -44,7 +44,9 @@ public class ReportActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         findViewById(R.id.iv_title_left).setOnClickListener(view -> {
 

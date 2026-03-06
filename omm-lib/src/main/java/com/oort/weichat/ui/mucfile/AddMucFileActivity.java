@@ -43,7 +43,9 @@ public class AddMucFileActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(new View(this));
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         mRoomId = getIntent().getStringExtra("roomId");
 
         dialog = new MucSelectFileDialog(this, new MucSelectFileDialog.OptionFileBeanListener() {

@@ -83,7 +83,9 @@ public class RoomCopyActivity extends BaseActivity {
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         TextView tvTitle = findViewById(R.id.tv_title_center);
         tvTitle.setText(getString(R.string.copy_group));
         findViewById(R.id.iv_title_left).setOnClickListener(v -> finish());

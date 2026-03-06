@@ -43,7 +43,9 @@ public class ActivityVideoPlayer extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override

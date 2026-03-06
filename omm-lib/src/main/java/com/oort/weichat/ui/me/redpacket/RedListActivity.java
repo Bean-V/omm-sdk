@@ -73,7 +73,9 @@ public class RedListActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.tv_title_left).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

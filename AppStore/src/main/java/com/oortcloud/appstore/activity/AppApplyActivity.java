@@ -35,8 +35,9 @@ public class AppApplyActivity extends AppCompatActivity {
 
         LocaleHelper.setLocale(this, LocaleHelper.getLanguage(this));
 
-
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         mBinding = ActivityAppApplyBinding.inflate(getLayoutInflater());

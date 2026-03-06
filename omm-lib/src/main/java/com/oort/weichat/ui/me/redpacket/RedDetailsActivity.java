@@ -86,7 +86,9 @@ public class RedDetailsActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         red_head_iv = (ImageView) findViewById(R.id.red_head_iv);
         red_nickname_tv = (TextView) findViewById(R.id.red_nickname_tv);

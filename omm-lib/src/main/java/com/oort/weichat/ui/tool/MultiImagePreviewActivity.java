@@ -132,7 +132,9 @@ public class MultiImagePreviewActivity extends BaseActivity {
     }
 
     private void initView() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mIndexCountTv = (TextView) findViewById(R.id.index_count_tv);
         mCheckBox = (CheckBox) findViewById(R.id.check_box);

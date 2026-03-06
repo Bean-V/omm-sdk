@@ -87,7 +87,9 @@ public class SearchChatHistoryActivity extends BaseActivity implements View.OnCl
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

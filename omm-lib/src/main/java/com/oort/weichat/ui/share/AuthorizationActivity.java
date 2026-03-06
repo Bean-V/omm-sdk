@@ -97,7 +97,9 @@ public class AuthorizationActivity extends BaseActivity {
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setVisibility(View.GONE);
         TextView mTvTitleLeft = findViewById(R.id.tv_title_left);
         mTvTitleLeft.setText(getString(R.string.close));

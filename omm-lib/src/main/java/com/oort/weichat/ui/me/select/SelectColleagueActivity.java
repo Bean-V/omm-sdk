@@ -97,7 +97,9 @@ public class SelectColleagueActivity extends BaseActivity {
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         TextView tvTitle = findViewById(R.id.tv_title_center);
         tvTitle.setText(getString(R.string.select_colleague));
         TextView tv_title_right = findViewById(R.id.tv_title_right);

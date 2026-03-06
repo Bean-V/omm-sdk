@@ -113,7 +113,9 @@ public class SingleImagePreviewActivity extends BaseActivity {
     }
 
     private void initView() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         mImageView = findViewById(R.id.image_view);
         if (TextUtils.isEmpty(mImageUri)) {
             Toast.makeText(mContext, R.string.image_not_found, Toast.LENGTH_SHORT).show();

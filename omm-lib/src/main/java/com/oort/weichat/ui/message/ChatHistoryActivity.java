@@ -134,7 +134,9 @@ public class ChatHistoryActivity extends BaseActivity {
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(v -> finish());
         TextView mTvTitle = findViewById(R.id.tv_title_center);
         mTvTitle.setText(mChatMessage.getObjectId());

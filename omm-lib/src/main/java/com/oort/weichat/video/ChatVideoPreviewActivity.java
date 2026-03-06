@@ -166,7 +166,9 @@ public class ChatVideoPreviewActivity extends BaseActivity implements View.OnCli
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
     }
 
     private void initView() {

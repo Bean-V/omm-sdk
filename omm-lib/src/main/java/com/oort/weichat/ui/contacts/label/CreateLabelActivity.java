@@ -84,7 +84,9 @@ public class CreateLabelActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         ImageView mTitleLeft = (ImageView) findViewById(R.id.iv_title_left);
         mTitleLeft.setVisibility(View.VISIBLE);
         mTitleLeft.setOnClickListener(this);

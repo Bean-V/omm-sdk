@@ -55,7 +55,9 @@ public class MucFileDetails extends BaseActivity implements DownManager.DownLoad
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_muc_dateils);
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(v -> finish());
 
         ImageView ivRight = findViewById(R.id.iv_title_right);

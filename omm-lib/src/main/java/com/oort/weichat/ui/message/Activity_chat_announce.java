@@ -26,7 +26,9 @@ public class Activity_chat_announce extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_announce);
 
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.iv_title_left).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

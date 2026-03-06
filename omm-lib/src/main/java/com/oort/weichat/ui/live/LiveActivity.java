@@ -70,7 +70,9 @@ public class LiveActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initActionBar() {
-        getSupportActionBar().hide();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         new DefaultNavigationBar.Builder(this).setTitle(getString(R.string.live_push)).setMoreClickListener(view ->  {
             new LiveSettingDialog(LiveActivity.this)
