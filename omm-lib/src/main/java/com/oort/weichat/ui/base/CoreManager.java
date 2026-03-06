@@ -73,6 +73,7 @@ public class CoreManager {
     private ServiceConnection mCoreServiceConnection;
 
     CoreManager(Context ctx, @Nullable CoreStatusListener coreStatusListener) {
+        Log.d(TAG, "CoreManager() 创建  ---" );
         this.ctx = ctx;
         this.coreStatusListener = coreStatusListener;
     }
@@ -81,6 +82,7 @@ public class CoreManager {
      * 直接通过ctx获取的coreManager不可以操作coreService,
      */
     public static CoreManager getInstance(Context ctx) {
+
         CoreManager coreManager = new CoreManager(ctx, null);
         coreManager.init(false, false);
         return coreManager;
@@ -427,6 +429,8 @@ public class CoreManager {
 
     void init(boolean loginRequired, boolean configRequired) {
         Log.d(TAG, "init() called");
+        Log.d(TAG, "loginRequired----" +loginRequired);
+        Log.d(TAG, "configRequired---" +configRequired);
         this.loginRequired = loginRequired;
         this.configRequired = configRequired;
         if (loginRequired) {
@@ -448,7 +452,9 @@ public class CoreManager {
                 // 重新登录不再次调用，
                 connectedCallback = null;
             };
-            isBind = ctx.bindService(CoreService.getIntent(),createCoreServiceConnection(), Context.BIND_AUTO_CREATE);
+            Log.d(TAG, "bindService----------" );
+//            isBind = ctx.bindService(CoreService.getIntent(), createCoreServiceConnection(), Context.BIND_AUTO_CREATE);
+            isBind = ctx.bindService(CoreService.getIntent(ctx, self.getUserId(), self.getPassword(), self.getNickName()), createCoreServiceConnection(), Context.BIND_AUTO_CREATE);
         }
     }
 
@@ -479,6 +485,8 @@ public class CoreManager {
     }
 
     public boolean isServiceReady() {
+        Log.d(TAG, "isBind() ---" + isBind);
+        Log.d(TAG, "mService() ---" + mService);
         return isBind && mService != null;
     }
 
@@ -513,6 +521,8 @@ public class CoreManager {
             ContextCompat.startForegroundService(ctx, CoreService.getIntent(ctx, self.getUserId(), self.getPassword(), self.getNickName()));
             connectedCallback = null;
             isBind = ctx.bindService(CoreService.getIntent(), createCoreServiceConnection(), Context.BIND_AUTO_CREATE);
+//            isBind = ctx.bindService(CoreService.getIntent(ctx, self.getUserId(), self.getPassword(), self.getNickName()), createCoreServiceConnection(), Context.BIND_AUTO_CREATE);
+
         }
     }
 
@@ -593,6 +603,8 @@ public class CoreManager {
 
     public boolean isLogin() {
         Log.d(TAG, "isLogin() called");
+        Log.d(TAG, "isServiceReady() ---" + isServiceReady());
+//        Log.d(TAG, " mService.isAuthenticated()() ---" +  mService.isAuthenticated());
         return isServiceReady() && mService.isAuthenticated();
     }
 
